@@ -227,6 +227,7 @@ LDEP = ldep/ldep
 # emergency build
 ldep/ldep: ldep/ldep.c
 	cc -O -o $@ $<
+CLEAN_ADDITIONS+=ldep/ldep
 endif
 
 
