@@ -361,9 +361,9 @@ char *beg,*end;
 			}
 		}
 		/* simple algorithm to find the end of quoted 'name=quoted'
-		 * 			 * substrings. As a side effect, quotes are removed from
-		 * 			 			 * the value.
-		 * 			 			 			 */
+		 * substrings. As a side effect, quotes are removed from
+		 * the value.
+		 */
 		if ( (end = strchr(beg,'=')) ) {
 			char *dst;
 
