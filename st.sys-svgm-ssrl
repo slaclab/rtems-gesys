@@ -3,3 +3,15 @@
 SIOCSIFMEDIA=0xc0206937
 media100Tx_F=0x00100026
 rtems_bsdnet_ifconfig("es1",SIOCSIFMEDIA,&media100Tx_F)
+
+# start debugger stub (experimental)
+ld("rtems-gdb-stub.obj")
+
+# search path for modules; terminate with a ':' to search current dir
+binpath=malloc(2000)
+strcpy(binpath,"/TFTP/BOOTP_HOST/ssrlApps/powerpc-rtems/svgm/bin")
+strcat(binpath,":/TFTP/BOOTP_HOST/epics/app/bin/RTEMS-svgm")
+(oldpath=getenv("PATH")) && strcat(binpath,oldpath)
+strcat(binpath,":")
+setenv("PATH",binpath,1)
+free(binpath)
