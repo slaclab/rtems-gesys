@@ -1,0 +1,965 @@
+/* apiext.o: */
+EXTERN(_API_extensions_Add)
+EXTERN(_API_extensions_Initialization)
+EXTERN(_API_extensions_Run_postdriver)
+EXTERN(_API_extensions_Run_postswitch)
+EXTERN(_API_extensions_Run_predriver)
+/* chain.o: */
+EXTERN(_Chain_Append)
+EXTERN(_Chain_Extract)
+EXTERN(_Chain_Get)
+EXTERN(_Chain_Initialize)
+EXTERN(_Chain_Insert)
+/* coremsgbroadcast.o: */
+EXTERN(_CORE_message_queue_Broadcast)
+/* coremsgclose.o: */
+EXTERN(_CORE_message_queue_Close)
+/* coremsgflush.o: */
+EXTERN(_CORE_message_queue_Flush)
+/* coremsgflushsupp.o: */
+EXTERN(_CORE_message_queue_Flush_support)
+/* coremsgflushwait.o: */
+EXTERN(_CORE_message_queue_Flush_waiting_threads)
+/* coremsginsert.o: */
+EXTERN(_CORE_message_queue_Insert_message)
+/* coremsg.o: */
+EXTERN(_CORE_message_queue_Initialize)
+/* coremsgseize.o: */
+EXTERN(_CORE_message_queue_Seize)
+/* coremsgsubmit.o: */
+EXTERN(_CORE_message_queue_Submit)
+/* coremutexflush.o: */
+EXTERN(_CORE_mutex_Flush)
+/* coremutex.o: */
+EXTERN(_CORE_mutex_Initialize)
+/* coremutexseize.o: */
+EXTERN(_CORE_mutex_Seize_interrupt_blocking)
+/* coremutexsurrender.o: */
+EXTERN(_CORE_mutex_Surrender)
+/* coresemflush.o: */
+EXTERN(_CORE_semaphore_Flush)
+/* coresem.o: */
+EXTERN(_CORE_semaphore_Initialize)
+/* coresemseize.o: */
+EXTERN(_CORE_semaphore_Seize)
+/* coresemsurrender.o: */
+EXTERN(_CORE_semaphore_Surrender)
+/* coretod.o: */
+EXTERN(_TOD_Handler_initialization)
+/* coretodset.o: */
+EXTERN(_TOD_Set)
+/* coretodtickle.o: */
+EXTERN(_TOD_Tickle)
+/* coretodtoseconds.o: */
+EXTERN(_TOD_To_seconds)
+/* coretodvalidate.o: */
+EXTERN(_TOD_Validate)
+/* heapallocate.o: */
+EXTERN(_Heap_Allocate)
+/* heapextend.o: */
+EXTERN(_Heap_Extend)
+/* heapfree.o: */
+EXTERN(_Heap_Free)
+/* heapgetinfo.o: */
+EXTERN(_Heap_Get_information)
+/* heap.o: */
+EXTERN(_Heap_Initialize)
+/* heapsizeofuserarea.o: */
+EXTERN(_Heap_Size_of_user_area)
+/* heapwalk.o: */
+EXTERN(_Heap_Walk)
+/* interr.o: */
+EXTERN(_Internal_error_Occurred)
+/* isr.o: */
+EXTERN(_ISR_Handler_initialization)
+/* objectallocatebyindex.o: */
+EXTERN(_Objects_Allocate_by_index)
+/* objectallocate.o: */
+EXTERN(_Objects_Allocate)
+/* objectclearname.o: */
+EXTERN(_Objects_Clear_name)
+/* objectcomparenameraw.o: */
+EXTERN(_Objects_Compare_name_raw)
+/* objectcomparenamestring.o: */
+EXTERN(_Objects_Compare_name_string)
+/* objectcopynameraw.o: */
+EXTERN(_Objects_Copy_name_raw)
+/* objectcopynamestring.o: */
+EXTERN(_Objects_Copy_name_string)
+/* objectextendinformation.o: */
+EXTERN(_Objects_Extend_information)
+/* objectfree.o: */
+EXTERN(_Objects_Free)
+/* objectgetbyindex.o: */
+EXTERN(_Objects_Get_by_index)
+/* objectgetisr.o: */
+EXTERN(_Objects_Get_isr_disable)
+/* objectgetnext.o: */
+EXTERN(_Objects_Get_next)
+/* objectget.o: */
+EXTERN(_Objects_Get)
+/* objectinitializeinformation.o: */
+EXTERN(_Objects_Initialize_information)
+/* objectnametoid.o: */
+EXTERN(_Objects_Name_to_id)
+/* object.o: */
+EXTERN(_Objects_Handler_initialization)
+/* objectshrinkinformation.o: */
+EXTERN(_Objects_Shrink_information)
+/* threadchangepriority.o: */
+EXTERN(_Thread_Change_priority)
+/* threadclearstate.o: */
+EXTERN(_Thread_Clear_state)
+/* threadclose.o: */
+EXTERN(_Thread_Close)
+/* threadcreateidle.o: */
+EXTERN(_Thread_Create_idle)
+EXTERN(_Thread_Idle_name)
+/* threaddelayended.o: */
+EXTERN(_Thread_Delay_ended)
+/* threaddispatch.o: */
+EXTERN(_Thread_Dispatch)
+EXTERN(_Thread_Enable_dispatch)
+/* threadevaluatemode.o: */
+EXTERN(_Thread_Evaluate_mode)
+/* threadget.o: */
+/* threadhandler.o: */
+EXTERN(_Thread_Handler)
+/* threadidlebody.o: */
+EXTERN(_Thread_Idle_body)
+/* threadinitialize.o: */
+EXTERN(_Thread_Initialize)
+/* threadloadenv.o: */
+EXTERN(_Thread_Load_environment)
+/* thread.o: */
+EXTERN(_Thread_Handler_initialization)
+/* threadqdequeuefifo.o: */
+EXTERN(_Thread_queue_Dequeue_fifo)
+/* threadqdequeue.o: */
+EXTERN(_Thread_queue_Dequeue)
+/* threadqdequeuepriority.o: */
+EXTERN(_Thread_queue_Dequeue_priority)
+/* threadqenqueuefifo.o: */
+EXTERN(_Thread_queue_Enqueue_fifo)
+/* threadqenqueue.o: */
+EXTERN(_Thread_queue_Enqueue)
+/* threadqenqueuepriority.o: */
+EXTERN(_Thread_queue_Enqueue_priority)
+/* threadqextractfifo.o: */
+EXTERN(_Thread_queue_Extract_fifo)
+/* threadqextract.o: */
+EXTERN(_Thread_queue_Extract)
+/* threadqextractpriority.o: */
+EXTERN(_Thread_queue_Extract_priority)
+/* threadqextractwithproxy.o: */
+EXTERN(_Thread_queue_Extract_with_proxy)
+/* threadqfirstfifo.o: */
+EXTERN(_Thread_queue_First_fifo)
+/* threadqfirst.o: */
+EXTERN(_Thread_queue_First)
+/* threadqfirstpriority.o: */
+EXTERN(_Thread_queue_First_priority)
+/* threadqflush.o: */
+EXTERN(_Thread_queue_Flush)
+/* threadq.o: */
+EXTERN(_Thread_queue_Initialize)
+/* threadqtimeout.o: */
+EXTERN(_Thread_queue_Timeout)
+/* threadready.o: */
+EXTERN(_Thread_Ready)
+/* threadreset.o: */
+EXTERN(_Thread_Reset)
+/* threadresettimeslice.o: */
+EXTERN(_Thread_Reset_timeslice)
+/* threadrestart.o: */
+EXTERN(_Thread_Restart)
+/* threadresume.o: */
+EXTERN(_Thread_Resume)
+/* threadrotatequeue.o: */
+EXTERN(_Thread_Rotate_Ready_Queue)
+/* threadsetpriority.o: */
+EXTERN(_Thread_Set_priority)
+/* threadsetstate.o: */
+EXTERN(_Thread_Set_state)
+/* threadsettransient.o: */
+EXTERN(_Thread_Set_transient)
+/* threadstackallocate.o: */
+EXTERN(_Thread_Stack_Allocate)
+/* threadstackfree.o: */
+EXTERN(_Thread_Stack_Free)
+/* threadstartmultitasking.o: */
+EXTERN(_Thread_Start_multitasking)
+/* threadstart.o: */
+EXTERN(_Thread_Start)
+/* threadsuspend.o: */
+EXTERN(_Thread_Suspend)
+/* threadtickletimeslice.o: */
+EXTERN(_Thread_Tickle_timeslice)
+/* threadyieldprocessor.o: */
+EXTERN(_Thread_Yield_processor)
+/* userext.o: */
+EXTERN(_User_extensions_Fatal)
+EXTERN(_User_extensions_Thread_begin)
+EXTERN(_User_extensions_Thread_create)
+EXTERN(_User_extensions_Thread_delete)
+EXTERN(_User_extensions_Thread_exitted)
+EXTERN(_User_extensions_Thread_restart)
+EXTERN(_User_extensions_Thread_start)
+/* watchdogadjust.o: */
+EXTERN(_Watchdog_Adjust)
+/* watchdoginsert.o: */
+EXTERN(_Watchdog_Insert)
+/* watchdog.o: */
+EXTERN(_Watchdog_Handler_initialization)
+/* watchdogremove.o: */
+EXTERN(_Watchdog_Remove)
+/* watchdogtickle.o: */
+EXTERN(_Watchdog_Tickle)
+/* wkspace.o: */
+EXTERN(_Workspace_Allocate_or_fatal_error)
+EXTERN(_Workspace_Handler_initialization)
+/* attr.o: */
+EXTERN(rtems_interrupt_level_attribute)
+EXTERN(rtems_interrupt_mask)
+EXTERN(rtems_minimum_stack_size)
+/* clockget.o: */
+EXTERN(rtems_clock_get)
+/* clockset.o: */
+EXTERN(rtems_clock_set)
+/* clocktick.o: */
+EXTERN(rtems_clock_tick)
+/* dpmemcreate.o: */
+EXTERN(rtems_port_create)
+/* dpmemdelete.o: */
+EXTERN(rtems_port_delete)
+/* dpmemexternal2internal.o: */
+EXTERN(rtems_port_external_to_internal)
+/* dpmemident.o: */
+EXTERN(rtems_port_ident)
+/* dpmeminternal2external.o: */
+EXTERN(rtems_port_internal_to_external)
+/* dpmem.o: */
+EXTERN(_Dual_ported_memory_Manager_initialization)
+/* event.o: */
+EXTERN(_Event_Manager_initialization)
+/* eventreceive.o: */
+EXTERN(rtems_event_receive)
+/* eventseize.o: */
+EXTERN(_Event_Seize)
+/* eventsend.o: */
+EXTERN(rtems_event_send)
+/* eventsurrender.o: */
+EXTERN(_Event_Surrender)
+/* eventtimeout.o: */
+EXTERN(_Event_Timeout)
+/* intrbody.o: */
+EXTERN(rtems_interrupt_disable)
+EXTERN(rtems_interrupt_enable)
+EXTERN(rtems_interrupt_flash)
+EXTERN(rtems_interrupt_is_in_progress)
+/* intrcatch.o: */
+EXTERN(rtems_interrupt_catch)
+/* intr.o: */
+EXTERN(_Interrupt_Manager_initialization)
+/* msg.o: */
+EXTERN(_Message_queue_Manager_initialization)
+/* msgqallocate.o: */
+EXTERN(_Message_queue_Allocate)
+/* msgqbroadcast.o: */
+EXTERN(rtems_message_queue_broadcast)
+/* msgqcreate.o: */
+EXTERN(rtems_message_queue_create)
+/* msgqdelete.o: */
+EXTERN(rtems_message_queue_delete)
+/* msgqflush.o: */
+EXTERN(rtems_message_queue_flush)
+/* msgqgetnumberpending.o: */
+EXTERN(rtems_message_queue_get_number_pending)
+/* msgqident.o: */
+EXTERN(rtems_message_queue_ident)
+/* msgqreceive.o: */
+EXTERN(rtems_message_queue_receive)
+/* msgqsend.o: */
+EXTERN(rtems_message_queue_send)
+/* msgqsubmit.o: */
+EXTERN(_Message_queue_Submit)
+/* msgqtranslatereturncode.o: */
+EXTERN(_Message_queue_Translate_core_message_queue_return_code)
+EXTERN(_Message_queue_Translate_core_return_code_)
+/* msgqurgent.o: */
+EXTERN(rtems_message_queue_urgent)
+/* partcreate.o: */
+EXTERN(rtems_partition_create)
+/* partdelete.o: */
+EXTERN(rtems_partition_delete)
+/* partgetbuffer.o: */
+EXTERN(rtems_partition_get_buffer)
+/* partident.o: */
+EXTERN(rtems_partition_ident)
+/* part.o: */
+EXTERN(_Partition_Manager_initialization)
+/* partreturnbuffer.o: */
+EXTERN(rtems_partition_return_buffer)
+/* ratemoncancel.o: */
+EXTERN(rtems_rate_monotonic_cancel)
+/* ratemoncreate.o: */
+EXTERN(rtems_rate_monotonic_create)
+/* ratemondelete.o: */
+EXTERN(rtems_rate_monotonic_delete)
+/* ratemongetstatus.o: */
+EXTERN(rtems_rate_monotonic_get_status)
+/* ratemonident.o: */
+EXTERN(rtems_rate_monotonic_ident)
+/* ratemon.o: */
+EXTERN(_Rate_monotonic_Manager_initialization)
+/* ratemonperiod.o: */
+EXTERN(rtems_rate_monotonic_period)
+/* ratemontimeout.o: */
+EXTERN(_Rate_monotonic_Timeout)
+/* regioncreate.o: */
+EXTERN(rtems_region_create)
+/* regiondelete.o: */
+EXTERN(rtems_region_delete)
+/* regionextend.o: */
+EXTERN(rtems_region_extend)
+/* regiongetinfo.o: */
+EXTERN(rtems_region_get_information)
+/* regiongetsegment.o: */
+EXTERN(rtems_region_get_segment)
+/* regiongetsegmentsize.o: */
+EXTERN(rtems_region_get_segment_size)
+/* regionident.o: */
+EXTERN(rtems_region_ident)
+/* region.o: */
+EXTERN(_Region_Manager_initialization)
+/* regionreturnsegment.o: */
+EXTERN(rtems_region_return_segment)
+/* rtclock.o: */
+/* rtemstimer.o: */
+EXTERN(_Timer_Manager_initialization)
+/* semcreate.o: */
+EXTERN(rtems_semaphore_create)
+/* semdelete.o: */
+EXTERN(rtems_semaphore_delete)
+/* semflush.o: */
+EXTERN(rtems_semaphore_flush)
+/* semident.o: */
+EXTERN(rtems_semaphore_ident)
+/* sem.o: */
+EXTERN(_Semaphore_Manager_initialization)
+/* semobtain.o: */
+EXTERN(rtems_semaphore_obtain)
+/* semrelease.o: */
+EXTERN(rtems_semaphore_release)
+/* semtranslatereturncode.o: */
+EXTERN(_Semaphore_Translate_core_mutex_return_code)
+EXTERN(_Semaphore_Translate_core_mutex_return_code_)
+EXTERN(_Semaphore_Translate_core_semaphore_return_code)
+EXTERN(_Semaphore_Translate_core_semaphore_return_code_)
+/* signalcatch.o: */
+EXTERN(rtems_signal_catch)
+/* signal.o: */
+EXTERN(_Signal_Manager_initialization)
+/* signalsend.o: */
+EXTERN(rtems_signal_send)
+/* taskcreate.o: */
+EXTERN(rtems_task_create)
+/* taskdelete.o: */
+EXTERN(rtems_task_delete)
+/* taskgetnote.o: */
+EXTERN(rtems_task_get_note)
+/* taskident.o: */
+EXTERN(rtems_task_ident)
+/* taskinitusers.o: */
+EXTERN(_RTEMS_tasks_Initialize_user_tasks)
+/* taskissuspended.o: */
+EXTERN(rtems_task_is_suspended)
+/* taskmode.o: */
+EXTERN(rtems_task_mode)
+/* taskrestart.o: */
+EXTERN(rtems_task_restart)
+/* taskresume.o: */
+EXTERN(rtems_task_resume)
+/* tasksetnote.o: */
+EXTERN(rtems_task_set_note)
+/* tasksetpriority.o: */
+EXTERN(rtems_task_set_priority)
+/* tasks.o: */
+EXTERN(_RTEMS_tasks_API_extensions)
+EXTERN(_RTEMS_tasks_Create_extension)
+EXTERN(_RTEMS_tasks_Delete_extension)
+EXTERN(_RTEMS_tasks_Manager_initialization)
+EXTERN(_RTEMS_tasks_Post_switch_extension)
+EXTERN(_RTEMS_tasks_Start_extension)
+EXTERN(_RTEMS_tasks_Switch_extension)
+EXTERN(_RTEMS_tasks_User_extensions)
+/* taskstart.o: */
+EXTERN(rtems_task_start)
+/* tasksuspend.o: */
+EXTERN(rtems_task_suspend)
+/* taskvariableadd.o: */
+EXTERN(rtems_task_variable_add)
+/* taskvariabledelete.o: */
+EXTERN(rtems_task_variable_delete)
+/* taskvariableget.o: */
+EXTERN(rtems_task_variable_get)
+/* taskwakeafter.o: */
+EXTERN(rtems_task_wake_after)
+/* taskwakewhen.o: */
+EXTERN(rtems_task_wake_when)
+/* timercancel.o: */
+EXTERN(rtems_timer_cancel)
+/* timercreate.o: */
+EXTERN(rtems_timer_create)
+/* timerdelete.o: */
+EXTERN(rtems_timer_delete)
+/* timerfireafter.o: */
+EXTERN(rtems_timer_fire_after)
+/* timerfirewhen.o: */
+EXTERN(rtems_timer_fire_when)
+/* timergetinfo.o: */
+EXTERN(rtems_timer_get_information)
+/* timerident.o: */
+EXTERN(rtems_timer_ident)
+/* timerreset.o: */
+EXTERN(rtems_timer_reset)
+/* timerserverfireafter.o: */
+EXTERN(rtems_timer_server_fire_after)
+/* timerserverfirewhen.o: */
+EXTERN(rtems_timer_server_fire_when)
+/* timerserver.o: */
+EXTERN(_Timer_Process_seconds_chain)
+EXTERN(_Timer_Process_ticks_chain)
+EXTERN(_Timer_Seconds_chain)
+EXTERN(_Timer_Seconds_timer)
+EXTERN(_Timer_Server_body)
+EXTERN(_Timer_Server_reset)
+EXTERN(_Timer_Server_seconds_last_time)
+EXTERN(_Timer_Server_ticks_last_time)
+EXTERN(_Timer_Ticks_chain)
+EXTERN(rtems_timer_initiate_server)
+/* debug.o: */
+EXTERN(_Debug_Is_enabled)
+EXTERN(_Debug_Manager_initialization)
+EXTERN(rtems_debug_disable)
+EXTERN(rtems_debug_enable)
+/* entrytable.o: */
+EXTERN(_Entry_points)
+/* exinit.o: */
+EXTERN(Internal_errors_What_happened)
+EXTERN(_API_extensions_List)
+EXTERN(_CPU_IRQ_info)
+EXTERN(_CPU_Interrupt_stack_high)
+EXTERN(_CPU_Interrupt_stack_low)
+EXTERN(_CPU_Table)
+EXTERN(_Configuration_MP_table)
+EXTERN(_Configuration_Table)
+EXTERN(_Context_Switch_necessary)
+EXTERN(_Copyright_Notice)
+EXTERN(_Debug_Level)
+EXTERN(_Extension_Information)
+EXTERN(_IO_Driver_address_table)
+EXTERN(_IO_Driver_name_table)
+EXTERN(_IO_Number_of_devices)
+EXTERN(_IO_Number_of_drivers)
+EXTERN(_ISR_Nest_level)
+EXTERN(_ISR_Signals_to_thread_executing)
+EXTERN(_ISR_Vector_table)
+EXTERN(_Initialization_Default_multiprocessing_table)
+EXTERN(_Objects_Information_table)
+EXTERN(_Objects_Local_node)
+EXTERN(_Objects_Maximum_nodes)
+EXTERN(_Priority_Bit_map)
+EXTERN(_Priority_Major_bit_map)
+EXTERN(_RTEMS_version)
+EXTERN(_System_state_Current)
+EXTERN(_System_state_Is_multiprocessing)
+EXTERN(_TOD_Current)
+EXTERN(_TOD_Days_per_month)
+EXTERN(_TOD_Days_since_last_leap_year)
+EXTERN(_TOD_Days_to_date)
+EXTERN(_TOD_Is_set)
+EXTERN(_TOD_Microseconds_per_tick)
+EXTERN(_TOD_Seconds_since_epoch)
+EXTERN(_TOD_Seconds_watchdog)
+EXTERN(_TOD_Ticks_per_second)
+EXTERN(_Thread_Allocated_fp)
+EXTERN(_Thread_BSP_context)
+EXTERN(_Thread_Dispatch_disable_level)
+EXTERN(_Thread_Do_post_task_switch_extension)
+EXTERN(_Thread_Executing)
+EXTERN(_Thread_Heir)
+EXTERN(_Thread_Idle)
+EXTERN(_Thread_Internal_information)
+EXTERN(_Thread_Maximum_extensions)
+EXTERN(_Thread_Ready_chain)
+EXTERN(_Thread_Ticks_per_timeslice)
+EXTERN(_Thread_queue_Extract_table)
+EXTERN(_User_extensions_List)
+EXTERN(_Watchdog_Seconds_chain)
+EXTERN(_Watchdog_Sync_count)
+EXTERN(_Watchdog_Sync_level)
+EXTERN(_Watchdog_Ticks_chain)
+EXTERN(_Watchdog_Ticks_since_boot)
+EXTERN(_Workspace_Area)
+EXTERN(rtems_ada_self)
+EXTERN(rtems_initialize_executive)
+EXTERN(rtems_initialize_executive_early)
+EXTERN(rtems_initialize_executive_late)
+EXTERN(rtems_shutdown_executive)
+/* extension.o: */
+EXTERN(_Extension_Manager_initialization)
+EXTERN(rtems_extension_create)
+EXTERN(rtems_extension_delete)
+EXTERN(rtems_extension_ident)
+/* fatal.o: */
+EXTERN(rtems_fatal_error_occurred)
+/* io.o: */
+EXTERN(_IO_Initialize_all_drivers)
+EXTERN(_IO_Manager_initialization)
+EXTERN(rtems_io_close)
+EXTERN(rtems_io_control)
+EXTERN(rtems_io_initialize)
+EXTERN(rtems_io_open)
+EXTERN(rtems_io_read)
+EXTERN(rtems_io_register_driver)
+EXTERN(rtems_io_unregister_driver)
+EXTERN(rtems_io_write)
+/* itronapi.o: */
+/* posixapi.o: */
+EXTERN(_POSIX_API_Initialize)
+EXTERN(_POSIX_Condition_variables_Information)
+EXTERN(_POSIX_Default_configuration)
+EXTERN(_POSIX_Keys_Information)
+EXTERN(_POSIX_Message_queue_Information)
+EXTERN(_POSIX_Mutex_Information)
+EXTERN(_POSIX_Semaphore_Information)
+EXTERN(_POSIX_Threads_Information)
+EXTERN(_POSIX_Threads_Number_of_initialization_threads)
+EXTERN(_POSIX_Threads_User_initialization_threads)
+/* rtemsapi.o: */
+EXTERN(_Dual_ported_memory_Information)
+EXTERN(_Event_Sync_state)
+EXTERN(_Message_queue_Information)
+EXTERN(_Partition_Information)
+EXTERN(_RTEMS_API_Initialize)
+EXTERN(_RTEMS_tasks_Information)
+EXTERN(_RTEMS_tasks_Number_of_initialization_tasks)
+EXTERN(_RTEMS_tasks_User_initialization_tasks)
+EXTERN(_Rate_monotonic_Information)
+EXTERN(_Region_Information)
+EXTERN(_Semaphore_Information)
+EXTERN(_Status_Object_name_errors_to_status)
+EXTERN(_Timer_Information)
+EXTERN(_Timer_Server)
+/* adasupp.o: */
+EXTERN(_ada_pthread_minimum_stack_size)
+/* aio.o: */
+EXTERN(aio_cancel)
+EXTERN(aio_error)
+EXTERN(aio_fsync)
+EXTERN(aio_read)
+EXTERN(aio_return)
+EXTERN(aio_suspend)
+EXTERN(aio_write)
+EXTERN(lio_listio)
+/* alarm.o: */
+EXTERN(alarm)
+/* cancel.o: */
+EXTERN(pthread_cancel)
+/* cancelrun.o: */
+EXTERN(_POSIX_Thread_cancel_run)
+/* cleanuppop.o: */
+EXTERN(pthread_cleanup_pop)
+/* cleanuppush.o: */
+EXTERN(pthread_cleanup_push)
+/* clockgetcpuclockid.o: */
+EXTERN(clock_getcpuclockid)
+/* clockgetenableattr.o: */
+EXTERN(clock_getenable_attr)
+/* clockgetres.o: */
+EXTERN(clock_getres)
+/* clockgettime.o: */
+EXTERN(clock_gettime)
+/* clocksetenableattr.o: */
+EXTERN(clock_setenable_attr)
+/* clocksettime.o: */
+EXTERN(clock_settime)
+/* condattrdestroy.o: */
+EXTERN(pthread_condattr_destroy)
+/* condattrgetpshared.o: */
+EXTERN(pthread_condattr_getpshared)
+/* condattrinit.o: */
+EXTERN(pthread_condattr_init)
+/* condattrsetpshared.o: */
+EXTERN(pthread_condattr_setpshared)
+/* condbroadcast.o: */
+EXTERN(pthread_cond_broadcast)
+/* conddefaultattributes.o: */
+EXTERN(_POSIX_Condition_variables_Default_attributes)
+/* conddestroy.o: */
+EXTERN(pthread_cond_destroy)
+/* condinit.o: */
+EXTERN(pthread_cond_init)
+/* condmp.o: */
+/* cond.o: */
+EXTERN(_POSIX_Condition_variables_Manager_initialization)
+/* condsignal.o: */
+EXTERN(pthread_cond_signal)
+/* condsignalsupp.o: */
+EXTERN(_POSIX_Condition_variables_Signal_support)
+/* condtimedwait.o: */
+EXTERN(pthread_cond_timedwait)
+/* condwait.o: */
+EXTERN(pthread_cond_wait)
+/* condwaitsupp.o: */
+EXTERN(_POSIX_Condition_variables_Wait_support)
+/* execle.o: */
+EXTERN(execle)
+/* execl.o: */
+EXTERN(execl)
+/* execlp.o: */
+EXTERN(execlp)
+/* execve.o: */
+EXTERN(execve)
+/* execv.o: */
+EXTERN(execv)
+/* execvp.o: */
+EXTERN(execvp)
+/* fork.o: */
+EXTERN(fork)
+/* getegid.o: */
+EXTERN(getegid)
+/* geteuid.o: */
+EXTERN(geteuid)
+/* getgid.o: */
+EXTERN(getgid)
+EXTERN(setgid)
+/* getgroups.o: */
+EXTERN(getgroups)
+/* getlogin.o: */
+EXTERN(getlogin)
+EXTERN(getlogin_r)
+/* getpagesize.o: */
+EXTERN(getpagesize)
+/* getpgrp.o: */
+EXTERN(getpgrp)
+/* getpid.o: */
+EXTERN(_getpid_r)
+EXTERN(getpid)
+/* getppid.o: */
+EXTERN(_POSIX_types_Ppid)
+EXTERN(getppid)
+/* getuid.o: */
+EXTERN(getuid)
+EXTERN(setuid)
+/* keycreate.o: */
+EXTERN(pthread_key_create)
+/* keydelete.o: */
+EXTERN(pthread_key_delete)
+/* keygetspecific.o: */
+EXTERN(pthread_getspecific)
+/* key.o: */
+EXTERN(_POSIX_Key_Manager_initialization)
+/* keyrundestructors.o: */
+EXTERN(_POSIX_Keys_Run_destructors)
+/* keysetspecific.o: */
+EXTERN(pthread_setspecific)
+/* killinfo.o: */
+EXTERN(killinfo)
+/* kill.o: */
+EXTERN(_kill_r)
+EXTERN(kill)
+/* mprotect.o: */
+EXTERN(mprotect)
+/* mqueueclose.o: */
+EXTERN(mq_close)
+/* mqueuecreatesupp.o: */
+EXTERN(_POSIX_Message_queue_Create_support)
+/* mqueuedeletesupp.o: */
+EXTERN(_POSIX_Message_queue_Delete)
+/* mqueuegetattr.o: */
+EXTERN(mq_getattr)
+/* mqueuenametoid.o: */
+EXTERN(_POSIX_Message_queue_Name_to_id)
+/* mqueuenotify.o: */
+EXTERN(_POSIX_Message_queue_Notify_handler)
+EXTERN(mq_notify)
+/* mqueue.o: */
+EXTERN(_POSIX_Message_queue_Manager_initialization)
+/* mqueueopen.o: */
+EXTERN(mq_open)
+/* mqueuereceive.o: */
+EXTERN(mq_receive)
+/* mqueuerecvsupp.o: */
+EXTERN(_POSIX_Message_queue_Receive_support)
+/* mqueuesend.o: */
+EXTERN(mq_send)
+/* mqueuesendsupp.o: */
+EXTERN(_POSIX_Message_queue_Send_support)
+/* mqueuesetattr.o: */
+EXTERN(mq_setattr)
+/* mqueuetimedreceive.o: */
+EXTERN(mq_timedreceive)
+/* mqueuetimedsend.o: */
+EXTERN(mq_timedsend)
+/* mqueuetranslatereturncode.o: */
+EXTERN(_POSIX_Message_queue_Translate_core_message_queue_return_code)
+/* mqueueunlink.o: */
+EXTERN(mq_unlink)
+/* mutexattrdestroy.o: */
+EXTERN(pthread_mutexattr_destroy)
+/* mutexattrgetprioceiling.o: */
+EXTERN(pthread_mutexattr_getprioceiling)
+/* mutexattrgetprotocol.o: */
+EXTERN(pthread_mutexattr_getprotocol)
+/* mutexattrgetpshared.o: */
+EXTERN(pthread_mutexattr_getpshared)
+/* mutexattrinit.o: */
+EXTERN(pthread_mutexattr_init)
+/* mutexattrsetprioceiling.o: */
+EXTERN(pthread_mutexattr_setprioceiling)
+/* mutexattrsetprotocol.o: */
+EXTERN(pthread_mutexattr_setprotocol)
+/* mutexattrsetpshared.o: */
+EXTERN(pthread_mutexattr_setpshared)
+/* mutexdefaultattributes.o: */
+EXTERN(_POSIX_Mutex_Default_attributes)
+/* mutexdestroy.o: */
+EXTERN(pthread_mutex_destroy)
+/* mutexfromcorestatus.o: */
+EXTERN(_POSIX_Mutex_From_core_mutex_status)
+/* mutexgetprioceiling.o: */
+EXTERN(pthread_mutex_getprioceiling)
+/* mutexinit.o: */
+EXTERN(pthread_mutex_init)
+/* mutexlock.o: */
+EXTERN(pthread_mutex_lock)
+/* mutexlocksupp.o: */
+EXTERN(_POSIX_Mutex_Lock_support)
+/* mutexmp.o: */
+/* mutex.o: */
+EXTERN(_POSIX_Mutex_Manager_initialization)
+/* mutexsetprioceiling.o: */
+EXTERN(pthread_mutex_setprioceiling)
+/* mutextimedlock.o: */
+EXTERN(pthread_mutex_timedlock)
+/* mutextrylock.o: */
+EXTERN(pthread_mutex_trylock)
+/* mutexunlock.o: */
+EXTERN(pthread_mutex_unlock)
+/* nanosleep.o: */
+EXTERN(nanosleep)
+/* pause.o: */
+EXTERN(pause)
+/* posixintervaltotimespec.o: */
+EXTERN(_POSIX_Interval_to_timespec)
+/* posixtimespecsubtract.o: */
+EXTERN(_POSIX_Timespec_subtract)
+/* posixtimespectointerval.o: */
+EXTERN(_POSIX_Timespec_to_interval)
+/* psignalchecksignal.o: */
+EXTERN(_POSIX_signals_Check_signal)
+/* psignalclearprocesssignals.o: */
+EXTERN(_POSIX_signals_Clear_process_signals)
+/* psignalclearsignals.o: */
+EXTERN(_POSIX_signals_Clear_signals)
+/* psignal.o: */
+EXTERN(_POSIX_signals_Abnormal_termination_handler)
+EXTERN(_POSIX_signals_Alarm_TSR)
+EXTERN(_POSIX_signals_Alarm_timer)
+EXTERN(_POSIX_signals_Default_vectors)
+EXTERN(_POSIX_signals_Inactive_siginfo)
+EXTERN(_POSIX_signals_Manager_Initialization)
+EXTERN(_POSIX_signals_Pending)
+EXTERN(_POSIX_signals_Post_switch_extension)
+EXTERN(_POSIX_signals_Siginfo)
+EXTERN(_POSIX_signals_Vectors)
+EXTERN(_POSIX_signals_Wait_queue)
+/* psignalsetprocesssignals.o: */
+EXTERN(_POSIX_signals_Set_process_signals)
+/* psignalunblockthread.o: */
+EXTERN(_POSIX_signals_Unblock_thread)
+/* pthreadatfork.o: */
+EXTERN(pthread_atfork)
+/* pthreadattrdestroy.o: */
+EXTERN(pthread_attr_destroy)
+/* pthreadattrgetdetachstate.o: */
+EXTERN(pthread_attr_getdetachstate)
+/* pthreadattrgetinheritsched.o: */
+EXTERN(pthread_attr_getinheritsched)
+/* pthreadattrgetschedparam.o: */
+EXTERN(pthread_attr_getschedparam)
+/* pthreadattrgetschedpolicy.o: */
+EXTERN(pthread_attr_getschedpolicy)
+/* pthreadattrgetscope.o: */
+EXTERN(pthread_attr_getscope)
+/* pthreadattrgetstackaddr.o: */
+EXTERN(pthread_attr_getstackaddr)
+/* pthreadattrgetstacksize.o: */
+EXTERN(pthread_attr_getstacksize)
+/* pthreadattrinit.o: */
+EXTERN(pthread_attr_init)
+/* pthreadattrsetdetachstate.o: */
+EXTERN(pthread_attr_setdetachstate)
+/* pthreadattrsetinheritsched.o: */
+EXTERN(pthread_attr_setinheritsched)
+/* pthreadattrsetschedparam.o: */
+EXTERN(pthread_attr_setschedparam)
+/* pthreadattrsetschedpolicy.o: */
+EXTERN(pthread_attr_setschedpolicy)
+/* pthreadattrsetscope.o: */
+EXTERN(pthread_attr_setscope)
+/* pthreadattrsetstackaddr.o: */
+EXTERN(pthread_attr_setstackaddr)
+/* pthreadattrsetstacksize.o: */
+EXTERN(pthread_attr_setstacksize)
+/* pthreadcreate.o: */
+EXTERN(pthread_create)
+/* pthreaddetach.o: */
+EXTERN(pthread_detach)
+/* pthreadequal.o: */
+EXTERN(pthread_equal)
+/* pthreadexit.o: */
+EXTERN(pthread_exit)
+/* pthreadgetcpuclockid.o: */
+EXTERN(pthread_getcpuclockid)
+/* pthreadgetcputime.o: */
+EXTERN(pthread_attr_getcputime)
+/* pthreadgetschedparam.o: */
+EXTERN(pthread_getschedparam)
+/* pthreadjoin.o: */
+EXTERN(pthread_join)
+/* pthreadkill.o: */
+EXTERN(pthread_kill)
+/* pthread.o: */
+EXTERN(_POSIX_Threads_API_extensions)
+EXTERN(_POSIX_Threads_Create_extension)
+EXTERN(_POSIX_Threads_Default_attributes)
+EXTERN(_POSIX_Threads_Delete_extension)
+EXTERN(_POSIX_Threads_Exitted_extension)
+EXTERN(_POSIX_Threads_Initialize_user_threads)
+EXTERN(_POSIX_Threads_Manager_initialization)
+EXTERN(_POSIX_Threads_Sporadic_budget_TSR)
+EXTERN(_POSIX_Threads_Sporadic_budget_callout)
+EXTERN(_POSIX_Threads_User_extensions)
+/* pthreadonce.o: */
+EXTERN(pthread_once)
+/* pthreadself.o: */
+EXTERN(pthread_self)
+/* pthreadsetcputime.o: */
+EXTERN(pthread_attr_setcputime)
+/* pthreadsetschedparam.o: */
+EXTERN(pthread_setschedparam)
+/* pthreadsigmask.o: */
+EXTERN(pthread_sigmask)
+/* ptimer1.o: */
+EXTERN(COPY_ITIMERSPEC_S)
+EXTERN(FIRE_TIMER_S)
+EXTERN(FIRST_FREE_POSITION_F)
+EXTERN(ITIMERSPEC_TO_RTEMS_TIME_OF_DAY_S)
+EXTERN(TIMER_POSITION_F)
+EXTERN(timer_create)
+EXTERN(timer_delete)
+EXTERN(timer_getoverrun)
+EXTERN(timer_gettime)
+EXTERN(timer_settime)
+/* ptimer.o: */
+EXTERN(TIMER_INITIALIZE_S)
+EXTERN(_POSIX_Timer_Manager_initialization)
+EXTERN(timer_max)
+EXTERN(timer_struct)
+/* sched.o: */
+EXTERN(sched_get_priority_max)
+EXTERN(sched_get_priority_min)
+EXTERN(sched_getparam)
+EXTERN(sched_getscheduler)
+EXTERN(sched_rr_get_interval)
+EXTERN(sched_setparam)
+EXTERN(sched_setscheduler)
+EXTERN(sched_yield)
+/* semaphorecreatesupp.o: */
+EXTERN(_POSIX_Semaphore_Create_support)
+/* semaphoredeletesupp.o: */
+EXTERN(_POSIX_Semaphore_Delete)
+/* semaphoremp.o: */
+/* semaphorenametoid.o: */
+EXTERN(_POSIX_Semaphore_Name_to_id)
+/* semaphore.o: */
+EXTERN(_POSIX_Semaphore_Manager_initialization)
+/* semaphorewaitsupp.o: */
+EXTERN(_POSIX_Semaphore_Wait_support)
+/* semclose.o: */
+EXTERN(sem_close)
+/* semdestroy.o: */
+EXTERN(sem_destroy)
+/* semgetvalue.o: */
+EXTERN(sem_getvalue)
+/* seminit.o: */
+EXTERN(sem_init)
+/* semopen.o: */
+EXTERN(sem_open)
+/* sempost.o: */
+EXTERN(sem_post)
+/* semtimedwait.o: */
+EXTERN(sem_timedwait)
+/* semtrywait.o: */
+EXTERN(sem_trywait)
+/* semunlink.o: */
+EXTERN(sem_unlink)
+/* semwait.o: */
+EXTERN(sem_wait)
+/* setcancelstate.o: */
+EXTERN(pthread_setcancelstate)
+/* setcanceltype.o: */
+EXTERN(pthread_setcanceltype)
+/* setpgid.o: */
+EXTERN(setpgid)
+/* setsid.o: */
+EXTERN(setsid)
+/* sigaction.o: */
+EXTERN(sigaction)
+/* sigaddset.o: */
+EXTERN(sigaddset)
+/* sigdelset.o: */
+EXTERN(sigdelset)
+/* sigemptyset.o: */
+EXTERN(sigemptyset)
+/* sigfillset.o: */
+EXTERN(sigfillset)
+/* sigismember.o: */
+EXTERN(sigismember)
+/* signal_2.o: */
+EXTERN(signal)
+/* sigpending.o: */
+EXTERN(sigpending)
+/* sigprocmask.o: */
+EXTERN(sigprocmask)
+/* sigqueue.o: */
+EXTERN(sigqueue)
+/* sigsuspend.o: */
+EXTERN(sigsuspend)
+/* sigtimedwait.o: */
+EXTERN(_POSIX_signals_Get_highest)
+EXTERN(sigtimedwait)
+/* sigwaitinfo.o: */
+EXTERN(sigwaitinfo)
+/* sigwait.o: */
+EXTERN(sigwait)
+/* sleep.o: */
+EXTERN(sleep)
+/* sysconf.o: */
+EXTERN(sysconf)
+/* testcancel.o: */
+EXTERN(pthread_testcancel)
+/* time.o: */
+/* types.o: */
+EXTERN(POSIX_BOTTOM_REACHED)
+EXTERN(POSIX_MP_NOT_IMPLEMENTED)
+EXTERN(POSIX_NOT_IMPLEMENTED)
+/* utsname.o: */
+EXTERN(uname)
+/* wait.o: */
+EXTERN(wait)
+/* waitpid.o: */
+EXTERN(waitpid)

@@ -1,0 +1,10 @@
+/* bspExt.o: */
+EXTERN(__bspExtLock)
+EXTERN(bspExtInit)
+/* memProbe.o: */
+EXTERN(_bspExtMemProbeInit)
+EXTERN(bspExtMemProbe)
+/* dabrBpnt.o: */
+EXTERN(_bspExtCatchDabr)
+EXTERN(bspExtInstallDataBreakpoint)
+EXTERN(bspExtRemoveDataBreakpoint)

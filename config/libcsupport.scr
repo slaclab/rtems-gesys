@@ -1,0 +1,291 @@
+/* gxx_wrappers.o: */
+EXTERN(rtems_gxx_getspecific)
+EXTERN(rtems_gxx_key_create)
+EXTERN(rtems_gxx_key_delete)
+EXTERN(rtems_gxx_key_dtor)
+EXTERN(rtems_gxx_mutex_init)
+EXTERN(rtems_gxx_mutex_lock)
+EXTERN(rtems_gxx_mutex_trylock)
+EXTERN(rtems_gxx_mutex_unlock)
+EXTERN(rtems_gxx_once)
+EXTERN(rtems_gxx_setspecific)
+/* printk.o: */
+EXTERN(printk)
+/* base_fs.o: */
+EXTERN(rtems_current_user_env)
+EXTERN(rtems_filesystem_initialize)
+EXTERN(rtems_global_user_env)
+/* mount.o: */
+EXTERN(init_fs_mount_table)
+EXTERN(mount)
+EXTERN(rtems_filesystem_mount_table_control)
+/* unmount.o: */
+EXTERN(file_systems_below_this_mountpoint)
+EXTERN(rtems_filesystem_nodes_equal)
+EXTERN(unmount)
+/* libio.o: */
+EXTERN(access_modes_assoc)
+EXTERN(rtems_libio_allocate)
+EXTERN(rtems_libio_fcntl_flags)
+EXTERN(rtems_libio_free)
+EXTERN(rtems_libio_init)
+EXTERN(rtems_libio_iop_freelist)
+EXTERN(rtems_libio_iops)
+EXTERN(rtems_libio_is_file_open)
+EXTERN(rtems_libio_is_open_files_in_fs)
+EXTERN(rtems_libio_semaphore)
+EXTERN(rtems_libio_to_fcntl_flags)
+EXTERN(status_flags_assoc)
+/* libio_sockets.o: */
+EXTERN(rtems_bsdnet_fdToSocket)
+EXTERN(rtems_bsdnet_makeFdForSocket)
+/* eval.o: */
+EXTERN(rtems_filesystem_evaluate_path)
+/* fs_null_handlers.o: */
+EXTERN(rtems_filesystem_null_handlers)
+/* privateenv.o: */
+EXTERN(rtems_libio_set_private_env)
+EXTERN(rtems_libio_share_private_env)
+/* malloc.o: */
+EXTERN(RTEMS_Malloc_Heap)
+EXTERN(RTEMS_Malloc_Initialize)
+EXTERN(RTEMS_Malloc_Sbrk_amount)
+EXTERN(_calloc_r)
+EXTERN(_free_r)
+EXTERN(_malloc_r)
+EXTERN(_realloc_r)
+EXTERN(calloc)
+EXTERN(free)
+EXTERN(malloc)
+EXTERN(malloc_dump)
+EXTERN(malloc_walk)
+EXTERN(realloc)
+/* mallocfreespace.o: */
+EXTERN(malloc_free_space)
+/* __brk.o: */
+EXTERN(__brk)
+/* __sbrk.o: */
+EXTERN(__sbrk)
+/* envlock.o: */
+EXTERN(__env_lock)
+EXTERN(__env_unlock)
+/* cfgetispeed.o: */
+EXTERN(cfgetispeed)
+/* cfgetospeed.o: */
+EXTERN(cfgetospeed)
+/* cfsetispeed.o: */
+EXTERN(cfsetispeed)
+/* cfsetospeed.o: */
+EXTERN(cfsetospeed)
+/* tcgetattr.o: */
+EXTERN(tcgetattr)
+/* tcsetattr.o: */
+EXTERN(tcsetattr)
+/* tcdrain.o: */
+EXTERN(tcdrain)
+/* tcflow.o: */
+EXTERN(tcflow)
+/* tcflush.o: */
+EXTERN(tcflush)
+/* tcgetprgrp.o: */
+EXTERN(tcgetprgrp)
+/* tcsendbreak.o: */
+EXTERN(tcsendbreak)
+/* tcsetpgrp.o: */
+EXTERN(tcsetprgrp)
+/* termios.o: */
+EXTERN(linesw)
+EXTERN(nlinesw)
+EXTERN(rtems_termios_close)
+EXTERN(rtems_termios_dequeue_characters)
+EXTERN(rtems_termios_enqueue_raw_characters)
+EXTERN(rtems_termios_ioctl)
+EXTERN(rtems_termios_open)
+EXTERN(rtems_termios_puts)
+EXTERN(rtems_termios_read)
+EXTERN(rtems_termios_refill_transmitter)
+EXTERN(rtems_termios_rxirq_occured)
+EXTERN(rtems_termios_write)
+/* termiosinitialize.o: */
+EXTERN(rtems_termios_initialize)
+EXTERN(rtems_termios_ttyHead)
+EXTERN(rtems_termios_ttyMutex)
+EXTERN(rtems_termios_ttyTail)
+/* termiosreserveresources.o: */
+EXTERN(rtems_termios_reserve_resources)
+/* error.o: */
+EXTERN(rtems_error)
+EXTERN(rtems_panic)
+EXTERN(rtems_panic_in_progress)
+EXTERN(rtems_status_assoc)
+EXTERN(rtems_status_text)
+/* assoc.o: */
+EXTERN(rtems_assoc_local_by_name)
+EXTERN(rtems_assoc_local_by_remote)
+EXTERN(rtems_assoc_local_by_remote_bitfield)
+EXTERN(rtems_assoc_name_by_local)
+EXTERN(rtems_assoc_name_by_local_bitfield)
+EXTERN(rtems_assoc_name_by_remote)
+EXTERN(rtems_assoc_name_by_remote_bitfield)
+EXTERN(rtems_assoc_ptr_by_local)
+EXTERN(rtems_assoc_ptr_by_name)
+EXTERN(rtems_assoc_ptr_by_remote)
+EXTERN(rtems_assoc_remote_by_local)
+EXTERN(rtems_assoc_remote_by_local_bitfield)
+EXTERN(rtems_assoc_remote_by_name)
+/* assocnamebad.o: */
+EXTERN(rtems_assoc_name_bad)
+/* __getpid.o: */
+EXTERN(__getpid)
+/* __gettod.o: */
+EXTERN(_gettimeofday)
+EXTERN(_gettimeofday_r)
+EXTERN(gettimeofday)
+/* __times.o: */
+EXTERN(_times)
+EXTERN(_times_r)
+EXTERN(times)
+/* truncate.o: */
+EXTERN(truncate)
+/* access.o: */
+EXTERN(access)
+/* stat.o: */
+EXTERN(_stat_r)
+EXTERN(stat)
+/* lstat.o: */
+EXTERN(_lstat_r)
+EXTERN(lstat)
+/* pathconf.o: */
+EXTERN(pathconf)
+/* newlibc.o: */
+EXTERN(_exit)
+EXTERN(libc_create_hook)
+EXTERN(libc_delete_hook)
+EXTERN(libc_global_reent)
+EXTERN(libc_init)
+EXTERN(libc_reentrant)
+EXTERN(libc_start_hook)
+EXTERN(libc_switch_hook)
+EXTERN(libc_wrapup)
+/* no_posix.o: */
+EXTERN(__kill)
+/* no_libc.o: */
+EXTERN(no_libc_dummy_function)
+/* getpwent.o: */
+EXTERN(endpwent)
+EXTERN(getpwent)
+EXTERN(getpwnam)
+EXTERN(getpwnam_r)
+EXTERN(getpwuid)
+EXTERN(getpwuid_r)
+EXTERN(init_etc_passwd_group)
+EXTERN(setpwent)
+/* getgrent.o: */
+EXTERN(endgrent)
+EXTERN(getgrent)
+EXTERN(getgrgid)
+EXTERN(getgrgid_r)
+EXTERN(getgrnam)
+EXTERN(getgrnam_r)
+EXTERN(setgrent)
+/* ctermid.o: */
+EXTERN(ctermid)
+/* isatty.o: */
+EXTERN(isatty)
+/* ttyname.o: */
+EXTERN(ttyname)
+EXTERN(ttyname_r)
+/* ttyname_r.o: */
+EXTERN(ttyname)
+EXTERN(ttyname_r)
+/* open.o: */
+EXTERN(_open_r)
+EXTERN(open)
+/* close.o: */
+EXTERN(_close_r)
+EXTERN(close)
+/* read.o: */
+EXTERN(_read_r)
+EXTERN(read)
+/* write.o: */
+EXTERN(_write_r)
+EXTERN(write)
+/* lseek.o: */
+EXTERN(_lseek_r)
+EXTERN(lseek)
+/* ioctl.o: */
+EXTERN(ioctl)
+/* mkdir.o: */
+EXTERN(mkdir)
+/* mknod.o: */
+EXTERN(mknod)
+/* mkfifo.o: */
+EXTERN(mkfifo)
+/* rmdir.o: */
+EXTERN(rmdir)
+/* chdir.o: */
+EXTERN(chdir)
+/* chmod.o: */
+EXTERN(chmod)
+/* fchdir.o: */
+EXTERN(fchdir)
+/* fchmod.o: */
+EXTERN(fchmod)
+/* chown.o: */
+EXTERN(chown)
+/* link.o: */
+EXTERN(_link_r)
+EXTERN(link)
+/* unlink.o: */
+EXTERN(_unlink_r)
+EXTERN(unlink)
+/* umask.o: */
+EXTERN(umask)
+/* ftruncate.o: */
+EXTERN(ftruncate)
+/* utime.o: */
+EXTERN(utime)
+/* fstat.o: */
+EXTERN(_fstat_r)
+EXTERN(fstat)
+/* fcntl.o: */
+EXTERN(fcntl)
+/* fpathconf.o: */
+EXTERN(fpathconf)
+/* getdents.o: */
+EXTERN(getdents)
+/* fsync.o: */
+EXTERN(fsync)
+/* fdatasync.o: */
+EXTERN(fdatasync)
+/* pipe.o: */
+EXTERN(pipe)
+/* dup.o: */
+EXTERN(dup)
+/* dup2.o: */
+EXTERN(dup2)
+/* symlink.o: */
+EXTERN(symlink)
+/* readlink.o: */
+EXTERN(readlink)
+/* creat.o: */
+EXTERN(creat)
+/* chroot.o: */
+EXTERN(chroot)
+/* opendir.o: */
+EXTERN(opendir)
+/* closedir.o: */
+EXTERN(closedir)
+/* readdir.o: */
+EXTERN(readdir)
+/* rewinddir.o: */
+EXTERN(rewinddir)
+/* scandir.o: */
+EXTERN(alphasort)
+EXTERN(scandir)
+/* seekdir.o: */
+EXTERN(seekdir)
+/* telldir.o: */
+EXTERN(telldir)
+/* getcwd.o: */
+EXTERN(getcwd)

@@ -1,0 +1,27 @@
+/* bdbuf.o: */
+EXTERN(rtems_bdbuf_find_pool)
+EXTERN(rtems_bdbuf_get)
+EXTERN(rtems_bdbuf_get_pool_info)
+EXTERN(rtems_bdbuf_init)
+EXTERN(rtems_bdbuf_read)
+EXTERN(rtems_bdbuf_release)
+EXTERN(rtems_bdbuf_release_modified)
+EXTERN(rtems_bdbuf_sync)
+EXTERN(rtems_bdbuf_syncdev)
+/* blkdev.o: */
+EXTERN(rtems_blkdev_generic_close)
+EXTERN(rtems_blkdev_generic_ioctl)
+EXTERN(rtems_blkdev_generic_open)
+EXTERN(rtems_blkdev_generic_read)
+EXTERN(rtems_blkdev_generic_write)
+/* diskdevs.o: */
+EXTERN(rtems_disk_create_log)
+EXTERN(rtems_disk_create_phys)
+EXTERN(rtems_disk_delete)
+EXTERN(rtems_disk_io_done)
+EXTERN(rtems_disk_io_initialize)
+EXTERN(rtems_disk_lookup)
+EXTERN(rtems_disk_next)
+EXTERN(rtems_disk_release)
+/* ramdisk.o: */
+EXTERN(ramdisk_initialize)
