@@ -1,0 +1,45 @@
+/* xdr.o: */
+EXTERN(xdr_bool)
+EXTERN(xdr_bytes)
+EXTERN(xdr_char)
+EXTERN(xdr_enum)
+EXTERN(xdr_free)
+EXTERN(xdr_int)
+EXTERN(xdr_int16_t)
+EXTERN(xdr_int32_t)
+EXTERN(xdr_int64_t)
+EXTERN(xdr_long)
+EXTERN(xdr_netobj)
+EXTERN(xdr_opaque)
+EXTERN(xdr_short)
+EXTERN(xdr_string)
+EXTERN(xdr_u_char)
+EXTERN(xdr_u_int)
+EXTERN(xdr_u_int16_t)
+EXTERN(xdr_u_int32_t)
+EXTERN(xdr_u_int64_t)
+EXTERN(xdr_u_long)
+EXTERN(xdr_u_short)
+EXTERN(xdr_union)
+EXTERN(xdr_void)
+EXTERN(xdr_wrapstring)
+/* xdr_array.o: */
+EXTERN(xdr_array)
+EXTERN(xdr_vector)
+/* xdr_float.o: */
+EXTERN(xdr_double)
+EXTERN(xdr_float)
+/* xdr_mem.o: */
+EXTERN(xdrmem_create)
+/* xdr_rec.o: */
+EXTERN(xdrrec_create)
+EXTERN(xdrrec_endofrecord)
+EXTERN(xdrrec_eof)
+EXTERN(xdrrec_skiprecord)
+/* xdr_reference.o: */
+EXTERN(xdr_pointer)
+EXTERN(xdr_reference)
+/* xdr_sizeof.o: */
+EXTERN(xdr_sizeof)
+/* xdr_stdio.o: */
+EXTERN(xdrstdio_create)
