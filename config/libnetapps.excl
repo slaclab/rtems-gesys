@@ -1,5 +1,5 @@
 /* /test/rtems-4.6.0pre4/powerpc-rtems/svgm/lib/libnetapps.a[ftpd.o]: */
-librtemscpu.a[ftpd.o]:
+librtemsbsp.a[ftpd.o]:
 accept U         
 bind U         
 chdir U         
@@ -64,7 +64,7 @@ syslog U
 time U         
 unlink U         
 write U         
-librtemscpu.a[icmds.o]:
+librtemsbsp.a[icmds.o]:
 main_icmp T 00000090 00000024
 main_if T 00000048 00000024
 main_inet T 00000000 00000024
@@ -81,7 +81,7 @@ rtems_bsdnet_show_mbuf_stats U
 rtems_bsdnet_show_tcp_stats U         
 rtems_bsdnet_show_udp_stats U         
 shell_add_cmd U         
-librtemscpu.a[pty.o]:
+librtemsbsp.a[pty.o]:
 chmod U         
 chown U         
 close U         
@@ -116,7 +116,7 @@ rtems_termios_write U
 sprintf U         
 strlen U         
 write U         
-librtemscpu.a[telnetd.o]:
+librtemsbsp.a[telnetd.o]:
 accept U         
 bind U         
 close U         
@@ -144,7 +144,7 @@ str2int U
 telnetd_stack_size G 00000004 00000004
 telnetd_task_id G 00000000 00000004
 telnetd_task_priority G 00000008 00000004
-librtemscpu.a[auth.o]:
+librtemsbsp.a[auth.o]:
 allow_any_ip G 00000022 00000001
 auth_check_options T 00000394 0000026c
 auth_ip_addr T 00000a08 0000002c
@@ -230,7 +230,7 @@ update_link_stats U
 usehostname G 00000020 00000001
 uselogin G 0000001c 00000001
 user U         
-librtemscpu.a[ccp.o]:
+librtemsbsp.a[ccp.o]:
 ccp_allowoptions C 0000000c 0000000c
 ccp_fatal_error U         
 ccp_flags_set U         
@@ -258,8 +258,8 @@ slprintf U
 strlcpy U         
 strtol U         
 untimeout U         
-librtemscpu.a[chap_ms.o]:
-librtemscpu.a[chap.o]:
+librtemsbsp.a[chap_ms.o]:
+librtemsbsp.a[chap.o]:
 auth_peer_fail U         
 auth_peer_success U         
 auth_withpeer_fail U         
@@ -293,7 +293,7 @@ slprintf U
 strlcpy U         
 strlen U         
 untimeout U         
-librtemscpu.a[chat.o]:
+librtemsbsp.a[chat.o]:
 abort_next G 00000008 00000004
 abort_string D 0000001c 00000040
 atoi U         
@@ -340,7 +340,7 @@ tcsetattr U
 temp2 C 00000400 00000400
 timeout_next G 0000000c 00000004
 write U         
-librtemscpu.a[demand.o]:
+librtemsbsp.a[demand.o]:
 demand_block T 000004fc 00000084
 demand_conf T 000003d8 00000124
 demand_discard T 00000580 000000d8
@@ -361,7 +361,7 @@ ppp_recv_config U
 ppp_send_config U         
 protocols U         
 sifnpmode U         
-librtemscpu.a[fsm.o]:
+librtemsbsp.a[fsm.o]:
 fsm_close T 000001ac 00000118
 fsm_init T 00000fc4 00000038
 fsm_input T 00000420 00000164
@@ -381,7 +381,7 @@ pppd_warn U
 ppptimeout U         
 strlen U         
 untimeout U         
-librtemscpu.a[ipcp.o]:
+librtemsbsp.a[ipcp.o]:
 auth_ip_addr U         
 bad_ip_adrs U         
 cifaddr U         
@@ -435,7 +435,7 @@ sifup U
 sifvjcomp U         
 slprintf U         
 update_link_stats U         
-librtemscpu.a[lcp.o]:
+librtemsbsp.a[lcp.o]:
 auth_reset U         
 fsm_close U         
 fsm_init U         
@@ -483,7 +483,7 @@ protocols U
 strtol U         
 untimeout U         
 xmit_accm C 00000020 00000020
-librtemscpu.a[magic.o]:
+librtemsbsp.a[magic.o]:
 get_host_seed U         
 getpid U         
 gettimeofday U         
@@ -491,17 +491,17 @@ magic T 00000054 00000020
 magic_init T 00000000 00000054
 mrand48 U         
 srand48 U         
-librtemscpu.a[md4.o]:
+librtemsbsp.a[md4.o]:
 MD4Final T 00000284 0000006c
 MD4Init T 00000228 0000005c
 MD4Print T 000001c0 00000068
 MD4Update T 00000000 000001c0
 printf U         
-librtemscpu.a[md5.o]:
+librtemsbsp.a[md5.o]:
 MD5Final T 00000148 000001ec
 MD5Init T 00000000 00000040
 MD5Update T 00000040 00000108
-librtemscpu.a[options.o]:
+librtemsbsp.a[options.o]:
 add_options T 00001934 00000060
 auth_options U         
 bad_ip_adrs U         
@@ -604,7 +604,7 @@ using_pty G 00000050 00000004
 vslprintf U         
 welcomer G 0000002c 00000004
 welcomer_info C 00000008 00000008
-librtemscpu.a[rtemsmain.o]:
+librtemsbsp.a[rtemsmain.o]:
 auth_check_options U         
 baud_rate C 00000004 00000004
 callback_script C 00000004 00000004
@@ -711,7 +711,7 @@ untimeout T 000011a0 000000a4
 update_link_stats T 000010d0 000000d0
 wait_input U         
 welcomer U         
-librtemscpu.a[rtemspppd.o]:
+librtemsbsp.a[rtemspppd.o]:
 auth_linkdown_hook U         
 auth_linkup_hook U         
 ip_down_hook U         
@@ -742,7 +742,7 @@ rtems_pppd_terminate T 000000d8 00000058
 rtems_task_create U         
 rtems_task_delete U         
 rtems_task_start U         
-librtemscpu.a[sys-rtems.o]:
+librtemsbsp.a[sys-rtems.o]:
 baud_rate U         
 ccp_fatal_error T 000018dc 00000060
 ccp_flags_set T 00001814 000000c8
@@ -822,7 +822,7 @@ tcsetattr U
 ttyfd U         
 wait_input T 00001360 0000005c
 write U         
-librtemscpu.a[upap.o]:
+librtemsbsp.a[upap.o]:
 auth_peer_fail U         
 auth_peer_success U         
 auth_withpeer_fail U         
@@ -844,7 +844,7 @@ untimeout U
 upap C 00000030 00000030
 upap_authpeer T 000007e0 0000007c
 upap_authwithpeer T 00000744 0000009c
-librtemscpu.a[utils.o]:
+librtemsbsp.a[utils.o]:
 atoi U         
 close U         
 ctime U         
@@ -881,7 +881,7 @@ unlink U
 unlock T 000018f4 00000048
 vslprintf T 00000070 00000a98
 write U         
-librtemscpu.a[asp.o]:
+librtemsbsp.a[asp.o]:
 balloc U         
 ballocAscToUni U         
 bfree U         
@@ -909,7 +909,7 @@ websPageStat U
 websValid U         
 websWrite U         
 websWriteBlock U         
-librtemscpu.a[balloc.o]:
+librtemsbsp.a[balloc.o]:
 balloc T 000000c4 0000014c
 bclose T 00000260 00000060
 bfree T 000002c0 00000094
@@ -925,7 +925,7 @@ memset U
 strcpy U         
 strlen U         
 traceRaw U         
-librtemscpu.a[default.o]:
+librtemsbsp.a[default.o]:
 balloc U         
 bfree U         
 bfreeSafe U         
@@ -968,7 +968,7 @@ websStats U
 websValidateUrl T 00000344 000001d8
 websWrite U         
 websWriteDataNonBlock U         
-librtemscpu.a[ejlex.o]:
+librtemsbsp.a[ejlex.o]:
 balloc U         
 bfree U         
 brealloc U         
@@ -996,7 +996,7 @@ ringqOpen U
 ringqPutc U         
 ringqPutStr U         
 trace U         
-librtemscpu.a[ejparse.o]:
+librtemsbsp.a[ejparse.o]:
 atoi U         
 balloc U         
 ballocAscToUni U         
@@ -1061,7 +1061,7 @@ symLookup U
 symOpen U         
 valueInteger U         
 valueString U         
-librtemscpu.a[emfdb.o]:
+librtemsbsp.a[emfdb.o]:
 balloc U         
 basicGetProductDir T 00001274 00000020
 basicSetProductDir T 0000141c 00000078
@@ -1105,7 +1105,7 @@ strtok U
 trace U         
 unlink U         
 write U         
-librtemscpu.a[form.o]:
+librtemsbsp.a[form.o]:
 strchr U         
 strncpy U         
 symClose U         
@@ -1122,7 +1122,7 @@ websFormOpen T 00000158 0000002c
 websHeader T 000001c8 000000b8
 websStats U         
 websWrite U         
-librtemscpu.a[handler.o]:
+librtemsbsp.a[handler.o]:
 balloc U         
 bfree U         
 brealloc U         
@@ -1153,7 +1153,7 @@ websUrlHandlerDelete T 000005c4 00000058
 websUrlHandlerOpen T 000004b4 00000054
 websUrlHandlerRequest T 00000198 0000017c
 websValid U         
-librtemscpu.a[h.o]:
+librtemsbsp.a[h.o]:
 balloc U         
 bfree U         
 brealloc U         
@@ -1161,13 +1161,13 @@ hAlloc T 00000000 00000124
 hAllocEntry T 000001d8 000000a8
 hFree T 00000124 000000b4
 memset U         
-librtemscpu.a[md5c.o]:
+librtemsbsp.a[md5c.o]:
 MD5Final T 000001d4 00000110
 MD5Init T 00000080 00000040
 MD5Update T 000000c0 00000114
-librtemscpu.a[mime.o]:
+librtemsbsp.a[mime.o]:
 websMimeList D 00000000 00000050
-librtemscpu.a[misc.o]:
+librtemsbsp.a[misc.o]:
 ascToUni T 00000ecc 00000034
 atoi U         
 balloc U         
@@ -1189,7 +1189,7 @@ strncpy U
 strnlen U         
 strrchr U         
 uniToAsc T 00000f00 00000034
-librtemscpu.a[ringq.o]:
+librtemsbsp.a[ringq.o]:
 balloc U         
 bfree U         
 error U         
@@ -1211,8 +1211,8 @@ ringqPutBlkMax T 00000198 00000044
 ringqPutc T 0000047c 00000080
 ringqPutStr T 00000580 00000050
 strlen U         
-librtemscpu.a[rom.o]:
-librtemscpu.a[security.o]:
+librtemsbsp.a[rom.o]:
+librtemsbsp.a[security.o]:
 bstrdup U         
 strncpy U         
 websGetPassword T 00000048 00000028
@@ -1224,7 +1224,7 @@ websSecurityDelete T 00000070 00000028
 websSecurityHandler T 00000000 00000048
 websSetPassword T 00000098 00000030
 websUrlHandlerDelete U         
-librtemscpu.a[socket.o]:
+librtemsbsp.a[socket.o]:
 accept U         
 balloc U         
 ballocUniToAsc U         
@@ -1269,7 +1269,7 @@ socketSetBlock T 000009e8 000000c4
 socketSockBuffered T 00000c64 00000078
 socketWaitForEvent T 000003c8 000000a0
 strlen U         
-librtemscpu.a[sock.o]:
+librtemsbsp.a[sock.o]:
 ballocAscToUni U         
 bfree U         
 close U         
@@ -1320,7 +1320,7 @@ socketWrite T 00000000 000000f8
 socketWriteString T 00000780 00000044
 strlen U         
 strncpy U         
-librtemscpu.a[sym.o]:
+librtemsbsp.a[sym.o]:
 balloc U         
 bfree U         
 hAlloc U         
@@ -1338,7 +1338,7 @@ symSubClose T 00000434 00000024
 symSubOpen T 00000400 00000034
 valueFree U         
 valueString U         
-librtemscpu.a[uemf.o]:
+librtemsbsp.a[uemf.o]:
 balloc U         
 basicGetAddress T 0000043c 0000000c
 basicGetProduct T 00000430 0000000c
@@ -1362,7 +1362,7 @@ strupper T 000003d0 00000060
 trace T 00000100 000000b8
 traceRaw T 00000300 00000040
 traceSetHandler T 00000340 0000001c
-librtemscpu.a[um.o]:
+librtemsbsp.a[um.o]:
 accessColumnNames D 00000080 00000010
 accessColumnTypes D 00000090 00000010
 accessTable D 000000a0 00000018
@@ -1436,7 +1436,7 @@ umUserExists T 000001f4 00000048
 userColumnNames D 00000000 00000014
 userColumnTypes D 00000014 00000014
 userTable D 00000028 00000018
-librtemscpu.a[url.o]:
+librtemsbsp.a[url.o]:
 balloc U         
 bfree U         
 htmExt G 00000000 00000005
@@ -1453,18 +1453,18 @@ websGetPort U
 websMime U         
 websUrlParse T 000000d8 0000033c
 websUrlType T 00000000 000000d8
-librtemscpu.a[value.o]:
+librtemsbsp.a[value.o]:
 bfree U         
 bstrdup U         
 memset U         
 valueFree T 000000ec 00000070
 valueInteger T 00000000 00000064
 valueString T 00000064 00000088
-librtemscpu.a[wbase64.o]:
+librtemsbsp.a[wbase64.o]:
 error U         
 websDecode64 T 00000000 00000180
 websEncode64 T 00000180 00000114
-librtemscpu.a[webmain.o]:
+librtemsbsp.a[webmain.o]:
 ascToUni U         
 balloc U         
 bclose U         
@@ -1526,7 +1526,7 @@ websSetPassword U
 websUrlHandlerDefine U         
 websWrite U         
 write U         
-librtemscpu.a[webpage.o]:
+librtemsbsp.a[webpage.o]:
 close U         
 lseek U         
 open U         
@@ -1538,9 +1538,9 @@ websPageOpen T 00000000 00000044
 websPageReadData T 00000128 00000024
 websPageSeek T 0000014c 00000028
 websPageStat T 00000088 00000064
-librtemscpu.a[webrom.o]:
+librtemsbsp.a[webrom.o]:
 websRomPageIndex D 00000000 00000010
-librtemscpu.a[webs.o]:
+librtemsbsp.a[webs.o]:
 ascToUni U         
 atoi U         
 ballocAscToUni U         
@@ -1669,7 +1669,7 @@ websWrite T 0000136c 000000ec
 websWriteBlock T 00001458 000000a0
 websWriteDataNonBlock T 00001f40 00000040
 write U         
-librtemscpu.a[websuemf.o]:
+librtemsbsp.a[websuemf.o]:
 bfree U         
 _ctype_ U         
 ejEval U         
