@@ -1,11 +1,11 @@
 /* bitset.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/src/bitset.cc:75 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/src/bitset.cc:75 */
 EXTERN(_ZNKSt12_Base_bitsetILj1EE15_M_do_find_nextEjj)
 EXTERN(_ZNKSt12_Base_bitsetILj1EE16_M_do_find_firstEj)
 EXTERN(_ZSt12_S_bit_count)
 EXTERN(_ZSt12_S_first_one)
 /* codecvt.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/src/codecvt.cc:76 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/src/codecvt.cc:77 */
 EXTERN(_ZNKSt7codecvtIcc9mbstate_tE10do_unshiftERS0_PcS3_RS3_)
 EXTERN(_ZNKSt7codecvtIcc9mbstate_tE11do_encodingEv)
 EXTERN(_ZNKSt7codecvtIcc9mbstate_tE13do_max_lengthEv)
@@ -96,7 +96,7 @@ EXTERN(_ZN9__gnu_cxx29_BidirectionalIteratorConceptINS_17__normal_iteratorIPKcSs
 EXTERN(_ZN9__gnu_cxx29_BidirectionalIteratorConceptIPcE13__constraintsEv)
 EXTERN(_ZN9__gnu_cxx29_BidirectionalIteratorConceptIPKcE13__constraintsEv)
 /* ctype.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/src/ctype.cc:98 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/src/ctype.cc:98 */
 EXTERN(_ZNKSt5ctypeIcE10do_scan_isEcPKcS2_)
 EXTERN(_ZNKSt5ctypeIcE10do_tolowerEc)
 EXTERN(_ZNKSt5ctypeIcE10do_tolowerEPcPKc)
@@ -150,7 +150,7 @@ EXTERN(_ZTIN9__gnu_cxx13stdio_filebufIcSt11char_traitsIcEEE)
 EXTERN(_ZTSN9__gnu_cxx13stdio_filebufIcSt11char_traitsIcEEE)
 EXTERN(_ZTVN9__gnu_cxx13stdio_filebufIcSt11char_traitsIcEEE)
 /* fstream.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/src/fstream.cc:42 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/src/fstream.cc:42 */
 EXTERN(_ZNSt13basic_filebufIcSt11char_traitsIcEE19_M_underflow_commonEb)
 /* fstream-inst.o: */
 /* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/powerpc-rtems/libstdc++-v3/include/bits/fstream.tcc:75 */
@@ -250,7 +250,7 @@ EXTERN(_ZTVSt13basic_fstreamIcSt11char_traitsIcEE)
 EXTERN(_ZTVSt14basic_ifstreamIcSt11char_traitsIcEE)
 EXTERN(_ZTVSt14basic_ofstreamIcSt11char_traitsIcEE)
 /* functexcept.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/src/functexcept.cc:41 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/src/functexcept.cc:41 */
 EXTERN(_ZNSt11range_errorD0Ev)
 EXTERN(_ZNSt11range_errorD1Ev)
 EXTERN(_ZNSt12domain_errorD0Ev)
@@ -301,7 +301,6 @@ EXTERN(_ZTVSt14overflow_error)
 EXTERN(_ZTVSt15underflow_error)
 EXTERN(_ZTVSt16invalid_argument)
 /* globals.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/src/globals.cc:265 */
 EXTERN(_ZN9__gnu_cxx10facet_nameE)
 EXTERN(_ZN9__gnu_cxx10messages_cE)
 EXTERN(_ZN9__gnu_cxx10numpunct_cE)
@@ -324,11 +323,7 @@ EXTERN(_ZN9__gnu_cxx9collate_cE)
 EXTERN(_ZN9__gnu_cxx9facet_vecE)
 EXTERN(_ZN9__gnu_cxx9num_get_cE)
 EXTERN(_ZN9__gnu_cxx9num_put_cE)
-EXTERN(_ZSt13_GLIBCPP_once)
-EXTERN(_ZSt14_GLIBCPP_mutex)
-EXTERN(_ZSt19_GLIBCPP_mutex_initv)
-EXTERN(_ZSt22_GLIBCPP_mutex_address)
-EXTERN(_ZSt27_GLIBCPP_mutex_address_initv)
+EXTERN(_ZNSt17_Swap_lock_structILi0EE12_S_swap_lockE)
 EXTERN(_ZSt3cin)
 EXTERN(_ZSt4cerr)
 EXTERN(_ZSt4clog)
@@ -388,7 +383,7 @@ EXTERN(_ZTv0_n12_NSdD1Ev)
 EXTERN(_ZTVSd)
 EXTERN(_ZTVSt9basic_iosIcSt11char_traitsIcEE)
 /* ios.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/src/ios.cc:154 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/src/ios.cc:157 */
 EXTERN(_ZNKSt8ios_base7failure4whatEv)
 EXTERN(_ZNSt11__ios_flags10_S_failbitE)
 EXTERN(_ZNSt11__ios_flags10_S_showposE)
@@ -896,7 +891,7 @@ EXTERN(_ZNSt21__numeric_limits_base9is_iec559E)
 EXTERN(_ZNSt21__numeric_limits_base9is_moduloE)
 EXTERN(_ZNSt21__numeric_limits_base9is_signedE)
 /* locale.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/src/locale.cc:345 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/src/locale.cc:345 */
 EXTERN(_ZNKSt6locale4nameEv)
 EXTERN(_ZNKSt6localeeqERKS_)
 EXTERN(_ZNSt10money_base18_S_default_patternE)
@@ -904,7 +899,6 @@ EXTERN(_ZNSt10__num_base13_S_format_intERKSt8ios_basePccc)
 EXTERN(_ZNSt10__num_base15_S_format_floatERKSt8ios_basePcci)
 EXTERN(_ZNSt10__num_base8_S_atomsE)
 EXTERN(_ZNSt11__timepunctIcE12_S_timezonesE)
-EXTERN(_ZNSt15_STL_mutex_lock13_M_initializeEv)
 EXTERN(_ZNSt6locale10_S_classicE)
 EXTERN(_ZNSt6locale11_M_coalesceERKS_S1_j)
 EXTERN(_ZNSt6locale18_S_categories_sizeE)
@@ -920,6 +914,7 @@ EXTERN(_ZNSt6locale5ctypeE)
 EXTERN(_ZNSt6locale5facet11_S_c_localeE)
 EXTERN(_ZNSt6locale5facet16_M_add_referenceEv)
 EXTERN(_ZNSt6locale5facet19_M_remove_referenceEv)
+EXTERN(_ZNSt6locale5facet9_S_c_nameE)
 EXTERN(_ZNSt6locale5facetC1Ej)
 EXTERN(_ZNSt6locale5facetC2Ej)
 EXTERN(_ZNSt6locale5facetD0Ev)
@@ -1358,7 +1353,7 @@ EXTERN(_ZTVSt8time_putIcSt19ostreambuf_iteratorIcSt11char_traitsIcEEE)
 EXTERN(_ZTVSt9money_getIcSt19istreambuf_iteratorIcSt11char_traitsIcEEE)
 EXTERN(_ZTVSt9money_putIcSt19ostreambuf_iteratorIcSt11char_traitsIcEEE)
 /* localename.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/src/localename.cc:317 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/src/localename.cc:315 */
 EXTERN(_ZNSt6locale5_Impl16_M_install_facetEPKNS_2idEPNS_5facetE)
 EXTERN(_ZNSt6locale5_Impl16_M_replace_facetEPKS0_PKNS_2idE)
 EXTERN(_ZNSt6locale5_Impl19_M_replace_categoryEPKS0_PKPKNS_2idE)
@@ -1587,7 +1582,7 @@ EXTERN(_ZTVSt14overflow_error)
 EXTERN(_ZTVSt15underflow_error)
 EXTERN(_ZTVSt16invalid_argument)
 /* stl-inst.o: */
-/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/powerpc-rtems/libstdc++-v3/include/bits/stl_alloc.h:630 */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/powerpc-rtems/libstdc++-v3/include/bits/stl_alloc.h:664 */
 EXTERN(_ZNKSaIcE7addressERc)
 EXTERN(_ZNKSaIcE7addressERKc)
 EXTERN(_ZNKSaIcE8max_sizeEv)
@@ -1614,11 +1609,11 @@ EXTERN(_ZNSaIwEC2ERKS_)
 EXTERN(_ZNSaIwEC2Ev)
 EXTERN(_ZNSaIwED1Ev)
 EXTERN(_ZNSaIwED2Ev)
-EXTERN(_ZNSt15_STL_mutex_lock13_M_initializeEv)
 EXTERN(_ZNSt24__default_alloc_templateILb1ELi0EE10deallocateEPvj)
 EXTERN(_ZNSt24__default_alloc_templateILb1ELi0EE10reallocateEPvjj)
 EXTERN(_ZNSt24__default_alloc_templateILb1ELi0EE11_S_end_freeE)
 EXTERN(_ZNSt24__default_alloc_templateILb1ELi0EE11_S_round_upEj)
+EXTERN(_ZNSt24__default_alloc_templateILb1ELi0EE12_S_force_newE)
 EXTERN(_ZNSt24__default_alloc_templateILb1ELi0EE12_S_free_listE)
 EXTERN(_ZNSt24__default_alloc_templateILb1ELi0EE12_S_heap_sizeE)
 EXTERN(_ZNSt24__default_alloc_templateILb1ELi0EE13_S_start_freeE)
@@ -1861,13 +1856,12 @@ EXTERN(_ZNSsixEj)
 EXTERN(_ZNSspLEc)
 EXTERN(_ZNSspLEPKc)
 EXTERN(_ZNSspLERKSs)
-EXTERN(_ZNSt15_STL_mutex_lock13_M_initializeEv)
 EXTERN(_ZSt13__destroy_auxIPSsEvT_S1_12__false_type)
 EXTERN(_ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_EPKS3_RKS6_)
 EXTERN(_ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_ERKS6_S8_)
 EXTERN(_ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_ES3_RKS6_)
 /* strstream.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/src/strstream.cc:357 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/src/strstream.cc:357 */
 EXTERN(_ZNKSt10istrstream5rdbufEv)
 EXTERN(_ZNKSt10ostrstream5rdbufEv)
 EXTERN(_ZNKSt10ostrstream6pcountEv)
@@ -1969,7 +1963,7 @@ EXTERN(_ZTVSt10ostrstream)
 EXTERN(_ZTVSt12strstreambuf)
 EXTERN(_ZTVSt9strstream)
 /* valarray-inst.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/src/valarray-inst.cc:71 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/src/valarray-inst.cc:71 */
 EXTERN(_ZNKSt8valarrayIjE4sizeEv)
 EXTERN(_ZNSt6gslice8_IndexerC1EjRKSt8valarrayIjES4_)
 EXTERN(_ZNSt6gslice8_IndexerC2EjRKSt8valarrayIjES4_)
@@ -1984,7 +1978,7 @@ EXTERN(_ZSt15__valarray_copyIjEvPKT_jPS0_)
 EXTERN(_ZSt15__valarray_fillIjEvPT_jRKS0_)
 EXTERN(_ZSt17__gslice_to_indexjRKSt8valarrayIjES2_RS0_)
 /* vterminate.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/src/vterminate.cc:45 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/src/vterminate.cc:45 */
 EXTERN(_ZN9__gnu_cxx27__verbose_terminate_handlerEv)
 /* wstring-inst.o: */
 /* codecvt_members.o: */
@@ -2054,7 +2048,7 @@ EXTERN(_ZSt14__convert_to_vImEvPKcRT_RSt12_Ios_IostateRKPii)
 EXTERN(_ZSt14__convert_to_vIxEvPKcRT_RSt12_Ios_IostateRKPii)
 EXTERN(_ZSt14__convert_to_vIyEvPKcRT_RSt12_Ios_IostateRKPii)
 /* stubs.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/libmath/stubs.c:48 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/libmath/stubs.c:48 */
 EXTERN(atan2l)
 EXTERN(coshl)
 EXTERN(cosl)
@@ -2070,32 +2064,32 @@ EXTERN(sqrtl)
 EXTERN(tanhl)
 EXTERN(tanl)
 /* del_op.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/libsupc++/del_op.cc:38 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/libsupc++/del_op.cc:38 */
 EXTERN(_ZdlPv)
 /* del_opnt.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/libsupc++/del_opnt.cc:38 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/libsupc++/del_opnt.cc:38 */
 EXTERN(_ZdlPvRKSt9nothrow_t)
 /* del_opv.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/libsupc++/del_opv.cc:35 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/libsupc++/del_opv.cc:35 */
 EXTERN(_ZdaPv)
 /* del_opvnt.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/libsupc++/del_opvnt.cc:35 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/libsupc++/del_opvnt.cc:35 */
 EXTERN(_ZdaPvRKSt9nothrow_t)
 /* eh_alloc.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/libsupc++/eh_alloc.cc:98 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/libsupc++/eh_alloc.cc:98 */
 EXTERN(__cxa_allocate_exception)
 EXTERN(__cxa_free_exception)
 /* eh_aux_runtime.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/libsupc++/eh_aux_runtime.cc:40 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/libsupc++/eh_aux_runtime.cc:40 */
 EXTERN(__cxa_bad_cast)
 EXTERN(__cxa_bad_typeid)
 /* eh_catch.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/libsupc++/eh_catch.cc:39 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/libsupc++/eh_catch.cc:39 */
 EXTERN(__cxa_begin_catch)
 EXTERN(__cxa_end_catch)
 EXTERN(_ZSt18uncaught_exceptionv)
 /* eh_exception.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/libsupc++/typeinfo:85 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/libsupc++/typeinfo:85 */
 EXTERN(_ZNKSt9exception4whatEv)
 EXTERN(_ZNSt13bad_exceptionD0Ev)
 EXTERN(_ZNSt13bad_exceptionD1Ev)
@@ -2110,15 +2104,15 @@ EXTERN(_ZTSSt9exception)
 EXTERN(_ZTVSt13bad_exception)
 EXTERN(_ZTVSt9exception)
 /* eh_globals.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/libsupc++/eh_globals.cc:87 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/libsupc++/eh_globals.cc:87 */
 EXTERN(__cxa_get_globals)
 EXTERN(__cxa_get_globals_fast)
 /* eh_personality.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/libsupc++/eh_personality.cc:428 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/libsupc++/eh_personality.cc:428 */
 EXTERN(__cxa_call_unexpected)
 EXTERN(__gxx_personality_v0)
 /* eh_terminate.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/libsupc++/eh_terminate.cc:45 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/libsupc++/eh_terminate.cc:45 */
 EXTERN(_ZN10__cxxabiv111__terminateEPFvvE)
 EXTERN(_ZN10__cxxabiv112__unexpectedEPFvvE)
 EXTERN(_ZN10__cxxabiv119__terminate_handlerE)
@@ -2128,14 +2122,14 @@ EXTERN(_ZSt13set_terminatePFvvE)
 EXTERN(_ZSt14set_unexpectedPFvvE)
 EXTERN(_ZSt9terminatev)
 /* eh_throw.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/libsupc++/eh_throw.cc:82 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/libsupc++/eh_throw.cc:82 */
 EXTERN(__cxa_rethrow)
 EXTERN(__cxa_throw)
 /* eh_type.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/libsupc++/eh_type.cc:41 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/libsupc++/eh_type.cc:41 */
 EXTERN(__cxa_current_exception_type)
 /* new_handler.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/libsupc++/new_handler.cc:42 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/libsupc++/new_handler.cc:42 */
 EXTERN(__new_handler)
 EXTERN(_ZNSt9bad_allocD0Ev)
 EXTERN(_ZNSt9bad_allocD1Ev)
@@ -2146,22 +2140,22 @@ EXTERN(_ZTISt9bad_alloc)
 EXTERN(_ZTSSt9bad_alloc)
 EXTERN(_ZTVSt9bad_alloc)
 /* new_op.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/libsupc++/new_op.cc:46 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/libsupc++/new_op.cc:46 */
 EXTERN(_Znwj)
 /* new_opnt.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/libsupc++/new_opnt.cc:45 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/libsupc++/new_opnt.cc:45 */
 EXTERN(_ZnwjRKSt9nothrow_t)
 /* new_opv.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/libsupc++/new_opv.cc:35 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/libsupc++/new_opv.cc:35 */
 EXTERN(_Znaj)
 /* new_opvnt.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/libsupc++/new_opvnt.cc:35 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/libsupc++/new_opvnt.cc:35 */
 EXTERN(_ZnajRKSt9nothrow_t)
 /* pure.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/libsupc++/pure.cc:48 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc:48 */
 EXTERN(__cxa_pure_virtual)
 /* tinfo.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/libsupc++/tinfo.cc:685 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/libsupc++/tinfo.cc:686 */
 EXTERN(__dynamic_cast)
 EXTERN(_ZN10__cxxabiv117__class_type_infoD0Ev)
 EXTERN(_ZN10__cxxabiv117__class_type_infoD1Ev)
@@ -2215,7 +2209,7 @@ EXTERN(_ZTVSt10bad_typeid)
 EXTERN(_ZTVSt8bad_cast)
 EXTERN(_ZTVSt9type_info)
 /* tinfo2.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/libsupc++/tinfo2.cc:74 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/libsupc++/tinfo2.cc:74 */
 EXTERN(_ZN10__cxxabiv116__enum_type_infoD0Ev)
 EXTERN(_ZN10__cxxabiv116__enum_type_infoD1Ev)
 EXTERN(_ZN10__cxxabiv116__enum_type_infoD2Ev)
@@ -2367,7 +2361,7 @@ EXTERN(_ZTVN10__cxxabiv120__function_type_infoE)
 EXTERN(_ZTVN10__cxxabiv123__fundamental_type_infoE)
 EXTERN(_ZTVN10__cxxabiv129__pointer_to_member_type_infoE)
 /* vec.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/libstdc++-v3/libsupc++/vec.cc:183 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/libstdc++-v3/libsupc++/vec.cc:183 */
 EXTERN(__cxa_vec_cctor)
 EXTERN(__cxa_vec_cleanup)
 EXTERN(__cxa_vec_ctor)
@@ -2378,8 +2372,8 @@ EXTERN(__cxa_vec_dtor)
 EXTERN(__cxa_vec_new)
 EXTERN(__cxa_vec_new2)
 EXTERN(__cxa_vec_new3)
-EXTERN(_ZN10__cxxabiv188_GLOBAL__N__afs_slac_package_rtems_4.6_src_gcc_3.2.1_libstdc___v3_libsupc___vec.ccWTsuZa17uncatch_exceptionC1Ev)
-EXTERN(_ZN10__cxxabiv188_GLOBAL__N__afs_slac_package_rtems_4.6_src_gcc_3.2.1_libstdc___v3_libsupc___vec.ccWTsuZa17uncatch_exceptionC2Ev)
+EXTERN(_ZN10__cxxabiv194_GLOBAL__N__afs_slac_package_rtems_4.6.0pre2_src_gcc_3.2.2_libstdc___v3_libsupc___vec.cczeruZa17uncatch_exceptionC1Ev)
+EXTERN(_ZN10__cxxabiv194_GLOBAL__N__afs_slac_package_rtems_4.6.0pre2_src_gcc_3.2.2_libstdc___v3_libsupc___vec.cczeruZa17uncatch_exceptionC2Ev)
 /* cxa_demangle.o: */
 /* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/powerpc-rtems/libstdc++-v3/libsupc++/cxa_demangle.c:3638 */
 EXTERN(__cxa_demangle)

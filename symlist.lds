@@ -2,9 +2,9 @@
  * RTEMS snapshot (SLAC/SSRL patches applied)
  *
  * DONT CHANGE THE NEXT THREE LINES (Makefile needs them)
-rtems-ss-20030128
+rtems-4.6.0_pre2
 newlib-1.11.1
-gcc-3.2.1 
+gcc-3.2.2 
  *
  * T. Straumann, 2003/4/9
  */

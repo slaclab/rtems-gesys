@@ -1,52 +1,52 @@
 /* _muldi3.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:361 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:361 */
 EXTERN(__muldi3)
 /* _negdi2.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:52 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:52 */
 EXTERN(__negdi2)
 /* _lshrdi3.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:244 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:244 */
 EXTERN(__lshrdi3)
 /* _ashldi3.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:275 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:275 */
 EXTERN(__ashldi3)
 /* _ashrdi3.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:306 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:306 */
 EXTERN(__ashrdi3)
 /* _ffsdi2.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:338 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:338 */
 EXTERN(__ffsdi2)
 /* _clz.o: */
 EXTERN(__clz_tab)
 /* _cmpdi2.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:801 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:801 */
 EXTERN(__cmpdi2)
 /* _ucmpdi2.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:821 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:821 */
 EXTERN(__ucmpdi2)
 /* _floatdidf.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:1050 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:1050 */
 EXTERN(__floatdidf)
 /* _floatdisf.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:1098 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:1098 */
 EXTERN(__floatdisf)
 /* _fixunsdfsi.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:1170 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:1170 */
 EXTERN(__fixunsdfsi)
 /* _fixunssfsi.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:1192 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:1192 */
 EXTERN(__fixunssfsi)
 /* _fixunsdfdi.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:923 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:923 */
 EXTERN(__fixunsdfdi)
 /* _fixdfdi.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:952 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:952 */
 EXTERN(__fixdfdi)
 /* _fixunssfdi.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:965 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:965 */
 EXTERN(__fixunssfdi)
 /* _fixsfdi.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:998 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:998 */
 EXTERN(__fixsfdi)
 /* _fixxfdi.o: */
 /* _fixunsxfdi.o: */
@@ -56,63 +56,61 @@ EXTERN(__fixsfdi)
 /* _fixunstfdi.o: */
 /* _floatditf.o: */
 /* _clear_cache.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:1502 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:1502 */
 EXTERN(__clear_cache)
 /* _trampoline.o: */
 /* __main.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:1936 */
-/*
-EXTERN(SYMBOL__MAIN)
-*/
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:1936 */
+/* EXTERN(SYMBOL__MAIN) */
 /* _exit.o: */
 /* _absvsi2.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:181 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:181 */
 EXTERN(__absvsi2)
 /* _absvdi2.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:204 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:204 */
 EXTERN(__absvdi2)
 /* _addvsi3.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:68 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:68 */
 EXTERN(__addvsi3)
 /* _addvdi3.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:88 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:88 */
 EXTERN(__addvdi3)
 /* _subvsi3.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:106 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:106 */
 EXTERN(__subvsi3)
 /* _subvdi3.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:125 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:125 */
 EXTERN(__subvdi3)
 /* _mulvsi3.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:136 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:136 */
 EXTERN(__mulvsi3)
 /* _mulvdi3.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:221 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:221 */
 EXTERN(__mulvdi3)
 /* _negvsi2.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:156 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:156 */
 EXTERN(__negvsi2)
 /* _negvdi2.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:171 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:171 */
 EXTERN(__negvdi2)
 /* _ctors.o: */
 /* _divdi3.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:725 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:725 */
 EXTERN(__divdi3)
 /* _moddi3.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:751 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:751 */
 EXTERN(__moddi3)
 /* _udivdi3.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:788 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:788 */
 EXTERN(__udivdi3)
 /* _umoddi3.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:776 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:776 */
 EXTERN(__umoddi3)
 /* _udiv_w_sdiv.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:473 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:473 */
 EXTERN(__udiv_w_sdiv)
 /* _udivmoddi4.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:506 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:506 */
 EXTERN(__udivmoddi4)
 /* _pack_sf.o: */
 /* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/fp-bit.c:179 */
@@ -246,7 +244,7 @@ EXTERN(__floatunsidf)
 /* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/tramp.S:68 */
 EXTERN(__trampoline_setup)
 /* unwind-dw2.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/unwind-dw2.c:974 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/unwind-dw2.c:977 */
 EXTERN(__frame_state_for)
 EXTERN(_Unwind_DeleteException)
 EXTERN(_Unwind_ForcedUnwind)
@@ -261,7 +259,7 @@ EXTERN(_Unwind_Resume)
 EXTERN(_Unwind_SetGR)
 EXTERN(_Unwind_SetIP)
 /* unwind-dw2-fde.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/unwind-dw2-fde.c:225 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/unwind-dw2-fde.c:225 */
 EXTERN(__deregister_frame)
 EXTERN(__deregister_frame_info)
 EXTERN(__deregister_frame_info_bases)
@@ -276,7 +274,7 @@ EXTERN(_Unwind_Find_FDE)
 /* _eprintf.o: */
 /* _bb.o: */
 /* __gcc_bcmp.o: */
-/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:1231 */
+/* /afs/slac/package/rtems/4.6.0pre2/src/gcc-3.2.2/gcc/libgcc2.c:1231 */
 EXTERN(__gcc_bcmp)
 /* eabi.o: */
 /* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/eabi.S:145 */
