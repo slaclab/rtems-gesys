@@ -44,7 +44,10 @@ MANAGERS=all
 include $(RTEMS_MAKEFILE_PATH)/Makefile.inc
 include $(RTEMS_CUSTOM)
 include $(RTEMS_ROOT)/make/leaf.cfg
-#include f
+
+ifndef XSYMS
+XSYMS = xsyms
+endif
 
 
 #
@@ -52,23 +55,32 @@ include $(RTEMS_ROOT)/make/leaf.cfg
 #
 LINK.c = $(LINK.cc)
 
-ELFEXT = exe
 
-ifeq  "$(RTEMS_BSP)" "svgm" 
-DEFINES  += -DHAVE_BSP_EXCEPTION_EXTENSION
-endif
 DEFINES  += -DUSE_POSIX
 
-ifeq "$(RTEMS_BSP)" "mvme2307"
-DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_NAME=\"dc1\"
-DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_ATTACH=rtems_dec21140_driver_attach
-ELFEXT    = nxe
+ifeq  "$(RTEMS_BSP_FAMILY)" "svgm" 
+DEFINES  += -DHAVE_BSP_EXCEPTION_EXTENSION
+LIBBSPEXT = -lbspExt
+ifndef ELFEXT
+ELFEXT    = exe
+endif
 endif
 
-ifeq "$(RTEMS_BSP)" "pc386"
+ifeq "$(RTEMS_BSP_FAMILY)" "motorola_powerpc"
+DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_NAME=\"dc1\"
+DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_ATTACH=rtems_dec21140_driver_attach
+LIBBSPEXT = -lbspExt
+ifndef ELFEXT
+ELFEXT    = nxe
+endif
+endif
+
+ifeq  "$(RTEMS_BSP_FAMILY)" "pc386"
 DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_NAME=\"fxp1\"
 DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_ATTACH=rtems_fxp_attach
+ifndef ELFEXT
 ELFEXT    = obj
+endif
 endif
 
 
@@ -84,12 +96,11 @@ CFLAGS   += -O2
 #
 
 #LD_LIBS   += -Wl,--whole-archive -lcexp -lbfd -lspencer_regexp -lopcodes -liberty -lrtemscpu -lrtemsbsp  -lc
-LD_LIBS   += -lcexp -lbfd -lspencer_regexp -lopcodes -liberty -ltecla_r -lm -lbspExt
-LDFLAGS   += -Wl,--trace-symbol,get_pty -Wl,-Map,map
-#LDFLAGS   += -Wl,-T,symlist.lds
-#LDFLAGS    += -L$(prefix)/$(RTEMS_CPU)-rtems/lib
+LD_LIBS   += -lcexp -lbfd -lspencer_regexp -lopcodes -liberty -ltecla_r -lm -lrtems++ $(LIBBSPEXT)
+# Produce a linker map to help finding 'undefined symbol' references (README.config)
+LDFLAGS   += -Wl,-Map,map
+
 OBJS      += ${ARCH}/allsyms.o
-#OBJS      += allsyms.o
 
 tst:
 	echo $(LINK.c)
@@ -105,6 +116,7 @@ tst:
 #
 
 #CLEAN_ADDITIONS += xxx-your-debris-goes-here
+CLEAN_ADDITIONS+=map builddate.c
 CLOBBER_ADDITIONS +=
 
 all:	${ARCH} $(SRCS) $(PGMS)
@@ -121,15 +133,26 @@ $(ARCH)/init.o: builddate.c
 builddate.c: $(filter-out $(ARCH)/init.o,$(OBJS))
 	echo 'static char *system_build_date="'`date +%Y%m%d%Z%T`'";' > $@
 
-$(filter %.exe,$(PGMS)): ${OBJS} ${LINK_FILES}
+$(filter %.exe,$(PGMS)): ${LINK_FILES}
 	$(make-exe)
-	xsyms $(@:%.exe=%.$(ELFEXT)) $(@:%.exe=%.sym)
+ifdef ELFEXT
+ifdef XSYMS
+	$(XSYMS) $(@:%.exe=%.$(ELFEXT)) $(@:%.exe=%.sym)
+endif
+endif
 
 ifndef RTEMS_SITE_INSTALLDIR
 RTEMS_SITE_INSTALLDIR = $(PROJECT_RELEASE)
 endif
 
+$(RTEMS_SITE_INSTALLDIR)/$(RTEMS_BSP)/bin:
+	test -d $@ || mkdir -p $@
+
+INSTFILES = ${PGMS} ${PGMS:%.exe=%.bin} ${PGMS:%.exe=%.sym}
+
+
 # Install the program(s), appending _g or _p as appropriate.
 # for include files, just use $(INSTALL_CHANGE)
-install:  all
-	$(INSTALL_VARIANT) -m 555 ${PGMS} ${PGMS:%.exe=%.bin} ${PGMS:%.exe=%.sym} ${RTEMS_SITE_INSTALLDIR}/$(RTEMS_BSP)/bin
+install: all $(RTEMS_SITE_INSTALLDIR)/$(RTEMS_BSP)/bin
+	for feil in $(INSTFILES); do if [ -e $$feil ] ; then  \
+		$(INSTALL_VARIANT) -m 555 $$feil ${RTEMS_SITE_INSTALLDIR}/$(RTEMS_BSP)/bin ; fi ; done
