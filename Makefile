@@ -137,7 +137,7 @@ bspcheck: $(if $(filter $(RTEMS_BSP_FAMILY),pc386 motorola_powerpc svgm),,bspfai
 
 
 CPPFLAGS += -I.
-CFLAGS   += -O2
+CFLAGS   += -O2 -DSTACK_CHECKER_ON
 
 USE_TECLA_YES_DEFINES  = -DWINS_LINE_DISC -DUSE_TECLA
 

@@ -192,6 +192,13 @@ char	*argv[5]={
 
   rtems_libio_set_private_env();
 
+#ifdef STACK_CHECKER_ON
+  {
+	extern void Stack_check_Initialize();
+	Stack_check_Initialize();
+  }
+#endif
+
 #ifdef HAVE_BSPEXT_
   bspExtInit();
 #endif
