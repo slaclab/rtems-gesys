@@ -1,5 +1,5 @@
 /* /test/rtems-4.6.0pre4/powerpc-rtems/svgm/lib/librdbg.a[remdeb_xdr.o]: */
-librtemscpu.a[remdeb_xdr.o]:
+librtemsbsp.a[remdeb_xdr.o]:
 xdr_all_signals T 000015d0 00000044
 xdr_all_symbols T 00001490 00000044
 xdr_array U         
@@ -46,7 +46,7 @@ xdr_wait_out T 00000900 0000035c
 xdr_xdr_break T 00000110 000003d4
 xdr_xdr_mem T 00000f58 00000070
 xdr_xdr_regs T 00000000 00000110
-librtemscpu.a[remdeb_svc.o]:
+librtemsbsp.a[remdeb_svc.o]:
 close_connex_2_svc U         
 conn_list C 00000004 00000004
 conn_list_cnt C 00000004 00000004
@@ -77,7 +77,7 @@ xdr_signal_out U
 xdr_void U         
 xdr_wait_in U         
 xdr_wait_out U         
-librtemscpu.a[rdbg.o]:
+librtemsbsp.a[rdbg.o]:
 BackPort G 00000004 00000004
 bind U         
 CannotRestart G 00000010 00000004
@@ -122,7 +122,7 @@ svcudp_enablecache U
 taskName D 00000000 00000012
 TotalReboot G 00000014 00000004
 TSP_RETRIES G 00000020 00000004
-librtemscpu.a[servcon.o]:
+librtemsbsp.a[servcon.o]:
 ConnCreate T 00000000 000001d8
 ConnDelete T 000001d8 00000198
 conn_list C 00000004 00000004
@@ -142,7 +142,7 @@ TgtDetachCon U
 TgtKillAndDelete U         
 TspTranslateRpcAddr U         
 TspValidateAddr U         
-librtemscpu.a[servbkpt.o]:
+librtemsbsp.a[servbkpt.o]:
 __assert U         
 BreakAdjustPC T 000009b4 00000008
 BreakClear T 00000258 000002bc
@@ -169,7 +169,7 @@ realloc U
 setErrno U         
 TgtNotifyAll U         
 TgtPtrace U         
-librtemscpu.a[servrpc.o]:
+librtemsbsp.a[servrpc.o]:
 BreakClear U         
 BreakGet U         
 BreakGetIndex U         
@@ -209,7 +209,7 @@ TspInit U
 TspMessageReceive U         
 TspSendWaitChange U         
 wait_info_2_svc T 00000a74 00000240
-librtemscpu.a[excep.o]:
+librtemsbsp.a[excep.o]:
 conn_list C 00000004 00000004
 conn_list_cnt C 00000004 00000004
 FirstCtx G 00000000 00000004
@@ -228,7 +228,7 @@ PushExceptCtx T 00000128 000000c4
 PushSavedExceptCtx T 000001ec 00000034
 rtems_panic U         
 SavedContext C 000000a4 000000a4
-librtemscpu.a[excep_f.o]:
+librtemsbsp.a[excep_f.o]:
 BreakPointExcHdl T 00000000 0000019c
 conn_list C 00000004 00000004
 conn_list_cnt C 00000004 00000004
@@ -252,7 +252,7 @@ rtems_status_text U
 serializeSemId U         
 _Thread_Executing U         
 wakeupEventSemId U         
-librtemscpu.a[servtgt.o]:
+librtemsbsp.a[servtgt.o]:
 __assert U         
 BreakClear U         
 BreakIdentify U         
@@ -282,7 +282,7 @@ TgtNotifyWaitChange T 00000980 00000200
 TgtPtrace U         
 TgtRealPtrace U         
 TspSendWaitChange U         
-librtemscpu.a[servtsp.o]:
+librtemsbsp.a[servtsp.o]:
 alarm U         
 BackPort U         
 bind U         
@@ -310,7 +310,7 @@ TspSendMessage T 0000010c 00000160
 TspSendWaitChange T 00000000 0000010c
 TspTranslateRpcAddr T 00000324 00000084
 TspValidateAddr T 000003a8 0000003c
-librtemscpu.a[servutil.o]:
+librtemsbsp.a[servutil.o]:
 conn_list C 00000004 00000004
 conn_list_cnt C 00000004 00000004
 FindPidEntry T 0000009c 0000006c
@@ -321,7 +321,7 @@ pid_list_cnt C 00000004 00000004
 realloc U         
 strcpy U         
 strlen U         
-librtemscpu.a[_servtgt.o]:
+librtemsbsp.a[_servtgt.o]:
 CheckForSingleStep U         
 connect_rdbg_exception U         
 conn_list C 00000004 00000004
@@ -365,7 +365,7 @@ TgtPtrace T 00000340 000000cc
 TgtRealPtrace T 00000264 00000020
 TgtThreadList T 000004a8 0000008c
 wakeupEventSemId C 00000004 00000004
-librtemscpu.a[rdbg_f.o]:
+librtemsbsp.a[rdbg_f.o]:
 __assert U         
 BreakPointExcHdl U         
 CancelSingleStep T 0000030c 00000020
@@ -380,7 +380,7 @@ memcpy U
 RegsToCtx T 00000144 00000034
 set_ctx_thread T 00000178 000000c4
 Single_Step T 0000023c 00000098
-librtemscpu.a[ptrace.o]:
+librtemsbsp.a[ptrace.o]:
 __assert U         
 CannotRestart U         
 conn_list C 00000004 00000004
@@ -421,6 +421,6 @@ TgtThreadList U
 Thread_Get_RDBG T 00000558 0000008c
 TotalReboot U         
 wakeupEventSemId U         
-librtemscpu.a[rdbg_cpu_asm.o]:
+librtemsbsp.a[rdbg_cpu_asm.o]:
 copyback_data_cache_and_invalidate_instr_cache T 00000000 
 enterRdbg T 0000004c 
