@@ -1,4 +1,4 @@
-/* $Id$ */
+/* flashInit.c,v 1.5 2003/08/16 00:33:53 till Exp */
 
 /* Initialize a generic system with a symbol table in FLASH
  *
@@ -64,7 +64,7 @@
 
 #include <cexp.h>
 
-#ifdef HAVE_BSPEXT_
+#ifdef HAVE_LIBBSPEXT
 #include <bspExt.h>
 #endif
 
@@ -120,7 +120,7 @@ char	*slash;
 
   rtems_libio_set_private_env();
 
-#ifdef HAVE_BSPEXT_
+#ifdef HAVE_LIBBSPEXT
   bspExtInit();
 #endif
 

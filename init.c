@@ -164,7 +164,7 @@ static int tftpInited    = 1; /* initialization done by application itself */
 /* helper code borrowed from netboot */
 #include "pathcheck.c"
 
-#ifdef HAVE_BSPEXT_
+#ifdef HAVE_LIBBSPEXT
 #include <bsp/bspExt.h>
 #endif
 
@@ -328,7 +328,7 @@ char	*argv[7]={
   }
 #endif
 
-#ifdef HAVE_BSPEXT_
+#ifdef HAVE_LIBBSPEXT
   bspExtInit();
 #endif
 
