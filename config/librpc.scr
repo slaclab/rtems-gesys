@@ -1,0 +1,126 @@
+/* auth_none.o: */
+EXTERN(authnone_create)
+/* auth_unix.o: */
+EXTERN(authunix_create)
+EXTERN(authunix_create_default)
+EXTERN(set_rpc_maxgrouplist)
+/* authunix_prot.o: */
+EXTERN(xdr_authunix_parms)
+/* bindresvport.o: */
+EXTERN(bindresvport)
+EXTERN(bindresvport_sa)
+/* clnt_generic.o: */
+EXTERN(clnt_create)
+/* clnt_perror.o: */
+EXTERN(clnt_pcreateerror)
+EXTERN(clnt_perrno)
+EXTERN(clnt_perror)
+EXTERN(clnt_spcreateerror)
+EXTERN(clnt_sperrno)
+EXTERN(clnt_sperror)
+/* clnt_raw.o: */
+EXTERN(clntraw_create)
+/* clnt_simple.o: */
+EXTERN(callrpc)
+/* clnt_tcp.o: */
+EXTERN(clnttcp_create)
+/* clnt_udp.o: */
+EXTERN(clntudp_bufcreate)
+EXTERN(clntudp_create)
+/* get_myaddress.o: */
+EXTERN(get_myaddress)
+/* getrpcent.o: */
+EXTERN(endrpcent)
+EXTERN(getrpcbyname)
+EXTERN(getrpcbynumber)
+EXTERN(getrpcent)
+EXTERN(rpcdata)
+EXTERN(setrpcent)
+/* getrpcport.o: */
+EXTERN(getrpcport)
+/* netname.o: */
+EXTERN(getnetname)
+EXTERN(host2netname)
+EXTERN(user2netname)
+/* netnamer.o: */
+EXTERN(netname2host)
+EXTERN(netname2user)
+/* pmap_clnt.o: */
+EXTERN(pmap_set)
+EXTERN(pmap_unset)
+/* pmap_getmaps.o: */
+EXTERN(pmap_getmaps)
+/* pmap_getport.o: */
+EXTERN(pmap_getport)
+/* pmap_prot.o: */
+EXTERN(xdr_pmap)
+/* pmap_prot2.o: */
+EXTERN(xdr_pmaplist)
+/* pmap_rmt.o: */
+EXTERN(clnt_broadcast)
+EXTERN(pmap_rmtcall)
+EXTERN(xdr_rmtcall_args)
+EXTERN(xdr_rmtcallres)
+/* rpc_callmsg.o: */
+EXTERN(xdr_callmsg)
+/* rpc_commondata.o: */
+EXTERN(_null_auth)
+EXTERN(rpc_createerr)
+/* rpc_dtablesize.o: */
+EXTERN(_rpc_dtablesize)
+getdtablesize = 0; /* a hack */
+/* rpc_prot.o: */
+EXTERN(_null_auth)
+EXTERN(_seterr_reply)
+EXTERN(xdr_accepted_reply)
+EXTERN(xdr_callhdr)
+EXTERN(xdr_des_block)
+EXTERN(xdr_opaque_auth)
+EXTERN(xdr_rejected_reply)
+EXTERN(xdr_replymsg)
+/* rpcdname.o: */
+EXTERN(_rpc_get_default_domain)
+getdomainname = 0;
+/* rtime.o: */
+EXTERN(rtime)
+/* svc.o: */
+EXTERN(svc_getreq)
+EXTERN(svc_getreqset)
+EXTERN(svc_getreqset2)
+EXTERN(svc_register)
+EXTERN(svc_sendreply)
+EXTERN(svc_unregister)
+EXTERN(svcerr_auth)
+EXTERN(svcerr_decode)
+EXTERN(svcerr_noproc)
+EXTERN(svcerr_noprog)
+EXTERN(svcerr_progvers)
+EXTERN(svcerr_systemerr)
+EXTERN(svcerr_weakauth)
+EXTERN(xprt_register)
+EXTERN(xprt_unregister)
+/* svc_auth.o: */
+EXTERN(_authenticate)
+EXTERN(_svcauth_null)
+EXTERN(svc_auth_reg)
+/* svc_auth_unix.o: */
+EXTERN(_svcauth_short)
+EXTERN(_svcauth_unix)
+/* svc_raw.o: */
+EXTERN(svcraw_create)
+/* svc_run.o: */
+EXTERN(svc_run)
+/* svc_simple.o: */
+EXTERN(registerrpc)
+/* svc_tcp.o: */
+EXTERN(svcfd_create)
+EXTERN(svctcp_create)
+/* svc_udp.o: */
+EXTERN(svcudp_bufcreate)
+EXTERN(svcudp_create)
+EXTERN(svcudp_enablecache)
+/* rtems_portmapper.o: */
+EXTERN(rtems_rpc_start_portmapper)
+/* rtems_rpc.o: */
+EXTERN(rtems_rpc_task_init)
+EXTERN(rtems_rpc_task_variables)
