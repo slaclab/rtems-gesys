@@ -192,12 +192,13 @@ char	*argv[5]={
 
   rtems_libio_set_private_env();
 
-#ifdef STACK_CHECKER_ON
-  {
+  /* stuff command line 'name=value' pairs into the environment */
+  cmdline2env();
+
+  if ( getenv("STACKCHECK") ) {
 	extern void Stack_check_Initialize();
 	Stack_check_Initialize();
   }
-#endif
 
 #ifdef HAVE_BSPEXT_
   bspExtInit();
@@ -230,9 +231,6 @@ char	*argv[5]={
   printf("Installing TIOCGWINSZ line discipline: %s.\n",
 		 ansiTiocGwinszInstall(7) ? "failed" : "ok");
 #endif
-
-  /* stuff command line 'name=value' pairs into the environment */
-  cmdline2env();
 
   cexpInit(cexpExcHandlerInstall);
 
