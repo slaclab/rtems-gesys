@@ -99,7 +99,6 @@
  *   - eventually, CEXP enters interactive mode at the console.
  *
  */
-#include <bsp.h>
 // I386 #include <bsp/irq.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -117,9 +116,18 @@
 
 #include <cexp.h>
 
+#ifdef USE_TECLA
 #include <libtecla.h>
+#else
+#define del_GetLine(gl)					free(gl)
+#define	new_GetLine(len,lines)			malloc(len)
+#define gl_configure_getline(gl,a,b,c)	do {} while(0)
+typedef char GetLine;
+static	char *my_getline(char *rval, char *prompt, int len);
+#endif
 
-//#include "hack.c"
+#define LINE_LENGTH 200
+
 #include "builddate.c"
 
 #ifdef HAVE_BSPEXT_
@@ -159,8 +167,10 @@ cexpExcHandlerInstall(void (*handler)(int))
 static void
 cmdline2env(void);
 
+#ifdef USE_TECLA
 int
 ansiTiocGwinszInstall(int slot);
+#endif
 
 rtems_task Init(
   rtems_task_argument ignored
@@ -197,12 +207,14 @@ char	*argv[5]={
   else
 	printf("OK\n");
 
+#ifdef USE_TECLA
   /*
    * Install our special line discipline which implements
    * TIOCGWINSZ
    */
   printf("Installing TIOCGWINSZ line discipline: %s.\n",
 		 ansiTiocGwinszInstall(7) ? "failed" : "ok");
+#endif
 
   /* stuff command line 'name=value' pairs into the environment */
   cmdline2env();
@@ -215,12 +227,16 @@ char	*argv[5]={
 
   if (!bufp) {
 	if (!gl) {
-		assert( gl = new_GetLine(500,10) );
+		assert( gl = new_GetLine(LINE_LENGTH,10) );
 		/* silence warnings about missing .teclarc */
 		gl_configure_getline(gl,0,0,0);
 	}
 	do {
+#ifdef USE_TECLA
 		bufp = gl_get_line(gl, "Enter Symbol File Name: ", NULL, 0);
+#else
+		bufp = my_getline(gl, "Enter Symbol File Name: ", LINE_LENGTH);
+#endif
 	} while (!bufp || !*bufp);
   }
 
@@ -388,3 +404,31 @@ done:
 	free(buf);
 }
 
+#ifndef USE_TECLA
+static char *my_getline(char *rval, char *prompt, int len)
+{
+int		ch;
+char	*cp;
+
+    if (prompt)
+        fputs(prompt,stdout);
+
+    for (cp=rval; cp<rval+len-1 && (ch=getchar())>=0;) {
+            switch (ch) {
+                case '\n': goto done;
+                case '\b':
+                    if (cp>rval) {
+                        cp--;
+                        fputs("\b ",stdout);
+                    }
+                    break;
+                default:
+                    *cp++=ch;
+                    break;
+            }
+    }
+done:
+	*cp=0;
+    return rval;
+}
+#endif

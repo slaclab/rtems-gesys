@@ -3,6 +3,16 @@
 #
 #
 
+# On a PC console (i.e. VGA, not a serial terminal console)
+# tecla should _not_ be used because the RTEMS VGA console
+# driver is AFAIK non-ANSI and too dumb to be used by tecla.
+# Don't forget to configure Cexp with --disable-tecla in this
+# case...
+# On a PC, you may have to use a different network driver
+# also; YMMV. The value must be 'YES' or 'NO' (no quotes) 
+USE_TECLA = YES
+
+
 # C source names, if any, go here -- minus the .c
 # make a system for storing in flash. The compressed binary
 # can be generated with the tools and code from 'netboot'.
@@ -11,8 +21,9 @@
 #C_PIECES=flashInit rtems_netconfig config flash
 #
 
-# Normal system which can be net-booted
-C_PIECES=init rtems_netconfig config term
+# Normal (i.e. non-flash) system which can be net-booted
+USE_TECLA_YES_C_PIECES = term
+C_PIECES=init rtems_netconfig config $(USE_TECLA_$(USE_TECLA)_C_PIECES)
 C_FILES=$(C_PIECES:%=%.c)
 C_O_FILES=$(C_PIECES:%=${ARCH}/%.o)
 
@@ -85,7 +96,11 @@ endif
 
 
 CPPFLAGS += -I.
-CFLAGS   += -O2 -DWINS_LINE_DISC
+CFLAGS   += -O2
+
+USE_TECLA_YES_DEFINES = -DWINS_LINE_DISC -DUSE_TECLA
+
+DEFINES+=$(USE_TECLA_$(USE_TECLA)_DEFINES)
 
 #
 # CFLAGS_DEBUG_V are used when the `make debug' target is built.
@@ -94,7 +109,9 @@ CFLAGS   += -O2 -DWINS_LINE_DISC
 # CFLAGS_DEBUG_V += -qrtems_debug
 #
 
-LD_LIBS   += -lcexp -lbfd -lspencer_regexp -lopcodes -liberty -ltecla_r -lm -lrtems++ $(LIBBSPEXT)
+USE_TECLA_YES_LIB = -ltecla_r
+
+LD_LIBS   += -lcexp -lbfd -lspencer_regexp -lopcodes -liberty $(USE_TECLA_$(USE_TECLA)_LIB) -lm -lrtems++ $(LIBBSPEXT)
 # Produce a linker map to help finding 'undefined symbol' references (README.config)
 LDFLAGS   += -Wl,-Map,map
 
