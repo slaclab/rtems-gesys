@@ -59,7 +59,7 @@ INCLUDE_LISTS+=$(wildcard config/*.incl)
 
 # Normal (i.e. non-flash) system which can be net-booted
 USE_TECLA_YES_C_PIECES = term
-C_PIECES=init rtems_netconfig config $(USE_TECLA_$(USE_TECLA)_C_PIECES)
+C_PIECES=init rtems_netconfig config $(USE_TECLA_$(USE_TECLA)_C_PIECES) pre2-compat
 C_FILES=$(C_PIECES:%=%.c)
 C_O_FILES=$(C_PIECES:%=${ARCH}/%.o)
 
