@@ -13,7 +13,7 @@
 #C_PIECES=flashInit rtems_netconfig config flash
 #
 # Normal system which can be net-booted
-C_PIECES=init rtems_netconfig config
+C_PIECES=init rtems_netconfig config term
 C_FILES=$(C_PIECES:%=%.c)
 C_O_FILES=$(C_PIECES:%=${ARCH}/%.o)
 
@@ -85,9 +85,11 @@ CFLAGS   += -O2
 
 #LD_LIBS   += -Wl,--whole-archive -lcexp -lbfd -lspencer_regexp -lopcodes -liberty -lrtemscpu -lrtemsbsp  -lc
 LD_LIBS   += -lcexp -lbfd -lspencer_regexp -lopcodes -liberty -ltecla_r -lm -lbspExt
+LDFLAGS   += -Wl,--trace-symbol,get_pty -Wl,-Map,map
 #LDFLAGS   += -Wl,-T,symlist.lds
 #LDFLAGS    += -L$(prefix)/$(RTEMS_CPU)-rtems/lib
 OBJS      += ${ARCH}/allsyms.o
+#OBJS      += allsyms.o
 
 tst:
 	echo $(LINK.c)
@@ -107,16 +109,16 @@ CLOBBER_ADDITIONS +=
 
 all:	${ARCH} $(SRCS) $(PGMS)
 
-$(ARCH)/allsyms.o:	symlist.lds $(ARCH)/empty.o config/*
-	$(LD) -Tsymlist.lds -r -o $@ $(ARCH)/empty.o
+$(ARCH)/allsyms.o:	symlist.lds.tmpl $(ARCH)/empty.o config.tmpl/*
+	$(LD) -T$< -r -o $@ $(ARCH)/empty.o
 
 $(ARCH)/empty.o:
 	touch $(@:%.o=%.c)
 	$(CC) -c -O -o $@ $(@:%.o=%.c)
 
-init.c: builddate.c
+$(ARCH)/init.o: builddate.c
 
-builddate.c:
+builddate.c: $(filter-out $(ARCH)/init.o,$(OBJS))
 	echo 'static char *system_build_date="'`date +%Y%m%d%Z%T`'";' > $@
 
 $(filter %.exe,$(PGMS)): ${OBJS} ${LINK_FILES}

@@ -116,6 +116,9 @@ cexpExcHandlerInstall(void (*handler)(int))
 static void
 cmdline2env(void);
 
+int
+queryTerminalSize(int quiet);
+
 rtems_task Init(
   rtems_task_argument ignored
 )
@@ -149,6 +152,12 @@ char	*argv[5]={
 	printf("FAILED\n");
   else
 	printf("OK\n");
+
+  /* try to determine our terminal size (COLUMNS and LINES env.
+   * variables are set as a side effect
+   */
+  printf("Trying to determine terminal size...\n");
+  queryTerminalSize( 0 /*print info*/);
 
   /* stuff command line 'name=value' pairs into the environment */
   cmdline2env();
@@ -333,3 +342,4 @@ char *beg,*end;
 done:
 	free(buf);
 }
+

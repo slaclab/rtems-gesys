@@ -4,14 +4,68 @@
 #
 # Author: Till Straumann <strauman@slac.stanford.edu>
 #
-RTEMS = /afs/slac/package/rtems/prod/
-VPATH = $(RTEMS)/rtems/powerpc-rtems/svgm/lib:$(RTEMS)/rtems/powerpc-rtems/lib:$(RTEMS)/tools/i386_linux2x/powerpc-rtems/lib:$(RTEMS)/tools/i386_linux2x/lib/gcc-lib/powerpc-rtems/2.95.3/
-LIBS = libgcc.a libstdc++.a libc.a libm.a libblock.a libbsp.a libbspExt.a libcsupport.a libfs.a libmisc.a libnetchip.a libnetworking.a librtems++.a librtemscpu.a libserialio.a librpc.a libxdr.a libtecla_r.a
-NM = powerpc-rtems-nm
+# NOTES:
+#
+#   - set the variables below:
+#       VPATH = <all directories to search for libraries>
+#       LIBRS  = list all libraries to scan
+#   - make -f Makefile.symlists will generate a file 'libxxx.scr'
+#     for each library listing all the symbols exported by the library.
+#
+#   - an INCLUDE line for each 'libxxx.scr' must be added to 'symlist.lds'
+#
+#   - final linkage errors may occur due to the forced linking of 'dead'
+#     library parts. I.e. otherwise unused code forced into the link may
+#     reference undefined/unresolvable symbols.
+#     In such cases, the libxxx.scr files must be hand-tuned to delete/comment
+#     'dead' library parts.
+#     Sometimes, it is easier to simply 'define' an unresolved symbol to a
+#     bogus value. Note that great care must be taken that the respective
+#     symbol is _really_ unused / never referenced.
+#
+#   - unfortunately, configuring the libxxx.scr files has become more
+#     cumbersome with later releases of RTEMS:
+#     a) everything that used to be in separate libraries (e.g. pppd)
+#        is now included in one huge 'librtemsbsp.a', hence it is
+#        much more difficult to identify the unused parts.
+#     b) there are name clashes / redundant implementations of
+#        code (e.g. in srand48 ppp AND libc). If the libc version is wanted,
+#        it's not enough to eliminate srand48 from one of the libxxx.scr
+#        - one of the copies must be removed from the actual library.
+#
+#RTEMS = /afs/slac/package/rtems/prod/
+#VPATH = $(RTEMS)/rtems/powerpc-rtems/svgm/lib:$(RTEMS)/rtems/powerpc-rtems/lib:$(RTEMS)/tools/i386_linux2x/powerpc-rtems/lib:$(RTEMS)/tools/i386_linux2x/lib/gcc-lib/powerpc-rtems/2.95.3/
 
-SCRIPTS = $(patsubst %.a, %.scr, $(notdir $(LIBS)))
+CORELIBS = libgcc.a libstdc++.a libc.a libm.a librtemsbsp.a librtems++.a librtemscpu.a
 
-all: $(SCRIPTS)
+VPATH    = /home/till/rtems/sandbox/rtemsApplications/$(RTEMS_CPU)-rtems/lib
+LIBRS   += libbspExt.a
 
-%.scr: %.a
-	$(NM) --defined-only -g $^ | awk '/^[^ \t:]*[:]/{ print "/* "$$1" */"} { if ( NF == 3 ) print "EXTERN("$$3")" }' > $@
+ifneq (XX$(CORELIBS),XX)
+VPATH += $(dir $(foreach lib,$(CORELIBS),$(shell $(CC) -print-file-name=$(lib))))
+LIBRS := $(CORELIBS) $(LIBRS)
+endif
+
+#LIBRS = libgcc.a libstdc++.a libc.a libm.a libblock.a libbsp.a libbspExt.a libcsupport.a libfs.a libmisc.a libnetchip.a libnetworking.a librtems++.a librtemscpu.a libserialio.a librpc.a libxdr.a libtecla_r.a
+
+EXTENS = tmpl
+SCRIPTDIR = config.$(EXTENS)
+
+SCRIPTS = $(patsubst %.a, $(SCRIPTDIR)/%.scr, $(notdir $(LIBRS)))
+LISTSCR = symlist.lds.$(EXTENS)
+
+include $(RTEMS_MAKEFILE_PATH)/Makefile.inc
+include $(RTEMS_CUSTOM)
+include $(RTEMS_ROOT)/make/leaf.cfg
+
+all: $(SCRIPTDIR) $(SCRIPTS) $(LISTSCR)
+
+$(LISTSCR):
+	$(RM) $@
+	for scr in $(SCRIPTS); do echo INCLUDE $$scr >> $@; done
+
+$(SCRIPTDIR):
+	mkdir $@
+
+$(SCRIPTS):$(SCRIPTDIR)/%.scr:%.a
+	$(NM) --defined-only -g -l $^ | awk 'BEGIN { flag=0; }/^[^ \t:]*[:]/{ print "/* "$$1" */"; flag = 1;} { if ( NF >= 3 ) { if ( flag != 0 && NF > 3 ) print "/* "$$4" */"; flag = 0; print "EXTERN("$$3")";} }' > $@
