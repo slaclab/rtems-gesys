@@ -6,7 +6,7 @@ lsmod = cexpModuleInfo
 rtems_rpc_start_portmapper(50)
 # set telnet password to 'rtems'
 setenv("TELNETD_PASSWD","tduDcyLX12owo")
-ld("telnetd.obj") && startTelnetd(0,0,0,0,0)
+ld("telnetd.obj")
 # RTEMS monitor (type rtemsMonitor() to enter its own shell)
 ld("monitor.obj")
 # misc utilities, e.g., md(), mm() memory inspection/modification
