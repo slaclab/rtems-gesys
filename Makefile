@@ -25,7 +25,7 @@ USE_BSPEXT = YES
 # any library it knows of (libc, librtemscpu, OPT_LIBRARIES
 # etc. you can list objects you want to exclude explicitely
 # in the EXCLUDE_LISTS below.
-OPT_LIBRARIES = -lm -lrtems++
+OPT_LIBRARIES = -lm -lrtems++ -lrtemsNfs
 
 # Particular objects to EXCLUDE from the link.
 # '$(NM) -fposix -g' generated files are acceptable
@@ -49,6 +49,12 @@ EXCLUDE_LISTS+=$(wildcard config/*.excl)
 #       in the order they appear on the command line.
 INCLUDE_LISTS+=$(wildcard config/*.incl)
 
+# RTEMS versions older than 4.6.0 (and probably newer than 4.5)
+# have a subtle bug (PR504). Setting to YES installs a fix for this.
+# This should be NO on 4.6.0 and later.
+USE_GC=NO
+
+
 # C source names, if any, go here -- minus the .c
 # make a system for storing in flash. The compressed binary
 # can be generated with the tools and code from 'netboot'.
@@ -59,12 +65,23 @@ INCLUDE_LISTS+=$(wildcard config/*.incl)
 
 # Normal (i.e. non-flash) system which can be net-booted
 USE_TECLA_YES_C_PIECES = term
-C_PIECES=init rtems_netconfig config $(USE_TECLA_$(USE_TECLA)_C_PIECES) pre2-compat
+C_PIECES=init rtems_netconfig config $(USE_TECLA_$(USE_TECLA)_C_PIECES)
+
+# SSRL 4.6.0pre2 compatibility workaround. Obsolete.
+#C_PIECES+=pre2-compat
+
 C_FILES=$(C_PIECES:%=%.c)
 C_O_FILES=$(C_PIECES:%=${ARCH}/%.o)
 
 # C++ source names, if any, go here -- minus the .cc
-CC_PIECES=gc
+CC_PIECES=
+
+CC_PIECES_GC_YES=gc
+CC_PIECES+=$(CC_PIECES_GC_$(USE_GC))
+
+
+
+
 CC_FILES=$(CC_PIECES:%=%.cc)
 CC_O_FILES=$(CC_PIECES:%=${ARCH}/%.o)
 
@@ -130,10 +147,15 @@ endif
 USE_BSPEXT = NO
 endif
 
+ifeq "$(RTEMS_BSP_FAMILY)" "mvme167"
+USE_BSPEXT = NO
+endif
+
+
 bspfail:
 	$(error GeSys has not been ported/tested on this BSP ($(RTEMS_BSP)) yet)
 
-bspcheck: $(if $(filter $(RTEMS_BSP_FAMILY),pc386 motorola_powerpc svgm),,bspfail)
+bspcheck: $(if $(filter $(RTEMS_BSP_FAMILY),pc386 motorola_powerpc svgm mvme167),,bspfail)
 
 
 CPPFLAGS += -I.
@@ -163,7 +185,8 @@ LD_LIBS   += $(USE_BSPEXT_$(USE_BSPEXT)_LIB)
 LD_LIBS   += $(OPT_LIBRARIES)
 
 # Produce a linker map to help finding 'undefined symbol' references (README.config)
-LDFLAGS   += -Wl,-Map,$(ARCH)/linkmap -Wl,--wrap,free
+LDFLAGS_GC_YES = -Wl,--wrap,free
+LDFLAGS   += -Wl,-Map,$(ARCH)/linkmap $(LDFLAGS_GC_$(USE_GC))
 
 # this special object contains 'undefined' references for
 # symbols we want to forcibly include. It is automatically
@@ -180,7 +203,7 @@ OBJS      += ${ARCH}/allsyms.o
 CLEAN_ADDITIONS   += builddate.c nvram.c
 CLOBBER_ADDITIONS +=
 
-all: bspcheck libnms ${ARCH} $(SRCS) $(PGMS)
+all: bspcheck gc-check libnms ${ARCH} $(SRCS) $(PGMS)
 
 # We want to have the build date compiled in...
 $(ARCH)/init.o: builddate.c
@@ -196,7 +219,9 @@ $(filter %.exe,$(PGMS)): ${LINK_FILES}
 	$(make-exe)
 ifdef ELFEXT
 ifdef XSYMS
+ifeq ($(USE_GC),YES)
 	$(OBJCOPY) --redefine-sym free=__real_free --redefine-sym __wrap_free=free $(@:%.exe=%.$(ELFEXT))
+endif
 	$(XSYMS) $(@:%.exe=%.$(ELFEXT)) $(@:%.exe=%.sym)
 endif
 endif
@@ -277,10 +302,12 @@ $(ARCH)/app.nm: $(filter-out $(ARCH)/allsyms.o,$(OBJS))
 THELIBS:=$(shell $(LINK.cc) $(AM_CFLAGS) $(AM_LDFLAGS) $(LINK_LIBS) -specs=myspec)
 
 LIBNMS=$(patsubst %.a,$(ARCH)/%.nm,$(sort $(patsubst -l%,lib%.a,$(filter -l%,$(THELIBS)))))
+OPTIONAL_ALL=$(addprefix -o,$(LIBNMS)) 
+#OPTIONAL_ALL=-o$(ARCH)/app.nm
 
 $(SYMLIST_LDS): $(ARCH)/app.nm $(LIBNMS) $(ARCH)/startfiles.nm $(EXCLUDE_LISTS) $(LDEP)
 	echo $^
-	$(LDEP) -F -l -u $(addprefix -o,$(LIBNMS)) $(addprefix -x,$(EXCLUDE_LISTS)) $(addprefix -o,$(INCLUDE_LISTS)) -e $@ $(filter %.nm,$^) > $(ARCH)/ldep.log
+	$(LDEP) -F -l -u $(OPTIONAL_ALL) $(addprefix -x,$(EXCLUDE_LISTS)) $(addprefix -o,$(INCLUDE_LISTS)) -e $@ $(filter %.nm,$^) > $(ARCH)/ldep.log
 
 vpath %.a $(patsubst -L%,%,$(filter -L%,$(THELIBS)))
 
@@ -294,6 +321,9 @@ $(ARCH)/%.nm: %.a
 foo:
 	echo $(filter %.nm,$(LIBNMS))
 
+thelibs:
+	echo $(THELIBS)
+
 
 # Create the name files for our libraries. This is achieved by
 # invoking the compiler with a special 'spec' file which instructs
@@ -304,3 +334,19 @@ foo:
 # knowing the libraries.
 #libnms: $(ARCH)
 #	sh -c "$(MAKE) `$(LINK.cc) $(AM_CFLAGS) $(AM_LDFLAGS) $(LINK_LIBS) -specs=myspec` libnms-recurse"
+
+# 4.6. pre versions require the GC workaround. 4.5 probably not, but we
+# don't bother...
+gc-check: librtemscpu.a
+ifeq ($(USE_GC),YES)
+	@if nm $^ | grep -q RTEMS_Malloc_GC_list ; then \
+		echo 'Your RTEMS release has bug #504 apparently fixed; set USE_GC to NO' ;\
+		exit 1;\
+	fi
+else
+	@if ! nm $^ | grep -q RTEMS_Malloc_GC_list ; then \
+		echo 'Your RTEMS release might have bug #504; set USE_GC to YES' ;\
+		exit 1;\
+	fi
+endif
+
