@@ -212,6 +212,7 @@ char	*argv[5]={
   else
 	printf("OK\n");
 
+  /* remote logging only works after a call to openlog()... */
   openlog(0, LOG_PID | LOG_CONS, 0); /* use RTEMS defaults */
 
 #if defined(USE_TECLA)
