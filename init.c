@@ -140,7 +140,8 @@ char	*argv[5]={
   if (rtems_bsdnet_initialize_tftp_filesystem())
 	perror("TFTP FS initialization failed");
 
-  printf("This system $Id$ was built on %s\n",system_build_date);
+  printf("$Id$\n");
+  printf("This system $Name$ was built on %s\n",system_build_date);
 
   printf("Trying to synchronize NTP...");
   fflush(stdout);
