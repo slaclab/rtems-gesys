@@ -152,6 +152,15 @@ ELFEXT    = nxe
 endif 
 endif 
 
+ifeq "$(RTEMS_BSP_FAMILY)" "psim"
+USE_BSPEXT = NO
+USE_TFTPFS = NO
+USE_NFS    = NO
+USE_RSH    = NO
+C_PIECES  += bug_disk
+DEFINES   += -DPSIM
+endif
+
 ifeq "$(RTEMS_BSP_FAMILY)" "motorola_powerpc"
 DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_NAME=\"dc1\"
 DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_ATTACH=rtems_dec21140_driver_attach
@@ -195,7 +204,7 @@ endif
 bspfail:
 	$(error GeSys has not been ported/tested on this BSP ($(RTEMS_BSP)) yet)
 
-bspcheck: $(if $(filter $(RTEMS_BSP_FAMILY),pc386 motorola_powerpc svgm mvme167),,bspfail)
+bspcheck: $(if $(filter $(RTEMS_BSP_FAMILY),pc386 motorola_powerpc svgm mvme167 psim),,bspfail)
 
 
 CPPFLAGS += -I.
