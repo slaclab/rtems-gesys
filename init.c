@@ -116,6 +116,7 @@
 #include <rtems/rtems_bsdnet.h>
 #include <rtems/libio.h>
 #include <rtems/tftp.h>
+#include <bsp.h>
 
 
 #include <sys/select.h>
@@ -337,12 +338,11 @@ char	*argv[7]={
   printf("This system $Name$ was built on %s\n",system_build_date);
   printf("$Id$\n");
 
-#ifdef GRUB_BOOT
+#ifdef EARLY_CMDLINE_GET
   {
-	char *slash = strchr((const char*)0x2000, ' ');
-	if ( slash ) {
-		cmdline2env(slash+1);
-	}
+	char *cmdlinetmp;
+	EARLY_CMDLINE_GET(&cmdlinetmp);
+	cmdline2env(cmdlinetmp);
   }
 #endif
 
@@ -705,6 +705,9 @@ cmdline2env(const char *cmdline)
 char *buf = 0;
 
 char *beg,*end;
+
+	if ( !cmdline )
+		return;
 
 	/* make a copy we may modify */
 	buf = strdup(cmdline);

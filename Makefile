@@ -145,6 +145,7 @@ DEFINES  += $(DEFINES_BSPEXT_$(USE_BSPEXT))
 # Trim BSP specific things
 ifeq  "$(RTEMS_BSP_FAMILY)" "svgm" 
 DEFINES  += -DHAVE_BSP_EXCEPTION_EXTENSION
+DEFINES  += "-DEARLY_CMDLINE_GET(arg)=do { *(arg) = BSP_commandline_string; } while (0)"
 C_PIECES += nvram
 ifndef ELFEXT
 ELFEXT    = nxe
@@ -162,7 +163,7 @@ endif
 ifeq  "$(RTEMS_BSP_FAMILY)" "pc386"
 DEFINES  += -DMULTI_NETDRIVER
 DEFINES  += -DHAVE_PCIBIOS
-DEFINES  += -DGRUB_BOOT
+DEFINES  += "-DEARLY_CMDLINE_GET(arg)=do { if ( (*(arg) = strchr((const char*)0x2000, ' ')) ) (*(arg))++; } while (0)"
 ifndef ELFEXT
 ELFEXT    = obj
 endif
