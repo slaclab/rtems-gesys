@@ -17,6 +17,24 @@ USE_TECLA  = YES
 # (automagically) disabled on pcx86 BSPs.
 USE_BSPEXT = YES
 
+# Include NFS support; system symbol table and initialization
+# scripts can be loaded using NFS
+USE_NFS    = YES
+
+# Include TFTP filesystem support; system symbol table and
+# initialization scripts can be loaded using TFTP
+USE_TFTPFS = YES
+
+# Include RSH support for downloading the system symbol
+# table and a system initialization script (user level
+# script not supported).
+# NOTE: RSH support is NOT a filesystem but just downloads
+#       the essential files (symfile and script) to the IMFS,
+#       i.e., NO path is available to the script.
+USE_RSH    = YES
+
+#
+
 # Optional libraries to add, i.e. functionality you
 # want to be present but which is not directly used
 # by GeSys itself.
@@ -25,7 +43,7 @@ USE_BSPEXT = YES
 # any library it knows of (libc, librtemscpu, OPT_LIBRARIES
 # etc. you can list objects you want to exclude explicitely
 # in the EXCLUDE_LISTS below.
-OPT_LIBRARIES = -lm -lrtems++ -lrtemsNfs
+OPT_LIBRARIES = -lm -lrtems++
 
 # Particular objects to EXCLUDE from the link.
 # '$(NM) -fposix -g' generated files are acceptable
@@ -79,9 +97,6 @@ CC_PIECES=
 CC_PIECES_GC_YES=gc
 CC_PIECES+=$(CC_PIECES_GC_$(USE_GC))
 
-
-
-
 CC_FILES=$(CC_PIECES:%=%.cc)
 CC_O_FILES=$(CC_PIECES:%=${ARCH}/%.o)
 
@@ -117,7 +132,6 @@ endif
 #
 # make-exe uses LINK.c but we have C++ stuff
 LINK.c = $(LINK.cc)
-
 
 DEFINES  += -DUSE_POSIX
 
@@ -166,8 +180,14 @@ CFLAGS   += -O2
 #CFLAGS   +=-DSTACK_CHECKER_ON
 
 USE_TECLA_YES_DEFINES  = -DWINS_LINE_DISC -DUSE_TECLA
+USE_NFS_YES_DEFINES    = -DNFS_SUPPORT
+USE_TFTPFS_YES_DEFINES = -DTFTP_SUPPORT
+USE_RSH_YES_DEFINES    = -DRSH_SUPPORT
 
 DEFINES+=$(USE_TECLA_$(USE_TECLA)_DEFINES)
+DEFINES+=$(USE_NFS_$(USE_NFS)_DEFINES)
+DEFINES+=$(USE_TFTPFS_$(USE_TFTPFS)_DEFINES)
+DEFINES+=$(USE_RSH_$(USE_RSH)_DEFINES)
 
 #
 # CFLAGS_DEBUG_V are used when the `make debug' target is built.
@@ -178,10 +198,12 @@ DEFINES+=$(USE_TECLA_$(USE_TECLA)_DEFINES)
 
 USE_TECLA_YES_LIB  = -ltecla_r
 USE_BSPEXT_YES_LIB = -lbspExt
+USE_NFS_YES_LIB    = -lrtemsNfs
 
 LD_LIBS   += -lcexp -lbfd -lspencer_regexp -lopcodes -liberty
 LD_LIBS   += $(USE_TECLA_$(USE_TECLA)_LIB)
 LD_LIBS   += $(USE_BSPEXT_$(USE_BSPEXT)_LIB)
+LD_LIBS   += $(USE_NFS_$(USE_NFS)_LIB)
 LD_LIBS   += $(OPT_LIBRARIES)
 
 # Produce a linker map to help finding 'undefined symbol' references (README.config)
@@ -206,12 +228,15 @@ CLOBBER_ADDITIONS +=
 all: bspcheck gc-check libnms ${ARCH} $(SRCS) $(PGMS)
 
 # We want to have the build date compiled in...
-$(ARCH)/init.o: builddate.c
+$(ARCH)/init.o: builddate.c pathcheck.c
 
 builddate.c: $(filter-out $(ARCH)/init.o $(ARCH)/allsyms.o,$(OBJS)) Makefile
 	echo 'static char *system_build_date="'`date +%Y%m%d%Z%T`'";' > builddate.c
 
 nvram.c: nvram/nvram.c
+	ln -s $^ $@
+
+pathcheck.c: nvram/pathcheck.c
 	ln -s $^ $@
 
 # Build the executable and a symbol table file
