@@ -1,413 +1,285 @@
+/* _muldi3.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:361 */
+EXTERN(__muldi3)
+/* _negdi2.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:52 */
+EXTERN(__negdi2)
+/* _lshrdi3.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:244 */
+EXTERN(__lshrdi3)
 /* _ashldi3.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:275 */
 EXTERN(__ashldi3)
 /* _ashrdi3.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:306 */
 EXTERN(__ashrdi3)
-/* _bb.o: */
-/* _clear_cache.o: */
-EXTERN(__clear_cache)
+/* _ffsdi2.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:338 */
+EXTERN(__ffsdi2)
+/* _clz.o: */
+EXTERN(__clz_tab)
 /* _cmpdi2.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:801 */
 EXTERN(__cmpdi2)
+/* _ucmpdi2.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:821 */
+EXTERN(__ucmpdi2)
+/* _floatdidf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:1050 */
+EXTERN(__floatdidf)
+/* _floatdisf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:1098 */
+EXTERN(__floatdisf)
+/* _fixunsdfsi.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:1170 */
+EXTERN(__fixunsdfsi)
+/* _fixunssfsi.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:1192 */
+EXTERN(__fixunssfsi)
+/* _fixunsdfdi.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:923 */
+EXTERN(__fixunsdfdi)
+/* _fixdfdi.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:952 */
+EXTERN(__fixdfdi)
+/* _fixunssfdi.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:965 */
+EXTERN(__fixunssfdi)
+/* _fixsfdi.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:998 */
+EXTERN(__fixsfdi)
+/* _fixxfdi.o: */
+/* _fixunsxfdi.o: */
+/* _floatdixf.o: */
+/* _fixunsxfsi.o: */
+/* _fixtfdi.o: */
+/* _fixunstfdi.o: */
+/* _floatditf.o: */
+/* _clear_cache.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:1502 */
+EXTERN(__clear_cache)
+/* _trampoline.o: */
+/* __main.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:1936 */
+/*
+EXTERN(SYMBOL__MAIN)
+*/
+/* _exit.o: */
+/* _absvsi2.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:181 */
+EXTERN(__absvsi2)
+/* _absvdi2.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:204 */
+EXTERN(__absvdi2)
+/* _addvsi3.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:68 */
+EXTERN(__addvsi3)
+/* _addvdi3.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:88 */
+EXTERN(__addvdi3)
+/* _subvsi3.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:106 */
+EXTERN(__subvsi3)
+/* _subvdi3.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:125 */
+EXTERN(__subvdi3)
+/* _mulvsi3.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:136 */
+EXTERN(__mulvsi3)
+/* _mulvdi3.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:221 */
+EXTERN(__mulvdi3)
+/* _negvsi2.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:156 */
+EXTERN(__negvsi2)
+/* _negvdi2.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:171 */
+EXTERN(__negvdi2)
 /* _ctors.o: */
 /* _divdi3.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:725 */
 EXTERN(__divdi3)
-/* dp-bit.o: */
-EXTERN(__adddf3)
-EXTERN(__cmpdf2)
-EXTERN(__divdf3)
-EXTERN(__eqdf2)
-EXTERN(__fixdfsi)
-EXTERN(__floatsidf)
-EXTERN(__fpcmp_parts_d)
-EXTERN(__gedf2)
-EXTERN(__gtdf2)
-EXTERN(__ledf2)
-EXTERN(__ltdf2)
-EXTERN(__make_dp)
-EXTERN(__muldf3)
-EXTERN(__nedf2)
-EXTERN(__negdf2)
+/* _moddi3.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:751 */
+EXTERN(__moddi3)
+/* _udivdi3.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:788 */
+EXTERN(__udivdi3)
+/* _umoddi3.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:776 */
+EXTERN(__umoddi3)
+/* _udiv_w_sdiv.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:473 */
+EXTERN(__udiv_w_sdiv)
+/* _udivmoddi4.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:506 */
+EXTERN(__udivmoddi4)
+/* _pack_sf.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/fp-bit.c:179 */
+EXTERN(__pack_f)
+/* _unpack_sf.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/fp-bit.c:305 */
+EXTERN(__unpack_f)
+/* _addsub_sf.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/fp-bit.c:539 */
+EXTERN(__addsf3)
+EXTERN(__subsf3)
+/* _mul_sf.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/fp-bit.c:753 */
+EXTERN(__mulsf3)
+/* _div_sf.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/fp-bit.c:864 */
+EXTERN(__divsf3)
+/* _fpcmp_parts_sf.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/fp-bit.c:891 */
+EXTERN(__fpcmp_parts_f)
+/* _compare_sf.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/fp-bit.c:970 */
+EXTERN(__cmpsf2)
+/* _eq_sf.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/fp-bit.c:992 */
+EXTERN(__eqsf2)
+/* _ne_sf.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/fp-bit.c:1013 */
+EXTERN(__nesf2)
+/* _gt_sf.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/fp-bit.c:1034 */
+EXTERN(__gtsf2)
+/* _ge_sf.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/fp-bit.c:1055 */
+EXTERN(__gesf2)
+/* _lt_sf.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/fp-bit.c:1075 */
+EXTERN(__ltsf2)
+/* _le_sf.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/fp-bit.c:1096 */
+EXTERN(__lesf2)
+/* _unord_sf.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/fp-bit.c:1117 */
+EXTERN(__unordsf2)
+/* _si_to_sf.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/fp-bit.c:1137 */
+EXTERN(__floatsisf)
+/* _sf_to_si.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/fp-bit.c:1207 */
+EXTERN(__fixsfsi)
+/* _negate_sf.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/fp-bit.c:1275 */
+EXTERN(__negsf2)
+/* _make_sf.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/fp-bit.c:1295 */
+EXTERN(__make_fp)
+/* _sf_to_df.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/fp-bit.c:1316 */
+EXTERN(__extendsfdf2)
+/* _thenan_sf.o: */
+EXTERN(__thenan_sf)
+/* _sf_to_usi.o: */
+/* _usi_to_sf.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/fp-bit.c:1175 */
+EXTERN(__floatunsisf)
+/* _pack_df.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/dp-bit.c:178 */
 EXTERN(__pack_d)
-EXTERN(__subdf3)
-EXTERN(__truncdfsf2)
+/* _unpack_df.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/dp-bit.c:325 */
 EXTERN(__unpack_d)
-/* __dummy.o: */
-EXTERN(__dummy)
-/* eabi-ctors.o: */
-EXTERN(__atexit)
-EXTERN(__do_global_ctors)
-EXTERN(__do_global_dtors)
+/* _addsub_df.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/dp-bit.c:538 */
+EXTERN(__adddf3)
+EXTERN(__subdf3)
+/* _mul_df.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/dp-bit.c:752 */
+EXTERN(__muldf3)
+/* _div_df.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/dp-bit.c:863 */
+EXTERN(__divdf3)
+/* _fpcmp_parts_df.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/dp-bit.c:890 */
+EXTERN(__fpcmp_parts_d)
+/* _compare_df.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/dp-bit.c:969 */
+EXTERN(__cmpdf2)
+/* _eq_df.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/dp-bit.c:991 */
+EXTERN(__eqdf2)
+/* _ne_df.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/dp-bit.c:1012 */
+EXTERN(__nedf2)
+/* _gt_df.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/dp-bit.c:1033 */
+EXTERN(__gtdf2)
+/* _ge_df.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/dp-bit.c:1054 */
+EXTERN(__gedf2)
+/* _lt_df.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/dp-bit.c:1074 */
+EXTERN(__ltdf2)
+/* _le_df.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/dp-bit.c:1095 */
+EXTERN(__ledf2)
+/* _unord_df.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/dp-bit.c:1116 */
+EXTERN(__unorddf2)
+/* _si_to_df.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/dp-bit.c:1136 */
+EXTERN(__floatsidf)
+/* _df_to_si.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/dp-bit.c:1206 */
+EXTERN(__fixdfsi)
+/* _negate_df.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/dp-bit.c:1274 */
+EXTERN(__negdf2)
+/* _make_df.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/dp-bit.c:1337 */
+EXTERN(__make_dp)
+/* _df_to_sf.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/dp-bit.c:1351 */
+EXTERN(__truncdfsf2)
+/* _thenan_df.o: */
+EXTERN(__thenan_df)
+/* _df_to_usi.o: */
+/* _usi_to_df.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/dp-bit.c:1174 */
+EXTERN(__floatunsidf)
+/* tramp.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/tramp.S:68 */
+EXTERN(__trampoline_setup)
+/* unwind-dw2.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/unwind-dw2.c:974 */
+EXTERN(__frame_state_for)
+EXTERN(_Unwind_DeleteException)
+EXTERN(_Unwind_ForcedUnwind)
+EXTERN(_Unwind_GetDataRelBase)
+EXTERN(_Unwind_GetGR)
+EXTERN(_Unwind_GetIP)
+EXTERN(_Unwind_GetLanguageSpecificData)
+EXTERN(_Unwind_GetRegionStart)
+EXTERN(_Unwind_GetTextRelBase)
+EXTERN(_Unwind_RaiseException)
+EXTERN(_Unwind_Resume)
+EXTERN(_Unwind_SetGR)
+EXTERN(_Unwind_SetIP)
+/* unwind-dw2-fde.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/unwind-dw2-fde.c:225 */
+EXTERN(__deregister_frame)
+EXTERN(__deregister_frame_info)
+EXTERN(__deregister_frame_info_bases)
+EXTERN(__register_frame)
+EXTERN(__register_frame_info)
+EXTERN(__register_frame_info_bases)
+EXTERN(__register_frame_info_table)
+EXTERN(__register_frame_info_table_bases)
+EXTERN(__register_frame_table)
+EXTERN(_Unwind_Find_FDE)
+/* unwind-sjlj.o: */
+/* _eprintf.o: */
+/* _bb.o: */
+/* __gcc_bcmp.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/gcc/libgcc2.c:1231 */
+EXTERN(__gcc_bcmp)
 /* eabi.o: */
+/* /afs/slac/package/rtems/vol4/build-linux-ppcrtems/gcc/eabi.S:145 */
 EXTERN(__eabi)
 EXTERN(__eabi_convert)
 EXTERN(__eabi_uconvert)
-EXTERN(_restfpr_14)
-EXTERN(_restfpr_14_x)
-EXTERN(_restfpr_15)
-EXTERN(_restfpr_15_x)
-EXTERN(_restfpr_16)
-EXTERN(_restfpr_16_x)
-EXTERN(_restfpr_17)
-EXTERN(_restfpr_17_x)
-EXTERN(_restfpr_18)
-EXTERN(_restfpr_18_x)
-EXTERN(_restfpr_19)
-EXTERN(_restfpr_19_x)
-EXTERN(_restfpr_20)
-EXTERN(_restfpr_20_x)
-EXTERN(_restfpr_21)
-EXTERN(_restfpr_21_x)
-EXTERN(_restfpr_22)
-EXTERN(_restfpr_22_x)
-EXTERN(_restfpr_23)
-EXTERN(_restfpr_23_x)
-EXTERN(_restfpr_24)
-EXTERN(_restfpr_24_x)
-EXTERN(_restfpr_25)
-EXTERN(_restfpr_25_x)
-EXTERN(_restfpr_26)
-EXTERN(_restfpr_26_x)
-EXTERN(_restfpr_27)
-EXTERN(_restfpr_27_x)
-EXTERN(_restfpr_28)
-EXTERN(_restfpr_28_x)
-EXTERN(_restfpr_29)
-EXTERN(_restfpr_29_x)
-EXTERN(_restfpr_30)
-EXTERN(_restfpr_30_x)
-EXTERN(_restfpr_31)
-EXTERN(_restfpr_31_x)
-EXTERN(_restgpr_14)
-EXTERN(_restgpr_14_x)
-EXTERN(_restgpr_15)
-EXTERN(_restgpr_15_x)
-EXTERN(_restgpr_16)
-EXTERN(_restgpr_16_x)
-EXTERN(_restgpr_17)
-EXTERN(_restgpr_17_x)
-EXTERN(_restgpr_18)
-EXTERN(_restgpr_18_x)
-EXTERN(_restgpr_19)
-EXTERN(_restgpr_19_x)
-EXTERN(_restgpr_20)
-EXTERN(_restgpr_20_x)
-EXTERN(_restgpr_21)
-EXTERN(_restgpr_21_x)
-EXTERN(_restgpr_22)
-EXTERN(_restgpr_22_x)
-EXTERN(_restgpr_23)
-EXTERN(_restgpr_23_x)
-EXTERN(_restgpr_24)
-EXTERN(_restgpr_24_x)
-EXTERN(_restgpr_25)
-EXTERN(_restgpr_25_x)
-EXTERN(_restgpr_26)
-EXTERN(_restgpr_26_x)
-EXTERN(_restgpr_27)
-EXTERN(_restgpr_27_x)
-EXTERN(_restgpr_28)
-EXTERN(_restgpr_28_x)
-EXTERN(_restgpr_29)
-EXTERN(_restgpr_29_x)
-EXTERN(_restgpr_30)
-EXTERN(_restgpr_30_x)
-EXTERN(_restgpr_31)
-EXTERN(_restgpr_31_x)
-EXTERN(_savefpr_14)
-EXTERN(_savefpr_15)
-EXTERN(_savefpr_16)
-EXTERN(_savefpr_17)
-EXTERN(_savefpr_18)
-EXTERN(_savefpr_19)
-EXTERN(_savefpr_20)
-EXTERN(_savefpr_21)
-EXTERN(_savefpr_22)
-EXTERN(_savefpr_23)
-EXTERN(_savefpr_24)
-EXTERN(_savefpr_25)
-EXTERN(_savefpr_26)
-EXTERN(_savefpr_27)
-EXTERN(_savefpr_28)
-EXTERN(_savefpr_29)
-EXTERN(_savefpr_30)
-EXTERN(_savefpr_31)
-EXTERN(_savegpr_14)
-EXTERN(_savegpr_15)
-EXTERN(_savegpr_16)
-EXTERN(_savegpr_17)
-EXTERN(_savegpr_18)
-EXTERN(_savegpr_19)
-EXTERN(_savegpr_20)
-EXTERN(_savegpr_21)
-EXTERN(_savegpr_22)
-EXTERN(_savegpr_23)
-EXTERN(_savegpr_24)
-EXTERN(_savegpr_25)
-EXTERN(_savegpr_26)
-EXTERN(_savegpr_27)
-EXTERN(_savegpr_28)
-EXTERN(_savegpr_29)
-EXTERN(_savegpr_30)
-EXTERN(_savegpr_31)
-/* _eh.o: */
-EXTERN(__default_terminate)
-EXTERN(__eh_rtime_match)
-EXTERN(__empty)
-EXTERN(__get_dynamic_handler_chain)
-EXTERN(__get_eh_context)
-EXTERN(__get_eh_info)
-EXTERN(__sjpopnthrow)
-EXTERN(__sjthrow)
-EXTERN(__terminate)
-EXTERN(__terminate_func)
-EXTERN(__throw_type_match)
-/* _eprintf.o: */
-/* exception.o: */
-EXTERN(_._13bad_exception)
-EXTERN(_._9exception)
-EXTERN(__13bad_exception)
-EXTERN(__9exception)
-EXTERN(__check_eh_spec)
-EXTERN(__cp_eh_info)
-EXTERN(__cp_exception_info)
-EXTERN(__cp_pop_exception)
-EXTERN(__cp_push_exception)
-EXTERN(__cplus_type_matcher)
-EXTERN(__default_unexpected__Fv)
-EXTERN(__eh_alloc)
-EXTERN(__eh_free)
-EXTERN(__start_cp_handler)
-EXTERN(__tf13bad_exception)
-EXTERN(__tf9exception)
-EXTERN(__throw_bad_cast)
-EXTERN(__throw_bad_typeid)
-EXTERN(__ti13bad_exception)
-EXTERN(__ti9exception)
-EXTERN(__uncatch_exception)
-EXTERN(_vt.13bad_exception)
-EXTERN(_vt.9exception)
-EXTERN(set_terminate__FPFv_v)
-EXTERN(set_unexpected__FPFv_v)
-EXTERN(terminate__Fv)
-EXTERN(uncaught_exception__Fv)
-EXTERN(unexpected__Fv)
-EXTERN(what__C9exception)
-/* _exit.o: */
-EXTERN(_exit_dummy_decl)
-/* _ffsdi2.o: */
-EXTERN(__ffsdi2)
-/* _fixdfdi.o: */
-EXTERN(__fixdfdi)
-/* _fixsfdi.o: */
-EXTERN(__fixsfdi)
-/* _fixtfdi.o: */
-/* _fixunsdfdi.o: */
-EXTERN(__fixunsdfdi)
-/* _fixunsdfsi.o: */
-EXTERN(__fixunsdfsi)
-/* _fixunssfdi.o: */
-EXTERN(__fixunssfdi)
-/* _fixunssfsi.o: */
-EXTERN(__fixunssfsi)
-/* _fixunstfdi.o: */
-/* _fixunsxfdi.o: */
-/* _fixunsxfsi.o: */
-/* _fixxfdi.o: */
-/* _floatdidf.o: */
-EXTERN(__floatdidf)
-/* _floatdisf.o: */
-EXTERN(__floatdisf)
-/* _floatditf.o: */
-/* _floatdixf.o: */
-/* fp-bit.o: */
-EXTERN(__addsf3)
-EXTERN(__cmpsf2)
-EXTERN(__divsf3)
-EXTERN(__eqsf2)
-EXTERN(__extendsfdf2)
-EXTERN(__fixsfsi)
-EXTERN(__floatsisf)
-EXTERN(__fpcmp_parts_f)
-EXTERN(__gesf2)
-EXTERN(__gtsf2)
-EXTERN(__lesf2)
-EXTERN(__ltsf2)
-EXTERN(__make_fp)
-EXTERN(__mulsf3)
-EXTERN(__negsf2)
-EXTERN(__nesf2)
-EXTERN(__pack_f)
-EXTERN(__subsf3)
-EXTERN(__unpack_f)
-/* frame.o: */
-/* __gcc_bcmp.o: */
-EXTERN(__gcc_bcmp)
-/* _lshrdi3.o: */
-EXTERN(__lshrdi3)
-/* __main.o: */
-/* _moddi3.o: */
-EXTERN(__moddi3)
-/* _muldi3.o: */
-EXTERN(__muldi3)
-/* _negdi2.o: */
-EXTERN(__negdi2)
-/* new.o: */
-EXTERN(_._9bad_alloc)
-EXTERN(__new_handler)
-EXTERN(__nw__FUiPv)
-EXTERN(__tf9bad_alloc)
-EXTERN(__ti9bad_alloc)
-EXTERN(__vn__FUiPv)
-EXTERN(_vt.9bad_alloc)
-EXTERN(nothrow)
-EXTERN(set_new_handler__FPFv_v)
-EXTERN(what__C9bad_alloc)
-/* opdelnt.o: */
-EXTERN(__dl__FPvRC9nothrow_t)
-/* opdel.o: */
-EXTERN(__builtin_delete)
-/* opnewnt.o: */
-EXTERN(__nw__FUiRC9nothrow_t)
-/* opnew.o: */
-EXTERN(__9bad_alloc)
-EXTERN(__builtin_new)
-/* opvdelnt.o: */
-EXTERN(__vd__FPvRC9nothrow_t)
-/* opvdel.o: */
-EXTERN(__builtin_vec_delete)
-/* opvnewnt.o: */
-EXTERN(__vn__FUiRC9nothrow_t)
-/* opvnew.o: */
-EXTERN(__builtin_vec_new)
-/* _pure.o: */
-EXTERN(__pure_virtual)
-/* _shtab.o: */
-EXTERN(__shtab)
-/* tinfo2.o: */
-EXTERN(_._16__attr_type_info)
-EXTERN(_._16__func_type_info)
-EXTERN(_._16__ptmd_type_info)
-EXTERN(_._16__ptmf_type_info)
-EXTERN(_._17__array_type_info)
-EXTERN(_._19__builtin_type_info)
-EXTERN(_._19__pointer_type_info)
-EXTERN(__dynamic_cast)
-EXTERN(__is_pointer__FPv)
-EXTERN(__rtti_array)
-EXTERN(__rtti_attr)
-EXTERN(__rtti_func)
-EXTERN(__rtti_ptmd)
-EXTERN(__rtti_ptmf)
-EXTERN(__rtti_ptr)
-EXTERN(__tf16__attr_type_info)
-EXTERN(__tf16__func_type_info)
-EXTERN(__tf16__ptmd_type_info)
-EXTERN(__tf16__ptmf_type_info)
-EXTERN(__tf17__array_type_info)
-EXTERN(__tf19__builtin_type_info)
-EXTERN(__tf19__pointer_type_info)
-EXTERN(__tfSc)
-EXTERN(__tfUc)
-EXTERN(__tfUi)
-EXTERN(__tfUl)
-EXTERN(__tfUs)
-EXTERN(__tfUx)
-EXTERN(__tfb)
-EXTERN(__tfc)
-EXTERN(__tfd)
-EXTERN(__tff)
-EXTERN(__tfi)
-EXTERN(__tfl)
-EXTERN(__tfr)
-EXTERN(__tfs)
-EXTERN(__tfv)
-EXTERN(__tfw)
-EXTERN(__tfx)
-EXTERN(__throw_type_match_rtti)
-EXTERN(__ti16__attr_type_info)
-EXTERN(__ti16__func_type_info)
-EXTERN(__ti16__ptmd_type_info)
-EXTERN(__ti16__ptmf_type_info)
-EXTERN(__ti17__array_type_info)
-EXTERN(__ti19__builtin_type_info)
-EXTERN(__ti19__pointer_type_info)
-EXTERN(__tiSc)
-EXTERN(__tiUc)
-EXTERN(__tiUi)
-EXTERN(__tiUl)
-EXTERN(__tiUs)
-EXTERN(__tiUx)
-EXTERN(__tib)
-EXTERN(__tic)
-EXTERN(__tid)
-EXTERN(__tif)
-EXTERN(__tii)
-EXTERN(__til)
-EXTERN(__tir)
-EXTERN(__tis)
-EXTERN(__tiv)
-EXTERN(__tiw)
-EXTERN(__tix)
-EXTERN(_vt.16__attr_type_info)
-EXTERN(_vt.16__func_type_info)
-EXTERN(_vt.16__ptmd_type_info)
-EXTERN(_vt.16__ptmf_type_info)
-EXTERN(_vt.17__array_type_info)
-EXTERN(_vt.19__builtin_type_info)
-EXTERN(_vt.19__pointer_type_info)
-EXTERN(before__C9type_infoRC9type_info)
-/* tinfo.o: */
-EXTERN(_._10bad_typeid)
-EXTERN(_._14__si_type_info)
-EXTERN(_._16__user_type_info)
-EXTERN(_._17__class_type_info)
-EXTERN(_._8bad_cast)
-EXTERN(_._9type_info)
-EXTERN(__10bad_typeid)
-EXTERN(__14__si_type_infoPCcRC16__user_type_info)
-EXTERN(__16__user_type_infoPCc)
-EXTERN(__17__class_type_infoPCcPCQ217__class_type_info9base_infoUi)
-EXTERN(__8bad_cast)
-EXTERN(__9type_infoPCc)
-EXTERN(__eq__C9type_infoRC9type_info)
-EXTERN(__ne__C9type_infoRC9type_info)
-EXTERN(__rtti_class)
-EXTERN(__rtti_si)
-EXTERN(__rtti_user)
-EXTERN(__tf10bad_typeid)
-EXTERN(__tf14__si_type_info)
-EXTERN(__tf16__user_type_info)
-EXTERN(__tf17__class_type_info)
-EXTERN(__tf8bad_cast)
-EXTERN(__tf9type_info)
-EXTERN(__ti10bad_typeid)
-EXTERN(__ti14__si_type_info)
-EXTERN(__ti16__user_type_info)
-EXTERN(__ti17__class_type_info)
-EXTERN(__ti8bad_cast)
-EXTERN(__ti9type_info)
-EXTERN(_vt.10bad_typeid)
-EXTERN(_vt.14__si_type_info)
-EXTERN(_vt.16__user_type_info)
-EXTERN(_vt.17__class_type_info)
-EXTERN(_vt.8bad_cast)
-EXTERN(_vt.9type_info)
-EXTERN(dcast__C14__si_type_infoRC9type_infoiPvPC9type_infoT3)
-EXTERN(dcast__C16__user_type_infoRC9type_infoiPvPC9type_infoT3)
-EXTERN(dcast__C17__class_type_infoRC9type_infoiPvPC9type_infoT3)
-EXTERN(name__C9type_info)
-/* tramp.o: */
-EXTERN(__trampoline_initial)
-EXTERN(__trampoline_setup)
-/* _trampoline.o: */
-/* _ucmpdi2.o: */
-EXTERN(__ucmpdi2)
-/* _udivdi3.o: */
-EXTERN(__udivdi3)
-/* _udivmoddi4.o: */
-EXTERN(__udivmoddi4)
-/* _udiv_w_sdiv.o: */
-EXTERN(__udiv_w_sdiv)
-/* _umoddi3.o: */
-EXTERN(__umoddi3)
-/* _varargs.o: */
-EXTERN(__builtin_saveregs)

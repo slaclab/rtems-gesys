@@ -1,4 +1,5 @@
 /* xdr.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/cpukit/librpc/src/xdr/xdr.c:472 */
 EXTERN(xdr_bool)
 EXTERN(xdr_bytes)
 EXTERN(xdr_char)
@@ -19,27 +20,34 @@ EXTERN(xdr_u_int16_t)
 EXTERN(xdr_u_int32_t)
 EXTERN(xdr_u_int64_t)
 EXTERN(xdr_u_long)
-EXTERN(xdr_u_short)
 EXTERN(xdr_union)
+EXTERN(xdr_u_short)
 EXTERN(xdr_void)
 EXTERN(xdr_wrapstring)
 /* xdr_array.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/cpukit/librpc/src/xdr/xdr_array.c:68 */
 EXTERN(xdr_array)
 EXTERN(xdr_vector)
 /* xdr_float.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/cpukit/librpc/src/xdr/xdr_float.c:225 */
 EXTERN(xdr_double)
 EXTERN(xdr_float)
 /* xdr_mem.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/cpukit/librpc/src/xdr/xdr_mem.c:99 */
 EXTERN(xdrmem_create)
 /* xdr_rec.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/cpukit/librpc/src/xdr/xdr_rec.c:145 */
 EXTERN(xdrrec_create)
 EXTERN(xdrrec_endofrecord)
 EXTERN(xdrrec_eof)
 EXTERN(xdrrec_skiprecord)
 /* xdr_reference.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/cpukit/librpc/src/xdr/xdr_reference.c:125 */
 EXTERN(xdr_pointer)
 EXTERN(xdr_reference)
 /* xdr_sizeof.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/cpukit/librpc/src/xdr/xdr_sizeof.c:134 */
 EXTERN(xdr_sizeof)
 /* xdr_stdio.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/cpukit/librpc/src/xdr/xdr_stdio.c:86 */
 EXTERN(xdrstdio_create)

@@ -1,0 +1,100 @@
+/* fat.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/cpukit/libfs/src/dosfs/fat.c:50 */
+EXTERN(_fat_block_read)
+EXTERN(_fat_block_write)
+EXTERN(fat_cluster_read)
+EXTERN(fat_cluster_write)
+EXTERN(fat_fat32_update_fsinfo_sector)
+EXTERN(fat_free_unique_ino)
+EXTERN(fat_get_unique_ino)
+EXTERN(fat_init_clusters_chain)
+EXTERN(fat_init_volume_info)
+EXTERN(fat_ino_is_unique)
+EXTERN(fat_shutdown_drive)
+/* fat_fat_operations.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/cpukit/libfs/src/dosfs/fat_fat_operations.c:173 */
+EXTERN(fat_free_fat_clusters_chain)
+EXTERN(fat_get_fat_cluster)
+EXTERN(fat_scan_fat_for_free_clusters)
+EXTERN(fat_set_fat_cluster)
+/* fat_file.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/cpukit/libfs/src/dosfs/fat_file.c:185 */
+EXTERN(fat_file_close)
+EXTERN(fat_file_datasync)
+EXTERN(fat_file_extend)
+EXTERN(fat_file_ioctl)
+EXTERN(fat_file_mark_removed)
+EXTERN(fat_file_open)
+EXTERN(fat_file_read)
+EXTERN(fat_file_reopen)
+EXTERN(fat_file_size)
+EXTERN(fat_file_truncate)
+EXTERN(fat_file_write)
+/* msdos_create.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/cpukit/libfs/src/dosfs/msdos_create.c:56 */
+EXTERN(msdos_creat_node)
+/* msdos_dir.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/cpukit/libfs/src/dosfs/msdos_dir.c:85 */
+EXTERN(msdos_dir_close)
+EXTERN(msdos_dir_lseek)
+EXTERN(msdos_dir_open)
+EXTERN(msdos_dir_read)
+EXTERN(msdos_dir_rmnod)
+EXTERN(msdos_dir_stat)
+EXTERN(msdos_dir_sync)
+/* msdos_eval.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/cpukit/libfs/src/dosfs/msdos_eval.c:259 */
+EXTERN(msdos_eval4make)
+EXTERN(msdos_eval_path)
+/* msdos_file.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/cpukit/libfs/src/dosfs/msdos_file.c:88 */
+EXTERN(msdos_file_close)
+EXTERN(msdos_file_datasync)
+EXTERN(msdos_file_ftruncate)
+EXTERN(msdos_file_ioctl)
+EXTERN(msdos_file_lseek)
+EXTERN(msdos_file_open)
+EXTERN(msdos_file_read)
+EXTERN(msdos_file_rmnod)
+EXTERN(msdos_file_stat)
+EXTERN(msdos_file_sync)
+EXTERN(msdos_file_write)
+/* msdos_free.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/cpukit/libfs/src/dosfs/msdos_free.c:42 */
+EXTERN(msdos_free_node_info)
+/* msdos_fsunmount.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/cpukit/libfs/src/dosfs/msdos_fsunmount.c:48 */
+EXTERN(msdos_shut_down)
+/* msdos_handlers_dir.o: */
+EXTERN(msdos_dir_handlers)
+/* msdos_handlers_file.o: */
+EXTERN(msdos_file_handlers)
+/* msdos_init.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/cpukit/libfs/src/dosfs/msdos_init.c:52 */
+EXTERN(msdos_initialize)
+EXTERN(msdos_ops)
+/* msdos_initsupp.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/cpukit/libfs/src/dosfs/msdos_initsupp.c:55 */
+EXTERN(msdos_initialize_support)
+/* msdos_misc.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/cpukit/libfs/src/dosfs/msdos_misc.c:138 */
+EXTERN(msdos_date_dos2unix)
+EXTERN(msdos_date_unix2dos)
+EXTERN(msdos_dir_is_empty)
+EXTERN(msdos_find_name)
+EXTERN(msdos_find_name_in_fat_file)
+EXTERN(msdos_find_node_by_cluster_num_in_fat_file)
+EXTERN(msdos_format_name)
+EXTERN(msdos_get_dotdot_dir_info_cluster_num_and_offset)
+EXTERN(msdos_get_name_node)
+EXTERN(msdos_get_token)
+EXTERN(msdos_set_dir_wrt_time_and_date)
+EXTERN(msdos_set_file_size)
+EXTERN(msdos_set_first_char4file_name)
+EXTERN(msdos_set_first_cluster_num)
+/* msdos_mknod.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/cpukit/libfs/src/dosfs/msdos_mknod.c:55 */
+EXTERN(msdos_mknod)
+/* msdos_node_type.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/cpukit/libfs/src/dosfs/msdos_node_type.c:55 */
+EXTERN(msdos_node_type)

@@ -1,5 +1,14 @@
+/* cs8900.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/c/src/libchip/network/cs8900.c:1138 */
+EXTERN(cs8900_driver_attach)
+EXTERN(cs8900_interrupt)
+EXTERN(cs8900_link_active)
 /* dec21140.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/c/src/libchip/network/dec21140.c:600 */
+EXTERN(dec21140_txDaemon)
+EXTERN(rtems_dec21140_driver_attach)
 /* i82586.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/c/src/libchip/network/i82586.c:237 */
 EXTERN(bitmask_snprintf)
 EXTERN(ether_sprintf)
 EXTERN(i82586_attach)
@@ -16,6 +25,7 @@ EXTERN(i82586_stop)
 EXTERN(i82586_tint)
 EXTERN(i82586_watchdog)
 /* sonic.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/c/src/libchip/network/sonic.c:1535 */
 EXTERN(rtems_sonic_driver_attach)
 EXTERN(sonic_allocate)
 EXTERN(sonic_clear_interrupts)
@@ -34,3 +44,4 @@ EXTERN(sonic_start)
 EXTERN(sonic_stats)
 EXTERN(sonic_stop)
 EXTERN(sonic_txDaemon)
+/* if_fxp.o: */

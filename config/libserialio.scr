@@ -1,4 +1,5 @@
 /* mc68681.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/c/src/libchip/serial/mc68681.c:544 */
 EXTERN(mc68681_baud_rate)
 EXTERN(mc68681_build_imr)
 EXTERN(mc68681_close)
@@ -19,18 +20,23 @@ EXTERN(mc68681_write_support_polled)
 /* mc68681_baud.o: */
 EXTERN(mc68681_baud_rate_table)
 /* mc68681_reg.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/c/src/libchip/serial/mc68681_reg.c:42 */
 EXTERN(mc68681_get_register)
 EXTERN(mc68681_set_register)
 /* mc68681_reg2.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/c/src/libchip/serial/mc68681_reg.c:40 */
 EXTERN(mc68681_get_register_2)
 EXTERN(mc68681_set_register_2)
 /* mc68681_reg4.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/c/src/libchip/serial/mc68681_reg.c:40 */
 EXTERN(mc68681_get_register_4)
 EXTERN(mc68681_set_register_4)
 /* mc68681_reg8.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/c/src/libchip/serial/mc68681_reg.c:40 */
 EXTERN(mc68681_get_register_8)
 EXTERN(mc68681_set_register_8)
 /* ns16550.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/c/src/libchip/serial/ns16550.c:290 */
 EXTERN(ns16550_assert_DTR)
 EXTERN(ns16550_assert_RTS)
 EXTERN(ns16550_close)
@@ -52,6 +58,7 @@ EXTERN(ns16550_write_polled)
 EXTERN(ns16550_write_support_int)
 EXTERN(ns16550_write_support_polled)
 /* z85c30.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/c/src/libchip/serial/z85c30.c:368 */
 EXTERN(z85c30_assert_DTR)
 EXTERN(z85c30_assert_RTS)
 EXTERN(z85c30_close)
@@ -74,11 +81,15 @@ EXTERN(z85c30_write_polled)
 EXTERN(z85c30_write_support_int)
 EXTERN(z85c30_write_support_polled)
 /* z85c30_reg.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/c/src/libchip/serial/z85c30_reg.c:40 */
 EXTERN(z85c30_get_register)
 EXTERN(z85c30_set_register)
 /* serprobe.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/c/src/libchip/serial/serprobe.c:17 */
 EXTERN(libchip_serial_default_probe)
 /* termios_baud2index.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/c/src/libchip/serial/termios_baud2index.c:23 */
 EXTERN(termios_baud_to_index)
 /* termios_baud2num.o: */
+/* /afs/slac/package/rtems/4.6/src/rtems/c/src/libchip/serial/termios_baud2num.c:23 */
 EXTERN(termios_baud_to_number)

@@ -1,10 +1,13 @@
 /* bspExt.o: */
-EXTERN(__bspExtLock)
+/* /afs/slac/g/spear/vol4/strauman/rtemsApplications/libbspExt/bspExt.c:13 */
 EXTERN(bspExtInit)
+EXTERN(__bspExtLock)
 /* memProbe.o: */
-EXTERN(_bspExtMemProbeInit)
+/* /afs/slac/g/spear/vol4/strauman/rtemsApplications/libbspExt/memProbe.c:101 */
 EXTERN(bspExtMemProbe)
+EXTERN(_bspExtMemProbeInit)
 /* dabrBpnt.o: */
+/* /afs/slac/g/spear/vol4/strauman/rtemsApplications/libbspExt/dabrBpnt.c:75 */
 EXTERN(_bspExtCatchDabr)
 EXTERN(bspExtInstallDataBreakpoint)
 EXTERN(bspExtRemoveDataBreakpoint)

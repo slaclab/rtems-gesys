@@ -107,6 +107,12 @@ EXTERN(_pu_path_is_exe)
 EXTERN(_pu_path_is_file)
 EXTERN(_pu_pathname_dim)
 EXTERN(_pu_start_of_path)
+/* expand.o: */
+EXTERN(del_ExpandFile)
+EXTERN(ef_expand_file)
+EXTERN(ef_last_error)
+EXTERN(ef_list_expansions)
+EXTERN(new_ExpandFile)
 /* stringrp.o: */
 EXTERN(_clr_StringGroup)
 EXTERN(_del_StringGroup)
@@ -148,9 +154,3 @@ EXTERN(ppc_file_start)
 EXTERN(ppc_literal_escapes)
 /* version.o: */
 EXTERN(libtecla_version)
-/* expand.o: */
-EXTERN(del_ExpandFile)
-EXTERN(ef_expand_file)
-EXTERN(ef_last_error)
-EXTERN(ef_list_expansions)
-EXTERN(new_ExpandFile)

@@ -1,0 +1,10 @@
+/* regexp.o: */
+/* /afs/slac/g/spear/vol4/strauman/rtemsApplications/cexp.powerpc-build/regexp/../../cexp/regexp/regexp.c:200 */
+EXTERN(spencer_regcomp)
+EXTERN(spencer_regexec)
+/* regerror.o: */
+/* /afs/slac/g/spear/vol4/strauman/rtemsApplications/cexp.powerpc-build/regexp/../../cexp/regexp/regerror.c:6 */
+EXTERN(spencer_regerror)
+/* regsub.o: */
+/* /afs/slac/g/spear/vol4/strauman/rtemsApplications/cexp.powerpc-build/regexp/../../cexp/regexp/regsub.c:39 */
+EXTERN(spencer_regsub)

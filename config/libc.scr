@@ -1,32 +1,96 @@
+/* a64l.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/a64l.c:70 */
+EXTERN(a64l)
 /* abort.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/abort.c:55 */
 EXTERN(abort)
 /* abs.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/abs.c:42 */
 EXTERN(abs)
 /* __adjust.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/__adjust.c:23 */
 EXTERN(__adjust)
+/* argz_add.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/argz/argz_add.c:14 */
+EXTERN(argz_add)
+/* argz_add_sep.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/argz/argz_add_sep.c:15 */
+EXTERN(argz_add_sep)
+/* argz_append.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/argz/argz_append.c:14 */
+EXTERN(argz_append)
+/* argz_count.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/argz/argz_count.c:13 */
+EXTERN(argz_count)
+/* argz_create.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/argz/argz_create.c:14 */
+EXTERN(argz_create)
+/* argz_create_sep.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/argz/argz_create_sep.c:14 */
+EXTERN(argz_create_sep)
+/* argz_delete.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/argz/argz_delete.c:18 */
+EXTERN(argz_delete)
+/* argz_extract.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/argz/argz_extract.c:12 */
+EXTERN(argz_extract)
+/* argz_insert.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/argz/argz_insert.c:18 */
+EXTERN(argz_insert)
+/* argz_next.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/argz/argz_next.c:15 */
+EXTERN(argz_next)
+/* argz_replace.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/argz/argz_replace.c:17 */
+EXTERN(argz_replace)
+/* argz_stringify.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/argz/argz_stringify.c:15 */
+EXTERN(argz_stringify)
 /* asctime.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/time/asctime.c:59 */
 EXTERN(asctime)
 /* asctime_r.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/time/asctime_r.c:12 */
 EXTERN(asctime_r)
+/* asprintf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/asprintf.c:73 */
+EXTERN(asprintf)
+EXTERN(asprintf_r)
 /* assert.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/assert.c:56 */
 EXTERN(__assert)
 /* atexit.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/atexit.c:65 */
 EXTERN(atexit)
 /* atoff.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/atoff.c:7 */
 EXTERN(atoff)
 /* atof.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/atof.c:70 */
 EXTERN(atof)
 /* atoi.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/atoi.c:51 */
 EXTERN(atoi)
 /* atol.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/atol.c:10 */
 EXTERN(atol)
 /* bcmp.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/bcmp.c:48 */
 EXTERN(bcmp)
 /* bcopy.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/bcopy.c:36 */
 EXTERN(bcopy)
 /* bsearch.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/search/bsearch.c:73 */
 EXTERN(bsearch)
+/* btowc.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/btowc.c:8 */
+EXTERN(btowc)
+/* buf_findstr.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/argz/buf_findstr.c:22 */
+EXTERN(_buf_findstr)
 /* bzero.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/bzero.c:41 */
 EXTERN(bzero)
 /* calloc.o: */
 EXTERN(_dummy_calloc)
@@ -35,34 +99,52 @@ EXTERN(_dummy_mallocr)
 /* cfreer.o: */
 EXTERN(_dummy_mallocr)
 /* clearerr.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/clearerr.c:63 */
 EXTERN(clearerr)
 /* clock.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/time/clock.c:58 */
 EXTERN(clock)
 /* closer.o: */
 /* ctime.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/time/ctime.c:49 */
 EXTERN(ctime)
 /* ctime_r.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/time/ctime_r.c:12 */
 EXTERN(ctime_r)
 /* ctype_.o: */
 EXTERN(_ctype_)
+EXTERN(__ctype_ptr)
 /* difftime.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/time/difftime.c:42 */
 EXTERN(difftime)
 /* div.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/div.c:95 */
 EXTERN(div)
 /* dprintf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/misc/dprintf.c:63 */
 EXTERN(__dprintf)
+/* drand48.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/drand48.c:27 */
+EXTERN(drand48)
+EXTERN(_drand48_r)
 /* dtoa.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/dtoa.c:189 */
 EXTERN(_dtoa_r)
 /* dtoastub.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/dtoastub.c:19 */
 EXTERN(__dtoa)
+/* dummy.o: */
 /* dummysys.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/sys/rtems/dummysys.c:1 */
 EXTERN(not_required_by_rtems)
 /* ecvtbuf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/ecvtbuf.c:452 */
 EXTERN(_dcvt)
-EXTERN(_gcvt)
 EXTERN(ecvtbuf)
 EXTERN(fcvtbuf)
+EXTERN(_gcvt)
 /* efgcvt.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/efgcvt.c:174 */
 EXTERN(ecvt)
 EXTERN(ecvtf)
 EXTERN(fcvt)
@@ -72,162 +154,406 @@ EXTERN(gcvtf)
 /* environ.o: */
 EXTERN(environ)
 /* envlock.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/envlock.c:45 */
 EXTERN(__env_lock)
 EXTERN(__env_unlock)
+/* envz_add.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/argz/envz_add.c:16 */
+EXTERN(envz_add)
+/* envz_entry.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/argz/envz_entry.c:21 */
+EXTERN(envz_entry)
+/* envz_get.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/argz/envz_get.c:21 */
+EXTERN(envz_get)
+/* envz_merge.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/argz/envz_merge.c:16 */
+EXTERN(envz_merge)
+/* envz_remove.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/argz/envz_remove.c:16 */
+EXTERN(envz_remove)
+/* envz_strip.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/argz/envz_strip.c:16 */
+EXTERN(envz_strip)
 /* eprintf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/eprintf.c:22 */
 EXTERN(__eprintf)
+/* erand48.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/erand48.c:31 */
+EXTERN(erand48)
+EXTERN(_erand48_r)
 /* errno.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/errno/errno.c:13 */
 EXTERN(__errno)
 /* execr.o: */
 EXTERN(_dummy_exec_syscalls)
 /* exit.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/exit.c:61 */
 EXTERN(exit)
+/* _Exit.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/_Exit.c:44 */
+EXTERN(_Exit)
 /* __exp10.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/__exp10.c:10 */
 EXTERN(__exp10)
+/* fcloseall.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/fcloseall.c:84 */
+EXTERN(fcloseall)
+EXTERN(_fcloseall_r)
 /* fclose.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/fclose.c:61 */
 EXTERN(fclose)
+/* fcntlr.o: */
 /* fdopen.o: */
-EXTERN(_fdopen_r)
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/fdopen.c:123 */
 EXTERN(fdopen)
+EXTERN(_fdopen_r)
 /* feof.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/feof.c:41 */
 EXTERN(feof)
 /* ferror.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/ferror.c:68 */
 EXTERN(ferror)
 /* fflush.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/fflush.c:62 */
 EXTERN(fflush)
 /* ffs.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/misc/ffs.c:30 */
 EXTERN(ffs)
 /* fgetc.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/fgetc.c:44 */
 EXTERN(fgetc)
 /* fgetpos.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/fgetpos.c:55 */
 EXTERN(fgetpos)
 /* fgets.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/fgets.c:78 */
 EXTERN(fgets)
 /* fileno.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/fileno.c:37 */
 EXTERN(fileno)
 /* findfp.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/findfp.c:141 */
+EXTERN(_cleanup)
+EXTERN(_cleanup_r)
 EXTERN(__sfmoreglue)
 EXTERN(__sfp)
 EXTERN(__sinit)
-EXTERN(_cleanup)
-EXTERN(_cleanup_r)
 /* fiprintf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/fiprintf.c:48 */
 EXTERN(fiprintf)
+/* fix_grouping.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/locale/fix_grouping.c:45 */
+EXTERN(__fix_locale_grouping_str)
 /* flags.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/flags.c:41 */
 EXTERN(__sflags)
 /* fopen.o: */
-/* EXTERN(_fopen_r) */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/fopen.c:174 */
 EXTERN(fopen)
+EXTERN(_fopen_r)
 /* fprintf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/fprintf.c:27 */
 EXTERN(fprintf)
 /* fputc.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/fputc.c:49 */
 EXTERN(fputc)
 /* fputs.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/fputs.c:62 */
 EXTERN(fputs)
 /* fread.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/fread.c:117 */
 EXTERN(fread)
 /* freer.o: */
 EXTERN(_dummy_mallocr)
 /* freopen.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/freopen.c:74 */
 EXTERN(freopen)
 /* fscanf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/fscanf.c:40 */
 EXTERN(fscanf)
+EXTERN(_fscanf_r)
 /* fseek.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/fseek.c:101 */
 EXTERN(fseek)
+/* fseeko.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/fseeko.c:25 */
+EXTERN(fseeko)
 /* fsetpos.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/fsetpos.c:48 */
 EXTERN(fsetpos)
 /* fstatr.o: */
 EXTERN(_dummy_fstat_syscalls)
 /* ftell.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/ftell.c:89 */
 EXTERN(ftell)
+/* ftello.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/ftello.c:23 */
+EXTERN(ftello)
 /* fvwrite.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/fvwrite.c:49 */
 EXTERN(__sfvwrite)
 /* fwalk.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/fwalk.c:33 */
 EXTERN(_fwalk)
 /* fwrite.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/fwrite.c:85 */
 EXTERN(fwrite)
 /* getchar.o: */
-EXTERN(_getchar_r)
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/getchar.c:93 */
 EXTERN(getchar)
+EXTERN(_getchar_r)
+/* getchar_u.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/getchar_u.c:73 */
+EXTERN(getchar_unlocked)
+EXTERN(_getchar_unlocked_r)
 /* getc.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/getc.c:76 */
 EXTERN(getc)
+/* getc_u.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/getc_u.c:64 */
+EXTERN(getc_unlocked)
+/* getdelim.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/getdelim.c:56 */
+EXTERN(__getdelim)
 /* getenv.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/getenv.c:75 */
 EXTERN(_findenv)
 EXTERN(getenv)
 /* getenv_r.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/getenv_r.c:87 */
 EXTERN(_findenv_r)
 EXTERN(_getenv_r)
+/* getline.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/getline.c:51 */
+EXTERN(__getline)
 /* getopt.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/getopt.c:62 */
 EXTERN(getopt)
 EXTERN(optarg)
 EXTERN(opterr)
 EXTERN(optind)
 EXTERN(optopt)
 EXTERN(optreset)
+/* getreent.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/reent/getreent.c:9 */
+EXTERN(__getreent)
 /* gets.o: */
-EXTERN(_gets_r)
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/gets.c:98 */
 EXTERN(gets)
+EXTERN(_gets_r)
+/* getsubopt.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/getsubopt.c:55 */
+EXTERN(getsubopt)
+EXTERN(suboptarg)
 /* getw.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/getw.c:62 */
 EXTERN(getw)
 /* gmtime.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/time/gmtime.c:61 */
 EXTERN(gmtime)
 /* gmtime_r.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/time/gmtime_r.c:12 */
 EXTERN(gmtime_r)
+/* hash_bigkey.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/search/hash_bigkey.c:196 */
+EXTERN(__big_delete)
+EXTERN(__big_insert)
+EXTERN(__big_keydata)
+EXTERN(__big_return)
+EXTERN(__big_split)
+EXTERN(__find_bigpair)
+EXTERN(__find_last_page)
+/* hash_buf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/search/hash_buf.c:323 */
+EXTERN(__buf_free)
+EXTERN(__buf_init)
+EXTERN(__get_buf)
+EXTERN(__reclaim_buf)
+/* hash_func.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/search/hash_func.c:77 */
+EXTERN(__default_hash)
+/* hash_log2.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/search/hash_log2.c:52 */
+EXTERN(__log2)
+/* hash.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/search/hash.c:901 */
+EXTERN(__call_hash)
+EXTERN(__expand_table)
+EXTERN(__hash_open)
+/* hash_page.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/search/hash_page.c:404 */
+EXTERN(__addel)
+EXTERN(__add_ovflpage)
+EXTERN(__delpair)
+EXTERN(__free_ovflpage)
+EXTERN(__get_page)
+EXTERN(__ibitmap)
+EXTERN(__put_page)
+EXTERN(__split_page)
+/* hcreate.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/search/hcreate.c:62 */
+EXTERN(hcreate)
+EXTERN(hdestroy)
+EXTERN(hsearch)
+/* hcreate_r.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/search/hcreate_r.c:83 */
+EXTERN(hcreate_r)
+EXTERN(hdestroy_r)
+EXTERN(hsearch_r)
 /* impure.o: */
 EXTERN(_impure_ptr)
 /* index.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/index.c:42 */
 EXTERN(index)
 /* iprintf.o: */
-EXTERN(_iprintf_r)
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/iprintf.c:51 */
 EXTERN(iprintf)
+EXTERN(_iprintf_r)
 /* isalnum.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/isalnum.c:44 */
 EXTERN(isalnum)
 /* isalpha.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/isalpha.c:42 */
 EXTERN(isalpha)
 /* isascii.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/isascii.c:42 */
 EXTERN(isascii)
+/* isblank.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/isblank.c:39 */
+EXTERN(isblank)
 /* iscntrl.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/iscntrl.c:45 */
 EXTERN(iscntrl)
 /* isdigit.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/isdigit.c:42 */
 EXTERN(isdigit)
 /* islower.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/islower.c:41 */
 EXTERN(islower)
 /* isprint.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/isprint.c:50 */
 EXTERN(isgraph)
 EXTERN(isprint)
 /* ispunct.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/ispunct.c:44 */
 EXTERN(ispunct)
 /* isspace.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/isspace.c:42 */
 EXTERN(isspace)
 /* isupper.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/isupper.c:41 */
 EXTERN(isupper)
+/* iswalnum.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/iswalnum.c:34 */
+EXTERN(iswalnum)
+/* iswalpha.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/iswalpha.c:340 */
+EXTERN(iswalpha)
+/* iswblank.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/iswblank.c:103 */
+EXTERN(iswblank)
+/* iswcntrl.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/iswcntrl.c:102 */
+EXTERN(iswcntrl)
+/* iswctype.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/iswctype.c:38 */
+EXTERN(iswctype)
+/* iswdigit.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/iswdigit.c:35 */
+EXTERN(iswdigit)
+/* iswgraph.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/iswgraph.c:63 */
+EXTERN(iswgraph)
+/* iswlower.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/iswlower.c:35 */
+EXTERN(iswlower)
+/* iswprint.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/iswprint.c:395 */
+EXTERN(iswprint)
+/* iswpunct.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/iswpunct.c:330 */
+EXTERN(iswpunct)
+/* iswspace.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/iswspace.c:104 */
+EXTERN(iswspace)
+/* iswupper.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/iswupper.c:35 */
+EXTERN(iswupper)
+/* iswxdigit.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/iswxdigit.c:35 */
+EXTERN(iswxdigit)
 /* isxdigit.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/isxdigit.c:43 */
 EXTERN(isxdigit)
+/* jp2uc.o: */
+/* jrand48.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/jrand48.c:29 */
+EXTERN(jrand48)
+EXTERN(_jrand48_r)
+/* l64a.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/l64a.c:32 */
+EXTERN(l64a)
+EXTERN(_l64a_r)
 /* labs.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/labs.c:44 */
 EXTERN(labs)
 /* lcltime.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/time/lcltime.c:53 */
 EXTERN(localtime)
 /* lcltime_r.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/time/lcltime_r.c:16 */
 EXTERN(localtime_r)
+/* lcong48.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/lcong48.c:35 */
+EXTERN(lcong48)
+EXTERN(_lcong48_r)
 /* ldiv.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/ldiv.c:98 */
 EXTERN(ldiv)
+/* ldpart.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/locale/ldpart.c:50 */
+EXTERN(__part_load_locale)
 /* ldtoa.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/ldtoa.c:2839 */
 EXTERN(_ldcheck)
 EXTERN(_ldtoa_r)
 EXTERN(_strtold)
 /* linkr.o: */
 EXTERN(_dummy_link_syscalls)
+/* lmessages.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/locale/lmessages.c:71 */
+EXTERN(__get_current_messages_locale)
+EXTERN(__messages_load_locale)
+/* lmonetary.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/locale/lmonetary.c:103 */
+EXTERN(__get_current_monetary_locale)
+EXTERN(__monetary_load_locale)
+/* lnumeric.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/locale/lnumeric.c:69 */
+EXTERN(__get_current_numeric_locale)
+EXTERN(__numeric_load_locale)
 /* locale.o: */
-EXTERN(__mb_cur_max)
-EXTERN(_localeconv_r)
-EXTERN(_setlocale_r)
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/locale/locale.c:124 */
+EXTERN(__lc_ctype)
+EXTERN(__locale_charset)
 EXTERN(localeconv)
+EXTERN(_localeconv_r)
+EXTERN(__mb_cur_max)
+EXTERN(__mlocale_changed)
+EXTERN(__nlocale_changed)
+EXTERN(_PathLocale)
 EXTERN(setlocale)
+EXTERN(_setlocale_r)
+/* lrand48.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/lrand48.c:29 */
+EXTERN(lrand48)
+EXTERN(_lrand48_r)
 /* lseekr.o: */
 /* makebuf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/makebuf.c:39 */
 EXTERN(__smakebuf)
-/* malign.o:
-EXTERN(memalign) */
+/* malign.o: */
 /* malignr.o: */
 EXTERN(_dummy_mallocr)
 /* mallinfor.o: */
@@ -238,101 +564,169 @@ EXTERN(_dummy_malloc)
 EXTERN(_dummy_mallocr)
 /* malloptr.o: */
 EXTERN(_dummy_mallocr)
-/* mallstatsr.o: */
-EXTERN(_dummy_mallocr)
 /* mblen.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/mblen.c:70 */
 EXTERN(mblen)
 /* mblen_r.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/mblen_r.c:68 */
 EXTERN(_mblen_r)
+/* mbrlen.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/mbrlen.c:9 */
+EXTERN(mbrlen)
+/* mbrtowc.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/mbrtowc.c:48 */
+EXTERN(mbrtowc)
+EXTERN(_mbrtowc_r)
+/* mbsinit.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/mbsinit.c:10 */
+EXTERN(mbsinit)
+/* mbsrtowcs.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/mbsrtowcs.c:63 */
+EXTERN(mbsrtowcs)
+EXTERN(_mbsrtowcs_r)
 /* mbstowcs.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/mbstowcs.c:70 */
 EXTERN(mbstowcs)
 /* mbstowcs_r.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/mbstowcs_r.c:11 */
 EXTERN(_mbstowcs_r)
 /* mbtowc.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/mbtowc.c:79 */
 EXTERN(mbtowc)
 /* mbtowc_r.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/mbtowc_r.c:60 */
 EXTERN(_mbtowc_r)
+/* memccpy.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/memccpy.c:100 */
+EXTERN(memccpy)
 /* memchr.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/memchr.c:97 */
 EXTERN(memchr)
 /* memcmp.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/memcmp.c:81 */
 EXTERN(memcmp)
 /* memcpy.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/memcpy.c:79 */
 EXTERN(memcpy)
 /* memmove.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/memmove.c:93 */
 EXTERN(memmove)
+/* mempcpy.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/mempcpy.c:76 */
+EXTERN(mempcpy)
 /* memset.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/memset.c:65 */
 EXTERN(memset)
 /* mktemp.o: */
-EXTERN(_mkstemp_r)
-EXTERN(_mktemp_r)
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/mktemp.c:207 */
 EXTERN(mkstemp)
+EXTERN(_mkstemp_r)
 EXTERN(mktemp)
+EXTERN(_mktemp_r)
 /* mktime.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/time/mktime.c:157 */
 EXTERN(mktime)
+/* mktm_r.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/time/mktm_r.c:30 */
+EXTERN(_mktm_r)
+EXTERN(__tzcalc_limits)
 /* mlock.o: */
-EXTERN(__malloc_lock)
-EXTERN(__malloc_unlock)
 /* mprec.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/mprec.c:680 */
+EXTERN(_b2d)
 EXTERN(_Balloc)
 EXTERN(_Bfree)
-EXTERN(__mcmp)
-EXTERN(__mdiff)
-EXTERN(__mprec_bigtens)
-EXTERN(__mprec_tens)
-EXTERN(__mprec_tinytens)
-EXTERN(_b2d)
 EXTERN(_d2b)
 EXTERN(_hi0bits)
 EXTERN(_i2b)
 EXTERN(_lo0bits)
 EXTERN(_lshift)
+EXTERN(__mcmp)
+EXTERN(__mdiff)
+EXTERN(__mprec_bigtens)
 EXTERN(_mprec_log10)
+EXTERN(__mprec_tens)
+EXTERN(__mprec_tinytens)
 EXTERN(_multadd)
 EXTERN(_multiply)
 EXTERN(_pow5mult)
 EXTERN(_ratio)
 EXTERN(_s2b)
 EXTERN(_ulp)
-/* msize.o:
-EXTERN(malloc_usable_size) */
+/* mrand48.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/mrand48.c:28 */
+EXTERN(mrand48)
+EXTERN(_mrand48_r)
+/* msize.o: */
 /* msizer.o: */
 EXTERN(_dummy_mallocr)
 /* mstats.o: */
 EXTERN(_dummy_mstats)
-/* mtrim.o:
-EXTERN(malloc_trim) */
+/* mtrim.o: */
+/* nl_langinfo.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/locale/nl_langinfo.c:45 */
+EXTERN(nl_langinfo)
+/* nrand48.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/nrand48.c:30 */
+EXTERN(nrand48)
+EXTERN(_nrand48_r)
+/* on_exit.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/on_exit.c:70 */
+EXTERN(on_exit)
 /* openr.o: */
 /* perror.o: */
-EXTERN(_perror_r)
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/perror.c:79 */
 EXTERN(perror)
+EXTERN(_perror_r)
 /* printf.o: */
-EXTERN(_printf_r)
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/printf.c:55 */
 EXTERN(printf)
+EXTERN(_printf_r)
 /* putchar.o: */
-EXTERN(_putchar_r)
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/putchar.c:91 */
 EXTERN(putchar)
+EXTERN(_putchar_r)
+/* putchar_u.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/putchar_u.c:74 */
+EXTERN(putchar_unlocked)
+EXTERN(_putchar_unlocked_r)
 /* putc.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/putc.c:80 */
 EXTERN(putc)
+/* putc_u.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/putc_u.c:65 */
+EXTERN(putc_unlocked)
 /* putenv.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/putenv.c:28 */
 EXTERN(putenv)
 /* putenv_r.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/putenv_r.c:37 */
 EXTERN(_putenv_r)
 /* puts.o: */
-EXTERN(_puts_r)
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/puts.c:100 */
 EXTERN(puts)
+EXTERN(_puts_r)
 /* putw.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/putw.c:59 */
 EXTERN(putw)
 /* pvallocr.o: */
 EXTERN(_dummy_mallocr)
 /* qsort.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/search/qsort.c:147 */
 EXTERN(qsort)
 /* raise.o: */
-EXTERN(_raise_r)
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/signal/raise.c:66 */
 EXTERN(raise)
+EXTERN(_raise_r)
+/* rand48.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/rand48.c:167 */
+EXTERN(__dorand48)
 /* rand.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/rand.c:85 */
 EXTERN(rand)
 EXTERN(srand)
 /* rand_r.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/rand_r.c:28 */
 EXTERN(rand_r)
 /* readr.o: */
 /* realloc.o: */
@@ -340,226 +734,506 @@ EXTERN(_dummy_calloc)
 /* reallocr.o: */
 EXTERN(_dummy_mallocr)
 /* reent.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/reent/reent.c:36 */
+EXTERN(cleanup_glue)
 EXTERN(_reclaim_reent)
 EXTERN(_wrapup_reent)
-EXTERN(cleanup_glue)
 /* refill.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/refill.c:41 */
 EXTERN(__srefill)
 /* remove.o: */
-EXTERN(_remove_r)
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/remove.c:66 */
 EXTERN(remove)
+EXTERN(_remove_r)
 /* rename.o: */
-EXTERN(_rename_r)
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/rename.c:82 */
 EXTERN(rename)
+EXTERN(_rename_r)
 /* rewind.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/rewind.c:57 */
 EXTERN(rewind)
 /* rget.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/rget.c:36 */
 EXTERN(__srget)
 /* rindex.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/rindex.c:42 */
 EXTERN(rindex)
 /* sbrkr.o: */
 EXTERN(_dummy_sbrk_syscalls)
 /* scanf.o: */
-EXTERN(_scanf_r)
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/scanf.c:40 */
 EXTERN(scanf)
+EXTERN(_scanf_r)
 /* s_copysign.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libm/common/s_copysign.c:74 */
 EXTERN(copysign)
+/* seed48.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/seed48.c:41 */
+EXTERN(seed48)
+EXTERN(_seed48_r)
+/* setbuffer.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/setbuffer.c:116 */
+EXTERN(setbuffer)
 /* setbuf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/setbuf.c:77 */
 EXTERN(setbuf)
 /* setenv.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/setenv.c:39 */
 EXTERN(setenv)
 EXTERN(unsetenv)
 /* setenv_r.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/setenv_r.c:54 */
 EXTERN(_setenv_r)
 EXTERN(_unsetenv_r)
 /* setjmp.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/machine/powerpc/setjmp.S:117 */
 EXTERN(longjmp)
 EXTERN(setjmp)
+/* setlinebuf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/setlinebuf.c:68 */
+EXTERN(setlinebuf)
 /* setvbuf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/setvbuf.c:104 */
 EXTERN(setvbuf)
 /* sf_copysign.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libm/common/sf_copysign.c:30 */
 EXTERN(copysignf)
 /* sf_finite.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libm/common/sf_finite.c:29 */
 EXTERN(finitef)
 /* sf_frexp.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libm/math/sf_frexp.c:31 */
 EXTERN(frexpf)
 /* s_finite.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libm/common/s_finite.c:29 */
 EXTERN(finite)
 /* sf_isinf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libm/math/sf_isinf.c:14 */
 EXTERN(isinff)
 /* sf_isnan.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libm/math/sf_isnan.c:28 */
 EXTERN(isnanf)
 /* sf_ldexp.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libm/math/sf_ldexp.c:25 */
 EXTERN(ldexpf)
 /* sf_modf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libm/common/sf_modf.c:30 */
 EXTERN(modff)
 /* s_frexp.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libm/math/s_frexp.c:96 */
 EXTERN(frexp)
 /* sf_scalbn.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libm/common/sf_scalbn.c:42 */
 EXTERN(scalbnf)
 /* signal.o: */
 EXTERN(_dummy_simulated_signal)
 /* signalr.o: */
 EXTERN(_dummy_link_syscalls)
+/* signgam.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/reent/signgam.c:13 */
+EXTERN(__signgam)
 /* s_infconst.o: */
 EXTERN(__infinity)
 /* siprintf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/siprintf.c:52 */
 EXTERN(siprintf)
 /* s_isinf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libm/math/s_isinf.c:17 */
 EXTERN(isinf)
 /* s_isnan.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libm/math/s_isnan.c:113 */
 EXTERN(isnan)
 /* s_ldexp.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libm/math/s_ldexp.c:74 */
 EXTERN(ldexp)
 /* s_modf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libm/common/s_modf.c:88 */
 EXTERN(modf)
 /* snprintf.o: */
-EXTERN(_snprintf_r)
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/snprintf.c:76 */
 EXTERN(snprintf)
+EXTERN(_snprintf_r)
 /* sprintf.o: */
-EXTERN(_sprintf_r)
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/sprintf.c:350 */
 EXTERN(sprintf)
+EXTERN(_sprintf_r)
+/* srand48.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/srand48.c:35 */
+EXTERN(srand48)
+EXTERN(_srand48_r)
 /* s_scalbn.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libm/common/s_scalbn.c:78 */
 EXTERN(scalbn)
 /* sscanf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/sscanf.c:391 */
 EXTERN(sscanf)
+EXTERN(_sscanf_r)
 /* statr.o: */
 EXTERN(_dummy_stat_syscalls)
 /* stdio.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/stdio.c:116 */
 EXTERN(__sclose)
 EXTERN(__sread)
 EXTERN(__sseek)
 EXTERN(__swrite)
 /* strcasecmp.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strcasecmp.c:49 */
 EXTERN(strcasecmp)
 /* strcat.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strcat.c:66 */
 EXTERN(strcat)
 /* strchr.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strchr.c:85 */
 EXTERN(strchr)
 /* strcmp.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strcmp.c:78 */
 EXTERN(strcmp)
 /* strcoll.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strcoll.c:46 */
 EXTERN(strcoll)
 /* strcpy.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strcpy.c:79 */
 EXTERN(strcpy)
 /* strcspn.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strcspn.c:41 */
 EXTERN(strcspn)
 /* strdup.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strdup.c:9 */
 EXTERN(strdup)
 /* strdup_r.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strdup_r.c:9 */
 EXTERN(_strdup_r)
 /* strerror.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strerror.c:320 */
 EXTERN(strerror)
+/* strerror_r.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strerror_r.c:48 */
+EXTERN(strerror_r)
 /* strftime.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/time/strftime.c:171 */
 EXTERN(strftime)
+/* strlcat.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strlcat.c:56 */
+EXTERN(strlcat)
+/* strlcpy.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strlcpy.c:53 */
+EXTERN(strlcpy)
 /* strlen.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strlen.c:71 */
 EXTERN(strlen)
 /* strlwr.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strlwr.c:42 */
 EXTERN(strlwr)
 /* strncasecmp.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strncasecmp.c:55 */
 EXTERN(strncasecmp)
 /* strncat.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strncat.c:89 */
 EXTERN(strncat)
 /* strncmp.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strncmp.c:84 */
 EXTERN(strncmp)
 /* strncpy.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strncpy.c:96 */
 EXTERN(strncpy)
+/* strndup.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strndup.c:12 */
+EXTERN(strndup)
+/* strndup_r.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strndup_r.c:12 */
+EXTERN(_strndup_r)
+/* strnlen.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strnlen.c:45 */
+EXTERN(strnlen)
 /* strpbrk.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strpbrk.c:39 */
 EXTERN(strpbrk)
+/* strptime.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/time/strptime.c:202 */
+EXTERN(strptime)
+EXTERN(tm_year_base)
 /* strrchr.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strrchr.c:45 */
 EXTERN(strrchr)
+/* strsep.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strsep.c:17 */
+EXTERN(strsep)
 /* strspn.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strspn.c:46 */
 EXTERN(strspn)
 /* strstr.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strstr.c:44 */
 EXTERN(strstr)
 /* strtod.o: */
-EXTERN(_strtod_r)
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/strtod.c:719 */
 EXTERN(strtod)
-EXTERN(strtodf)
+EXTERN(_strtod_r)
+EXTERN(strtof)
 /* strtok.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strtok.c:97 */
 EXTERN(strtok)
 /* strtok_r.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strtok_r.c:44 */
+EXTERN(__strtok_r)
 EXTERN(strtok_r)
+/* strtoll.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/strtoll.c:134 */
+EXTERN(strtoll)
+/* strtoll_r.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/strtoll_r.c:64 */
+EXTERN(_strtoll_r)
 /* strtol.o: */
-EXTERN(_strtol_r)
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/strtol.c:222 */
 EXTERN(strtol)
+EXTERN(_strtol_r)
+/* strtoull.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/strtoull.c:135 */
+EXTERN(strtoull)
+/* strtoull_r.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/strtoull_r.c:65 */
+EXTERN(_strtoull_r)
 /* strtoul.o: */
-EXTERN(_strtoul_r)
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/strtoul.c:202 */
 EXTERN(strtoul)
+EXTERN(_strtoul_r)
 /* strupr.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strupr.c:41 */
 EXTERN(strupr)
 /* strxfrm.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/strxfrm.c:61 */
 EXTERN(strxfrm)
 /* swab.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/swab.c:35 */
 EXTERN(swab)
 /* system.o: */
-EXTERN(_system_r)
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/system.c:106 */
 EXTERN(system)
+EXTERN(_system_r)
+/* tdelete.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/search/tdelete.c:33 */
+EXTERN(tdelete)
+/* tdestroy.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/search/tdestroy.c:47 */
+EXTERN(tdestroy)
 /* __ten_mu.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/__ten_mu.c:14 */
 EXTERN(__ten_mul)
+/* tfind.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/search/tfind.c:32 */
+EXTERN(tfind)
+/* timelocal.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/locale/timelocal.c:103 */
+EXTERN(__get_current_time_locale)
+EXTERN(__time_load_locale)
 /* time.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/time/time.c:47 */
 EXTERN(time)
 /* timer.o: */
 EXTERN(_dummy_time_syscalls)
+/* times.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/machine/powerpc/times.c:14 */
+EXTERN(times)
 /* tmpfile.o: */
-EXTERN(_tmpfile_r)
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/tmpfile.c:73 */
 EXTERN(tmpfile)
+EXTERN(_tmpfile_r)
 /* tmpnam.o: */
-EXTERN(_tempnam_r)
-EXTERN(_tmpnam_r)
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/tmpnam.c:198 */
 EXTERN(tempnam)
+EXTERN(_tempnam_r)
 EXTERN(tmpnam)
+EXTERN(_tmpnam_r)
 /* toascii.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/toascii.c:39 */
 EXTERN(toascii)
 /* _tolower.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/_tolower.c:8 */
 EXTERN(_tolower)
 /* tolower.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/tolower.c:54 */
 EXTERN(tolower)
 /* _toupper.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/_toupper.c:8 */
 EXTERN(_toupper)
 /* toupper.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/toupper.c:53 */
 EXTERN(toupper)
+/* towctrans.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/towctrans.c:94 */
+EXTERN(towctrans)
+EXTERN(_towctrans_r)
+/* towlower.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/towlower.c:476 */
+EXTERN(towlower)
+/* towupper.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/towupper.c:503 */
+EXTERN(towupper)
+/* tsearch.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/search/tsearch.c:32 */
+EXTERN(tsearch)
+/* twalk.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/search/twalk.c:55 */
+EXTERN(twalk)
+/* tzlock.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/time/tzlock.c:39 */
+EXTERN(__tz_lock)
+EXTERN(__tz_unlock)
+/* tzset.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/time/tzset.c:70 */
+EXTERN(tzset)
+/* tzset_r.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/time/tzset_r.c:29 */
+EXTERN(_daylight)
+EXTERN(_timezone)
+EXTERN(_tzname)
+EXTERN(__tznorth)
+EXTERN(__tzrule)
+EXTERN(_tzset_r)
+EXTERN(__tzyear)
 /* unctrl.o: */
 EXTERN(__unctrl)
 EXTERN(__unctrllen)
 /* ungetc.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/ungetc.c:38 */
 EXTERN(__submore)
 EXTERN(ungetc)
 /* unlinkr.o: */
 /* u_strerr.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/u_strerr.c:8 */
 EXTERN(_user_strerror)
-/* valloc.o:
-EXTERN(pvalloc)
-EXTERN(valloc) */
-/* vallocr.o:
-EXTERN(_dummy_mallocr) */
+/* valloc.o: */
+/* vallocr.o: */
+EXTERN(_dummy_mallocr)
 /* vfiprintf.o: */
-EXTERN(_vfiprintf_r)
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/vfprintf.c:363 */
 EXTERN(vfiprintf)
+EXTERN(_vfiprintf_r)
 /* vfprintf.o: */
-EXTERN(_vfprintf_r)
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/vfprintf.c:363 */
 EXTERN(vfprintf)
+EXTERN(_vfprintf_r)
 /* vfscanf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/vfscanf.c:1051 */
 EXTERN(__sccl)
 EXTERN(__svfscanf)
+EXTERN(__svfscanf_r)
+EXTERN(vfscanf)
+EXTERN(_vfscanf_r)
 /* vprintf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/vprintf.c:35 */
 EXTERN(vprintf)
+EXTERN(_vprintf_r)
+/* vscanf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/vscanf.c:40 */
+EXTERN(vscanf)
+EXTERN(_vscanf_r)
 /* vsnprintf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/vsnprintf.c:42 */
 EXTERN(vsnprintf)
-EXTERN(vsnprintf_r)
+EXTERN(_vsnprintf_r)
 /* vsprintf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/vsprintf.c:39 */
 EXTERN(vsprintf)
-EXTERN(vsprintf_r)
+EXTERN(_vsprintf_r)
+/* vsscanf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/vsscanf.c:52 */
+EXTERN(vsscanf)
+EXTERN(_vsscanf_r)
 /* wbuf.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/wbuf.c:38 */
 EXTERN(__swbuf)
+/* wcrtomb.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/wcrtomb.c:46 */
+EXTERN(wcrtomb)
+EXTERN(_wcrtomb_r)
+/* wcscat.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/wcscat.c:76 */
+EXTERN(wcscat)
+/* wcschr.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/wcschr.c:72 */
+EXTERN(wcschr)
+/* wcscmp.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/wcscmp.c:78 */
+EXTERN(wcscmp)
+/* wcscpy.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/wcscpy.c:70 */
+EXTERN(wcscpy)
+/* wcscspn.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/wcscspn.c:71 */
+EXTERN(wcscspn)
+/* wcslcat.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/wcslcat.c:82 */
+EXTERN(wcslcat)
+/* wcslcpy.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/wcslcpy.c:82 */
+EXTERN(wcslcpy)
+/* wcslen.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/wcslen.c:67 */
+EXTERN(wcslen)
+/* wcsncat.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/wcsncat.c:79 */
+EXTERN(wcsncat)
+/* wcsncmp.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/wcsncmp.c:77 */
+EXTERN(wcsncmp)
+/* wcsncpy.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/wcsncpy.c:81 */
+EXTERN(wcsncpy)
+/* wcspbrk.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/wcspbrk.c:72 */
+EXTERN(wcspbrk)
+/* wcsrchr.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/wcsrchr.c:75 */
+EXTERN(wcsrchr)
+/* wcsrtombs.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/wcsrtombs.c:75 */
+EXTERN(wcsrtombs)
+EXTERN(_wcsrtombs_r)
+/* wcsspn.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/wcsspn.c:71 */
+EXTERN(wcsspn)
+/* wcsstr.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/wcsstr.c:71 */
+EXTERN(wcsstr)
 /* wcstombs.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/wcstombs.c:70 */
 EXTERN(wcstombs)
 /* wcstombs_r.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/wcstombs_r.c:11 */
 EXTERN(_wcstombs_r)
+/* wctob.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/wctob.c:9 */
+EXTERN(wctob)
 /* wctomb.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/wctomb.c:61 */
 EXTERN(wctomb)
 /* wctomb_r.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdlib/wctomb_r.c:18 */
 EXTERN(_wctomb_r)
+/* wctrans.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/wctrans.c:91 */
+EXTERN(wctrans)
+EXTERN(_wctrans_r)
+/* wctype.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/ctype/wctype.c:135 */
+EXTERN(wctype)
+EXTERN(_wctype_r)
+/* wmemchr.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/wmemchr.c:78 */
+EXTERN(wmemchr)
+/* wmemcmp.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/wmemcmp.c:77 */
+EXTERN(wmemcmp)
+/* wmemcpy.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/wmemcpy.c:72 */
+EXTERN(wmemcpy)
+/* wmemmove.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/wmemmove.c:78 */
+EXTERN(wmemmove)
+/* wmemset.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/string/wmemset.c:76 */
+EXTERN(wmemset)
 /* writer.o: */
 /* wsetup.o: */
+/* /afs/slac/package/rtems/4.6/src/gcc-3.2.1/newlib/libc/stdio/wsetup.c:33 */
 EXTERN(__swsetup)
