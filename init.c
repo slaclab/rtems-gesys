@@ -108,10 +108,17 @@
 #include <ctype.h>
 #include <assert.h>
 #include <syslog.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <netdb.h>
 
 #include <rtems/rtems_bsdnet.h>
 #include <rtems/libio.h>
 #include <rtems/tftp.h>
+
+
+#include <sys/select.h>
 
 #include <rtems/userenv.h>
 
@@ -129,7 +136,28 @@ static	char *my_getline(char *rval, char *prompt, int len);
 
 #define LINE_LENGTH 200
 
+#define SYMEXT      ".sym"
+
 #include "builddate.c"
+
+#define TFTP_OPEN_FLAGS (O_RDONLY)
+
+#define ISONTMP(str) ( ! strncmp((str),"/tmp/",5) )
+#define ISONTFTP(str) ( ! strncmp((str),"/TFTP/",6))
+
+#ifdef NFS_SUPPORT
+static int nfsInited     = 1; /* initialization done by application itself */
+#endif
+#ifdef TFTP_SUPPORT
+static int tftpInited    = 1; /* initialization done by application itself */
+#endif
+
+
+#ifdef NFS_SUPPORT
+#include <librtemsNfs.h>
+#endif
+/* helper code borrowed from netboot */
+#include "pathcheck.c"
 
 #ifdef HAVE_BSPEXT_
 #include <bspExt.h>
@@ -162,7 +190,8 @@ cexpExcHandlerInstall(void (*handler)(int))
 #define cexpExcHandlerInstall 0
 #endif
 
-#define BOOTPF rtems_bsdnet_bootp_boot_file_name
+#define BOOTPFN  rtems_bsdnet_bootp_boot_file_name
+#define BOOTPSA  rtems_bsdnet_bootp_server_address
 #define SYSSCRIPT	"st.sys"
 
 static void
@@ -173,6 +202,45 @@ int
 ansiTiocGwinszInstall(int slot);
 #endif
 
+#ifdef RSH_SUPPORT
+static int rshCopy(char **pDfltSrv, char *pathspec, char **pFnam);
+#endif
+
+
+static void freeps(char **ps)
+{
+	free(*ps); *ps = 0;
+}
+
+static char *theSrv = 0;
+
+#define DFLT_SRV_LEN 100
+
+static void getDfltSrv(char **pdfltSrv)
+{
+
+	*pdfltSrv = realloc(*pdfltSrv, theSrv ? strlen(theSrv)+1 : DFLT_SRV_LEN);
+
+	if ( theSrv ) {
+		strcpy(*pdfltSrv, theSrv);
+	} else {
+  		if ( !inet_ntop( AF_INET, &BOOTPSA, *pdfltSrv, DFLT_SRV_LEN ) ) {
+			freeps(pdfltSrv);
+  		}
+	}
+}
+
+
+static void mkTmpDir()
+{
+struct stat stbuf;
+    if (stat("/tmp",&stbuf)) {
+        mode_t old=umask(0);
+        mkdir("/tmp",0777);
+        umask(old);
+    }
+}
+
 rtems_task Init(
   rtems_task_argument ignored
 )
@@ -181,14 +249,19 @@ GetLine	*gl=0;
 char	*symf=0, *user_script=0, *bufp;
 int		argc=4;
 int		result=0;
+char	*dfltSrv  = 0;
+char	*pathspec = 0;
+#ifdef NFS_SUPPORT
+MntDescRec	bootmnt = { "/boot", 0, 0 };
+MntDescRec  homemnt = { "/home", 0, 0 };
+#endif
 char	*argv[5]={
 	"Cexp",	/* program name */
 	"-s",
 	0,
-	SYSSCRIPT,
+	0,
 	0
 };
-
 
   rtems_libio_set_private_env();
 
@@ -203,12 +276,21 @@ char	*argv[5]={
   bspExtInit();
 #endif
 
+  /* make /tmp directory */
+  mkTmpDir();
+
   rtems_bsdnet_initialize_network(); 
 
+
+#ifdef TFTP_SUPPORT
   if (rtems_bsdnet_initialize_tftp_filesystem())
 	perror("TFTP FS initialization failed");
+#endif
 
-  printf("$Id$\n");
+#ifdef NFS_SUPPORT
+  rpcUdpInit() || nfsInit(0,0);
+#endif
+
   printf("Welcome to RTEMS GeSys\n");
   printf("This system $Name$ was built on %s\n",system_build_date);
 
@@ -218,6 +300,8 @@ char	*argv[5]={
 	printf("FAILED\n");
   else
 	printf("OK\n");
+
+  printf("$Id$\n");
 
   /* remote logging only works after a call to openlog()... */
   openlog(0, LOG_PID | LOG_CONS, 0); /* use RTEMS defaults */
@@ -236,75 +320,261 @@ char	*argv[5]={
 
   cexpInit(cexpExcHandlerInstall);
 
-  bufp = BOOTPF;
 
-  while (1) {
+  if ( BOOTPFN ) {
+	char *slash,*dot;
+	pathspec = malloc(strlen(BOOTPFN) + strlen(SYMEXT) + 1);
+	strcpy(pathspec, BOOTPFN);
+	slash    = strrchr(pathspec,'/');
+	dot      = strrchr(pathspec,'.');
+	if (slash>dot)
+		dot=0;
+	/* substitute suffix */
+	if (dot) {
+		strcpy(dot,SYMEXT);
+	} else {
+		strcat(pathspec,SYMEXT);
+	}
+  }
 
-  if (!bufp) {
+  dflt_fname = "rtems.sym";
+#ifdef TFTP_SUPPORT
+  path_prefix = strdup("/TFTP/BOOTP_HOST/");
+#elif defined(NFS_SUPPORT)
+  path_prefix = strdup(":/remote/rtems:");
+#elif defined(RSH_SUPPORT)
+  path_prefix = strdup("~rtems/");
+#endif
+  getDfltSrv(&dfltSrv);
+
+  /* omit prompting for the symbol file */
+  if ( pathspec )
+  	goto firstTimeEntry;
+
+  do {
+	chdir("/");
+#ifdef NFS_SUPPORT
+	if ( releaseMount( &bootmnt ) ) {
+		fprintf(stderr,"Unable to unmount /boot NFS - don't know what to do, sorry\n");
+		break;
+	}
+#endif
+	freeps(&symf);
+	freeps(&user_script);
+
 	if (!gl) {
-		assert( gl = new_GetLine(LINE_LENGTH,10) );
+		assert( gl = new_GetLine(LINE_LENGTH, 10*LINE_LENGTH) );
 		/* silence warnings about missing .teclarc */
 		gl_configure_getline(gl,0,0,0);
 	}
+
 	do {
+		printf("Symbol file can be loaded by:\n");
+#ifdef NFS_SUPPORT
+		printf("   NFS: [<uid>.<gid>@][<host>]:<export_path>:<symfile_path>\n"); 
+#endif
+#ifdef TFTP_SUPPORT
+		printf("  TFTP: [/TFTP/<host_ip>]<symfile_path>\n"); 
+#endif
+#ifdef RSH_SUPPORT
+		printf("   RSH: [<host>:]~<user>/<symfile_path>\n"); 
+#endif
 #ifdef USE_TECLA
-		bufp = gl_get_line(gl, "Enter Symbol File Name: ", NULL, 0);
+		bufp = gl_get_line(gl, "Enter Symbol File Name: ",
+			               pathspec,
+                           ( pathspec && *pathspec ) ? strlen(pathspec) : 0 );
 #else
 		bufp = my_getline(gl, "Enter Symbol File Name: ", LINE_LENGTH);
 #endif
 	} while (!bufp || !*bufp);
-  }
+	pathspec = realloc(pathspec, strlen(bufp) + 1);
+	strcpy(pathspec, bufp);
+	bufp = pathspec + strlen(bufp) - 1;
+	while ( bufp >= pathspec && ('\n' == *bufp || '\r' == *bufp) )
+		*bufp-- = 0;
+
+firstTimeEntry:
 
   {
-	char *slash,*dot;
+	int fd = -1, ed = -1;
+	char *slash;
 
-	symf  = realloc(symf, strlen(bufp)+30);
-	*symf=0;
-	if ('~' != *bufp                /* we are not using rsh */
-		&& strncmp(bufp,"/TFTP/",6) /* and it's a relative path */
-	   ) {
-		/* prepend default server path */
-		strcat(symf,"/TFTP/BOOTP_HOST/");
+	getDfltSrv( &dfltSrv );
+
+	switch ( pathType(pathspec) ) {
+		case LOCAL_PATH:
+
+#ifdef TFTP_SUPPORT
+		case TFTP_PATH:
+			fd = isTftpPath( &dfltSrv, pathspec, &ed, &symf );
+		break;
+#endif
+
+#ifdef NFS_SUPPORT
+		case NFS_PATH:
+    		fd = isNfsPath( &dfltSrv, pathspec, &ed, &symf, &bootmnt );
+		break;
+#endif
+
+#ifdef RSH_SUPPORT
+		case RSH_PATH:
+    		fd = rshCopy( &dfltSrv, pathspec, &symf );
+		break;
+#endif
+
+		default:
+			fprintf(stderr,"Unrecognized pathspec; maybe remote FS support is not compiled in ?\n");
+		break;
 	}
 
-	 strcat(symf,bufp);
-	 slash = strrchr(symf,'/');
-	 dot   = strrchr(symf,'.');
-	 if (slash>dot)
-		dot=0;
-	 /* substitute suffix */
-	 if (dot) {
-		strcpy(dot,".sym");
-	 } else {
-		strcat(symf,".sym");
-	 }
-	if (slash) {
-		int ch=*(slash+1);
-		*(slash+1)=0;
-		printf("Change Dir to '%s'\n",symf);
-		chdir(symf);
-		*(slash+1)=ch;
+	if ( 0==result && dfltSrv ) {
+		/* allow the default server to be overridden by the pathspec
+		 * during the first pass (original pathspec from boot)
+		 */
+		theSrv = strdup(dfltSrv);
 	}
-	printf("Trying symfile '%s', system script '%s'\n",symf,SYSSCRIPT);
+
+
+	if ( (fd < 0) ) {
+		fprintf(stderr,"Unable to open symbol file (%s)\n", 
+			-11 == fd ? "not a valid pathspec" : strerror(errno));
+continue;
+	}
+	
+	close(fd);
+	if ( ed >= 0 )
+		close(ed);
+
+
+	argc = 4;
+
+	freeps(argv+3);
+	argv[3] = strdup(SYSSCRIPT);
+
+#ifdef RSH_SUPPORT
+	if ( !ISONTMP(symf) ) {
+#endif
+		if ( (slash = strrchr(symf,'/')) ) {
+			int ch=*(slash+1);
+			*(slash+1)=0;
+			printf("Change Dir to '%s'",symf);
+			if ( chdir(symf) )
+				printf(" FAILED: %s",strerror(errno));
+			fputc('\n',stdout);
+			*(slash+1)=ch;
+		}
+#ifdef RSH_SUPPORT
+	} else {
+		char *sysscr = 0;
+		char *scrspec = malloc( strlen(pathspec) + strlen(SYSSCRIPT) + 1);
+
+		strcpy(scrspec, pathspec);
+		if ( (slash = strrchr(scrspec, '/')) )
+			strcpy( slash+1, SYSSCRIPT );
+		else
+			strcpy( scrspec, SYSSCRIPT );
+
+		getDfltSrv( &dfltSrv );
+
+		freeps( argv+3 );
+		if ( (fd = rshCopy( &dfltSrv, scrspec, &sysscr )) >= 0 ) {
+			close( fd );
+			argv[3] = sysscr;
+		} else {
+			argc--;
+		}
+		freeps(&scrspec);
+	}
+#endif
+
+	printf("Trying symfile '%s', system script '%s'\n",symf,argc > 3 ? argv[3] :"(NONE)");
+
 	argv[2]=symf;
-	if (!(result=cexp_main(argc,argv)) || CEXP_MAIN_NO_SCRIPT==result) {
-  		free(symf); symf=0;
+
+	result = cexp_main(argc, argv);
+
+	if ( ISONTMP( symf ) )
+		unlink( symf );
+	if ( ISONTMP( argv[3] ) )
+		unlink( argv[3] );
+
+	freeps(&symf);
+	freeps(&argv[3]);
+	
+
+	if (!result || CEXP_MAIN_NO_SCRIPT==result) {
+		int  rc;
+
 		if (gl) {
 			del_GetLine(gl);
 			gl = 0;
 		}
+
+		freeps(&pathspec);
+
 		/* try a user script */
 		if ((user_script=getenv("INIT"))) {
+
 			printf("Trying user script '%s':\n",user_script);
-			argv[1]=user_script=strdup(user_script);
-			if ((slash = strrchr(user_script,'/'))) {
-				/* chdir to where the user script resides */
-				int ch=*(++slash);
-				*(slash)=0;
-				printf("Change Dir to '%s'\n",user_script);
-				chdir(user_script);
-				*(slash)=ch;
-				argv[1]=slash;
+
+			pathspec = strdup(user_script); user_script = 0;
+
+			getDfltSrv(&dfltSrv);
+
+			switch ( pathType( pathspec ) ) {
+#ifdef NFS_SUPPORT
+				case NFS_PATH:	 
+					if ( 0 == (rc = isNfsPath( &dfltSrv, pathspec, 0, &user_script, &homemnt ) ) ) {
+						/* valid NFS path; try to mount; */
+						if ( !bootmnt.uidhost || strcmp( homemnt.uidhost, bootmnt.uidhost ) ||
+						     !bootmnt.rpath   || strcmp( homemnt.rpath  , bootmnt.rpath   ) )
+							rc = nfsMount(homemnt.uidhost, homemnt.rpath, homemnt.mntpt);
+					}
+				break;
+#endif
+				case RSH_PATH:
+					fprintf(stderr,"RSH download of user scripts is not supported\n");
+					rc = -1;
+				break;
+
+#ifdef TFTP_SUPPORT
+				case TFTP_PATH:
+					rc = isTftpPath( &dfltSrv, pathspec, 0, &user_script );
+				break;
+#endif
+
+				case LOCAL_PATH:
+					/* they might refer to a path on the local FS (already mounted NFS) */
+					user_script = pathspec; pathspec = 0;
+					rc = 0;
+				break;
+
+				default:
+					fprintf(stderr,"Invalid path specifier; support for remote FS not compiled in?\n");
+					rc = -1;
+				break;
+			}
+
+			freeps(&pathspec);
+
+			argc = 2;
+
+			if ( rc ) {
+				fprintf(stderr,"Unable to determine filesystem for user script\n");
+				freeps(&user_script);
+				argc = 1;
+			} else {
+				if ((slash = strrchr(user_script,'/'))) {
+					/* chdir to where the user script resides */
+					int ch=*(++slash);
+					*(slash)=0;
+					printf("Change Dir to '%s'\n",user_script);
+					chdir(user_script);
+					*(slash)=ch;
+					argv[1]=slash;
+				} else {
+					argv[1]=user_script;
+				}
 			}
 			argc=2;
 		} else {
@@ -313,19 +583,19 @@ char	*argv[5]={
 		do {
 			result=cexp_main(argc,argv);
 			argc=1;
-  			free(user_script); user_script=0;
+  			freeps(&user_script);
 		} while (!result || CEXP_MAIN_NO_SCRIPT==result);
+		chdir("/");
+#ifdef NFS_SUPPORT
+		releaseMount( &homemnt );
+#endif
 	}
   }
-
-  free(symf);        symf=0;
-  free(user_script); user_script=0;
 
   switch (result) {
 		case CEXP_MAIN_NO_SYMS  :
 				fprintf(stderr,"CEXP_MAIN_NO_SYMS\n");
-				bufp = 0;
-				continue; /* retry asking them for a symbol file */
+				result = 0;
 		break;
 		case CEXP_MAIN_INVAL_ARG: fprintf(stderr,"CEXP_MAIN_INVAL_ARG\n"); break;
 		case CEXP_MAIN_NO_SCRIPT: fprintf(stderr,"CEXP_MAIN_NO_SCRIPT\n"); break;
@@ -337,7 +607,7 @@ char	*argv[5]={
 			fprintf(stderr,"unknown error\n");
   }
 
-  } /* while (1), retry asking for a sym-filename */
+  }  while ( !result ); /* retry asking for a sym-filename */
   if (gl) {
 	del_GetLine(gl);
 	gl = 0;
@@ -445,5 +715,122 @@ char	*cp;
 done:
 	*cp=0;
     return rval;
+}
+#endif
+
+#ifdef RSH_SUPPORT
+static int cpfd(int *pi, int o)
+{
+int  got,put,n;
+char buf[BUFSIZ];
+char *b = buf;
+
+	if ( (got = read( *pi, buf, sizeof(buf) )) < 0 ) {
+		fprintf(stderr,"rshCopy() -- cpfd unable to read");
+		return -1;
+	}
+
+	if ( 0 == got ) {
+		close(*pi);
+		*pi = -1;	
+		return 0;
+	}
+
+	b = buf;
+
+	for ( b = buf, n = got; n > 0; n-=put, b+=put ) {
+		if ( (put = write(o, b, n)) <= 0 ) {
+			fprintf(stderr,"rshCopy() -- cpfd unable to write");
+			return -1;
+		}
+	}
+	return got;
+}
+
+static int rshCopy(char **pDfltSrv, char *pathspec, char **pFnam)
+{
+int		fd = -1, ed = -1, tmpfd = -1, maxfd, got;
+fd_set	r,w,e;
+struct timeval timeout;
+
+int rval = -1;
+
+	fd = isRshPath( pDfltSrv, pathspec, &ed, 0 );
+	if ( fd < 0 ) {
+		rval = fd;
+		goto cleanup;
+	}
+	
+	assert( !*pFnam );
+
+	*pFnam = strdup("/tmp/rshcpyXXXXXX");
+
+   	if ( (tmpfd=mkstemp(*pFnam)) < 0 ) {
+		perror("rshCopy() -- creating scratch file");
+		goto cleanup;
+	}
+
+	while ( fd >= 0 || ed >= 0 ) {
+
+		FD_ZERO( &r ); FD_ZERO( &w ); FD_ZERO( &e );
+		timeout.tv_sec  = 5;
+		timeout.tv_usec = 0;
+
+		maxfd = 0;
+
+		if ( fd >= 0 ) {
+			FD_SET( fd, &r );
+			if ( fd > maxfd )
+				maxfd = fd;
+		}
+		if ( ed >= 0 ) {
+			FD_SET( ed, &r );
+			if ( ed > maxfd )
+				maxfd = ed;
+		}
+		maxfd++;
+
+		got = select(maxfd, &r, &w, &e, &timeout);
+
+		if ( got <= 0 ) {
+			if ( got )
+				perror("rshCopy() network select() error");
+			else 
+				fprintf(stderr,"rshCopy() network select() timeout\n");
+			goto cleanup;
+		}
+		if ( ed >= 0 && FD_ISSET( ed, &r ) ) {
+			if ( cpfd( &ed, 2 ) < 0 ) {
+				perror(" error file descriptor");
+				goto cleanup;
+			}
+		}
+		if ( fd >= 0 && FD_ISSET( fd, &r ) ) {
+			if ( cpfd( &fd, tmpfd ) < 0 ) {
+				perror(" temp file descriptor");
+				goto cleanup;
+			}
+		}
+	}
+
+	rval = tmpfd; tmpfd = -1;
+
+cleanup:
+
+	if ( ed >= 0 )
+		close(ed);
+
+	if ( fd >= 0 )
+		close(fd);
+
+	if ( tmpfd >= 0 ) {
+		close(tmpfd);
+		unlink( *pFnam );
+	}
+
+	if ( rval < 0 )
+		freeps(pFnam);
+
+	return rval;	
 }
 #endif
