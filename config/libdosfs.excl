@@ -1,4 +1,4 @@
-/* /test/rtems-4.6.0pre4/powerpc-rtems/svgm/lib/libdosfs.a[fat.o]:*/
+/* libdosfs.a[fat.o]:*/
 librtemscpu.a[fat.o]:
 calloc U         
 _Chain_Get U         

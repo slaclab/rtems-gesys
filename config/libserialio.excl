@@ -1,4 +1,4 @@
-/* /test/rtems-4.6.0pre4/powerpc-rtems/svgm/lib/libserialio.a[mc68681.o]:*/
+/* libserialio.a[mc68681.o]:*/
 librtemsbsp.a[mc68681.o]:
 Console_Port_Count U         
 Console_Port_Data U         

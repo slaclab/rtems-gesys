@@ -1,4 +1,4 @@
-/* /test/rtems-4.6.0pre4/powerpc-rtems/svgm/lib/libnetchip.a[cs8900.o]: */
+/* libnetchip.a[cs8900.o]: */
 librtemsbsp.a[cs8900.o]:
 bsp_cs8900_io_base U         
 bsp_cs8900_memory_base U         

@@ -1,4 +1,4 @@
-/* /test/rtems-4.6.0pre4/powerpc-rtems/svgm/lib/libnetapps.a[ftpd.o]: */
+/* libnetapps.a[ftpd.o]: */
 librtemsbsp.a[ftpd.o]:
 accept U         
 bind U         

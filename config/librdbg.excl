@@ -1,4 +1,4 @@
-/* /test/rtems-4.6.0pre4/powerpc-rtems/svgm/lib/librdbg.a[remdeb_xdr.o]: */
+/* librdbg.a[remdeb_xdr.o]: */
 librtemsbsp.a[remdeb_xdr.o]:
 xdr_all_signals T 000015d0 00000044
 xdr_all_symbols T 00001490 00000044

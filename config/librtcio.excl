@@ -1,4 +1,4 @@
-/* /test/rtems-4.6.0pre4/powerpc-rtems/svgm/lib/librtcio.a[rtcprobe.o]: */
+/* librtcio.a[rtcprobe.o]: */
 librtemsbsp.a[rtcprobe.o]:
 rtc_probe T 00000000 00000008
 librtemsbsp.a[icm7170.o]:

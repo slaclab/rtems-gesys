@@ -1,4 +1,4 @@
-/* /test/rtems-4.6.0pre4/powerpc-rtems/svgm/lib/libblock.a[bdbuf.o]: */
+/* libblock.a[bdbuf.o]: */
 librtemscpu.a[bdbuf.o]:
 calloc U         
 _Chain_Append U         

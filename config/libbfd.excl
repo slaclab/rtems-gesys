@@ -1,4 +1,4 @@
-/tftpboot/powerpc-rtems//lib/libbfd.a[archive.o]:
+libbfd.a[archive.o]:
 atoi U         
 _bfd_abort U         
 _bfd_add_bfd_to_archive_cache T 00000150 000000a8
@@ -67,7 +67,7 @@ strncmp U
 strrchr U         
 strtol U         
 time U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[archures.o]:
+libbfd.a[archures.o]:
 bfd_arch_bits_per_address T 00000264 0000000c
 bfd_arch_bits_per_byte T 00000258 0000000c
 bfd_arch_get_compatible T 00000174 0000005c
@@ -95,7 +95,7 @@ strcasecmp U
 strchr U         
 strlen U         
 strncasecmp U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[bfd.o]:
+libbfd.a[bfd.o]:
 _bfd_abort T 000004b4 00000090
 bfd_alloc U         
 bfd_alt_mach_code T 00000a4c 00000080
@@ -148,7 +148,7 @@ strtoul U
 vfprintf U         
 xexit U         
 xstrerror U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[cache.o]:
+libbfd.a[cache.o]:
 _bfd_abort U         
 bfd_assert U         
 bfd_cache_close T 000001f8 00000048
@@ -163,7 +163,7 @@ fseek U
 ftell U         
 stat U         
 unlink U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[coffgen.o]:
+libbfd.a[coffgen.o]:
 _bfd_abort U         
 bfd_abs_section U         
 bfd_alloc U         
@@ -228,12 +228,12 @@ strcpy U
 strlen U         
 strncpy U         
 strtol U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[corefile.o]:
+libbfd.a[corefile.o]:
 bfd_core_file_failing_command T 00000000 00000048
 bfd_core_file_failing_signal T 00000048 00000048
 bfd_set_error U         
 core_file_matches_executable_p T 00000090 00000054
-/tftpboot/powerpc-rtems//lib/libbfd.a[format.o]:
+libbfd.a[format.o]:
 bfd_check_format T 00000000 00000024
 bfd_check_format_matches T 00000024 000003bc
 bfd_default_vector U         
@@ -248,9 +248,9 @@ _bfd_target_vector_entries U
 binary_vec U         
 free U         
 memcpy U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[init.o]:
+libbfd.a[init.o]:
 bfd_init T 00000000 00000004
-/tftpboot/powerpc-rtems//lib/libbfd.a[libbfd.o]:
+libbfd.a[libbfd.o]:
 bfd_0 T 00000058 00000008
 bfd_0l T 00000068 00000008
 bfd_0u T 00000060 00000008
@@ -322,7 +322,7 @@ memcpy U
 memset U         
 realloc U         
 warn_deprecated T 00000f48 000000a0
-/tftpboot/powerpc-rtems//lib/libbfd.a[opncls.o]:
+libbfd.a[opncls.o]:
 bfd_alloc T 00000824 0000008c
 bfd_cache_close U         
 bfd_cache_init U         
@@ -362,7 +362,7 @@ objalloc_free U
 objalloc_free_block U         
 stat U         
 umask U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[reloc.o]:
+libbfd.a[reloc.o]:
 _bfd_abort U         
 bfd_abs_section U         
 bfd_arch_bits_per_address U         
@@ -389,7 +389,7 @@ bfd_reloc_type_lookup T 00000d90 0000002c
 bfd_und_section U         
 free U         
 memcmp U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[section.o]:
+libbfd.a[section.o]:
 _bfd_abort U         
 bfd_abs_section R 00000190 00000088
 bfd_abs_symbol G 00000008 00000004
@@ -424,7 +424,7 @@ memcpy U
 memset U         
 sprintf U         
 strlen U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[syms.o]:
+libbfd.a[syms.o]:
 bfd_abs_section U         
 bfd_alloc U         
 bfd_canonicalize_reloc U         
@@ -457,7 +457,7 @@ strchr U
 strcmp U         
 strlen U         
 strncmp U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[targets.o]:
+libbfd.a[targets.o]:
 bfd_default_vector G 00000004 00000008
 bfd_elf32_big_generic_vec U         
 bfd_elf32_little_generic_vec U         
@@ -482,7 +482,7 @@ srec_vec U
 strcmp U         
 symbolsrec_vec U         
 tekhex_vec U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[hash.o]:
+libbfd.a[hash.o]:
 _bfd_abort U         
 bfd_bwrite U         
 bfd_hash_allocate T 000003f0 000000ac
@@ -509,7 +509,7 @@ objalloc_create U
 objalloc_free U         
 strcmp U         
 strlen U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[linker.o]:
+libbfd.a[linker.o]:
 _bfd_abort U         
 bfd_abs_section U         
 bfd_alloc U         
@@ -574,7 +574,7 @@ sprintf U
 strcat U         
 strcmp U         
 strlen U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[srec.o]:
+libbfd.a[srec.o]:
 bfd_0l U         
 bfd_abs_section U         
 bfd_alloc U         
@@ -648,7 +648,7 @@ srec_vec R 000000fc 0000017c
 strcpy U         
 strlen U         
 symbolsrec_vec R 00000284 0000017c
-/tftpboot/powerpc-rtems//lib/libbfd.a[binary.o]:
+libbfd.a[binary.o]:
 bfd_0l U         
 bfd_abs_section U         
 bfd_alloc U         
@@ -704,7 +704,7 @@ binary_vec R 00000080 0000017c
 _sch_istable U         
 sprintf U         
 strlen U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[tekhex.o]:
+libbfd.a[tekhex.o]:
 _bfd_abort U         
 bfd_alloc U         
 bfd_assert U         
@@ -762,7 +762,7 @@ _hex_value U
 memcpy U         
 strlen U         
 tekhex_vec R 0000018c 0000017c
-/tftpboot/powerpc-rtems//lib/libbfd.a[ihex.o]:
+libbfd.a[ihex.o]:
 bfd_0l U         
 bfd_alloc U         
 bfd_archive_filename U         
@@ -821,7 +821,7 @@ _sch_istable U
 sprintf U         
 strcpy U         
 strlen U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[stabs.o]:
+libbfd.a[stabs.o]:
 bfd_abs_section U         
 bfd_alloc U         
 bfd_archive_filename U         
@@ -851,9 +851,9 @@ _bfd_write_stab_strings T 00000d60 000000fc
 free U         
 memset U         
 _sch_istable U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[stab-syms.o]:
+libbfd.a[stab-syms.o]:
 bfd_get_stab_name T 00000000 000002a0
-/tftpboot/powerpc-rtems//lib/libbfd.a[merge.o]:
+libbfd.a[merge.o]:
 _bfd_abort U         
 bfd_alloc U         
 bfd_bwrite U         
@@ -877,7 +877,7 @@ htab_find_slot_with_hash U
 memcmp U         
 qsort U         
 strcmp U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[dwarf2.o]:
+libbfd.a[dwarf2.o]:
 _bfd_abort U         
 bfd_alloc U         
 bfd_assert U         
@@ -896,7 +896,7 @@ free U
 memcmp U         
 strchr U         
 strlen U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[archive64.o]:
+libbfd.a[archive64.o]:
 bfd_alloc U         
 bfd_bread U         
 bfd_bwrite U         
@@ -916,7 +916,7 @@ memset U
 sprintf U         
 strlen U         
 time U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[elf32-ppc.o]:
+libbfd.a[elf32-ppc.o]:
 _bfd_abort U         
 bfd_abs_section U         
 _bfd_archive_coff_construct_extended_name_table U         
@@ -1049,7 +1049,7 @@ memset U
 qsort U         
 strcmp U         
 strlen U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[elf32.o]:
+libbfd.a[elf32.o]:
 basename U         
 _bfd_abort U         
 bfd_abs_section U         
@@ -1198,7 +1198,7 @@ strchr U
 strcmp U         
 strlen U         
 strrchr U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[elf.o]:
+libbfd.a[elf.o]:
 atoi U         
 _bfd_abort U         
 bfd_abs_section U         
@@ -1363,7 +1363,7 @@ strcmp U
 strlen U         
 strncmp U         
 __swbuf U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[elflink.o]:
+libbfd.a[elflink.o]:
 bfd_abs_section U         
 bfd_alloc U         
 _bfd_elf_create_dynamic_sections T 000001ec 000002a8
@@ -1394,7 +1394,7 @@ elf_link_record_local_dynamic_symbol T 00000620 000001f8
 free U         
 memcpy U         
 strchr U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[elf-strtab.o]:
+libbfd.a[elf-strtab.o]:
 bfd_assert U         
 bfd_bwrite U         
 _bfd_elf_strtab_add T 00000174 00000120
@@ -1423,7 +1423,7 @@ memcmp U
 memset U         
 qsort U         
 strlen U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[elf-eh-frame.o]:
+libbfd.a[elf-eh-frame.o]:
 bfd_abs_section U         
 bfd_assert U         
 _bfd_elf_discard_section_eh_frame T 000002f8 00000bd8
@@ -1449,7 +1449,7 @@ strchr U
 strcmp U         
 strcpy U         
 strlen U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[dwarf1.o]:
+libbfd.a[dwarf1.o]:
 _bfd_abort U         
 bfd_alloc U         
 _bfd_dwarf1_find_nearest_line T 0000075c 000002c0
@@ -1458,7 +1458,7 @@ bfd_get_section_contents U
 bfd_zalloc U         
 memset U         
 strlen U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[coff-rs6000.o]:
+libbfd.a[coff-rs6000.o]:
 _bfd_abort U         
 bfd_abs_section U         
 bfd_alloc U         
@@ -1594,7 +1594,7 @@ xcoff_reloc_type_pos T 000076e4 00000014
 xcoff_reloc_type_rel T 0000770c 0000003c
 xcoff_reloc_type_toc T 00007748 00000124
 xcoff_rtype2howto T 00003f14 000000dc
-/tftpboot/powerpc-rtems//lib/libbfd.a[xcofflink.o]:
+libbfd.a[xcofflink.o]:
 _bfd_abort U         
 bfd_abs_section U         
 bfd_alloc U         
@@ -1666,7 +1666,7 @@ strcmp U
 strcpy U         
 strlen U         
 strrchr U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[ppcboot.o]:
+libbfd.a[ppcboot.o]:
 bfd_0l U         
 bfd_abs_section U         
 bfd_alloc U         
@@ -1732,7 +1732,7 @@ ppcboot_vec R 000001c0 0000017c
 _sch_istable U         
 sprintf U         
 strlen U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[elf32-gen.o]:
+libbfd.a[elf32-gen.o]:
 _bfd_archive_coff_construct_extended_name_table U         
 bfd_archive_filename U         
 bfd_default_reloc_type_lookup U         
@@ -1826,12 +1826,12 @@ _bfd_slurp_extended_name_table U
 bfd_true U         
 _bfd_write_archive_contents U         
 coff_write_armap U         
-/tftpboot/powerpc-rtems//lib/libbfd.a[cpu-rs6000.o]:
+libbfd.a[cpu-rs6000.o]:
 bfd_assert U         
 bfd_default_compatible U         
 bfd_default_scan U         
 bfd_rs6000_arch R 000000f0 00000030
-/tftpboot/powerpc-rtems//lib/libbfd.a[cpu-powerpc.o]:
+libbfd.a[cpu-powerpc.o]:
 bfd_assert U         
 bfd_default_compatible U         
 bfd_default_scan U         
