@@ -117,7 +117,7 @@ static void
 cmdline2env(void);
 
 int
-queryTerminalSize(int quiet);
+queryTerminalSize(int infoLevel);
 
 rtems_task Init(
   rtems_task_argument ignored
@@ -157,7 +157,7 @@ char	*argv[5]={
    * variables are set as a side effect
    */
   printf("Trying to determine terminal size...\n");
-  queryTerminalSize( 0 /*print info*/);
+  queryTerminalSize( 1 /*print some info*/);
 
   /* stuff command line 'name=value' pairs into the environment */
   cmdline2env();
