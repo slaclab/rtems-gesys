@@ -1,0 +1,5 @@
+
+# Hardwire media setup (disabling autoconfig) to 100Tx-Fullduplex
+SIOCSIFMEDIA=0xc0206937
+media100Tx_F=0x00100026
+rtems_bsdnet_ifconfig("es1",SIOCSIFMEDIA,&media100Tx_F)
