@@ -120,6 +120,10 @@ char	*slash;
 
   rtems_libio_set_private_env();
 
+#ifdef HAVE_BSPEXT_
+  bspExtInit();
+#endif
+
   cexpInit(cexpExcHandlerInstall);
 
   cexpFlashSymLoad(2);

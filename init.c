@@ -191,6 +191,10 @@ char	*argv[5]={
 
   rtems_libio_set_private_env();
 
+#ifdef HAVE_BSPEXT_
+  bspExtInit();
+#endif
+
   rtems_bsdnet_initialize_network(); 
 
   if (rtems_bsdnet_initialize_tftp_filesystem())
