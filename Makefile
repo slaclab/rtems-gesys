@@ -32,7 +32,7 @@ S_O_FILES=$(S_FILES:%.S=${ARCH}/%.o)
 SRCS=$(C_FILES) $(CC_FILES) $(H_FILES) $(S_FILES)
 OBJS=$(C_O_FILES) $(CC_O_FILES) $(S_O_FILES)
 
-PGMS=${ARCH}/rtems.exe
+PGMS=${ARCH}/rtems.exe st.sys
 
 # List of RTEMS managers to be included in the application goes here.
 # Use:
@@ -40,18 +40,41 @@ PGMS=${ARCH}/rtems.exe
 # to include all RTEMS managers in the application.
 MANAGERS=all
 
-include $(RTEMS_MAKEFILE_PATH)/Makefile.inc
 
+include $(RTEMS_MAKEFILE_PATH)/Makefile.inc
 include $(RTEMS_CUSTOM)
 include $(RTEMS_ROOT)/make/leaf.cfg
+#include f
+
 
 #
 # (OPTIONAL) Add local stuff here using +=
 #
+LINK.c = $(LINK.cc)
+LD_PATHS+=/afs/slac/g/spear/rtemsApplications/i386-rtems/lib
 
-DEFINES  +=
+ELFEXT = exe
 
-CPPFLAGS += -I. -I/afs/slac/package/rtems/prod/rtems/powerpc-rtems/include 
+ifeq  "$(RTEMS_BSP)" "svgm" 
+DEFINES  += -DHAVE_BSP_EXCEPTION_EXTENSION
+endif
+DEFINES  += -DUSE_POSIX
+
+ifeq "$(RTEMS_BSP)" "mvme2307"
+DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_NAME=\"dc1\"
+DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_ATTACH=rtems_dec21140_driver_attach
+ELFEXT    = nxe
+endif
+
+ifeq "$(RTEMS_BSP)" "pc386"
+DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_NAME=\"fxp1\"
+DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_ATTACH=rtems_fxp_attach
+ELFEXT    = obj
+endif
+
+
+
+CPPFLAGS += -I.
 CFLAGS   += -O2
 
 #
@@ -61,10 +84,12 @@ CFLAGS   += -O2
 # CFLAGS_DEBUG_V += -qrtems_debug
 #
 
-LD_PATHS  += /home/till/slac/cexp/build-ppc-rtems /afs/slac/package/rtems/prod/rtems/powerpc-rtems/lib /home/till/rtems/apps/libtecla/build-ppc-rtems
-#LD_LIBS   += -Wl,--whole-archive -lcexp -lbfd -lregexp -lopcodes -liberty -lrtemscpu -lrtemsbsp  -lc
-LD_LIBS   += -lcexp -lbfd -lregexp -lopcodes -liberty -ltecla_r -Wl,-T,symlist.lds  -lm
-LDFLAGS   += -Wl,-u,inet_pton
+#LD_PATHS  += /afs/slac/u/qa/strauman/cexp/build-ppc-rtems
+#LD_LIBS   += -Wl,--whole-archive -lcexp -lbfd -lspencer_regexp -lopcodes -liberty -lrtemscpu -lrtemsbsp  -lc
+LD_LIBS   += -lcexp -lbfd -lspencer_regexp -lopcodes -liberty -ltecla_r -lm -lbspExt
+#LDFLAGS   += -Wl,-T,symlist.lds
+LDFLAGS    += -L$(prefix)/$(RTEMS_CPU)-rtems/lib
+OBJS       += $(ARCH)/allsyms.o
 
 tst:
 	echo $(LINK.c)
@@ -84,11 +109,27 @@ CLOBBER_ADDITIONS +=
 
 all:	${ARCH} $(SRCS) $(PGMS)
 
+$(ARCH)/allsyms.o:	symlist.lds $(ARCH)/empty.o config/*
+	$(LD) -Tsymlist.lds -r -o $@ $(ARCH)/empty.o
+
+$(ARCH)/empty.o:
+	touch $(@:%.o=%.c)
+	$(CC) -c -O -o $@ $(@:%.o=%.c)
+
+init.c: builddate.c
+
+builddate.c:
+	echo 'static char *system_build_date="'`date +%Y%m%d%Z%T`'";' > $@
+
 $(filter %.exe,$(PGMS)): ${OBJS} ${LINK_FILES}
 	$(make-exe)
-	xsyms $@ $(@:%.exe=%.sym)
+	xsyms $(@:%.exe=%.$(ELFEXT)) $(@:%.exe=%.sym)
+
+ifndef RTEMS_SITE_INSTALLDIR
+RTEMS_SITE_INSTALLDIR = $(PROJECT_RELEASE)
+endif
 
 # Install the program(s), appending _g or _p as appropriate.
 # for include files, just use $(INSTALL_CHANGE)
 install:  all
-	$(INSTALL_VARIANT) -m 555 ${PGMS} ${PROJECT_RELEASE}/bin
+	$(INSTALL_VARIANT) -m 555 ${PGMS} ${PGMS:%.exe=%.bin} ${PGMS:%.exe=%.sym} ${RTEMS_SITE_INSTALLDIR}/$(RTEMS_BSP)/bin

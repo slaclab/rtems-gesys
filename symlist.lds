@@ -17,3 +17,4 @@ INCLUDE config/libstdc++.scr
 INCLUDE config/libgcc.scr
 INCLUDE config/libtecla_r.scr
 INCLUDE config/librdbg.scr
+INCLUDE config/libsupc++.scr

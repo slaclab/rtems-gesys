@@ -61,7 +61,7 @@ cexpExcHandlerInstall(void (*handler)(int))
 		/* we use cexp_kill() directly; no need
 		 * for the handler arg
 		 */
-		BSP_exceptionHandlerInstall(&excExt);
+        BSP_exceptionHandlerInstall(&excExt);
 }
 #else
 #define cexpExcHandlerInstall 0

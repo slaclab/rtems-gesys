@@ -558,6 +558,7 @@ EXTERN(_IO_popen)
 EXTERN(_IO_proc_close)
 EXTERN(_IO_proc_jumps)
 EXTERN(_IO_proc_open)
+vfork = 0;
 /* ioungetc.o: */
 EXTERN(_IO_ungetc)
 /* peekc.o: */

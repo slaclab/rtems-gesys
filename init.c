@@ -20,12 +20,13 @@
  *  $Id$
  */
 #include <bsp.h>
-#include <bsp/irq.h>
+// I386 #include <bsp/irq.h>
 #include <stdio.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #include <rtems/rtems_bsdnet.h>
 #include <rtems/libio.h>
@@ -35,12 +36,14 @@
 
 #include <cexp.h>
 
+//#include "hack.c"
+#include "builddate.c"
+
 #ifdef HAVE_BSPEXT_
 #include <bspExt.h>
 #endif
 
-#define HAVE_BSP_EXCEPTION_EXTENSION /* SVGM has it */
-#ifdef HAVE_BSP_EXCEPTION_EXTENSION
+#if defined(HAVE_BSP_EXCEPTION_EXTENSION)
 #include <bsp/bspException.h>
 
 static void
@@ -67,10 +70,15 @@ cexpExcHandlerInstall(void (*handler)(int))
 #define cexpExcHandlerInstall 0
 #endif
 
+#if 0
 #include <bsp/vmeUniverse.h>
+#endif
 
 #define BOOTPF rtems_bsdnet_bootp_boot_file_name
 #define SYSSCRIPT	"st.sys"
+
+static void
+cmdline2env(void);
 
 rtems_task Init(
   rtems_task_argument ignored
@@ -95,12 +103,17 @@ char	*argv[5]={
   if (rtems_bsdnet_initialize_tftp_filesystem())
 	perror("TFTP FS initialization failed");
 
+  printf("This system (ss-20021007) was built on %s\n",system_build_date);
+
   printf("Trying to synchronize NTP...");
   fflush(stdout);
   if (rtems_bsdnet_synchronize_ntp(0,0)<0)
 	printf("FAILED\n");
   else
 	printf("OK\n");
+
+  /* stuff command line 'name=value' pairs into the environment */
+  cmdline2env();
 
   cexpInit(cexpExcHandlerInstall);
 
@@ -178,4 +191,76 @@ char	*argv[5]={
   fprintf(stderr,"Unable to execute CEXP - suspending initialization...\n");
   rtems_task_suspend(RTEMS_SELF);
   exit( 1 );
+}
+
+static void
+cmdline2env(void)
+{
+char *buf = 0;
+
+char *beg,*end;
+
+	/* make a copy we may modify */
+	buf = strdup(rtems_bsdnet_bootp_cmdline);
+
+	/* find 'name=' tags */
+
+	/* this algorithm is copied from the svgm BSP (startup/bspstart.c) */
+	for (beg=buf; beg; beg=end) {
+		/* skip whitespace */
+		while (' '==*beg) {
+			if (!*++beg) {
+			/* end of string reached; bail out */
+				goto done;
+			}
+		}
+		/* simple algorithm to find the end of quoted 'name=quoted'
+		 * 			 * substrings. As a side effect, quotes are removed from
+		 * 			 			 * the value.
+		 * 			 			 			 */
+		if ( (end = strchr(beg,'=')) ) {
+			char *dst;
+
+			/* eliminate whitespace between variable name and '=' */
+			for (dst=end; dst>beg; ) {
+					dst--;
+					if (!isspace(*dst)) {
+						dst++;
+						break;
+					}
+			}
+
+			beg = memmove(beg + (end-dst), beg, dst-beg);
+
+			/* now unquote the value */
+			if ('\'' == *++end) {
+				/* end points to the 1st char after '=' which is a '\'' */
+
+				dst = end++;
+
+				/* end points to 1st char after '\'' */
+
+				while ('\'' != *end || '\'' == *++end) {
+					if ( 0 == (*dst++=*end++) ) {
+						/* NO TERMINATING QUOTE FOUND
+						 * (for a properly quoted string we
+						 * should never get here)
+						 */
+						end = 0;
+						dst--;
+						break;
+					}
+				}
+				*dst = 0;
+			} else {
+				/* first space terminates non-quoted strings */
+				if ( (end = strchr(end,' ')) )
+					*(end++)=0;
+			}
+			putenv(beg);
+		}
+
+	}
+done:
+	free(buf);
 }
