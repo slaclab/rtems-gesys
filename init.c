@@ -481,6 +481,10 @@ firstTimeEntry:
 
 	getDfltSrv( &dfltSrv );
 
+#ifdef TFTP_SUPPORT
+	chdir("/TFTP/BOOTP_HOST/");
+#endif
+
 	switch ( pathType(pathspec) ) {
 		case LOCAL_PATH:
 			fd = open(pathspec,O_RDONLY);			
