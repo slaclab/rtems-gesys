@@ -3,12 +3,17 @@ ld    = cexpModuleLoad
 unld  = cexpModuleUnload
 lsmod = cexpModuleInfo
 # start the portmapper with a priority argument
-ld("watchdog.obj")
 rtems_rpc_start_portmapper(50)
-#wdStart()
+# SVGM watchdog -- initialize BSP specific
+# things prior to chdir into common dir
+#ld("watchdog.obj") # && wdStart()
 chdir("../../bin/")
-ld("telnetd.obj") && startTelnetd()
+# set telnet password to 'rtems'
+setenv("TELNETD_PASSWD","tdH/UvyAt6kUM")
+ld("telnetd.obj") && startTelnetd(0,0,0,0,0)
 ld("monitor.obj")
+ld("miscUtils.obj")
+ld("ntpclock.obj") && rtemsNtpInitialize(0,0)
+# set timezone
 setenv("TZ","PST8PDT",1)
-setenv("TELNETD_PASSWD","ms1w/HcQ.Z7Rg")
 tzset()
