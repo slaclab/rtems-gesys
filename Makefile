@@ -159,6 +159,7 @@ USE_NFS    = NO
 USE_RSH    = NO
 C_PIECES  += bug_disk
 DEFINES   += -DPSIM
+INSTFILES += psim_tree.gesys
 endif
 
 ifeq "$(RTEMS_BSP_FAMILY)" "motorola_powerpc"
@@ -304,7 +305,7 @@ endif
 $(RTEMS_SITE_INSTALLDIR)/bin:
 	test -d $@ || mkdir -p $@
 
-INSTFILES = ${PGMS} ${PGMS:%.exe=%.$(ELFEXT)} ${PGMS:%.exe=%.bin} ${PGMS:%.exe=%.sym}
+INSTFILES += ${PGMS} ${PGMS:%.exe=%.$(ELFEXT)} ${PGMS:%.exe=%.bin} ${PGMS:%.exe=%.sym}
 
 # How to build a  tarball of this package
 REVISION=$(filter-out $$%,$$Name$$)
