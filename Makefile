@@ -166,7 +166,7 @@ OBJS      += ${ARCH}/allsyms.o
 CLEAN_ADDITIONS   += builddate.c nvram.c
 CLOBBER_ADDITIONS +=
 
-all: myspec bspcheck libnms ${ARCH} $(SRCS) $(PGMS)
+all: bspcheck libnms ${ARCH} $(SRCS) $(PGMS)
 
 # We want to have the build date compiled in...
 $(ARCH)/init.o: builddate.c
@@ -249,10 +249,14 @@ $(ARCH)/startfiles.nm: $(ARCH)/gcc-startfiles.o
 $(ARCH)/app.nm: $(filter-out $(ARCH)/allsyms.o,$(OBJS))
 	$(NM) -g -fposix $^ > $@
 
-myspec:
-	$(RM) $@
-	echo '*linker:' >$@
-	echo "`pwd`/mylink" >>$@
+# NOTE: must not make 'myspec'! Otherwise, the first
+#       'make' won't find it when interpreting the makefile.
+#
+#myspec:
+#	$(RM) $@
+#	echo '*linker:' >$@
+#	echo "`pwd`/mylink" >>$@
+#
 
 THELIBS:=$(shell $(LINK.cc) $(AM_CFLAGS) $(AM_LDFLAGS) $(LINK_LIBS) -specs=myspec)
 
