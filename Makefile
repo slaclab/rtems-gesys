@@ -8,11 +8,13 @@
 # driver is AFAIK non-ANSI and too dumb to be used by tecla.
 # Don't forget to configure Cexp with --disable-tecla in this
 # case...
+# UPDATE: I just filed PR#502 to RTEMS-4.6.0pre4 - if you
+#         have this, libtecla should work fine (2003/9/26)
 # On a PC, you may have to use a different network driver
 # also; YMMV. The value must be 'YES' or 'NO' (no quotes) 
 USE_TECLA  = YES
 # Whether to use the libbspExt library. This is always
-# disabled on pcx86 BSPs.
+# (automagically) disabled on pcx86 BSPs.
 USE_BSPEXT = YES
 
 # Optional libraries to add, i.e. functionality you
