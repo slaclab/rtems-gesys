@@ -1,2 +1,2 @@
 *linker:
-/afs/slac/g/spear/rtemsApplications/test/rtemsApplications/system/mylink
+./mylink
