@@ -37,9 +37,10 @@
 #VPATH = $(RTEMS)/rtems/powerpc-rtems/svgm/lib:$(RTEMS)/rtems/powerpc-rtems/lib:$(RTEMS)/tools/i386_linux2x/powerpc-rtems/lib:$(RTEMS)/tools/i386_linux2x/lib/gcc-lib/powerpc-rtems/2.95.3/
 
 CORELIBS = libgcc.a libstdc++.a libc.a libm.a librtemsbsp.a librtems++.a librtemscpu.a
+SITELIBS = libbspExt.a
 
-VPATH    = /home/till/rtems/sandbox/rtemsApplications/$(RTEMS_CPU)-rtems/lib
-LIBRS   += libbspExt.a
+VPATH    = $(RTEMS_SITE_INSTALLDIR)
+LIBRS   += $(SITELIBS)
 
 ifneq (XX$(CORELIBS),XX)
 VPATH += $(dir $(foreach lib,$(CORELIBS),$(shell $(CC) -print-file-name=$(lib))))
