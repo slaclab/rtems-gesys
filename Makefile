@@ -51,7 +51,6 @@ include $(RTEMS_ROOT)/make/leaf.cfg
 # (OPTIONAL) Add local stuff here using +=
 #
 LINK.c = $(LINK.cc)
-LD_PATHS+=/afs/slac/g/spear/rtemsApplications/i386-rtems/lib
 
 ELFEXT = exe
 
@@ -84,12 +83,11 @@ CFLAGS   += -O2
 # CFLAGS_DEBUG_V += -qrtems_debug
 #
 
-#LD_PATHS  += /afs/slac/u/qa/strauman/cexp/build-ppc-rtems
 #LD_LIBS   += -Wl,--whole-archive -lcexp -lbfd -lspencer_regexp -lopcodes -liberty -lrtemscpu -lrtemsbsp  -lc
 LD_LIBS   += -lcexp -lbfd -lspencer_regexp -lopcodes -liberty -ltecla_r -lm -lbspExt
 #LDFLAGS   += -Wl,-T,symlist.lds
-LDFLAGS    += -L$(prefix)/$(RTEMS_CPU)-rtems/lib
-OBJS       += $(ARCH)/allsyms.o
+#LDFLAGS    += -L$(prefix)/$(RTEMS_CPU)-rtems/lib
+OBJS      += ${ARCH}/allsyms.o
 
 tst:
 	echo $(LINK.c)
