@@ -1,0 +1,565 @@
+/* abort.o: */
+EXTERN(abort)
+/* abs.o: */
+EXTERN(abs)
+/* __adjust.o: */
+EXTERN(__adjust)
+/* asctime.o: */
+EXTERN(asctime)
+/* asctime_r.o: */
+EXTERN(asctime_r)
+/* assert.o: */
+EXTERN(__assert)
+/* atexit.o: */
+EXTERN(atexit)
+/* atoff.o: */
+EXTERN(atoff)
+/* atof.o: */
+EXTERN(atof)
+/* atoi.o: */
+EXTERN(atoi)
+/* atol.o: */
+EXTERN(atol)
+/* bcmp.o: */
+EXTERN(bcmp)
+/* bcopy.o: */
+EXTERN(bcopy)
+/* bsearch.o: */
+EXTERN(bsearch)
+/* bzero.o: */
+EXTERN(bzero)
+/* calloc.o: */
+EXTERN(_dummy_calloc)
+/* callocr.o: */
+EXTERN(_dummy_mallocr)
+/* cfreer.o: */
+EXTERN(_dummy_mallocr)
+/* clearerr.o: */
+EXTERN(clearerr)
+/* clock.o: */
+EXTERN(clock)
+/* closer.o: */
+/* ctime.o: */
+EXTERN(ctime)
+/* ctime_r.o: */
+EXTERN(ctime_r)
+/* ctype_.o: */
+EXTERN(_ctype_)
+/* difftime.o: */
+EXTERN(difftime)
+/* div.o: */
+EXTERN(div)
+/* dprintf.o: */
+EXTERN(__dprintf)
+/* dtoa.o: */
+EXTERN(_dtoa_r)
+/* dtoastub.o: */
+EXTERN(__dtoa)
+/* dummysys.o: */
+EXTERN(not_required_by_rtems)
+/* ecvtbuf.o: */
+EXTERN(_dcvt)
+EXTERN(_gcvt)
+EXTERN(ecvtbuf)
+EXTERN(fcvtbuf)
+/* efgcvt.o: */
+EXTERN(ecvt)
+EXTERN(ecvtf)
+EXTERN(fcvt)
+EXTERN(fcvtf)
+EXTERN(gcvt)
+EXTERN(gcvtf)
+/* environ.o: */
+EXTERN(environ)
+/* envlock.o: */
+EXTERN(__env_lock)
+EXTERN(__env_unlock)
+/* eprintf.o: */
+EXTERN(__eprintf)
+/* errno.o: */
+EXTERN(__errno)
+/* execr.o: */
+EXTERN(_dummy_exec_syscalls)
+/* exit.o: */
+EXTERN(exit)
+/* __exp10.o: */
+EXTERN(__exp10)
+/* fclose.o: */
+EXTERN(fclose)
+/* fdopen.o: */
+EXTERN(_fdopen_r)
+EXTERN(fdopen)
+/* feof.o: */
+EXTERN(feof)
+/* ferror.o: */
+EXTERN(ferror)
+/* fflush.o: */
+EXTERN(fflush)
+/* ffs.o: */
+EXTERN(ffs)
+/* fgetc.o: */
+EXTERN(fgetc)
+/* fgetpos.o: */
+EXTERN(fgetpos)
+/* fgets.o: */
+EXTERN(fgets)
+/* fileno.o: */
+EXTERN(fileno)
+/* findfp.o: */
+EXTERN(__sfmoreglue)
+EXTERN(__sfp)
+EXTERN(__sinit)
+EXTERN(_cleanup)
+EXTERN(_cleanup_r)
+/* fiprintf.o: */
+EXTERN(fiprintf)
+/* flags.o: */
+EXTERN(__sflags)
+/* fopen.o: */
+EXTERN(_fopen_r)
+EXTERN(fopen)
+/* fprintf.o: */
+EXTERN(fprintf)
+/* fputc.o: */
+EXTERN(fputc)
+/* fputs.o: */
+EXTERN(fputs)
+/* fread.o: */
+EXTERN(fread)
+/* freer.o: */
+EXTERN(_dummy_mallocr)
+/* freopen.o: */
+EXTERN(freopen)
+/* fscanf.o: */
+EXTERN(fscanf)
+/* fseek.o: */
+EXTERN(fseek)
+/* fsetpos.o: */
+EXTERN(fsetpos)
+/* fstatr.o: */
+EXTERN(_dummy_fstat_syscalls)
+/* ftell.o: */
+EXTERN(ftell)
+/* fvwrite.o: */
+EXTERN(__sfvwrite)
+/* fwalk.o: */
+EXTERN(_fwalk)
+/* fwrite.o: */
+EXTERN(fwrite)
+/* getchar.o: */
+EXTERN(_getchar_r)
+EXTERN(getchar)
+/* getc.o: */
+EXTERN(getc)
+/* getenv.o: */
+EXTERN(_findenv)
+EXTERN(getenv)
+/* getenv_r.o: */
+EXTERN(_findenv_r)
+EXTERN(_getenv_r)
+/* getopt.o: */
+EXTERN(getopt)
+EXTERN(optarg)
+EXTERN(opterr)
+EXTERN(optind)
+EXTERN(optopt)
+EXTERN(optreset)
+/* gets.o: */
+EXTERN(_gets_r)
+EXTERN(gets)
+/* getw.o: */
+EXTERN(getw)
+/* gmtime.o: */
+EXTERN(gmtime)
+/* gmtime_r.o: */
+EXTERN(gmtime_r)
+/* impure.o: */
+EXTERN(_impure_ptr)
+/* index.o: */
+EXTERN(index)
+/* iprintf.o: */
+EXTERN(_iprintf_r)
+EXTERN(iprintf)
+/* isalnum.o: */
+EXTERN(isalnum)
+/* isalpha.o: */
+EXTERN(isalpha)
+/* isascii.o: */
+EXTERN(isascii)
+/* iscntrl.o: */
+EXTERN(iscntrl)
+/* isdigit.o: */
+EXTERN(isdigit)
+/* islower.o: */
+EXTERN(islower)
+/* isprint.o: */
+EXTERN(isgraph)
+EXTERN(isprint)
+/* ispunct.o: */
+EXTERN(ispunct)
+/* isspace.o: */
+EXTERN(isspace)
+/* isupper.o: */
+EXTERN(isupper)
+/* isxdigit.o: */
+EXTERN(isxdigit)
+/* labs.o: */
+EXTERN(labs)
+/* lcltime.o: */
+EXTERN(localtime)
+/* lcltime_r.o: */
+EXTERN(localtime_r)
+/* ldiv.o: */
+EXTERN(ldiv)
+/* ldtoa.o: */
+EXTERN(_ldcheck)
+EXTERN(_ldtoa_r)
+EXTERN(_strtold)
+/* linkr.o: */
+EXTERN(_dummy_link_syscalls)
+/* locale.o: */
+EXTERN(__mb_cur_max)
+EXTERN(_localeconv_r)
+EXTERN(_setlocale_r)
+EXTERN(localeconv)
+EXTERN(setlocale)
+/* lseekr.o: */
+/* makebuf.o: */
+EXTERN(__smakebuf)
+/* malign.o:
+EXTERN(memalign) */
+/* malignr.o: */
+EXTERN(_dummy_mallocr)
+/* mallinfor.o: */
+EXTERN(_dummy_mallocr)
+/* malloc.o: */
+EXTERN(_dummy_malloc)
+/* mallocr.o: */
+EXTERN(_dummy_mallocr)
+/* malloptr.o: */
+EXTERN(_dummy_mallocr)
+/* mallstatsr.o: */
+EXTERN(_dummy_mallocr)
+/* mblen.o: */
+EXTERN(mblen)
+/* mblen_r.o: */
+EXTERN(_mblen_r)
+/* mbstowcs.o: */
+EXTERN(mbstowcs)
+/* mbstowcs_r.o: */
+EXTERN(_mbstowcs_r)
+/* mbtowc.o: */
+EXTERN(mbtowc)
+/* mbtowc_r.o: */
+EXTERN(_mbtowc_r)
+/* memchr.o: */
+EXTERN(memchr)
+/* memcmp.o: */
+EXTERN(memcmp)
+/* memcpy.o: */
+EXTERN(memcpy)
+/* memmove.o: */
+EXTERN(memmove)
+/* memset.o: */
+EXTERN(memset)
+/* mktemp.o: */
+EXTERN(_mkstemp_r)
+EXTERN(_mktemp_r)
+EXTERN(mkstemp)
+EXTERN(mktemp)
+/* mktime.o: */
+EXTERN(mktime)
+/* mlock.o: */
+EXTERN(__malloc_lock)
+EXTERN(__malloc_unlock)
+/* mprec.o: */
+EXTERN(_Balloc)
+EXTERN(_Bfree)
+EXTERN(__mcmp)
+EXTERN(__mdiff)
+EXTERN(__mprec_bigtens)
+EXTERN(__mprec_tens)
+EXTERN(__mprec_tinytens)
+EXTERN(_b2d)
+EXTERN(_d2b)
+EXTERN(_hi0bits)
+EXTERN(_i2b)
+EXTERN(_lo0bits)
+EXTERN(_lshift)
+EXTERN(_mprec_log10)
+EXTERN(_multadd)
+EXTERN(_multiply)
+EXTERN(_pow5mult)
+EXTERN(_ratio)
+EXTERN(_s2b)
+EXTERN(_ulp)
+/* msize.o:
+EXTERN(malloc_usable_size) */
+/* msizer.o: */
+EXTERN(_dummy_mallocr)
+/* mstats.o: */
+EXTERN(_dummy_mstats)
+/* mtrim.o:
+EXTERN(malloc_trim) */
+/* openr.o: */
+/* perror.o: */
+EXTERN(_perror_r)
+EXTERN(perror)
+/* printf.o: */
+EXTERN(_printf_r)
+EXTERN(printf)
+/* putchar.o: */
+EXTERN(_putchar_r)
+EXTERN(putchar)
+/* putc.o: */
+EXTERN(putc)
+/* putenv.o: */
+EXTERN(putenv)
+/* putenv_r.o: */
+EXTERN(_putenv_r)
+/* puts.o: */
+EXTERN(_puts_r)
+EXTERN(puts)
+/* putw.o: */
+EXTERN(putw)
+/* pvallocr.o: */
+EXTERN(_dummy_mallocr)
+/* qsort.o: */
+EXTERN(qsort)
+/* raise.o: */
+EXTERN(_raise_r)
+EXTERN(raise)
+/* rand.o: */
+EXTERN(rand)
+EXTERN(srand)
+/* rand_r.o: */
+EXTERN(rand_r)
+/* readr.o: */
+/* realloc.o: */
+EXTERN(_dummy_calloc)
+/* reallocr.o: */
+EXTERN(_dummy_mallocr)
+/* reent.o: */
+EXTERN(_reclaim_reent)
+EXTERN(_wrapup_reent)
+EXTERN(cleanup_glue)
+/* refill.o: */
+EXTERN(__srefill)
+/* remove.o: */
+EXTERN(_remove_r)
+EXTERN(remove)
+/* rename.o: */
+EXTERN(_rename_r)
+EXTERN(rename)
+/* rewind.o: */
+EXTERN(rewind)
+/* rget.o: */
+EXTERN(__srget)
+/* rindex.o: */
+EXTERN(rindex)
+/* sbrkr.o: */
+EXTERN(_dummy_sbrk_syscalls)
+/* scanf.o: */
+EXTERN(_scanf_r)
+EXTERN(scanf)
+/* s_copysign.o: */
+EXTERN(copysign)
+/* setbuf.o: */
+EXTERN(setbuf)
+/* setenv.o: */
+EXTERN(setenv)
+EXTERN(unsetenv)
+/* setenv_r.o: */
+EXTERN(_setenv_r)
+EXTERN(_unsetenv_r)
+/* setjmp.o: */
+EXTERN(longjmp)
+EXTERN(setjmp)
+/* setvbuf.o: */
+EXTERN(setvbuf)
+/* sf_copysign.o: */
+EXTERN(copysignf)
+/* sf_finite.o: */
+EXTERN(finitef)
+/* sf_frexp.o: */
+EXTERN(frexpf)
+/* s_finite.o: */
+EXTERN(finite)
+/* sf_isinf.o: */
+EXTERN(isinff)
+/* sf_isnan.o: */
+EXTERN(isnanf)
+/* sf_ldexp.o: */
+EXTERN(ldexpf)
+/* sf_modf.o: */
+EXTERN(modff)
+/* s_frexp.o: */
+EXTERN(frexp)
+/* sf_scalbn.o: */
+EXTERN(scalbnf)
+/* signal.o: */
+EXTERN(_dummy_simulated_signal)
+/* signalr.o: */
+EXTERN(_dummy_link_syscalls)
+/* s_infconst.o: */
+EXTERN(__infinity)
+/* siprintf.o: */
+EXTERN(siprintf)
+/* s_isinf.o: */
+EXTERN(isinf)
+/* s_isnan.o: */
+EXTERN(isnan)
+/* s_ldexp.o: */
+EXTERN(ldexp)
+/* s_modf.o: */
+EXTERN(modf)
+/* snprintf.o: */
+EXTERN(_snprintf_r)
+EXTERN(snprintf)
+/* sprintf.o: */
+EXTERN(_sprintf_r)
+EXTERN(sprintf)
+/* s_scalbn.o: */
+EXTERN(scalbn)
+/* sscanf.o: */
+EXTERN(sscanf)
+/* statr.o: */
+EXTERN(_dummy_stat_syscalls)
+/* stdio.o: */
+EXTERN(__sclose)
+EXTERN(__sread)
+EXTERN(__sseek)
+EXTERN(__swrite)
+/* strcasecmp.o: */
+EXTERN(strcasecmp)
+/* strcat.o: */
+EXTERN(strcat)
+/* strchr.o: */
+EXTERN(strchr)
+/* strcmp.o: */
+EXTERN(strcmp)
+/* strcoll.o: */
+EXTERN(strcoll)
+/* strcpy.o: */
+EXTERN(strcpy)
+/* strcspn.o: */
+EXTERN(strcspn)
+/* strdup.o: */
+EXTERN(strdup)
+/* strdup_r.o: */
+EXTERN(_strdup_r)
+/* strerror.o: */
+EXTERN(strerror)
+/* strftime.o: */
+EXTERN(strftime)
+/* strlen.o: */
+EXTERN(strlen)
+/* strlwr.o: */
+EXTERN(strlwr)
+/* strncasecmp.o: */
+EXTERN(strncasecmp)
+/* strncat.o: */
+EXTERN(strncat)
+/* strncmp.o: */
+EXTERN(strncmp)
+/* strncpy.o: */
+EXTERN(strncpy)
+/* strpbrk.o: */
+EXTERN(strpbrk)
+/* strrchr.o: */
+EXTERN(strrchr)
+/* strspn.o: */
+EXTERN(strspn)
+/* strstr.o: */
+EXTERN(strstr)
+/* strtod.o: */
+EXTERN(_strtod_r)
+EXTERN(strtod)
+EXTERN(strtodf)
+/* strtok.o: */
+EXTERN(strtok)
+/* strtok_r.o: */
+EXTERN(strtok_r)
+/* strtol.o: */
+EXTERN(_strtol_r)
+EXTERN(strtol)
+/* strtoul.o: */
+EXTERN(_strtoul_r)
+EXTERN(strtoul)
+/* strupr.o: */
+EXTERN(strupr)
+/* strxfrm.o: */
+EXTERN(strxfrm)
+/* swab.o: */
+EXTERN(swab)
+/* system.o: */
+EXTERN(_system_r)
+EXTERN(system)
+/* __ten_mu.o: */
+EXTERN(__ten_mul)
+/* time.o: */
+EXTERN(time)
+/* timer.o: */
+EXTERN(_dummy_time_syscalls)
+/* tmpfile.o: */
+EXTERN(_tmpfile_r)
+EXTERN(tmpfile)
+/* tmpnam.o: */
+EXTERN(_tempnam_r)
+EXTERN(_tmpnam_r)
+EXTERN(tempnam)
+EXTERN(tmpnam)
+/* toascii.o: */
+EXTERN(toascii)
+/* _tolower.o: */
+EXTERN(_tolower)
+/* tolower.o: */
+EXTERN(tolower)
+/* _toupper.o: */
+EXTERN(_toupper)
+/* toupper.o: */
+EXTERN(toupper)
+/* unctrl.o: */
+EXTERN(__unctrl)
+EXTERN(__unctrllen)
+/* ungetc.o: */
+EXTERN(__submore)
+EXTERN(ungetc)
+/* unlinkr.o: */
+/* u_strerr.o: */
+EXTERN(_user_strerror)
+/* valloc.o:
+EXTERN(pvalloc)
+EXTERN(valloc) */
+/* vallocr.o:
+EXTERN(_dummy_mallocr) */
+/* vfiprintf.o: */
+EXTERN(_vfiprintf_r)
+EXTERN(vfiprintf)
+/* vfprintf.o: */
+EXTERN(_vfprintf_r)
+EXTERN(vfprintf)
+/* vfscanf.o: */
+EXTERN(__sccl)
+EXTERN(__svfscanf)
+/* vprintf.o: */
+EXTERN(vprintf)
+/* vsnprintf.o: */
+EXTERN(vsnprintf)
+EXTERN(vsnprintf_r)
+/* vsprintf.o: */
+EXTERN(vsprintf)
+EXTERN(vsprintf_r)
+/* wbuf.o: */
+EXTERN(__swbuf)
+/* wcstombs.o: */
+EXTERN(wcstombs)
+/* wcstombs_r.o: */
+EXTERN(_wcstombs_r)
+/* wctomb.o: */
+EXTERN(wctomb)
+/* wctomb_r.o: */
+EXTERN(_wctomb_r)
+/* writer.o: */
+/* wsetup.o: */
+EXTERN(__swsetup)

@@ -1,0 +1,338 @@
+/* e_acosh.o: */
+EXTERN(__ieee754_acosh)
+/* e_acos.o: */
+EXTERN(__ieee754_acos)
+/* e_asin.o: */
+EXTERN(__ieee754_asin)
+/* e_atan2.o: */
+EXTERN(__ieee754_atan2)
+/* e_atanh.o: */
+EXTERN(__ieee754_atanh)
+/* e_cosh.o: */
+EXTERN(__ieee754_cosh)
+/* e_exp.o: */
+EXTERN(__ieee754_exp)
+/* ef_acosh.o: */
+EXTERN(__ieee754_acoshf)
+/* ef_acos.o: */
+EXTERN(__ieee754_acosf)
+/* ef_asin.o: */
+EXTERN(__ieee754_asinf)
+/* ef_atan2.o: */
+EXTERN(__ieee754_atan2f)
+/* ef_atanh.o: */
+EXTERN(__ieee754_atanhf)
+/* ef_cosh.o: */
+EXTERN(__ieee754_coshf)
+/* ef_exp.o: */
+EXTERN(__ieee754_expf)
+/* ef_fmod.o: */
+EXTERN(__ieee754_fmodf)
+/* ef_hypot.o: */
+EXTERN(__ieee754_hypotf)
+/* ef_j0.o: */
+EXTERN(__ieee754_j0f)
+EXTERN(__ieee754_y0f)
+/* ef_j1.o: */
+EXTERN(__ieee754_j1f)
+EXTERN(__ieee754_y1f)
+/* ef_jn.o: */
+EXTERN(__ieee754_jnf)
+EXTERN(__ieee754_ynf)
+/* ef_log10.o: */
+EXTERN(__ieee754_log10f)
+/* ef_log.o: */
+EXTERN(__ieee754_logf)
+/* e_fmod.o: */
+EXTERN(__ieee754_fmod)
+/* ef_pow.o: */
+EXTERN(__ieee754_powf)
+/* ef_remainder.o: */
+EXTERN(__ieee754_remainderf)
+/* ef_rem_pio2.o: */
+EXTERN(__ieee754_rem_pio2f)
+/* ef_scalb.o: */
+EXTERN(__ieee754_scalbf)
+/* ef_sinh.o: */
+EXTERN(__ieee754_sinhf)
+/* ef_sqrt.o: */
+EXTERN(__ieee754_sqrtf)
+/* e_hypot.o: */
+EXTERN(__ieee754_hypot)
+/* e_j0.o: */
+EXTERN(__ieee754_j0)
+EXTERN(__ieee754_y0)
+/* e_j1.o: */
+EXTERN(__ieee754_j1)
+EXTERN(__ieee754_y1)
+/* e_jn.o: */
+EXTERN(__ieee754_jn)
+EXTERN(__ieee754_yn)
+/* e_log10.o: */
+EXTERN(__ieee754_log10)
+/* e_log.o: */
+EXTERN(__ieee754_log)
+/* e_pow.o: */
+EXTERN(__ieee754_pow)
+/* e_remainder.o: */
+EXTERN(__ieee754_remainder)
+/* e_rem_pio2.o: */
+EXTERN(__ieee754_rem_pio2)
+/* erf_gamma.o: */
+EXTERN(__ieee754_gammaf_r)
+/* erf_lgamma.o: */
+EXTERN(__ieee754_lgammaf_r)
+/* er_gamma.o: */
+EXTERN(__ieee754_gamma_r)
+/* er_lgamma.o: */
+EXTERN(__ieee754_lgamma_r)
+/* e_scalb.o: */
+EXTERN(__ieee754_scalb)
+/* e_sinh.o: */
+EXTERN(__ieee754_sinh)
+/* e_sqrt.o: */
+EXTERN(__ieee754_sqrt)
+/* k_cos.o: */
+EXTERN(__kernel_cos)
+/* kf_cos.o: */
+EXTERN(__kernel_cosf)
+/* kf_rem_pio2.o: */
+EXTERN(__kernel_rem_pio2f)
+/* kf_sin.o: */
+EXTERN(__kernel_sinf)
+/* kf_tan.o: */
+EXTERN(__kernel_tanf)
+/* k_rem_pio2.o: */
+EXTERN(__kernel_rem_pio2)
+/* k_sin.o: */
+EXTERN(__kernel_sin)
+/* k_standard.o: */
+EXTERN(__kernel_standard)
+/* k_tan.o: */
+EXTERN(__kernel_tan)
+/* s_asinh.o: */
+EXTERN(asinh)
+/* s_atan.o: */
+EXTERN(atan)
+/* s_cbrt.o: */
+EXTERN(cbrt)
+/* s_ceil.o: */
+EXTERN(ceil)
+/* s_copysign.o: */
+EXTERN(copysign)
+/* s_cos.o: */
+EXTERN(cos)
+/* s_erf.o: */
+EXTERN(erf)
+EXTERN(erfc)
+/* s_expm1.o: */
+EXTERN(expm1)
+/* s_fabs.o: */
+EXTERN(fabs)
+/* sf_asinh.o: */
+EXTERN(asinhf)
+/* sf_atan.o: */
+EXTERN(atanf)
+/* sf_cbrt.o: */
+EXTERN(cbrtf)
+/* sf_ceil.o: */
+EXTERN(ceilf)
+/* sf_copysign.o: */
+EXTERN(copysignf)
+/* sf_cos.o: */
+EXTERN(cosf)
+/* sf_erf.o: */
+EXTERN(erfcf)
+EXTERN(erff)
+/* sf_expm1.o: */
+EXTERN(expm1f)
+/* sf_fabs.o: */
+EXTERN(fabsf)
+/* sf_finite.o: */
+EXTERN(finitef)
+/* sf_floor.o: */
+EXTERN(floorf)
+/* sf_frexp.o: */
+EXTERN(frexpf)
+/* sf_ilogb.o: */
+EXTERN(ilogbf)
+/* sf_infinity.o: */
+EXTERN(infinityf)
+/* s_finite.o: */
+EXTERN(finite)
+/* sf_isinf.o: */
+EXTERN(isinff)
+/* sf_isnan.o: */
+EXTERN(isnanf)
+/* sf_ldexp.o: */
+EXTERN(ldexpf)
+/* sf_log1p.o: */
+EXTERN(log1pf)
+/* sf_logb.o: */
+EXTERN(logbf)
+/* s_floor.o: */
+EXTERN(floor)
+/* sf_modf.o: */
+EXTERN(modff)
+/* sf_nan.o: */
+EXTERN(nanf)
+/* sf_nextafter.o: */
+EXTERN(nextafterf)
+/* s_frexp.o: */
+EXTERN(frexp)
+/* sf_rint.o: */
+EXTERN(rintf)
+/* sf_scalbn.o: */
+EXTERN(scalbnf)
+/* sf_signif.o: */
+EXTERN(significandf)
+/* sf_sin.o: */
+EXTERN(sinf)
+/* sf_tanh.o: */
+EXTERN(tanhf)
+/* sf_tan.o: */
+EXTERN(tanf)
+/* s_ilogb.o: */
+EXTERN(ilogb)
+/* s_infconst.o: */
+EXTERN(__infinity)
+/* s_infinity.o: */
+EXTERN(infinity)
+/* s_isinf.o: */
+EXTERN(isinf)
+/* s_isnan.o: */
+EXTERN(isnan)
+/* s_ldexp.o: */
+EXTERN(ldexp)
+/* s_lib_ver.o: */
+EXTERN(__fdlib_version)
+/* s_log1p.o: */
+EXTERN(log1p)
+/* s_logb.o: */
+EXTERN(logb)
+/* s_matherr.o: */
+EXTERN(matherr)
+/* s_modf.o: */
+EXTERN(modf)
+/* s_nan.o: */
+EXTERN(nan)
+/* s_nextafter.o: */
+EXTERN(nextafter)
+/* s_rint.o: */
+EXTERN(rint)
+/* s_scalbn.o: */
+EXTERN(scalbn)
+/* s_signif.o: */
+EXTERN(significand)
+/* s_sin.o: */
+EXTERN(sin)
+/* s_tanh.o: */
+EXTERN(tanh)
+/* s_tan.o: */
+EXTERN(tan)
+/* w_acosh.o: */
+EXTERN(acosh)
+/* w_acos.o: */
+EXTERN(acos)
+/* w_asin.o: */
+EXTERN(asin)
+/* w_atan2.o: */
+EXTERN(atan2)
+/* w_atanh.o: */
+EXTERN(atanh)
+/* w_cabs.o: */
+EXTERN(cabs)
+/* w_cosh.o: */
+EXTERN(cosh)
+/* w_drem.o: */
+EXTERN(drem)
+/* w_exp.o: */
+EXTERN(exp)
+/* wf_acosh.o: */
+EXTERN(acoshf)
+/* wf_acos.o: */
+EXTERN(acosf)
+/* wf_asin.o: */
+EXTERN(asinf)
+/* wf_atan2.o: */
+EXTERN(atan2f)
+/* wf_atanh.o: */
+EXTERN(atanhf)
+/* wf_cabs.o: */
+EXTERN(cabsf)
+/* wf_cosh.o: */
+EXTERN(coshf)
+/* wf_drem.o: */
+EXTERN(dremf)
+/* wf_exp.o: */
+EXTERN(expf)
+/* wf_fmod.o: */
+EXTERN(fmodf)
+/* wf_gamma.o: */
+EXTERN(gammaf)
+/* wf_hypot.o: */
+EXTERN(hypotf)
+/* wf_j0.o: */
+EXTERN(j0f)
+EXTERN(y0f)
+/* wf_j1.o: */
+EXTERN(j1f)
+EXTERN(y1f)
+/* wf_jn.o: */
+EXTERN(jnf)
+EXTERN(ynf)
+/* wf_lgamma.o: */
+EXTERN(lgammaf)
+/* wf_log10.o: */
+EXTERN(log10f)
+/* wf_log.o: */
+EXTERN(logf)
+/* w_fmod.o: */
+EXTERN(fmod)
+/* wf_pow.o: */
+EXTERN(powf)
+/* wf_remainder.o: */
+EXTERN(remainderf)
+/* wf_scalb.o: */
+EXTERN(scalbf)
+/* wf_sinh.o: */
+EXTERN(sinhf)
+/* wf_sqrt.o: */
+EXTERN(sqrtf)
+/* w_gamma.o: */
+EXTERN(gamma)
+/* w_hypot.o: */
+EXTERN(hypot)
+/* w_j0.o: */
+EXTERN(j0)
+EXTERN(y0)
+/* w_j1.o: */
+EXTERN(j1)
+EXTERN(y1)
+/* w_jn.o: */
+EXTERN(jn)
+EXTERN(yn)
+/* w_lgamma.o: */
+EXTERN(lgamma)
+/* w_log10.o: */
+EXTERN(log10)
+/* w_log.o: */
+EXTERN(log)
+/* w_pow.o: */
+EXTERN(pow)
+/* w_remainder.o: */
+EXTERN(remainder)
+/* wrf_gamma.o: */
+EXTERN(gammaf_r)
+/* wrf_lgamma.o: */
+EXTERN(lgammaf_r)
+/* wr_gamma.o: */
+EXTERN(gamma_r)
+/* wr_lgamma.o: */
+EXTERN(lgamma_r)
+/* w_scalb.o: */
+EXTERN(scalb)
+/* w_sinh.o: */
+EXTERN(sinh)
+/* w_sqrt.o: */
+EXTERN(sqrt)
