@@ -271,7 +271,7 @@ THELIBS:=$(shell $(LINK.cc) $(AM_CFLAGS) $(AM_LDFLAGS) $(LINK_LIBS) -specs=myspe
 
 LIBNMS=$(patsubst %.a,$(ARCH)/%.nm,$(sort $(patsubst -l%,lib%.a,$(filter -l%,$(THELIBS)))))
 
-$(SYMLIST_LDS): $(ARCH)/app.nm $(LIBNMS) $(ARCH)/startfiles.nm $(EXCLUDE_LISTS)
+$(SYMLIST_LDS): $(ARCH)/app.nm $(LIBNMS) $(ARCH)/startfiles.nm $(EXCLUDE_LISTS) $(LDEP)
 	echo $^
 	$(LDEP) -F -l -u $(addprefix -o,$(LIBNMS)) $(addprefix -x,$(EXCLUDE_LISTS)) $(addprefix -o,$(INCLUDE_LISTS)) -e $@ $(filter %.nm,$^) > $(ARCH)/ldep.log
 
