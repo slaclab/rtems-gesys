@@ -138,6 +138,10 @@ bspcheck: $(if $(filter $(RTEMS_BSP_FAMILY),pc386 motorola_powerpc svgm),,bspfai
 
 CPPFLAGS += -I.
 CFLAGS   += -O2
+# Enable the stack checker. Unfortunately, this must be
+# a command line option because some pieces are built into
+# the system configuration table...
+CFLAGS   +=-DSTACK_CHECKER_ON
 
 USE_TECLA_YES_DEFINES  = -DWINS_LINE_DISC -DUSE_TECLA
 
