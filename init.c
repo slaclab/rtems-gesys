@@ -4,7 +4,7 @@
  *
  *  Author: Till Straumann <strauman@slac.stanford.edu>
  *
- *  $Id$
+ *  init.c,v 1.24 2004/11/08 23:10:42 till Exp
  */
 
 /*
@@ -337,8 +337,8 @@ char	*argv[7]={
 
 
   printf("Welcome to RTEMS GeSys\n");
-  printf("This system $Name$ was built on %s\n",system_build_date);
-  printf("$Id$\n");
+  printf("This system SSRL_RTEMS_20041202 was built on %s\n",system_build_date);
+  printf("init.c,v 1.24 2004/11/08 23:10:42 till Exp\n");
 
 #ifdef EARLY_CMDLINE_GET
   {
@@ -375,17 +375,25 @@ goto shell_entry;
 #ifndef CDROM_IMAGE
   if ( BOOTPFN ) {
 	char *slash,*dot;
-	pathspec = malloc(strlen(BOOTPFN) + strlen(SYMEXT) + 1);
+	pathspec = malloc(strlen(BOOTPFN) + (BUILTIN_SYMTAB ? strlen(SYSSCRIPT) : strlen(SYMEXT)) + 1);
 	strcpy(pathspec, BOOTPFN);
 	slash    = strrchr(pathspec,'/');
-	dot      = strrchr(pathspec,'.');
-	if (slash>dot)
-		dot=0;
-	/* substitute suffix */
-	if (dot) {
-		strcpy(dot,SYMEXT);
+
+	if ( BUILTIN_SYMTAB ) {
+ 		if ( slash )
+			strcpy(slash+1,SYSSCRIPT);
+		else
+			strcpy(pathspec,SYSSCRIPT);
 	} else {
-		strcat(pathspec,SYMEXT);
+		dot      = strrchr(pathspec,'.');
+		if (slash>dot)
+			dot=0;
+		/* substitute suffix */
+		if (dot) {
+			strcpy(dot,SYMEXT);
+		} else {
+			strcat(pathspec,SYMEXT);
+		}
 	}
   }
 #else
@@ -394,7 +402,7 @@ goto shell_entry;
 	extern unsigned long gesys_tarfs_image_size;
 	printf("Loading TARFS... %s\n", 
 		rtems_tarfs_load("/tmp", gesys_tarfs_image_start, gesys_tarfs_image_size) ? "FAILED" : "OK");
-	pathspec=strdup("/tmp/rtems.sym");
+	pathspec=strdup(BUILTIN_SYMTAB ? "/tmp/"SYSSCRIPT : "/tmp/rtems.sym");
   }
 #endif
 
@@ -413,7 +421,7 @@ goto shell_entry;
   extern int loadTarImg(int verbose, int lun);
   if ( !pathspec ) {
 	loadTarImg(1, 0);
-	pathspec = strdup("/bin/st.sys");
+	pathspec = strdup("/bin/"SYSSCRIPT);
   }
   }
 #endif
