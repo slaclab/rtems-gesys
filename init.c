@@ -187,6 +187,7 @@ char	*argv[5]={
 	perror("TFTP FS initialization failed");
 
   printf("$Id$\n");
+  printf("Welcome to RTEMS GeSys\n");
   printf("This system $Name$ was built on %s\n",system_build_date);
 
   printf("Trying to synchronize NTP...");

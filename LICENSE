@@ -10,13 +10,13 @@
        Copyright © 2003, Stanford University and
 			 Till Straumann <strauman@slac.stanford.edu>
 
-       The "RTEMS/CEXP generic SYSTEM application" is distributed
+       The "RTEMS/CEXP generic SYSTEM application 'GeSys'" is distributed
        subject to the following license conditions:
 
          SOFTWARE LICENSE AGREEMENT
-         Software: RTEMS/CEXP generic system application
+         Software: RTEMS/CEXP generic system application / GeSys
 
-          1. The "Software", below, refers to the aforementioned system
+          1. The "Software", below, refers to the aforementioned GeSys
              application (in either source code, or binary form and accompanying
              documentation)
 
