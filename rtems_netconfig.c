@@ -44,7 +44,7 @@ static struct rtems_bsdnet_ifconfig loopback_config = {
 #else                                    /* Use NIC provided by BSP */
 # define NIC_NAME   RTEMS_BSP_NETWORK_DRIVER_NAME
 # define NIC_ATTACH RTEMS_BSP_NETWORK_DRIVER_ATTACH
-/* T. Straumann, TSILL, 12/18/2001, added declaration, just in case */
+/* T. Straumann, 12/18/2001, added declaration, just in case */
 extern int
 RTEMS_BSP_NETWORK_DRIVER_ATTACH();
 #endif
