@@ -64,7 +64,7 @@ C_FILES=$(C_PIECES:%=%.c)
 C_O_FILES=$(C_PIECES:%=${ARCH}/%.o)
 
 # C++ source names, if any, go here -- minus the .cc
-CC_PIECES=
+CC_PIECES=gc
 CC_FILES=$(CC_PIECES:%=%.cc)
 CC_O_FILES=$(CC_PIECES:%=${ARCH}/%.o)
 
@@ -159,7 +159,7 @@ LD_LIBS   += $(USE_BSPEXT_$(USE_BSPEXT)_LIB)
 LD_LIBS   += $(OPT_LIBRARIES)
 
 # Produce a linker map to help finding 'undefined symbol' references (README.config)
-LDFLAGS   += -Wl,-Map,$(ARCH)/linkmap
+LDFLAGS   += -Wl,-Map,$(ARCH)/linkmap -Wl,--wrap,free
 
 # this special object contains 'undefined' references for
 # symbols we want to forcibly include. It is automatically
@@ -192,6 +192,7 @@ $(filter %.exe,$(PGMS)): ${LINK_FILES}
 	$(make-exe)
 ifdef ELFEXT
 ifdef XSYMS
+	$(OBJCOPY) --redefine-sym free=__real_free --redefine-sym __wrap_free=free $(@:%.exe=%.$(ELFEXT))
 	$(XSYMS) $(@:%.exe=%.$(ELFEXT)) $(@:%.exe=%.sym)
 endif
 endif
