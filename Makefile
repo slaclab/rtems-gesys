@@ -85,7 +85,7 @@ endif
 
 
 CPPFLAGS += -I.
-CFLAGS   += -O2
+CFLAGS   += -O2 -DWINS_LINE_DISC
 
 #
 # CFLAGS_DEBUG_V are used when the `make debug' target is built.

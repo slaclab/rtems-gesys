@@ -160,7 +160,7 @@ static void
 cmdline2env(void);
 
 int
-queryTerminalSize(int infoLevel);
+ansiTiocGwinszInstall(int slot);
 
 rtems_task Init(
   rtems_task_argument ignored
@@ -196,11 +196,12 @@ char	*argv[5]={
   else
 	printf("OK\n");
 
-  /* try to determine our terminal size (COLUMNS and LINES env.
-   * variables are set as a side effect
+  /*
+   * Install our special line discipline which implements
+   * TIOCGWINSZ
    */
-  printf("Trying to determine terminal size...\n");
-  queryTerminalSize( 1 /*print some info*/);
+  printf("Installing TIOCGWINSZ line discipline: %s.\n",
+		 ansiTiocGwinszInstall(7) ? "failed" : "ok");
 
   /* stuff command line 'name=value' pairs into the environment */
   cmdline2env();
