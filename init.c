@@ -274,12 +274,14 @@ gesys_network_start()
   rpcUdpInit() || nfsInit(0,0);
 #endif
 
-  printf("Trying to synchronize NTP...");
-  fflush(stdout);
-  if (rtems_bsdnet_synchronize_ntp(0,0)<0)
-	printf("FAILED\n");
-  else
-	printf("OK\n");
+  if ( rtems_bsdnet_ntpserver_count > 0 ) {
+  	printf("Trying to synchronize NTP...");
+  	fflush(stdout);
+  	if (rtems_bsdnet_synchronize_ntp(0,0)<0)
+		printf("FAILED\n");
+  	else
+		printf("OK\n");
+  }
 
   /* stuff command line 'name=value' pairs into the environment */
   cmdline2env(rtems_bsdnet_bootp_cmdline);
@@ -406,6 +408,16 @@ goto shell_entry;
 #endif
   getDfltSrv(&dfltSrv);
 
+#ifdef PSIM
+  {
+  extern int loadTarImg(int verbose, int lun);
+  if ( !pathspec ) {
+	loadTarImg(1, 0);
+	pathspec = strdup("/bin/st.sys");
+  }
+  }
+#endif
+
   /* omit prompting for the symbol file */
   if ( pathspec )
   	goto firstTimeEntry;
@@ -463,12 +475,10 @@ firstTimeEntry:
 
 	switch ( pathType(pathspec) ) {
 		case LOCAL_PATH:
-#ifdef CDROM_IMAGE
 			fd = open(pathspec,O_RDONLY);			
 			if ( fd >= 0 )
 				symf = strdup(pathspec);
 		break;
-#endif
 
 
 #ifdef TFTP_SUPPORT
