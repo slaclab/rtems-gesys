@@ -275,12 +275,14 @@ pathcheck.c: nvram/pathcheck.c
 $(filter %.exe,$(PGMS)): ${LINK_FILES}
 	$(make-exe)
 	$(bsp-size-check)
+ifeq "$(USE_BUILTIN_SYMTAB)xx" "NOxx"
 ifdef ELFEXT
 ifdef XSYMS
 ifeq ($(USE_GC),YES)
 	$(OBJCOPY) --redefine-sym free=__real_free --redefine-sym __wrap_free=free $(@:%.exe=%.$(ELFEXT))
 endif
 	$(XSYMS) $(@:%.exe=%.$(ELFEXT)) $(@:%.exe=%.sym)
+endif
 endif
 endif
 
