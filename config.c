@@ -17,7 +17,7 @@
 
 #define CONFIGURE_RTEMS_INIT_TASKS_TABLE
 
-#define CONFIGURE_EXECUTIVE_RAM_SIZE        (2000*1024)
+#define CONFIGURE_EXECUTIVE_RAM_SIZE        (5000*1024)
 #define CONFIGURE_MAXIMUM_TASKS             rtems_resource_unlimited(30)
 #define CONFIGURE_MAXIMUM_SEMAPHORES        rtems_resource_unlimited(500)
 #define CONFIGURE_MAXIMUM_TIMERS            rtems_resource_unlimited(20)
