@@ -61,10 +61,7 @@ cexpExcHandlerInstall(void (*handler)(int))
 		/* we use cexp_kill() directly; no need
 		 * for the handler arg
 		 */
-		rtems_task_set_note(
-				RTEMS_SELF,
-				BSP_EXCEPTION_NOTEPAD,
-				(rtems_unsigned32)&excExt);
+		BSP_exceptionHandlerInstall(&excExt);
 }
 #else
 #define cexpExcHandlerInstall 0
