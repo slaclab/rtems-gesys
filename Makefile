@@ -88,7 +88,6 @@ USE_GC=NO
 # Normal (i.e. non-flash) system which can be net-booted
 USE_TECLA_YES_C_PIECES = term
 C_PIECES=init rtems_netconfig config $(USE_TECLA_$(USE_TECLA)_C_PIECES)
-C_PIECES+=mdbg
 
 # SSRL 4.6.0pre2 compatibility workaround. Obsolete.
 #C_PIECES+=pre2-compat
@@ -208,8 +207,6 @@ CFLAGS   += -O2
 # a command line option because some pieces are built into
 # the system configuration table...
 #CFLAGS   +=-DSTACK_CHECKER_ON
-CFLAGS += -DUSE_WRAP
-CFLAGS += -DDEPTH=15 -DNR_INFOS=30983
 
 USE_TECLA_YES_DEFINES  = -DWINS_LINE_DISC -DUSE_TECLA
 USE_NFS_YES_DEFINES    = -DNFS_SUPPORT
@@ -241,8 +238,6 @@ LD_LIBS   += $(OPT_LIBRARIES)
 # Produce a linker map to help finding 'undefined symbol' references (README.config)
 LDFLAGS_GC_YES = -Wl,--wrap,free
 LDFLAGS   += -Wl,-Map,$(ARCH)/linkmap $(LDFLAGS_GC_$(USE_GC))
-LDFLAGS += -Wl,--wrap,malloc -Wl,--wrap,calloc -Wl,--wrap,realloc -Wl,--wrap,free
-LDFLAGS += -Wl,--wrap,_malloc_r -Wl,--wrap,_calloc_r -Wl,--wrap,_realloc_r -Wl,--wrap,_free_r
 ##LDFLAGS += -Tlinkcmds
 
 # this special object contains 'undefined' references for
