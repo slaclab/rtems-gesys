@@ -97,6 +97,7 @@ DEFINES  += -DUSE_POSIX
 # Trim BSP specific things
 ifeq  "$(RTEMS_BSP_FAMILY)" "svgm" 
 DEFINES  += -DHAVE_BSP_EXCEPTION_EXTENSION
+C_PIECES += nvram
 ifndef ELFEXT
 ELFEXT    = exe
 endif 
@@ -162,7 +163,7 @@ OBJS      += ${ARCH}/allsyms.o
 #  'make clobber' already includes 'make clean'
 #
 
-CLEAN_ADDITIONS   += builddate.c
+CLEAN_ADDITIONS   += builddate.c nvram.c
 CLOBBER_ADDITIONS +=
 
 all: myspec bspcheck libnms ${ARCH} $(SRCS) $(PGMS)
@@ -172,6 +173,9 @@ $(ARCH)/init.o: builddate.c
 
 builddate.c: $(filter-out $(ARCH)/init.o $(ARCH)/allsyms.o,$(OBJS)) Makefile
 	echo 'static char *system_build_date="'`date +%Y%m%d%Z%T`'";' > builddate.c
+
+nvram.c: nvram/nvram.c
+	ln -s $^ $@
 
 # Build the executable and a symbol table file
 $(filter %.exe,$(PGMS)): ${LINK_FILES}
