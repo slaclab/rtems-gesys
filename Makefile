@@ -1,5 +1,5 @@
 #
-#  $Id$
+#  Makefile,v 1.44 2004/11/09 04:02:33 till Exp
 #
 #
 
@@ -308,7 +308,7 @@ $(RTEMS_SITE_INSTALLDIR)/bin:
 INSTFILES += ${PGMS} ${PGMS:%.exe=%.$(ELFEXT)} ${PGMS:%.exe=%.bin} ${PGMS:%.exe=%.sym}
 
 # How to build a  tarball of this package
-REVISION=$(filter-out $$%,$$Name$$)
+REVISION=$(filter-out $$%,$SSRL_RTEMS_20041202$)
 tar:
 	@$(make-tar)
 
@@ -416,12 +416,12 @@ thelibs:
 # don't bother...
 gc-check: librtemscpu.a
 ifeq ($(USE_GC),YES)
-	@if nm $^ | grep -q RTEMS_Malloc_GC_list ; then \
+	@if nm $^ | grep -s RTEMS_Malloc_GC_list > /dev/null ; then \
 		echo 'Your RTEMS release has bug #504 apparently fixed; set USE_GC to NO' ;\
 		exit 1;\
 	fi
 else
-	@if ! nm $^ | grep -q RTEMS_Malloc_GC_list ; then \
+	@if ! nm $^ | grep -s RTEMS_Malloc_GC_list > /dev/null ; then \
 		echo 'Your RTEMS release might have bug #504; set USE_GC to YES' ;\
 		exit 1;\
 	fi
