@@ -160,7 +160,7 @@ static int tftpInited    = 1; /* initialization done by application itself */
 #include "pathcheck.c"
 
 #ifdef HAVE_BSPEXT_
-#include <bspExt.h>
+#include <bsp/bspExt.h>
 #endif
 
 #if defined(HAVE_BSP_EXCEPTION_EXTENSION)

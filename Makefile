@@ -133,7 +133,10 @@ endif
 # make-exe uses LINK.c but we have C++ stuff
 LINK.c = $(LINK.cc)
 
+DEFINES_BSPEXT_YES=-DHAVE_BSPEXT_
+
 DEFINES  += -DUSE_POSIX
+DEFINES  += $(DEFINES_BSPEXT_$(USE_BSPEXT))
 
 # Trim BSP specific things
 ifeq  "$(RTEMS_BSP_FAMILY)" "svgm" 
