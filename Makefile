@@ -88,6 +88,7 @@ USE_GC=NO
 # Normal (i.e. non-flash) system which can be net-booted
 USE_TECLA_YES_C_PIECES = term
 C_PIECES=init rtems_netconfig config $(USE_TECLA_$(USE_TECLA)_C_PIECES)
+C_PIECES+=mdbg
 
 # SSRL 4.6.0pre2 compatibility workaround. Obsolete.
 #C_PIECES+=pre2-compat
@@ -207,6 +208,8 @@ CFLAGS   += -O2
 # a command line option because some pieces are built into
 # the system configuration table...
 #CFLAGS   +=-DSTACK_CHECKER_ON
+CFLAGS += -DUSE_WRAP
+CFLAGS += -DDEPTH=15 -DNR_INFOS=30983
 
 USE_TECLA_YES_DEFINES  = -DWINS_LINE_DISC -DUSE_TECLA
 USE_NFS_YES_DEFINES    = -DNFS_SUPPORT
@@ -238,6 +241,9 @@ LD_LIBS   += $(OPT_LIBRARIES)
 # Produce a linker map to help finding 'undefined symbol' references (README.config)
 LDFLAGS_GC_YES = -Wl,--wrap,free
 LDFLAGS   += -Wl,-Map,$(ARCH)/linkmap $(LDFLAGS_GC_$(USE_GC))
+LDFLAGS += -Wl,--wrap,malloc -Wl,--wrap,calloc -Wl,--wrap,realloc -Wl,--wrap,free
+LDFLAGS += -Wl,--wrap,_malloc_r -Wl,--wrap,_calloc_r -Wl,--wrap,_realloc_r -Wl,--wrap,_free_r
+##LDFLAGS += -Tlinkcmds
 
 # this special object contains 'undefined' references for
 # symbols we want to forcibly include. It is automatically
@@ -291,7 +297,7 @@ ifndef RTEMS_SITE_INSTALLDIR
 RTEMS_SITE_INSTALLDIR = $(PROJECT_RELEASE)
 endif
 
-$(RTEMS_SITE_INSTALLDIR)/$(RTEMS_BSP)/bin:
+$(RTEMS_SITE_INSTALLDIR)/bin:
 	test -d $@ || mkdir -p $@
 
 INSTFILES = ${PGMS} ${PGMS:%.exe=%.$(ELFEXT)} ${PGMS:%.exe=%.bin} ${PGMS:%.exe=%.sym}
@@ -303,9 +309,9 @@ tar:
 
 # Install the program(s), appending _g or _p as appropriate.
 # for include files, just use $(INSTALL_CHANGE)
-install: all $(RTEMS_SITE_INSTALLDIR)/$(RTEMS_BSP)/bin
+install: all $(RTEMS_SITE_INSTALLDIR)/bin
 	for feil in $(INSTFILES); do if [ -r $$feil ] ; then  \
-		$(INSTALL_VARIANT) -m 555 $$feil ${RTEMS_SITE_INSTALLDIR}/$(RTEMS_BSP)/bin ; fi ; done
+		$(INSTALL_VARIANT) -m 555 $$feil ${RTEMS_SITE_INSTALLDIR}/bin ; fi ; done
 
 
 # Below here, magic follows for generating the
