@@ -124,7 +124,7 @@ include $(RTEMS_CUSTOM)
 include $(RTEMS_ROOT)/make/leaf.cfg
 
 ifndef XSYMS
-XSYMS = xsyms
+XSYMS = $(RTEMS_CPU)-rtems-xsyms
 endif
 
 #
