@@ -557,8 +557,10 @@ continue;
 
 	argc = 1;
 #ifdef DEFAULT_CPU_ARCH_FOR_CEXP
-	argv[argc++] = "-a";
-	argv[argc++] = DEFAULT_CPU_ARCH_FOR_CEXP;
+	if ( DEFAULT_CPU_ARCH_FOR_CEXP && *DEFAULT_CPU_ARCH_FOR_CEXP ) {
+		argv[argc++] = "-a";
+		argv[argc++] = DEFAULT_CPU_ARCH_FOR_CEXP;
+	}
 #endif
 	if ( !BUILTIN_SYMTAB ) {
 		argv[argc++] = "-s";
