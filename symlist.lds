@@ -1,7 +1,10 @@
 /* THIS CONFIGURATION WAS CREATED FOR
- * RTEMS snapshot ss-20030128 (SLAC/SSRL patches applied)
- * newlib-1.11.1
- * GCC-3.2.1 
+ * RTEMS snapshot (SLAC/SSRL patches applied)
+ *
+ * DONT CHANGE THE NEXT THREE LINES (Makefile needs them)
+rtems-ss-20030128
+newlib-1.11.1
+gcc-3.2.1 
  *
  * T. Straumann, 2003/4/9
  */

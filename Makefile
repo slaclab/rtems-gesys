@@ -119,7 +119,7 @@ tst:
 CLEAN_ADDITIONS+=map builddate.c
 CLOBBER_ADDITIONS +=
 
-all:	${ARCH} $(SRCS) $(PGMS)
+all: versioncheck ${ARCH} $(SRCS) $(PGMS)
 
 $(ARCH)/allsyms.o:	symlist.lds $(ARCH)/empty.o config/*
 	$(LD) -T$< -r -o $@ $(ARCH)/empty.o
@@ -149,6 +149,18 @@ $(RTEMS_SITE_INSTALLDIR)/$(RTEMS_BSP)/bin:
 	test -d $@ || mkdir -p $@
 
 INSTFILES = ${PGMS} ${PGMS:%.exe=%.bin} ${PGMS:%.exe=%.sym}
+
+CONFVERSION = $(shell grep ^gcc- symlist.lds)
+GCCVERSION  = gcc-$(shell $(CC) -dumpversion)
+
+versioncheck:
+	@if [ "gcc-`$(CC) -dumpversion`" != $(CONFVERSION)] ; then \
+       echo 'WARNING: THIS SYSTEM CONFIGURATION WAS GENERATED FOR'; \
+       echo '            $(CONFVERSION)'; \
+       echo '         YOU MAY HAVE TO GENERATE A NEW CONFIGURATION (linker errors?) FOR'; \
+       echo '            $(GCCVERSION)'; \
+       exit 1; \
+    fi
 
 
 # Install the program(s), appending _g or _p as appropriate.
