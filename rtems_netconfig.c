@@ -56,12 +56,12 @@ static struct rtems_bsdnet_ifconfig netdriver_config[]={
  *      TARGET_CFLAGS += -DEPICS_RTEMS_NIC_3C509
  * to configure/os/CONFIG_SITE.Common.RTEMS-pc386.
  */
-#if defined(EPICS_RTEMS_NIC_3C509)       /* 3COM 3C509 */
+#if defined(EPICS_RTEMS_NIC_3C509)            /* 3COM 3C509 */
   extern int rtems_3c509_driver_attach (struct rtems_bsdnet_ifconfig *, int);
 # define NIC_NAME   "ep0"
 # define NIC_ATTACH rtems_3c509_driver_attach
 
-#else                                    /* Use NIC provided by BSP */
+#elif defined(RTEMS_BSP_NETWORK_DRIVER_NAME)  /* Use NIC provided by BSP */
 # define NIC_NAME   RTEMS_BSP_NETWORK_DRIVER_NAME
 # define NIC_ATTACH RTEMS_BSP_NETWORK_DRIVER_ATTACH
 /* T. Straumann, 12/18/2001, added declaration, just in case */
@@ -69,11 +69,16 @@ extern int
 RTEMS_BSP_NETWORK_DRIVER_ATTACH();
 #endif
 
+#ifdef NIC_NAME
 static struct rtems_bsdnet_ifconfig netdriver_config[1] = {{
     NIC_NAME,	/* name */
     NIC_ATTACH,	/* attach function */
     0,			/* link to next interface */
 }};
+#else
+#warning "NO KNOWN NETWORK DRIVER FOR THIS BSP -- YOU MAY HAVE TO EDIT rtems_netconfig.c"
+#define netdriver_config 0
+#endif
 
 #endif
 
@@ -88,7 +93,7 @@ static struct rtems_bsdnet_ifconfig loopback_config = {
 
 struct rtems_bsdnet_config rtems_bsdnet_config = {
     &loopback_config,         /* Network interface */
-    rtems_bsdnet_do_bootp,    /* Use BOOTP to get network configuration */
+    netdriver_config ? rtems_bsdnet_do_bootp : 0,    /* Use BOOTP to get network configuration */
     NETWORK_TASK_PRIORITY,    /* Network task priority */
 #ifdef MEMORY_SCARCE
     100*1024,                 /* MBUF space */
