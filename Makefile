@@ -147,7 +147,7 @@ ifeq  "$(RTEMS_BSP_FAMILY)" "svgm"
 DEFINES  += -DHAVE_BSP_EXCEPTION_EXTENSION
 C_PIECES += nvram
 ifndef ELFEXT
-ELFEXT    = exe
+ELFEXT    = nxe
 endif 
 endif 
 
@@ -185,7 +185,9 @@ endif
 ifeq "$(RTEMS_BSP_FAMILY)" "mvme167"
 USE_BSPEXT = NO
 DEFINES+=-DMEMORY_SCARCE
+ifndef ELFEXT
 ELFEXT=elf
+endif
 endif
 
 
@@ -289,7 +291,7 @@ endif
 $(RTEMS_SITE_INSTALLDIR)/$(RTEMS_BSP)/bin:
 	test -d $@ || mkdir -p $@
 
-INSTFILES = ${PGMS} ${PGMS:%.exe=%.bin} ${PGMS:%.exe=%.sym}
+INSTFILES = ${PGMS} ${PGMS:%.exe=%.$(ELFEXT)} ${PGMS:%.exe=%.bin} ${PGMS:%.exe=%.sym}
 
 # How to build a  tarball of this package
 REVISION=$(filter-out $$%,$$Name$$)
@@ -410,4 +412,3 @@ else
 		exit 1;\
 	fi
 endif
-
