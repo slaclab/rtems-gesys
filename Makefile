@@ -177,7 +177,7 @@ CONFVERSION = $(shell grep '^gcc-' symlist.lds)
 GCCVERSION  = gcc-$(shell $(CC) -dumpversion)
 
 versioncheck:
-	@if [ "gcc-`$(CC) -dumpversion`" != $(CONFVERSION)] ; then \
+	@if [ $(GCCVERSION) != $(CONFVERSION) ] ; then \
        echo 'WARNING: THIS SYSTEM CONFIGURATION WAS GENERATED FOR'; \
        echo '            $(CONFVERSION)'; \
        echo '         YOU MAY HAVE TO GENERATE A NEW CONFIGURATION (linker errors?) FOR'; \
