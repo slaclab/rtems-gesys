@@ -1,0 +1,101 @@
+This patch causes the RTEMS build process to not only
+install 'librtemscpu.a/librtemsbsp.a' but also the
+individual libraries they are composed of.
+
+NOTE: you need a recent version of automake to
+      regenerate 'Makefile.in'. If you configure RTEMS
+      with --enable-maintainer-mode, the necessary
+      steps are performed automatically.
+      
+Till Straumann, 2003/4/17
+
+Index: rtems-ss-20030128/c/src/wrapup//Makefile.am
+===================================================================
+RCS file: /afs/slac/g/spear/cvsrep/rtems/src-20030128/c/src/wrapup/Makefile.am,v
+retrieving revision 1.1.1.3
+diff -c -r1.1.1.3 Makefile.am
+*** rtems-ss-20030128/c/src/wrapup//Makefile.am	29 Jan 2003 22:56:53 -0000	1.1.1.3
+--- rtems-ss-20030128/c/src/wrapup//Makefile.am	3 Apr 2003 23:56:45 -0000
+***************
+*** 28,37 ****
+      $(wildcard $(PROJECT_RELEASE)/lib/libnetchip$(LIB_VARIANT).a)
+  endif
+  
+! SRCS = $(LIBBSP) $(LIBNETWORKING) $(LIBRDBG) \
+!     $(wildcard $(PROJECT_RELEASE)/lib/libcpu$(LIB_VARIANT).a) \
+!     $(LIBCHIP) \
+!     $(wildcard $(PROJECT_RELEASE)/lib/rtems-ctor$(LIB_VARIANT).$(OBJEXT))
+  
+  TMPINSTALL_FILES += $(LIB)
+  
+--- 28,46 ----
+      $(wildcard $(PROJECT_RELEASE)/lib/libnetchip$(LIB_VARIANT).a)
+  endif
+  
+! ## SRCS = $(LIBBSP) $(LIBNETWORKING) $(LIBRDBG) \
+! ##   $(wildcard $(PROJECT_RELEASE)/lib/libcpu$(LIB_VARIANT).a) \
+! ##    $(LIBCHIP) \
+! ##    $(wildcard $(PROJECT_RELEASE)/lib/rtems-ctor$(LIB_VARIANT).$(OBJEXT))
+! 
+! ## TillS: omit netapps from generic lib
+! SRCS = $(LIBBSP) $(LIBRDBG) \
+!      $(wildcard $(PROJECT_RELEASE)/lib/libcpu$(LIB_VARIANT).a) \
+!      $(LIBCHIP) \
+!      $(wildcard $(PROJECT_RELEASE)/lib/rtems-ctor$(LIB_VARIANT).$(OBJEXT))
+! 
+! EXCLUDED = $(LIBNETWORKING)
+! 
+  
+  TMPINSTALL_FILES += $(LIB)
+  
+***************
+*** 68,75 ****
+  	rm -f $(ARCH)/*
+  	$(RANLIB) $@
+  
+  install-data-local:
+  	@$(mkinstalldirs) $(DESTDIR)$(bsplibdir)
+! 	$(INSTALL_DATA) $(LIB) $(DESTDIR)$(bsplibdir)
+  
+  include $(top_srcdir)/../../automake/local.am
+--- 77,85 ----
+  	rm -f $(ARCH)/*
+  	$(RANLIB) $@
+  
++ ### TillS: install the individual libs as well
+  install-data-local:
+  	@$(mkinstalldirs) $(DESTDIR)$(bsplibdir)
+! 	for instlib in $(LIB) $(SRCS) $(EXCLUDED); do $(INSTALL_DATA) $$instlib $(DESTDIR)/$(libdir); done
+  
+  include $(top_srcdir)/../../automake/local.am
+Index: rtems-ss-20030128/cpukit/wrapup//Makefile.am
+===================================================================
+RCS file: /afs/slac/g/spear/cvsrep/rtems/src-20030128/cpukit/wrapup/Makefile.am,v
+retrieving revision 1.1.1.3
+diff -c -r1.1.1.3 Makefile.am
+*** rtems-ss-20030128/cpukit/wrapup//Makefile.am	29 Jan 2003 22:59:34 -0000	1.1.1.3
+--- rtems-ss-20030128/cpukit/wrapup//Makefile.am	8 Apr 2003 23:40:39 -0000
+***************
+*** 76,85 ****
+  
+  TMPINSTALL_FILES += $(project_libdir)$(MULTISUBDIR)/librtemscpu$(LIB_VARIANT).a
+  
+! all-am: $(ARCH) $(LIB) $(TMPINSTALL_FILES)
+  
+  install-data-hook: $(LIB)
+  	@$(mkinstalldirs) $(DESTDIR)/$(libdir)
+! 	$(INSTALL_DATA) $(LIB) $(DESTDIR)/$(libdir)
+  
+  include $(top_srcdir)/automake/local.am
+--- 76,86 ----
+  
+  TMPINSTALL_FILES += $(project_libdir)$(MULTISUBDIR)/librtemscpu$(LIB_VARIANT).a
+  
+! all-am: $(ARCH) $(LIB) $(LIBS) $(TMPINSTALL_FILES)
+  
++ ## TillS: install individual libs as well
+  install-data-hook: $(LIB)
+  	@$(mkinstalldirs) $(DESTDIR)/$(libdir)
+! 	for instlib in $(LIB) $(LIBS); do $(INSTALL_DATA) $$instlib $(DESTDIR)/$(libdir); done
+  
+  include $(top_srcdir)/automake/local.am
