@@ -87,7 +87,7 @@ EXTERN(__exp10)
 /* fclose.o: */
 EXTERN(fclose)
 /* fdopen.o: */
-/* EXTERN(_fdopen_r) */
+EXTERN(_fdopen_r)
 EXTERN(fdopen)
 /* feof.o: */
 EXTERN(feof)
