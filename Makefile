@@ -114,7 +114,7 @@ S_O_FILES=$(S_FILES:%.S=${ARCH}/%.o)
 SRCS=$(C_FILES) $(CC_FILES) $(H_FILES) $(S_FILES)
 OBJS=$(C_O_FILES) $(CC_O_FILES) $(S_O_FILES)
 
-PGMS=${ARCH}/rtems.exe st.sys
+PGMS=${ARCH}/rtems.exe ${ARCH}/st.sys
 
 # List of RTEMS managers to be included in the application goes here.
 # Use:
@@ -400,6 +400,11 @@ foo:
 
 thelibs:
 	echo $(THELIBS)
+
+#initialization script
+$(ARCH)/st.sys: st.sys $(wildcard st.sys-ssrl) $(wildcard st.sys-$(RTEMS_BSP)) $(wildcard st.sys-$(RTEMS_BSP)-ssrl)
+	cat $^ > $@
+
 
 
 # Create the name files for our libraries. This is achieved by
