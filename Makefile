@@ -10,7 +10,10 @@
 # case...
 # On a PC, you may have to use a different network driver
 # also; YMMV. The value must be 'YES' or 'NO' (no quotes) 
-USE_TECLA = YES
+USE_TECLA  = YES
+# Whether to use the libbspExt library. This is always
+# disabled on pcx86 BSPs.
+USE_BSPEXT = YES
 
 
 # C source names, if any, go here -- minus the .c
@@ -69,8 +72,6 @@ LINK.c = $(LINK.cc)
 DEFINES  += -DUSE_POSIX
 
 ifeq  "$(RTEMS_BSP_FAMILY)" "svgm" 
-DEFINES  += -DHAVE_BSP_EXCEPTION_EXTENSION
-LIBBSPEXT_YES = -lbspExt
 ifndef ELFEXT
 ELFEXT    = exe
 endif 
@@ -79,7 +80,6 @@ endif
 ifeq "$(RTEMS_BSP_FAMILY)" "motorola_powerpc"
 DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_NAME=\"dc1\"
 DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_ATTACH=rtems_dec21140_driver_attach
-LIBBSPEXT_YES = -lbspExt
 ifndef ELFEXT
 ELFEXT    = nxe
 endif
@@ -91,6 +91,7 @@ DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_ATTACH=rtems_fxp_attach
 ifndef ELFEXT
 ELFEXT    = obj
 endif
+USE_BSPEXT = NO
 endif
 
 bspfail:
@@ -102,9 +103,11 @@ bspcheck: $(if $(filter $(RTEMS_BSP_FAMILY),pc386 motorola_powerpc svgm),,bspfai
 CPPFLAGS += -I.
 CFLAGS   += -O2
 
-USE_TECLA_YES_DEFINES = -DWINS_LINE_DISC -DUSE_TECLA
+USE_TECLA_YES_DEFINES  = -DWINS_LINE_DISC -DUSE_TECLA
+USE_BSPEXT_YES_DEFINES = -DHAVE_BSP_EXCEPTION_EXTENSION
 
 DEFINES+=$(USE_TECLA_$(USE_TECLA)_DEFINES)
+DEFINES+=$(USE_BSPEXT_$(USE_BSPEXT)_DEFINES)
 
 #
 # CFLAGS_DEBUG_V are used when the `make debug' target is built.
@@ -113,9 +116,13 @@ DEFINES+=$(USE_TECLA_$(USE_TECLA)_DEFINES)
 # CFLAGS_DEBUG_V += -qrtems_debug
 #
 
-USE_TECLA_YES_LIB = -ltecla_r
+USE_TECLA_YES_LIB  = -ltecla_r
+USE_BSPEXT_YES_LIB = -lbspExt
 
-LD_LIBS   += -lcexp -lbfd -lspencer_regexp -lopcodes -liberty $(USE_TECLA_$(USE_TECLA)_LIB) -lm -lrtems++ $(LIBBSPEXT)
+LD_LIBS   += -lcexp -lbfd -lspencer_regexp -lopcodes -liberty
+LD_LIBS   += $(USE_TECLA_$(USE_TECLA)_LIB)
+LD_LIBS   += -lm -lrtems++
+LD_LIBS   += $(USE_BSPEXT_$(USE_BSPEXT)_LIB)
 # Produce a linker map to help finding 'undefined symbol' references (README.config)
 LDFLAGS   += -Wl,-Map,map
 
