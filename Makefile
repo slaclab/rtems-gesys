@@ -150,7 +150,7 @@ $(RTEMS_SITE_INSTALLDIR)/$(RTEMS_BSP)/bin:
 
 INSTFILES = ${PGMS} ${PGMS:%.exe=%.bin} ${PGMS:%.exe=%.sym}
 
-CONFVERSION = $(shell grep ^gcc- symlist.lds)
+CONFVERSION = $(shell grep '^gcc-' symlist.lds)
 GCCVERSION  = gcc-$(shell $(CC) -dumpversion)
 
 versioncheck:
@@ -167,5 +167,5 @@ versioncheck:
 # Install the program(s), appending _g or _p as appropriate.
 # for include files, just use $(INSTALL_CHANGE)
 install: all $(RTEMS_SITE_INSTALLDIR)/$(RTEMS_BSP)/bin
-	for feil in $(INSTFILES); do if [ -e $$feil ] ; then  \
+	for feil in $(INSTFILES); do if [ -r $$feil ] ; then  \
 		$(INSTALL_VARIANT) -m 555 $$feil ${RTEMS_SITE_INSTALLDIR}/$(RTEMS_BSP)/bin ; fi ; done
