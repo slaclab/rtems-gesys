@@ -14,14 +14,34 @@
 
 #define NETWORK_TASK_PRIORITY           90
 
-extern void rtems_bsdnet_loopattach();
-static struct rtems_bsdnet_ifconfig loopback_config = {
-    "lo0",                          /* name */
-    (int (*)(struct rtems_bsdnet_ifconfig *, int))rtems_bsdnet_loopattach, /* attach function */
-    NULL,                           /* link to next interface */
-    "127.0.0.1",                    /* IP address */
-    "255.0.0.0",                    /* IP net mask */
+#ifdef MULTI_NETDRIVER
+
+extern int rtems_3c509_driver_attach (struct rtems_bsdnet_ifconfig *, int);
+extern int rtems_fxp_attach (struct rtems_bsdnet_ifconfig *, int);
+extern int rtems_elnk_driver_attach (struct rtems_bsdnet_ifconfig *, int);
+extern int rtems_dec21140_driver_attach (struct rtems_bsdnet_ifconfig *, int);
+
+/* these don't probe and will be used even if there's no device :-( */
+extern int rtems_ne_driver_attach (struct rtems_bsdnet_ifconfig *, int);
+extern int rtems_wd_driver_attach (struct rtems_bsdnet_ifconfig *, int);
+
+static struct rtems_bsdnet_ifconfig netdriver_config[]={
+		{
+		"fxp1", rtems_fxp_attach, netdriver_config+1,
+		},
+		{
+		"dc1", rtems_dec21140_driver_attach, netdriver_config+2,
+		},
+		{
+		"elnk1", rtems_elnk_driver_attach, netdriver_config+3,
+		},
+		{
+		"ep0", rtems_3c509_driver_attach, 0,
+		},
 };
+
+#else
+
 
 /*
  * The following conditionals select the network interface card.
@@ -49,15 +69,32 @@ extern int
 RTEMS_BSP_NETWORK_DRIVER_ATTACH();
 #endif
 
-static struct rtems_bsdnet_ifconfig netdriver_config = {
-    NIC_NAME,                           /* name */
-    NIC_ATTACH,                         /* attach function */
-    &loopback_config,                   /* link to next interface */
+static struct rtems_bsdnet_ifconfig netdriver_config[1] = {{
+    NIC_NAME,	/* name */
+    NIC_ATTACH,	/* attach function */
+    0,			/* link to next interface */
+}};
+
+#endif
+
+extern void rtems_bsdnet_loopattach();
+static struct rtems_bsdnet_ifconfig loopback_config = {
+    "lo0",                          /* name */
+    (int (*)(struct rtems_bsdnet_ifconfig *, int))rtems_bsdnet_loopattach, /* attach function */
+    netdriver_config,               /* link to next interface */
+    "127.0.0.1",                    /* IP address */
+    "255.0.0.0",                    /* IP net mask */
 };
+
 struct rtems_bsdnet_config rtems_bsdnet_config = {
-    &netdriver_config,        /* Network interface */
+    &loopback_config,         /* Network interface */
     rtems_bsdnet_do_bootp,    /* Use BOOTP to get network configuration */
     NETWORK_TASK_PRIORITY,    /* Network task priority */
+#ifdef MEMORY_SCARCE
+    100*1024,                 /* MBUF space */
+    200*1024,                 /* MBUF cluster space */
+#else
     180*1024,                 /* MBUF space */
     350*1024,                 /* MBUF cluster space */
+#endif
 };

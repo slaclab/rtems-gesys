@@ -17,7 +17,11 @@
 
 #define CONFIGURE_RTEMS_INIT_TASKS_TABLE
 
-#define CONFIGURE_EXECUTIVE_RAM_SIZE        (5000*1024)
+#ifdef MEMORY_SCARCE
+#define CONFIGURE_EXECUTIVE_RAM_SIZE        (1024*1024)
+#else
+#define CONFIGURE_EXECUTIVE_RAM_SIZE        (5*1024*1024)
+#endif
 #define CONFIGURE_MAXIMUM_TASKS             rtems_resource_unlimited(30)
 #define CONFIGURE_MAXIMUM_SEMAPHORES        rtems_resource_unlimited(500)
 #define CONFIGURE_MAXIMUM_TIMERS            rtems_resource_unlimited(20)
@@ -49,7 +53,11 @@
                     RTEMS_NO_ASR | \
                     RTEMS_INTERRUPT_LEVEL(0))
 #define CONFIGURE_INIT_TASK_ATTRIBUTES (RTEMS_FLOATING_POINT | RTEMS_LOCAL)
+#ifdef MEMORY_SCARCE
+#define CONFIGURE_INIT_TASK_STACK_SIZE  (50*1024)
+#else
 #define CONFIGURE_INIT_TASK_STACK_SIZE  (100*1024)
+#endif
 rtems_task Init (rtems_task_argument argument);
 
 #define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER

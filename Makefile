@@ -33,7 +33,11 @@ USE_TFTPFS = YES
 #       i.e., NO path is available to the script.
 USE_RSH    = YES
 
-#
+# Whether the Cexp symbol table should be built into the executable ('YES')
+# If 'NO', cexp has to read the symbol table from a separate (.sym) file.
+# If 'YES', the Cexp source directory is assumed to be found in
+# the parent directory (for searching -I../cexp for cexpsyms.h)
+USE_BUILTIN_SYMTAB = YES
 
 # Optional libraries to add, i.e. functionality you
 # want to be present but which is not directly used
@@ -134,7 +138,7 @@ endif
 LINK.c = $(LINK.cc)
 
 DEFINES_BSPEXT_YES=-DHAVE_BSPEXT_
-
+#DEFINES  += -DCDROM_IMAGE 
 DEFINES  += -DUSE_POSIX
 DEFINES  += $(DEFINES_BSPEXT_$(USE_BSPEXT))
 
@@ -156,16 +160,32 @@ endif
 endif
 
 ifeq  "$(RTEMS_BSP_FAMILY)" "pc386"
-DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_NAME=\"fxp1\"
-DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_ATTACH=rtems_fxp_attach
+DEFINES  += -DMULTI_NETDRIVER
+DEFINES  += -DHAVE_PCIBIOS
+DEFINES  += -DGRUB_BOOT
 ifndef ELFEXT
 ELFEXT    = obj
 endif
 USE_BSPEXT = NO
+####### OBSOLETE AS OF PR#624 #######
+#define bsp-size-check
+#	@if [ `$(SIZE_FOR_TARGET) $(@:%.exe=%.$(ELFEXT)) | awk '/2/{print $$4}'` -ge 2097148 ]; then \
+#		echo '*******************************************************************************'; \
+#		echo "Your binary is so large (>=~2M) that the BSP's memory detection would write into it!";\
+#		echo "Change the probing limits in c/src/lib/libbsp/i386/pc386/startup/bspstart.c, rebuild/install";\
+#		echo "RTEMS and modify this check accordingly..." ;\
+#		echo '*******************************************************************************'; \
+#		$(RM) $@ $(@:%.exe=%.$(ELFEXT)) ; \
+#		exit 1;\
+#	fi
+#endef
+
 endif
 
 ifeq "$(RTEMS_BSP_FAMILY)" "mvme167"
 USE_BSPEXT = NO
+DEFINES+=-DMEMORY_SCARCE
+ELFEXT=elf
 endif
 
 
@@ -176,6 +196,9 @@ bspcheck: $(if $(filter $(RTEMS_BSP_FAMILY),pc386 motorola_powerpc svgm mvme167)
 
 
 CPPFLAGS += -I.
+ifeq "$(USE_BUILTIN_SYMTAB)xx" "YESxx"
+CPPFLAGS += -I../cexp
+endif
 CFLAGS   += -O2
 # Enable the stack checker. Unfortunately, this must be
 # a command line option because some pieces are built into
@@ -234,7 +257,8 @@ all: bspcheck gc-check libnms ${ARCH} $(SRCS) $(PGMS)
 $(ARCH)/init.o: builddate.c pathcheck.c
 
 builddate.c: $(filter-out $(ARCH)/init.o $(ARCH)/allsyms.o,$(OBJS)) Makefile
-	echo 'static char *system_build_date="'`date +%Y%m%d%Z%T`'";' > builddate.c
+	echo 'static char *system_build_date="'`date +%Y%m%d%Z%T`'";' > $@
+	echo '#define DEFAULT_CPU_ARCH_FOR_CEXP "'`$(XSYMS) -a $<`'"' >>$@
 
 nvram.c: nvram/nvram.c
 	ln -s $^ $@
@@ -242,9 +266,12 @@ nvram.c: nvram/nvram.c
 pathcheck.c: nvram/pathcheck.c
 	ln -s $^ $@
 
+#LINK_OBJS+= -Wl,-b,binary o-optimize/rtems.sym.tar -Wl,-b,elf32-i386
+
 # Build the executable and a symbol table file
 $(filter %.exe,$(PGMS)): ${LINK_FILES}
 	$(make-exe)
+	$(bsp-size-check)
 ifdef ELFEXT
 ifdef XSYMS
 ifeq ($(USE_GC),YES)
@@ -297,8 +324,10 @@ endif
 SYMLIST_LDS = $(ARCH)/ldep.lds
 # We just need an empty object to keep the linker happy
 
+ifeq "$(USE_BUILTIN_SYMTAB)xx" "NOxx"
 $(ARCH)/allsyms.o:	$(SYMLIST_LDS) $(ARCH)/empty.o
 	$(LD) -T$< -r -o $@ $(ARCH)/empty.o
+endif
 
 # dummy up an empty object file
 $(ARCH)/empty.o:
@@ -335,7 +364,11 @@ OPTIONAL_ALL=$(addprefix -o,$(LIBNMS))
 
 $(SYMLIST_LDS): $(ARCH)/app.nm $(LIBNMS) $(ARCH)/startfiles.nm $(EXCLUDE_LISTS) $(LDEP)
 	echo $^
-	$(LDEP) -F -l -u $(OPTIONAL_ALL) $(addprefix -x,$(EXCLUDE_LISTS)) $(addprefix -o,$(INCLUDE_LISTS)) -e $@ $(filter %.nm,$^) > $(ARCH)/ldep.log
+	$(LDEP) -F -l -u $(OPTIONAL_ALL) $(addprefix -x,$(EXCLUDE_LISTS)) $(addprefix -o,$(INCLUDE_LISTS)) -e $@ $(filter %.nm,$^)  > $(ARCH)/ldep.log
+
+$(ARCH)/allsyms.c: $(ARCH)/app.nm $(LIBNMS) $(ARCH)/startfiles.nm $(EXCLUDE_LISTS) $(LDEP)
+	echo $^
+	$(LDEP) -F -l -u $(OPTIONAL_ALL) $(addprefix -x,$(EXCLUDE_LISTS)) $(addprefix -o,$(INCLUDE_LISTS)) -C $@ $(filter %.nm,$^)  > $(ARCH)/ldep.log
 
 vpath %.a $(patsubst -L%,%,$(filter -L%,$(THELIBS)))
 

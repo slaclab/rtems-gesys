@@ -134,6 +134,10 @@ typedef char GetLine;
 static	char *my_getline(char *rval, char *prompt, int len);
 #endif
 
+#ifdef HAVE_PCIBIOS
+#include <pcibios.h>
+#endif
+
 #define LINE_LENGTH 200
 
 #define SYMEXT      ".sym"
@@ -195,7 +199,7 @@ cexpExcHandlerInstall(void (*handler)(int))
 #define SYSSCRIPT	"st.sys"
 
 static void
-cmdline2env(void);
+cmdline2env(const char *);
 
 #ifdef USE_TECLA
 int
@@ -241,13 +245,58 @@ struct stat stbuf;
     }
 }
 
+int
+gesys_network_start()
+{
+
+#ifdef MULTI_NETDRIVER
+  printf("Going to probe for Ethernet chips when initializing networking:\n");
+  printf("(supported are 3c509 (ISA), 3c90x (PCI) and eepro100 (PCI) variants).\n");
+  printf("NOTES:\n");
+  printf("  - Initializing a 3c90x may take a LONG time (~1min); PLUS: it NEEDS media\n");
+  printf("    autonegotiation!\n");
+  printf("  - A BOOTP/DHCP server must supply my IF configuration\n");
+  printf("    (ip address, mask, [gateway, dns, ntp])\n");
+#endif
+
+  rtems_bsdnet_initialize_network(); 
+
+  /* remote logging only works after a call to openlog()... */
+  openlog(0, LOG_PID | LOG_CONS, 0); /* use RTEMS defaults */
+
+#ifdef TFTP_SUPPORT
+  if (rtems_bsdnet_initialize_tftp_filesystem())
+	perror("TFTP FS initialization failed");
+#endif
+
+#ifdef NFS_SUPPORT
+  rpcUdpInit() || nfsInit(0,0);
+#endif
+
+  printf("Trying to synchronize NTP...");
+  fflush(stdout);
+  if (rtems_bsdnet_synchronize_ntp(0,0)<0)
+	printf("FAILED\n");
+  else
+	printf("OK\n");
+
+  /* stuff command line 'name=value' pairs into the environment */
+  cmdline2env(rtems_bsdnet_bootp_cmdline);
+
+  return 0;
+}
+
+extern void *cexpSystemSymbols;
+
+#define BUILTIN_SYMTAB (0!=cexpSystemSymbols)
+
 rtems_task Init(
   rtems_task_argument ignored
 )
 {
 GetLine	*gl=0;
-char	*symf=0, *user_script=0, *bufp;
-int		argc=4;
+char	*symf=0, *sysscr=0, *user_script=0, *bufp;
+int		argc;
 int		result=0;
 char	*dfltSrv  = 0;
 char	*pathspec = 0;
@@ -255,9 +304,9 @@ char	*pathspec = 0;
 MntDescRec	bootmnt = { "/boot", 0, 0 };
 MntDescRec  homemnt = { "/home", 0, 0 };
 #endif
-char	*argv[5]={
+char	*argv[7]={
 	"Cexp",	/* program name */
-	"-s",
+	0,
 	0,
 	0,
 	0
@@ -265,6 +314,10 @@ char	*argv[5]={
 
   rtems_libio_set_private_env();
 
+#ifdef HAVE_PCIBIOS
+  pcib_init();
+#endif
+	
 #ifdef STACK_CHECKER_ON
   {
 	extern void Stack_check_Initialize();
@@ -279,32 +332,31 @@ char	*argv[5]={
   /* make /tmp directory */
   mkTmpDir();
 
-  rtems_bsdnet_initialize_network(); 
-
-
-#ifdef TFTP_SUPPORT
-  if (rtems_bsdnet_initialize_tftp_filesystem())
-	perror("TFTP FS initialization failed");
-#endif
-
-#ifdef NFS_SUPPORT
-  rpcUdpInit() || nfsInit(0,0);
-#endif
 
   printf("Welcome to RTEMS GeSys\n");
   printf("This system $Name$ was built on %s\n",system_build_date);
-
-  printf("Trying to synchronize NTP...");
-  fflush(stdout);
-  if (rtems_bsdnet_synchronize_ntp(0,0)<0)
-	printf("FAILED\n");
-  else
-	printf("OK\n");
-
   printf("$Id$\n");
 
-  /* remote logging only works after a call to openlog()... */
-  openlog(0, LOG_PID | LOG_CONS, 0); /* use RTEMS defaults */
+#ifdef GRUB_BOOT
+  {
+	char *slash = strchr((const char*)0x2000, ' ');
+	if ( slash ) {
+		cmdline2env(slash+1);
+	}
+  }
+#endif
+
+	
+#ifndef CDROM_IMAGE
+  if ( !getenv("SKIP_NETINI") || !BUILTIN_SYMTAB )
+	gesys_network_start();
+  else {
+	fprintf(stderr,"Skipping network initialization - you can do it manually\n");
+	fprintf(stderr,"by invoking 'gesys_network_start()' (needs BOOTP/DHCP server)\n");
+	argc = 1;
+goto shell_entry;
+  }
+#endif
 
 #if defined(USE_TECLA)
   /*
@@ -315,12 +367,10 @@ char	*argv[5]={
 		 ansiTiocGwinszInstall(7) ? "failed" : "ok");
 #endif
 
-  /* stuff command line 'name=value' pairs into the environment */
-  cmdline2env();
-
   cexpInit(cexpExcHandlerInstall);
 
 
+#ifndef CDROM_IMAGE
   if ( BOOTPFN ) {
 	char *slash,*dot;
 	pathspec = malloc(strlen(BOOTPFN) + strlen(SYMEXT) + 1);
@@ -336,6 +386,15 @@ char	*argv[5]={
 		strcat(pathspec,SYMEXT);
 	}
   }
+#else
+  {
+	extern void *gesys_tarfs_image_start;
+	extern unsigned long gesys_tarfs_image_size;
+	printf("Loading TARFS... %s\n", 
+		rtems_tarfs_load("/tmp", gesys_tarfs_image_start, gesys_tarfs_image_size) ? "FAILED" : "OK");
+	pathspec=strdup("/tmp/rtems.sym");
+  }
+#endif
 
   dflt_fname = "rtems.sym";
 #ifdef TFTP_SUPPORT
@@ -350,6 +409,7 @@ char	*argv[5]={
   /* omit prompting for the symbol file */
   if ( pathspec )
   	goto firstTimeEntry;
+
 
   do {
 	chdir("/");
@@ -403,6 +463,13 @@ firstTimeEntry:
 
 	switch ( pathType(pathspec) ) {
 		case LOCAL_PATH:
+#ifdef CDROM_IMAGE
+			fd = open(pathspec,O_RDONLY);			
+			if ( fd >= 0 )
+				symf = strdup(pathspec);
+		break;
+#endif
+
 
 #ifdef TFTP_SUPPORT
 		case TFTP_PATH:
@@ -435,23 +502,22 @@ firstTimeEntry:
 	}
 
 
-	if ( (fd < 0) ) {
+	if ( (fd < 0) && !BUILTIN_SYMTAB ) {
 		fprintf(stderr,"Unable to open symbol file (%s)\n", 
 			-11 == fd ? "not a valid pathspec" : strerror(errno));
 continue;
 	}
 	
-	close(fd);
+
+	if ( fd >= 0 )
+		close(fd);
 	if ( ed >= 0 )
 		close(ed);
 
+	freeps( &sysscr );
+	sysscr = strdup(SYSSCRIPT);
 
-	argc = 4;
-
-	freeps(argv+3);
-	argv[3] = strdup(SYSSCRIPT);
-
-#ifdef RSH_SUPPORT
+#if defined(RSH_SUPPORT) && !defined(CDROM_IMAGE)
 	if ( !ISONTMP(symf) ) {
 #endif
 		if ( (slash = strrchr(symf,'/')) ) {
@@ -463,9 +529,8 @@ continue;
 			fputc('\n',stdout);
 			*(slash+1)=ch;
 		}
-#ifdef RSH_SUPPORT
+#if defined(RSH_SUPPORT) && !defined(CDROM_IMAGE)
 	} else {
-		char *sysscr = 0;
 		char *scrspec = malloc( strlen(pathspec) + strlen(SYSSCRIPT) + 1);
 
 		strcpy(scrspec, pathspec);
@@ -476,30 +541,45 @@ continue;
 
 		getDfltSrv( &dfltSrv );
 
-		freeps( argv+3 );
+		freeps( &sysscr );
 		if ( (fd = rshCopy( &dfltSrv, scrspec, &sysscr )) >= 0 ) {
 			close( fd );
-			argv[3] = sysscr;
 		} else {
-			argc--;
+			freeps( &sysscr );
 		}
 		freeps(&scrspec);
 	}
 #endif
 
-	printf("Trying symfile '%s', system script '%s'\n",symf,argc > 3 ? argv[3] :"(NONE)");
+	printf("Trying symfile '%s', system script '%s'\n",
+		BUILTIN_SYMTAB ? "BUILTIN" : symf,
+		sysscr ? sysscr :"(NONE)");
 
-	argv[2]=symf;
+	argc = 1;
+#ifdef DEFAULT_CPU_ARCH_FOR_CEXP
+	argv[argc++] = "-a";
+	argv[argc++] = DEFAULT_CPU_ARCH_FOR_CEXP;
+#endif
+	if ( !BUILTIN_SYMTAB ) {
+		argv[argc++] = "-s";
+		argv[argc++] = symf;
+	}
+	if ( sysscr ) {
+		argv[argc++] = sysscr;
+	}
+
+
+shell_entry:
 
 	result = cexp_main(argc, argv);
 
 	if ( ISONTMP( symf ) )
 		unlink( symf );
-	if ( ISONTMP( argv[3] ) )
-		unlink( argv[3] );
+	if ( sysscr && ISONTMP( sysscr ) )
+		unlink( sysscr );
 
 	freeps(&symf);
-	freeps(&argv[3]);
+	freeps(&sysscr);
 	
 
 	if (!result || CEXP_MAIN_NO_SCRIPT==result) {
@@ -618,14 +698,14 @@ continue;
 }
 
 static void
-cmdline2env(void)
+cmdline2env(const char *cmdline)
 {
 char *buf = 0;
 
 char *beg,*end;
 
 	/* make a copy we may modify */
-	buf = strdup(rtems_bsdnet_bootp_cmdline);
+	buf = strdup(cmdline);
 
 	/* find 'name=' tags */
 
