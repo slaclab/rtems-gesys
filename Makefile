@@ -109,7 +109,7 @@ CLOBBER_ADDITIONS +=
 
 all:	${ARCH} $(SRCS) $(PGMS)
 
-$(ARCH)/allsyms.o:	symlist.lds.tmpl $(ARCH)/empty.o config.tmpl/*
+$(ARCH)/allsyms.o:	symlist.lds $(ARCH)/empty.o config/*
 	$(LD) -T$< -r -o $@ $(ARCH)/empty.o
 
 $(ARCH)/empty.o:
