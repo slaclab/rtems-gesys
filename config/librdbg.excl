@@ -1,0 +1,426 @@
+/* /test/rtems-4.6.0pre4/powerpc-rtems/svgm/lib/librdbg.a[remdeb_xdr.o]: */
+librtemscpu.a[remdeb_xdr.o]:
+xdr_all_signals T 000015d0 00000044
+xdr_all_symbols T 00001490 00000044
+xdr_array U         
+xdr_break_type T 00000fc8 0000002c
+xdr_bytes U         
+xdr_CHAR_DATA T 00001088 00000038
+xdr_close_control T 000011dc 0000002c
+xdr_close_in T 00001208 0000002c
+xdr_debug_type T 000010f0 0000002c
+xdr_enum U         
+xdr_get_global_symbols_out T 000014d4 00000044
+xdr_get_signal_names_out T 00001614 00000044
+xdr_get_text_data_in T 00001518 0000005c
+xdr_get_text_data_out T 00000c5c 00000204
+xdr_int U         
+xdr_KernThread T 00001024 0000002c
+xdr_long U         
+xdr_one_arg T 000010c0 00000030
+xdr_one_signal T 00001574 0000005c
+xdr_one_symbol T 00001434 0000005c
+xdr_opaque U         
+xdr_open_in T 0000111c 000000c0
+xdr_open_out T 00000770 00000190
+xdr_ptrace_addr_data_in T 000004e4 00000138
+xdr_ptrace_addr_data_out T 0000061c 00000154
+xdr_ptrace_in T 0000133c 00000088
+xdr_ptrace_out T 000013c4 00000070
+xdr_ptracereq T 00000f2c 0000002c
+xdr_rpc_type T 00000e60 0000002c
+xdr_signal_in T 00001234 00000058
+xdr_signal_out T 0000128c 00000058
+xdr_stop_code T 000012e4 0000002c
+xdr_string U         
+xdr_thread_list T 00001050 00000038
+xdr_thread_name T 00000ff4 00000030
+xdr_u_char U         
+xdr_UDP_MSG T 00000e8c 000000a0
+xdr_u_int U         
+xdr_u_long U         
+xdr_u_short U         
+xdr_vector U         
+xdr_wait_in T 00001310 0000002c
+xdr_wait_out T 00000900 0000035c
+xdr_xdr_break T 00000110 000003d4
+xdr_xdr_mem T 00000f58 00000070
+xdr_xdr_regs T 00000000 00000110
+librtemscpu.a[remdeb_svc.o]:
+close_connex_2_svc U         
+conn_list C 00000004 00000004
+conn_list_cnt C 00000004 00000004
+exit U         
+get_signal_names_2_svc U         
+last_break C 00000002 00000002
+memset U         
+names D 00000000 0000004c
+open_connex_2_svc U         
+pid_list C 00000004 00000004
+pid_list_cnt C 00000004 00000004
+ptrace_2_svc U         
+remotedeb_2 T 00000000 000001cc
+send_signal_2_svc U         
+svcerr_decode U         
+svcerr_noproc U         
+svcerr_systemerr U         
+svc_sendreply U         
+wait_info_2_svc U         
+xdr_close_in U         
+xdr_get_signal_names_out U         
+xdr_open_in U         
+xdr_open_out U         
+xdr_ptrace_in U         
+xdr_ptrace_out U         
+xdr_signal_in U         
+xdr_signal_out U         
+xdr_void U         
+xdr_wait_in U         
+xdr_wait_out U         
+librtemscpu.a[rdbg.o]:
+BackPort G 00000004 00000004
+bind U         
+CannotRestart G 00000010 00000004
+connect_rdbg_exception U         
+conn_list C 00000004 00000004
+conn_list_cnt C 00000004 00000004
+CONN_LIST_INC G 00000018 00000004
+Continue C 00000004 00000004
+currentTargetThread C 00000004 00000004
+__errno U         
+ExitForSingleStep G 0000000c 00000004
+fwrite U         
+getErrno T 00000154 00000024
+getId T 00000000 00000030
+_impure_ptr U         
+justSaveContext C 00000004 00000004
+last_break C 00000002 00000002
+memset U         
+pid_list C 00000004 00000004
+pid_list_cnt C 00000004 00000004
+PID_LIST_INC G 0000001c 00000004
+printf U         
+printk U         
+puts U         
+rdbgDaemon T 00000030 00000020
+remotedeb_2 U         
+rtemsActive G 00000008 00000004
+rtems_panic U         
+rtemsPort G 00000000 00000002
+rtems_rdbg_initialize T 00000050 000000d4
+rtemsSock C 00000004 00000004
+rtems_task_create U         
+rtems_task_ident U         
+rtems_task_start U         
+rtemsXprt C 00000004 00000004
+setErrno T 00000124 00000030
+socket U         
+svc_register U         
+svc_run U         
+svcudp_create U         
+svcudp_enablecache U         
+taskName D 00000000 00000012
+TotalReboot G 00000014 00000004
+TSP_RETRIES G 00000020 00000004
+librtemscpu.a[servcon.o]:
+ConnCreate T 00000000 000001d8
+ConnDelete T 000001d8 00000198
+conn_list C 00000004 00000004
+conn_list_cnt C 00000004 00000004
+CONN_LIST_INC U         
+free U         
+last_break C 00000002 00000002
+malloc U         
+memset U         
+pid_list C 00000004 00000004
+pid_list_cnt C 00000004 00000004
+realloc U         
+setErrno U         
+strncpy U         
+TgtDelete U         
+TgtDetachCon U         
+TgtKillAndDelete U         
+TspTranslateRpcAddr U         
+TspValidateAddr U         
+librtemscpu.a[servbkpt.o]:
+__assert U         
+BreakAdjustPC T 000009b4 00000008
+BreakClear T 00000258 000002bc
+BreakGet T 00000168 000000f0
+BreakGetIndex T 00000668 0000007c
+BreakHide T 000006e4 000000c4
+BreakIdentify T 00000514 000000f0
+BreakOverwrite T 000007a8 0000007c
+BreakPcChanged T 000008a0 00000018
+BreakSet T 00000000 00000168
+BreakSetAt T 00000604 00000064
+BreakStepOff T 000008b8 00000038
+BreakSteppedOff T 000008f0 000000c4
+BreakStepRange T 00000824 0000007c
+conn_list C 00000004 00000004
+conn_list_cnt C 00000004 00000004
+getErrno U         
+last_break C 00000002 00000002
+memcpy U         
+memset U         
+pid_list C 00000004 00000004
+pid_list_cnt C 00000004 00000004
+realloc U         
+setErrno U         
+TgtNotifyAll U         
+TgtPtrace U         
+librtemscpu.a[servrpc.o]:
+BreakClear U         
+BreakGet U         
+BreakGetIndex U         
+BreakHide U         
+BreakOverwrite U         
+BreakPcChanged U         
+BreakSet U         
+BreakSetAt U         
+BreakStepOff U         
+BreakStepRange U         
+close_connex_2_svc T 00000cfc 00000050
+ConnCreate U         
+ConnDelete U         
+conn_list C 00000004 00000004
+conn_list_cnt C 00000004 00000004
+FindPidEntry U         
+getErrno U         
+get_signal_names_2_svc T 00000d4c 00000020
+last_break C 00000002 00000002
+memcpy U         
+memset U         
+open_connex_2_svc T 00000000 000000e8
+pid_list C 00000004 00000004
+pid_list_cnt C 00000004 00000004
+ptrace_2_svc T 000000e8 0000098c
+send_signal_2_svc T 00000cb4 00000048
+setErrno U         
+strlen U         
+TgtAttach U         
+TgtDelete U         
+TgtDetachCon U         
+TgtNotifyAll U         
+TgtPtrace U         
+TotalReboot U         
+TspConnGetIndex U         
+TspInit U         
+TspMessageReceive U         
+TspSendWaitChange U         
+wait_info_2_svc T 00000a74 00000240
+librtemscpu.a[excep.o]:
+conn_list C 00000004 00000004
+conn_list_cnt C 00000004 00000004
+FirstCtx G 00000000 00000004
+free U         
+GetExceptCtx T 00000220 0000008c
+last_break C 00000002 00000002
+LastCtx G 00000004 00000004
+malloc U         
+memcpy U         
+NbExceptCtx C 00000004 00000004
+NbSerializedCtx C 00000004 00000004
+pid_list C 00000004 00000004
+pid_list_cnt C 00000004 00000004
+PopExceptCtx T 00000000 00000128
+PushExceptCtx T 00000128 000000c4
+PushSavedExceptCtx T 000001ec 00000034
+rtems_panic U         
+SavedContext C 000000a4 000000a4
+librtemscpu.a[excep_f.o]:
+BreakPointExcHdl T 00000000 0000019c
+conn_list C 00000004 00000004
+conn_list_cnt C 00000004 00000004
+currentTargetThread U         
+ExcepToSig T 0000019c 00000054
+ExitForSingleStep U         
+justSaveContext U         
+last_break C 00000002 00000002
+NbSerializedCtx U         
+pid_list C 00000004 00000004
+pid_list_cnt C 00000004 00000004
+PopExceptCtx U         
+PushExceptCtx U         
+PushSavedExceptCtx U         
+rtems_panic U         
+rtems_semaphore_create U         
+rtems_semaphore_delete U         
+rtems_semaphore_obtain U         
+rtems_semaphore_release U         
+rtems_status_text U         
+serializeSemId U         
+_Thread_Executing U         
+wakeupEventSemId U         
+librtemscpu.a[servtgt.o]:
+__assert U         
+BreakClear U         
+BreakIdentify U         
+BreakSteppedOff U         
+conn_list C 00000004 00000004
+conn_list_cnt C 00000004 00000004
+CtxToRegs U         
+FindPidEntry U         
+free U         
+last_break C 00000002 00000002
+memset U         
+pid_list C 00000004 00000004
+pid_list_cnt C 00000004 00000004
+PID_LIST_INC U         
+ptrace_2_svc U         
+realloc U         
+strdup U         
+TgtBreakCancelStep T 00000874 0000010c
+TgtBreakRestoreOrig T 00000814 00000060
+TgtCreateNew T 00000000 000001c8
+TgtDelete T 00000c54 00000170
+TgtDetachCon T 00000dc4 000001e4
+TgtHandleChildChange T 000003d8 0000043c
+TgtKillAndDelete T 000001c8 00000210
+TgtNotifyAll T 00000b80 000000d4
+TgtNotifyWaitChange T 00000980 00000200
+TgtPtrace U         
+TgtRealPtrace U         
+TspSendWaitChange U         
+librtemscpu.a[servtsp.o]:
+alarm U         
+BackPort U         
+bind U         
+ConnDelete U         
+conn_list C 00000004 00000004
+conn_list_cnt C 00000004 00000004
+last_break C 00000002 00000002
+memcpy U         
+memset U         
+pid_list C 00000004 00000004
+pid_list_cnt C 00000004 00000004
+printf U         
+sendto U         
+setErrno U         
+sigaction U         
+socket U         
+sprintf U         
+taskName U         
+TspConnGetIndex T 000003e4 00000090
+TspGetHostName T 00000530 00000068
+TspInit T 0000026c 000000b8
+TspMessageReceive T 00000474 000000bc
+TSP_RETRIES U         
+TspSendMessage T 0000010c 00000160
+TspSendWaitChange T 00000000 0000010c
+TspTranslateRpcAddr T 00000324 00000084
+TspValidateAddr T 000003a8 0000003c
+librtemscpu.a[servutil.o]:
+conn_list C 00000004 00000004
+conn_list_cnt C 00000004 00000004
+FindPidEntry T 0000009c 0000006c
+last_break C 00000002 00000002
+ListAlloc T 00000000 0000009c
+pid_list C 00000004 00000004
+pid_list_cnt C 00000004 00000004
+realloc U         
+strcpy U         
+strlen U         
+librtemscpu.a[_servtgt.o]:
+CheckForSingleStep U         
+connect_rdbg_exception U         
+conn_list C 00000004 00000004
+conn_list_cnt C 00000004 00000004
+currentTargetThread U         
+debugId C 00000004 00000004
+enterRdbg U         
+__errno U         
+eventTask T 00000284 00000094
+eventTaskId C 00000004 00000004
+ExcepToSig U         
+FindPidEntry U         
+GetExceptCtx U         
+Idle_frame C 000000a4 000000a4
+last_break C 00000002 00000002
+MyThreadIdle T 00000318 00000028
+_Objects_Information_table U         
+pid_list C 00000004 00000004
+pid_list_cnt C 00000004 00000004
+printf U         
+ptrace U         
+rtems_panic U         
+rtems_semaphore_create U         
+rtems_semaphore_delete U         
+rtems_semaphore_ident U         
+rtems_semaphore_obtain U         
+rtems_status_text U         
+rtems_task_create U         
+rtems_task_delete U         
+rtems_task_ident U         
+rtems_task_start U         
+serializeSemId C 00000004 00000004
+TgtAttach T 00000000 00000264
+TgtBreakCancelStep U         
+TgtBreakRestoreOrig U         
+TgtCreateNew U         
+TgtGetThreadName T 0000040c 0000009c
+TgtHandleChildChange U         
+TgtNotifyWaitChange U         
+TgtPtrace T 00000340 000000cc
+TgtRealPtrace T 00000264 00000020
+TgtThreadList T 000004a8 0000008c
+wakeupEventSemId C 00000004 00000004
+librtemscpu.a[rdbg_f.o]:
+__assert U         
+BreakPointExcHdl U         
+CancelSingleStep T 0000030c 00000020
+CheckForSingleStep T 000002d4 00000038
+connect_rdbg_exception T 0000032c 00000028
+CtxToRegs T 00000110 00000034
+disconnect_rdbg_exception T 00000354 00000028
+ExitForSingleStep U         
+get_ctx_thread T 00000000 00000110
+globalExceptHdl U         
+memcpy U         
+RegsToCtx T 00000144 00000034
+set_ctx_thread T 00000178 000000c4
+Single_Step T 0000023c 00000098
+librtemscpu.a[ptrace.o]:
+__assert U         
+CannotRestart U         
+conn_list C 00000004 00000004
+conn_list_cnt C 00000004 00000004
+copyback_data_cache_and_invalidate_instr_cache U         
+CtxToRegs U         
+currentTargetThread U         
+debugId U         
+enterRdbg U         
+__errno U         
+eventTaskId U         
+ExitForSingleStep U         
+get_ctx_thread U         
+GetExceptCtx U         
+justSaveContext U         
+last_break C 00000002 00000002
+memcpy U         
+NbExceptCtx U         
+NbSerializedCtx U         
+_Objects_Information_table U         
+pid_list C 00000004 00000004
+pid_list_cnt C 00000004 00000004
+ptrace T 00000000 00000558
+RegsToCtx U         
+rtems_semaphore_delete U         
+rtems_semaphore_release U         
+rtems_task_delete U         
+rtems_task_ident U         
+safeMemRead T 000005e4 00000034
+safeMemWrite T 00000618 00000034
+SavedContext U         
+serializeSemId U         
+set_ctx_thread U         
+setErrno U         
+Single_Step U         
+TgtGetThreadName U         
+TgtThreadList U         
+Thread_Get_RDBG T 00000558 0000008c
+TotalReboot U         
+wakeupEventSemId U         
+librtemscpu.a[rdbg_cpu_asm.o]:
+copyback_data_cache_and_invalidate_instr_cache T 00000000 
+enterRdbg T 0000004c 

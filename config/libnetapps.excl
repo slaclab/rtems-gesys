@@ -1,0 +1,1685 @@
+/* /test/rtems-4.6.0pre4/powerpc-rtems/svgm/lib/libnetapps.a[ftpd.o]: */
+librtemscpu.a[ftpd.o]:
+accept U         
+bind U         
+chdir U         
+chmod U         
+chroot U         
+close U         
+closedir U         
+connect U         
+creat U         
+_ctype_ U         
+__errno U         
+fclose U         
+fdopen U         
+fflush U         
+fgets U         
+fprintf U         
+free U         
+getcwd U         
+getsockname U         
+gmtime U         
+gmtime_r U         
+listen U         
+malloc U         
+memcmp U         
+memcpy U         
+memset U         
+mkdir U         
+open U         
+opendir U         
+read U         
+readdir U         
+recv U         
+rmdir U         
+rtems_event_receive U         
+rtems_event_send U         
+rtems_ftpd_configuration U         
+rtems_initialize_ftpd T 0000053c 00000274
+rtems_libio_set_private_env U         
+rtems_semaphore_create U         
+rtems_semaphore_delete U         
+rtems_semaphore_obtain U         
+rtems_semaphore_release U         
+rtems_status_text U         
+rtems_task_create U         
+rtems_task_delete U         
+rtems_task_start U         
+rtems_task_wake_after U         
+send U         
+setsockopt U         
+shutdown U         
+snprintf U         
+socket U         
+split_command T 00000000 000001b8
+sscanf U         
+stat U         
+strcmp U         
+strcpy U         
+strerror U         
+strftime U         
+strlen U         
+syslog U         
+time U         
+unlink U         
+write U         
+librtemscpu.a[icmds.o]:
+main_icmp T 00000090 00000024
+main_if T 00000048 00000024
+main_inet T 00000000 00000024
+main_ip T 0000006c 00000024
+main_mbuf T 00000024 00000024
+main_tcp T 000000b4 00000024
+main_udp T 000000d8 00000024
+register_icmds T 000000fc 00000108
+rtems_bsdnet_show_icmp_stats U         
+rtems_bsdnet_show_if_stats U         
+rtems_bsdnet_show_inet_routes U         
+rtems_bsdnet_show_ip_stats U         
+rtems_bsdnet_show_mbuf_stats U         
+rtems_bsdnet_show_tcp_stats U         
+rtems_bsdnet_show_udp_stats U         
+shell_add_cmd U         
+librtemscpu.a[pty.o]:
+chmod U         
+chown U         
+close U         
+fclose U         
+get_pty T 00000380 00000084
+IAC_AYT_RSP R 00000000 00000022
+IAC_BRK_RSP R 00000024 0000000a
+IAC_IP_RSP R 00000030 0000000e
+_impure_ptr U         
+init_ptys T 00000410 00000090
+malloc U         
+printk U         
+pty_close T 000005d8 00000024
+pty_control T 00000644 00000024
+pty_get_termios_handlers T 00000404 0000000c
+pty_initialize T 000004a0 00000110
+pty_open T 000005b0 00000028
+pty_read T 000005fc 00000024
+ptys C 000001c0 000001c0
+ptys_initted G 00000000 00000004
+pty_write T 00000620 00000024
+read U         
+read_pty T 00000000 00000380
+rtems_fatal_error_occurred U         
+rtems_io_register_name U         
+rtems_task_delete U         
+rtems_termios_close U         
+rtems_termios_ioctl U         
+rtems_termios_open U         
+rtems_termios_read U         
+rtems_termios_write U         
+sprintf U         
+strlen U         
+write U         
+librtemscpu.a[telnetd.o]:
+accept U         
+bind U         
+close U         
+get_pty U         
+listen U         
+main_telnetd T 00000270 00000170
+memset U         
+new_rtems_name U         
+perror U         
+printf U         
+puts U         
+register_icmds U         
+register_telnetd T 000003e0 00000044
+rtems_error U         
+rtems_initialize_telnetd T 00000190 000000e0
+rtems_task_create U         
+rtems_task_delete U         
+rtems_task_start U         
+rtems_task_telnetd T 00000000 00000190
+setsockopt U         
+shell_add_cmd U         
+shell_init U         
+socket U         
+str2int U         
+telnetd_stack_size G 00000004 00000004
+telnetd_task_id G 00000000 00000004
+telnetd_task_priority G 00000008 00000004
+librtemscpu.a[auth.o]:
+allow_any_ip G 00000022 00000001
+auth_check_options T 00000394 0000026c
+auth_ip_addr T 00000a08 0000002c
+auth_linkdown_hook G 00000004 00000004
+auth_linkup_hook G 00000000 00000004
+auth_options D 00000008 00000240
+auth_peer_fail T 00000c84 00000034
+auth_peer_success T 00000cb8 000000c0
+auth_required G 00000021 00000001
+auth_reset T 00000ffc 00000158
+auth_withpeer_fail T 00000d78 00000070
+auth_withpeer_success T 00000de8 000000c0
+bad_ip_adrs T 00000a34 00000034
+ChapAuthPeer U         
+ChapAuthWithPeer U         
+check_passwd T 00001154 000000a8
+cryptpap G 0000001d 00000001
+explicit_remote G 00000023 00000001
+free U         
+gethostbyname U         
+get_idle_time U         
+getnetbyname U         
+get_secret T 000011fc 000000d0
+have_route_to U         
+hostname U         
+idle_time_hook G 00000008 00000004
+idle_time_limit U         
+inet_addr U         
+ipcp_wantoptions U         
+lcp_allowoptions U         
+lcp_close U         
+lcp_gotoptions U         
+lcp_hisoptions U         
+lcp_wantoptions U         
+link_down T 00000b64 00000120
+link_established T 00000000 00000240
+link_required T 00000b00 00000004
+link_terminated T 00000b04 00000060
+malloc U         
+maxconnect U         
+memcmp U         
+memcpy U         
+memset U         
+need_holdoff U         
+new_phase U         
+np_down T 00000f64 00000050
+np_finished T 00000fb4 00000048
+np_up T 00000ea8 000000bc
+option_error U         
+options_from_list U         
+our_name U         
+pap_auth_hook G 00000010 00000004
+pap_check_hook G 0000000c 00000004
+pap_logout_hook G 00000014 00000004
+pap_passwd_hook G 00000018 00000004
+passwd U         
+peer_authname C 00000100 00000100
+pppd_error U         
+pppd_info U         
+pppd_notice U         
+pppd_phase U         
+pppd_status U         
+pppd_warn U         
+pppifunit U         
+ppptimeout U         
+privileged U         
+protocols U         
+puts U         
+refuse_chap G 0000001f 00000001
+refuse_pap G 0000001e 00000001
+remote_name C 00000100 00000100
+slprintf U         
+start_networks T 000002c0 000000d4
+strchr U         
+strlcpy U         
+strlen U         
+strtol U         
+unsuccess U         
+untimeout U         
+upap_authpeer U         
+upap_authwithpeer U         
+update_link_stats U         
+usehostname G 00000020 00000001
+uselogin G 0000001c 00000001
+user U         
+librtemscpu.a[ccp.o]:
+ccp_allowoptions C 0000000c 0000000c
+ccp_fatal_error U         
+ccp_flags_set U         
+ccp_fsm C 00000038 00000038
+ccp_gotoptions C 0000000c 0000000c
+ccp_hisoptions C 0000000c 0000000c
+ccp_protent D 000001a0 00000044
+ccp_test U         
+ccp_wantoptions C 0000000c 0000000c
+fsm_close U         
+fsm_init U         
+fsm_input U         
+fsm_lowerdown U         
+fsm_lowerup U         
+fsm_open U         
+fsm_sdata U         
+memcpy U         
+memset U         
+option_error U         
+pppd_error U         
+pppd_notice U         
+ppptimeout U         
+print_string U         
+slprintf U         
+strlcpy U         
+strtol U         
+untimeout U         
+librtemscpu.a[chap_ms.o]:
+librtemscpu.a[chap.o]:
+auth_peer_fail U         
+auth_peer_success U         
+auth_withpeer_fail U         
+auth_withpeer_success U         
+chap C 00000088 00000088
+ChapAuthPeer T 00000c14 00000134
+ChapAuthWithPeer T 00000bcc 00000048
+chap_protent D 00000080 00000044
+debug U         
+drand48 U         
+explicit_remote U         
+get_secret U         
+hostname U         
+MD5Final U         
+MD5Init U         
+MD5Update U         
+memcmp U         
+memcpy U         
+memset U         
+outpacket_buf U         
+output U         
+pppd_dbglog U         
+pppd_error U         
+pppd_info U         
+pppd_notice U         
+pppd_warn U         
+ppptimeout U         
+print_string U         
+remote_name U         
+slprintf U         
+strlcpy U         
+strlen U         
+untimeout U         
+librtemscpu.a[chat.o]:
+abort_next G 00000008 00000004
+abort_string D 0000001c 00000040
+atoi U         
+break_sequence T 00000ac0 0000002c
+chat_expect T 000000fc 00000204
+chatmain T 00000958 00000168
+chat_send T 00000300 00000214
+clear_abort_next G 00000014 00000004
+clear_report_next G 00000024 00000004
+copy_of T 0000089c 00000060
+debug U         
+dup_mem T 00000840 0000005c
+echo_next G 00000010 00000004
+expect_strtok T 00000000 000000fc
+fail_buffer C 00000032 00000032
+fail_reason G 00000000 00000004
+free U         
+getenv U         
+getnextcommand T 000008fc 0000005c
+hup_next G 0000002c 00000004
+malloc U         
+memcmp U         
+memcpy U         
+memmove U         
+memset U         
+n_aborts G 00000004 00000004
+n_reports G 00000018 00000004
+pppd_dbglog U         
+read U         
+report_buffer C 00000032 00000032
+report_gathering G 00000020 00000004
+report_next G 0000001c 00000004
+report_string C 00000040 00000040
+saved_tty_parameters C 00000024 00000024
+say_next G 00000028 00000004
+sleep U         
+strchr U         
+strcpy U         
+strlen U         
+strncmp U         
+tcgetattr U         
+tcsendbreak U         
+tcsetattr U         
+temp2 C 00000400 00000400
+timeout_next G 0000000c 00000004
+write U         
+librtemscpu.a[demand.o]:
+demand_block T 000004fc 00000084
+demand_conf T 000003d8 00000124
+demand_discard T 00000580 000000d8
+demand_rexmit T 00000260 000000b4
+demand_unblock T 00000658 00000080
+die U         
+free U         
+get_loop_output U         
+loop_chars T 00000000 00000194
+loop_frame T 00000194 000000cc
+malloc U         
+memcpy U         
+novm U         
+output U         
+pend_q C 00000004 00000004
+pend_qtail C 00000004 00000004
+ppp_recv_config U         
+ppp_send_config U         
+protocols U         
+sifnpmode U         
+librtemscpu.a[fsm.o]:
+fsm_close T 000001ac 00000118
+fsm_init T 00000fc4 00000038
+fsm_input T 00000420 00000164
+fsm_lowerdown T 00000000 000000cc
+fsm_lowerup T 00000ffc 00000068
+fsm_open T 000000cc 000000e0
+fsm_protreject T 00000c7c 00000124
+fsm_sdata T 00000ef0 000000d4
+memcpy U         
+outpacket_buf U         
+output U         
+peer_mru C 00000004 00000004
+ppp_delay U         
+pppd_error U         
+pppd_info U         
+pppd_warn U         
+ppptimeout U         
+strlen U         
+untimeout U         
+librtemscpu.a[ipcp.o]:
+auth_ip_addr U         
+bad_ip_adrs U         
+cifaddr U         
+cifdefaultroute U         
+cifproxyarp U         
+debug U         
+demand U         
+demand_rexmit U         
+disable_defaultip G 00000000 00000001
+fsm_close U         
+fsm_init U         
+fsm_input U         
+fsm_lowerdown U         
+fsm_lowerup U         
+fsm_open U         
+gethostbyname U         
+GetMask U         
+hostname U         
+inet_addr U         
+int_option U         
+ipcp_allowoptions C 00000030 00000030
+ipcp_fsm C 00000038 00000038
+ipcp_gotoptions C 00000030 00000030
+ipcp_hisoptions C 00000030 00000030
+ipcp_protent D 0000035c 00000044
+ipcp_wantoptions C 00000030 00000030
+ip_down_hook G 00000008 00000004
+ip_ntoa T 00001e1c 0000004c
+ipparam U         
+ip_up_hook G 00000004 00000004
+memcpy U         
+memset U         
+np_down U         
+np_finished U         
+np_up U         
+option_error U         
+pppd_error U         
+pppd_notice U         
+pppd_warn U         
+pppifunit U         
+print_string U         
+__res_init U         
+rtems_bsdnet_nameserver U         
+rtems_bsdnet_nameserver_count U         
+sifaddr U         
+sifdefaultroute U         
+sifdown U         
+sifnpmode U         
+sifproxyarp U         
+sifup U         
+sifvjcomp U         
+slprintf U         
+update_link_stats U         
+librtemscpu.a[lcp.o]:
+auth_reset U         
+fsm_close U         
+fsm_init U         
+fsm_input U         
+fsm_lowerdown U         
+fsm_lowerup U         
+fsm_open U         
+fsm_protreject U         
+fsm_sdata U         
+lcp_allowoptions C 00000024 00000024
+lcp_close T 000021f0 00000094
+lcp_fsm C 00000038 00000038
+lcp_gotoptions C 00000024 00000024
+lcp_hisoptions C 00000024 00000024
+lcp_loopbackfail G 00000000 00000004
+lcp_lowerdown T 00002348 00000030
+lcp_lowerup T 00002284 000000c4
+lcp_open T 00002178 00000078
+lcp_protent D 00000374 00000044
+lcp_sprotrej T 00002378 00000054
+lcp_wantoptions C 00000024 00000024
+link_down U         
+link_established U         
+link_required U         
+link_terminated U         
+magic U         
+memcpy U         
+memset U         
+new_phase U         
+option_error U         
+peer_mru U         
+pppd_dbglog U         
+pppd_error U         
+pppd_info U         
+pppd_notice U         
+pppd_phase U         
+pppd_status U         
+pppd_warn U         
+ppp_recv_config U         
+ppp_send_config U         
+ppp_set_xaccm U         
+ppptimeout U         
+print_string U         
+protocols U         
+strtol U         
+untimeout U         
+xmit_accm C 00000020 00000020
+librtemscpu.a[magic.o]:
+get_host_seed U         
+getpid U         
+gettimeofday U         
+magic T 00000054 00000020
+magic_init T 00000000 00000054
+mrand48 U         
+srand48 U         
+librtemscpu.a[md4.o]:
+MD4Final T 00000284 0000006c
+MD4Init T 00000228 0000005c
+MD4Print T 000001c0 00000068
+MD4Update T 00000000 000001c0
+printf U         
+librtemscpu.a[md5.o]:
+MD5Final T 00000148 000001ec
+MD5Init T 00000000 00000040
+MD5Update T 00000040 00000108
+librtemscpu.a[options.o]:
+add_options T 00001934 00000060
+auth_options U         
+bad_ip_adrs U         
+close U         
+connect_delay G 00000060 00000004
+connect_script G 00000024 00000004
+connect_script_info C 00000008 00000008
+crtscts G 0000000c 00000004
+_ctype_ U         
+current_option C 00000004 00000004
+debug G 00000000 00000004
+default_device G 00000008 00000004
+demand G 00000039 00000001
+devnam C 00000400 00000400
+devnam_fixed U         
+devnam_info C 00000008 00000008
+devstat U         
+die U         
+disconnect_script G 00000028 00000004
+disconnect_script_info C 00000008 00000008
+__errno U         
+fclose U         
+fopen U         
+fprintf U         
+free U         
+general_options D 00000004 000005a0
+gethostbyname U         
+gethostname U         
+getword T 00000be8 00000470
+holdoff G 00000044 00000004
+holdoff_specified C 00000001 00000001
+hostname U         
+idle_time_limit G 00000040 00000004
+_impure_ptr U         
+inet_addr U         
+initializer G 00000020 00000004
+initializer_info C 00000008 00000008
+inspeed G 00000014 00000004
+int_option T 000010c8 00000050
+ipcp_allowoptions U         
+ipcp_wantoptions U         
+ip_ntoa U         
+ipparam G 0000003c 00000004
+kdebugflag G 00000004 00000004
+lcp_allowoptions U         
+lcp_wantoptions U         
+linkname C 00000400 00000400
+lockflag G 0000001c 00000001
+log_to_fd G 00000058 00000004
+log_to_file C 00000001 00000001
+malloc U         
+maxconnect G 00000034 00000004
+maxfail G 0000005c 00000004
+memcmp U         
+memcpy U         
+memset U         
+modem G 00000010 00000001
+netmask G 00000018 00000004
+nodetach G 0000001d 00000001
+notty G 00000048 00000001
+novm U         
+open U         
+option_error T 00000b2c 000000bc
+options_for_tty T 0000180c 00000128
+options_from_file T 0000013c 00000224
+options_from_list T 00000360 0000013c
+options_from_user T 00001804 00000008
+option_source C 00000004 00000004
+our_name C 00000100 00000100
+parse_args T 00000000 0000013c
+passwd C 00000100 00000100
+persist G 00000038 00000001
+pppd_phase U         
+prepass U         
+privileged U         
+privileged_option C 00000004 00000004
+protocols U         
+ptycommand G 00000030 00000004
+ptycommand_info C 00000008 00000008
+record_file G 0000004c 00000004
+remote_name U         
+slprintf U         
+__srget U         
+stat U         
+strchr U         
+strcmp U         
+strdup U         
+strlcat U         
+strlcpy U         
+strlen U         
+strncat U         
+strtol U         
+strtoul U         
+sync_serial G 00000054 00000001
+tune_kernel C 00000001 00000001
+ungetc U         
+updetach G 0000001e 00000001
+user C 00000100 00000100
+using_pty G 00000050 00000004
+vslprintf U         
+welcomer G 0000002c 00000004
+welcomer_info C 00000008 00000008
+librtemscpu.a[rtemsmain.o]:
+auth_check_options U         
+baud_rate C 00000004 00000004
+callback_script C 00000004 00000004
+ccp_fsm U         
+ccp_protent U         
+chap_protent U         
+chatmain U         
+clean_check U         
+close U         
+connect_script U         
+debug U         
+default_device U         
+demand U         
+demand_discard U         
+detached C 00000004 00000004
+devnam U         
+devnam_fixed C 00000004 00000004
+devstat C 00000050 00000050
+die T 00000ca0 00000020
+disconnect_script U         
+disestablish_ppp U         
+do_callback C 00000004 00000004
+doing_callback C 00000004 00000004
+__errno U         
+establish_ppp U         
+fcntl U         
+free U         
+get_ppp_stats U         
+gettimeofday U         
+holdoff U         
+holdoff_hook G 00000004 00000004
+holdoff_specified U         
+hostname C 00000100 00000100
+hungup C 00000004 00000004
+ifname C 00000020 00000020
+initializer U         
+inpacket_buf C 000005e0 000005e0
+ipcp_protent U         
+lcp_close U         
+lcp_fsm U         
+lcp_lowerdown U         
+lcp_lowerup U         
+lcp_open U         
+lcp_protent U         
+lcp_sprotrej U         
+link_connect_time C 00000004 00000004
+link_stats C 00000008 00000008
+link_stats_valid C 00000004 00000004
+link_terminated U         
+magic_init U         
+malloc U         
+maxfail U         
+modem U         
+need_holdoff C 00000004 00000004
+new_phase T 00000c60 00000040
+new_phase_hook G 00000008 00000004
+nodetach U         
+no_ppp_msg G 0000000c 00000004
+novm T 00001244 00000030
+open U         
+open_ccp_flag C 00000004 00000004
+option_error U         
+outpacket_buf C 000005e0 000005e0
+pap_protent U         
+persist U         
+ppp_available U         
+pppd_dbglog U         
+pppd_dialer C 00000004 00000004
+pppd_error U         
+pppd_fatal U         
+pppd_info U         
+pppd_kill_link C 00000004 00000004
+pppdmain T 00000000 0000099c
+pppd_notice U         
+pppd_phase C 00000004 00000004
+pppd_status C 00000004 00000004
+pppd_warn U         
+pppifunit C 00000004 00000004
+ppptimeout T 00000d90 00000108
+prepass G 00000000 00000004
+privileged C 00000004 00000004
+privileged_option U         
+protocol_list D 0000001c 000001f0
+protocol_name T 00001090 00000040
+protocols D 00000004 00000018
+read_packet U         
+restore_loop U         
+restore_tty U         
+script_env C 00000004 00000004
+s_env_nalloc C 00000004 00000004
+setdtr U         
+set_up_tty U         
+sleep U         
+slprintf U         
+strcpy U         
+strlcpy U         
+sys_check_options U         
+sys_cleanup U         
+sys_close U         
+sys_init U         
+ttyfd C 00000004 00000004
+unsuccess C 00000004 00000004
+untimeout T 000011a0 000000a4
+update_link_stats T 000010d0 000000d0
+wait_input U         
+welcomer U         
+librtemscpu.a[rtemspppd.o]:
+auth_linkdown_hook U         
+auth_linkup_hook U         
+ip_down_hook U         
+ip_up_hook U         
+options_from_list U         
+persist U         
+pppasyncattach U         
+pppd_dialer U         
+pppd_kill_link U         
+pppdmain U         
+pppd_phase U         
+ppptimeout U         
+protocols U         
+rtems_bsdnet_config U         
+rtems_event_receive U         
+rtems_event_send U         
+rtems_pppd_connect T 000002a0 00000030
+rtems_pppd_disconnect T 000002d0 00000044
+rtems_pppd_errorfp C 00000004 00000004
+rtems_pppd_exitfp C 00000004 00000004
+rtems_pppd_initialize T 00000000 000000d8
+rtems_pppd_reset_options T 00000130 00000064
+rtems_pppd_set_dialer T 00000210 00000010
+rtems_pppd_set_hook T 00000194 0000007c
+rtems_pppd_set_option T 00000220 00000080
+rtems_pppd_taskid C 00000004 00000004
+rtems_pppd_terminate T 000000d8 00000058
+rtems_task_create U         
+rtems_task_delete U         
+rtems_task_start U         
+librtemscpu.a[sys-rtems.o]:
+baud_rate U         
+ccp_fatal_error T 000018dc 00000060
+ccp_flags_set T 00001814 000000c8
+ccp_test T 000017a0 00000074
+cfgetospeed U         
+cfsetispeed U         
+cfsetospeed U         
+cifaddr T 00001d48 0000010c
+cifdefaultroute T 00001e7c 00000028
+cifproxyarp T 00001ea4 000000e4
+clean_check T 000002b0 000000e8
+close U         
+crtscts U         
+default_device U         
+demand U         
+devnam U         
+disestablish_ppp T 000010a4 000000f8
+__errno U         
+establish_ppp T 00000000 000002b0
+fcntl U         
+get_host_seed T 00001f90 00000008
+get_idle_time T 0000193c 00000040
+get_loop_output T 0000142c 0000008c
+GetMask T 00000a94 00000180
+get_ppp_stats T 0000197c 000000a8
+get_pty T 0000129c 00000008
+have_route_to T 00001f88 00000008
+ifname U         
+inspeed U         
+ioctl U         
+kdebugflag U         
+loop_chars U         
+memcpy U         
+memset U         
+modem U         
+netmask U         
+open_ppp_loopback T 000012a4 0000000c
+output T 000012b0 0000007c
+ppp_available T 00000f1c 00000088
+pppd_dbglog U         
+ppp_delay T 0000132c 00000034
+pppd_error U         
+pppd_fatal U         
+pppd_info U         
+pppd_warn U         
+pppifunit U         
+ppp_recv_config T 00001678 00000128
+ppp_send_config T 000014b8 0000015c
+ppp_set_xaccm T 00001614 00000064
+read U         
+read_packet T 000013bc 00000070
+restore_loop T 00000fa4 00000100
+restore_tty T 0000119c 000000bc
+rtems_bsdnet_microseconds_per_tick U         
+rtems_bsdnet_rtrequest U         
+rtems_event_receive U         
+rtems_pppd_taskid U         
+rtems_task_wake_after U         
+setdtr T 00001258 00000044
+set_up_tty T 00000398 00000200
+sifaddr T 00000598 000001d0
+sifdefaultroute T 00001e54 00000028
+sifdown T 00001c60 000000e8
+sifnpmode T 00001be0 00000080
+sifproxyarp T 00000768 00000158
+sifup T 00001b24 000000bc
+sifvjcomp T 00001a24 00000100
+socket U         
+strcmp U         
+strlcpy U         
+sys_check_options T 00000f14 00000008
+sys_cleanup T 00000c68 00000260
+sys_close T 00000ec8 0000004c
+sys_init T 00000c14 00000054
+tcgetattr U         
+tcsetattr U         
+ttyfd U         
+wait_input T 00001360 0000005c
+write U         
+librtemscpu.a[upap.o]:
+auth_peer_fail U         
+auth_peer_success U         
+auth_withpeer_fail U         
+auth_withpeer_success U         
+check_passwd U         
+debug U         
+memcpy U         
+memset U         
+outpacket_buf U         
+output U         
+pap_protent D 000000c4 00000044
+pppd_dbglog U         
+pppd_error U         
+pppd_info U         
+ppptimeout U         
+print_string U         
+strlen U         
+untimeout U         
+upap C 00000030 00000030
+upap_authpeer T 000007e0 0000007c
+upap_authwithpeer T 00000744 0000009c
+librtemscpu.a[utils.o]:
+atoi U         
+close U         
+ctime U         
+_ctype_ U         
+debug U         
+die U         
+__errno U         
+getpid U         
+kill U         
+line C 00000100 00000100
+linep C 00000004 00000004
+lock T 00001580 00000244
+log_packet T 000017c4 00000070
+log_to_fd U         
+memcpy U         
+open U         
+pppd_dbglog T 00001494 000000ec
+pppd_error T 000010e4 000000ec
+pppd_fatal T 00000ff0 000000f4
+pppd_info T 000013a8 000000ec
+pppd_notice T 000012bc 000000ec
+pppd_warn T 000011d0 000000ec
+print_string T 00000ea4 0000014c
+protocols U         
+read U         
+relock T 00001834 000000c0
+slprintf T 00000000 00000070
+strerror U         
+strlcpy U         
+strlen U         
+strrchr U         
+time U         
+unlink U         
+unlock T 000018f4 00000048
+vslprintf T 00000070 00000a98
+write U         
+librtemscpu.a[asp.o]:
+balloc U         
+ballocAscToUni U         
+bfree U         
+bfreeSafe U         
+_ctype_ U         
+ejCloseEngine U         
+ejOpenEngine U         
+ejSetGlobalFunctionDirect U         
+ejSetUserHandle U         
+scriptEval U         
+strlen U         
+strstr U         
+symClose U         
+symOpen U         
+websAspClose T 000005a0 00000060
+websAspDefine T 00000600 00000034
+websAspOpen T 00000540 00000060
+websAspRequest T 00000000 0000043c
+websAspWrite T 00000634 000000a8
+websError U         
+websGetRequestPath U         
+websPageClose U         
+websPageReadData U         
+websPageStat U         
+websValid U         
+websWrite U         
+websWriteBlock U         
+librtemscpu.a[balloc.o]:
+balloc T 000000c4 0000014c
+bclose T 00000260 00000060
+bfree T 000002c0 00000094
+bfreeSafe T 00000354 0000009c
+bopen T 00000000 000000c4
+brealloc T 00000454 000000e0
+bstats T 00000534 00000004
+bstrdup T 000003f0 00000064
+free U         
+malloc U         
+memcpy U         
+memset U         
+strcpy U         
+strlen U         
+traceRaw U         
+librtemscpu.a[default.o]:
+balloc U         
+bfree U         
+bfreeSafe U         
+bstrdup U         
+fmtAlloc U         
+memcmp U         
+strcat U         
+strcpy U         
+strlen U         
+strtok U         
+websAspRequest U         
+websDecodeUrl U         
+websDefaultClose T 00000658 00000064
+websDefaultHandler T 00000000 00000344
+websDone U         
+websError U         
+websGetDateString U         
+websGetDefaultDir T 000006c8 0000000c
+websGetDefaultPage T 000006bc 0000000c
+websGetRequestBytes U         
+websGetRequestDir U         
+websGetRequestFlags U         
+websGetRequestLpath U         
+websGetRequestType U         
+websGetRequestWritten U         
+websMarkTime U         
+websPageIsDirectory U         
+websPageOpen U         
+websPageReadData U         
+websPageSeek U         
+websPageStat U         
+websRedirect U         
+websSetDefaultDir T 00000720 0000004c
+websSetDefaultPage T 000006d4 0000004c
+websSetRequestBytes U         
+websSetRequestLpath U         
+websSetRequestSocketHandler U         
+websSetRequestWritten U         
+websStats U         
+websValidateUrl T 00000344 000001d8
+websWrite U         
+websWriteDataNonBlock U         
+librtemscpu.a[ejlex.o]:
+balloc U         
+bfree U         
+brealloc U         
+bstrdup U         
+_ctype_ U         
+ejError U         
+ejLexClose T 0000031c 00000004
+ejLexCloseScript T 00000320 0000007c
+ejLexFreeInputState T 00000470 00000048
+ejLexGetToken T 000004b8 00000050
+ejLexOpen T 00000314 00000008
+ejLexOpenScript T 00000000 000000c4
+ejLexPutbackToken T 00000508 00000054
+ejLexRestoreInputState T 000003f8 00000078
+ejLexSaveInputState T 0000039c 0000005c
+memcmp U         
+memcpy U         
+memset U         
+ringqClose U         
+ringqFlush U         
+ringqGetc U         
+ringqInsertc U         
+ringqLen U         
+ringqOpen U         
+ringqPutc U         
+ringqPutStr U         
+trace U         
+librtemscpu.a[ejparse.o]:
+atoi U         
+balloc U         
+ballocAscToUni U         
+bfree U         
+bfreeSafe U         
+brealloc U         
+bstrdup U         
+close U         
+_ctype_ U         
+ejArgs T 00001a90 00000188
+ejCloseBlock T 00001f9c 00000068
+ejCloseEngine T 00000130 000000e0
+ejError T 00001888 000000f0
+ejEval T 00000498 00000158
+ejEvalBlock T 000003bc 000000dc
+ejEvalFile T 00000210 000001ac
+ejGetFunctionTable T 00002354 00000034
+ejGetGlobalFunction T 00002110 00000058
+ejGetLineNumber T 000021d4 00000038
+ejGetResult T 00002250 00000034
+ejGetUserHandle T 000021a0 00000034
+ejGetVar T 00001d3c 000000a0
+ejGetVariableTable T 0000231c 00000038
+ejHandles C 00000004 00000004
+ejLexClose U         
+ejLexCloseScript U         
+ejLexFreeInputState U         
+ejLexGetToken U         
+ejLexOpen U         
+ejLexOpenScript U         
+ejLexPutbackToken U         
+ejLexRestoreInputState U         
+ejLexSaveInputState U         
+ejMax G 00000000 00000004
+ejOpenBlock T 00001f18 00000084
+ejOpenEngine T 00000000 00000130
+ejRemoveGlobalFunction T 000020c4 0000004c
+ejSetGlobalFunction T 00002004 0000006c
+ejSetGlobalFunctionDirect T 00002070 00000054
+ejSetGlobalVar T 00001cb0 0000008c
+ejSetLocalVar T 00001c18 00000098
+ejSetResult T 0000220c 00000044
+ejSetUserHandle T 00002168 00000038
+ejSetVar T 00002284 00000098
+fmtAlloc U         
+fmtValloc U         
+hAlloc U         
+hAllocEntry U         
+hFree U         
+memset U         
+open U         
+read U         
+stat U         
+strcmp U         
+strcpy U         
+stritoa U         
+strlen U         
+symClose U         
+symDelete U         
+symEnter U         
+symLookup U         
+symOpen U         
+valueInteger U         
+valueString U         
+librtemscpu.a[emfdb.o]:
+balloc U         
+basicGetProductDir T 00001274 00000020
+basicSetProductDir T 0000141c 00000078
+bfree U         
+bfreeSafe U         
+bstrdup U         
+close U         
+_ctype_ U         
+dbAddRow T 000012c8 0000009c
+dbClose T 0000010c 000000fc
+dbDeleteRow T 00000404 00000158
+dbGetTableId T 00001118 00000088
+dbGetTableName T 000013e0 0000003c
+dbGetTableNrow T 00001364 0000005c
+dbLoad T 00000d30 000003e8
+dbOpen T 00001294 00000034
+dbReadInt T 000006ac 000000c8
+dbReadStr T 000013c0 00000020
+dbRegisterDBSchema T 00000000 0000010c
+dbSave T 00000920 00000410
+dbSearchStr T 00000300 00000104
+dbSetTableNrow T 0000055c 00000150
+dbWriteInt T 00000774 000000c0
+dbWriteStr T 00000834 000000ec
+dbZero T 00000208 000000f8
+fmtAlloc U         
+gstrtoi U         
+hAllocEntry U         
+hFree U         
+memcmp U         
+memset U         
+open U         
+read U         
+rename U         
+stat U         
+strchr U         
+strcmp U         
+strlen U         
+strrchr U         
+strtok U         
+trace U         
+unlink U         
+write U         
+librtemscpu.a[form.o]:
+strchr U         
+strncpy U         
+symClose U         
+symEnter U         
+symLookup U         
+symOpen U         
+valueInteger U         
+websError U         
+websFooter T 00000280 0000002c
+websFormClose T 00000184 00000044
+websFormDefine T 00000100 00000058
+websFormHandler T 00000000 00000100
+websFormOpen T 00000158 0000002c
+websHeader T 000001c8 000000b8
+websStats U         
+websWrite U         
+librtemscpu.a[handler.o]:
+balloc U         
+bfree U         
+brealloc U         
+bstrdup U         
+memcmp U         
+memset U         
+qsort U         
+socketDeleteHandler U         
+strcat U         
+strcmp U         
+strlen U         
+strncmp U         
+strtok U         
+trace U         
+websAspClose U         
+websAspOpen U         
+websDecodeUrl U         
+websError U         
+websGetDefaultDir U         
+websGetPublishDir T 0000064c 000000c4
+websPublish T 0000061c 00000030
+websSetEnv U         
+websSetRequestPath U         
+websStats U         
+websUrlHandlerClose T 00000508 000000bc
+websUrlHandlerDefine T 00000000 00000100
+websUrlHandlerDelete T 000005c4 00000058
+websUrlHandlerOpen T 000004b4 00000054
+websUrlHandlerRequest T 00000198 0000017c
+websValid U         
+librtemscpu.a[h.o]:
+balloc U         
+bfree U         
+brealloc U         
+hAlloc T 00000000 00000124
+hAllocEntry T 000001d8 000000a8
+hFree T 00000124 000000b4
+memset U         
+librtemscpu.a[md5c.o]:
+MD5Final T 000001d4 00000110
+MD5Init T 00000080 00000040
+MD5Update T 000000c0 00000114
+librtemscpu.a[mime.o]:
+websMimeList D 00000000 00000050
+librtemscpu.a[misc.o]:
+ascToUni T 00000ecc 00000034
+atoi U         
+balloc U         
+ballocAscToUni T 00000f34 00000068
+ballocUniToAsc T 00000f9c 00000064
+brealloc U         
+_ctype_ U         
+dirname T 00000000 000000d4
+fmtAlloc T 000000d4 00000084
+fmtRealloc T 000001e0 00000090
+fmtStatic T 00000158 00000088
+fmtValloc T 00000ea0 0000002c
+gstrtoi T 00001000 00000060
+hextoi T 00000dfc 000000a4
+memcpy U         
+memset U         
+strlen U         
+strncpy U         
+strnlen U         
+strrchr U         
+uniToAsc T 00000f00 00000034
+librtemscpu.a[ringq.o]:
+balloc U         
+bfree U         
+error U         
+memcpy U         
+ringqAddNull T 000005d0 00000010
+ringqClose T 000003bc 0000005c
+ringqFlush T 00000718 00000020
+ringqGetBlk T 000000ec 000000ac
+ringqGetBlkAdj T 0000067c 0000009c
+ringqGetBlkMax T 000001dc 0000003c
+ringqGetc T 00000440 0000003c
+ringqGrowCalls G 00000000 00000004
+ringqInsertc T 000004fc 00000084
+ringqLen T 00000418 00000028
+ringqOpen T 00000344 00000078
+ringqPutBlk T 00000000 000000ec
+ringqPutBlkAdj T 000005e0 0000009c
+ringqPutBlkMax T 00000198 00000044
+ringqPutc T 0000047c 00000080
+ringqPutStr T 00000580 00000050
+strlen U         
+librtemscpu.a[rom.o]:
+librtemscpu.a[security.o]:
+bstrdup U         
+strncpy U         
+websGetPassword T 00000048 00000028
+websGetRequestFlags U         
+websGetRequestPassword U         
+websGetRequestType U         
+websGetRequestUserName U         
+websSecurityDelete T 00000070 00000028
+websSecurityHandler T 00000000 00000048
+websSetPassword T 00000098 00000030
+websUrlHandlerDelete U         
+librtemscpu.a[socket.o]:
+accept U         
+balloc U         
+ballocUniToAsc U         
+basicGetAddress U         
+bfree U         
+bind U         
+connect U         
+__errno U         
+fcntl U         
+gethostbyname U         
+inet_addr U         
+inet_ntoa U         
+listen U         
+memcpy U         
+memset U         
+recv U         
+recvfrom U         
+ringqLen U         
+select U         
+setsockopt U         
+socket U         
+socketAlloc U         
+socketClose T 00000aec 000000a4
+socketCloseConnection T 00000b90 0000003c
+socketDontBlock T 00000bd4 00000090
+socketFlush U         
+socketFree U         
+socketGetError U         
+socketGetInput T 000002f8 000000d0
+socketHighestFd U         
+socketInputBuffered U         
+socketList U         
+socketMax U         
+socketOpen T 00000aac 00000040
+socketOpenConnection T 00000000 000002f0
+socketProcess T 00000808 000000b0
+socketPtr U         
+socketReady T 00000468 000000e4
+socketRegisterInterest T 00000bcc 00000008
+socketSelect T 0000054c 000002bc
+socketSetBlock T 000009e8 000000c4
+socketSockBuffered T 00000c64 00000078
+socketWaitForEvent T 000003c8 000000a0
+strlen U         
+librtemscpu.a[sock.o]:
+ballocAscToUni U         
+bfree U         
+close U         
+__errno U         
+hAllocEntry U         
+hFree U         
+inet_addr U         
+memcpy U         
+recv U         
+ringqClose U         
+ringqFlush U         
+ringqGetBlkAdj U         
+ringqGetBlkMax U         
+ringqLen U         
+ringqOpen U         
+ringqPutBlk U         
+ringqPutBlkAdj U         
+ringqPutBlkMax U         
+ringqPutc U         
+send U         
+sendto U         
+shutdown U         
+socketAlloc T 00000a00 000000d4
+socketCanWrite T 0000087c 0000004c
+socketCreateHandler T 0000097c 0000004c
+socketDeleteHandler T 000009c8 00000038
+socketEof T 00000844 00000038
+socketFlush T 00000388 00000124
+socketFree T 000005e4 00000114
+socketGetBlock T 00000b08 00000038
+socketGetError T 0000075c 00000024
+socketGetHandle T 00000ad4 00000034
+socketGetInput U         
+socketGetMode T 00000b40 00000034
+socketGetPort T 00000bac 00000034
+socketGets T 0000028c 000000fc
+socketHighestFd G 00000000 00000004
+socketInputBuffered T 000007c4 00000080
+socketList C 00000004 00000004
+socketMax C 00000004 00000004
+socketPtr T 000006f8 00000064
+socketRead T 000000f8 00000194
+socketRegisterInterest U         
+socketSetBlock U         
+socketSetBufferSize T 000008c8 000000b4
+socketSetMode T 00000b74 00000038
+socketWrite T 00000000 000000f8
+socketWriteString T 00000780 00000044
+strlen U         
+strncpy U         
+librtemscpu.a[sym.o]:
+balloc U         
+bfree U         
+hAlloc U         
+hFree U         
+memset U         
+strcmp U         
+symClose T 00000594 000000c4
+symDelete T 000002b4 000000e8
+symEnter T 00000128 0000018c
+symFirst T 00000000 0000008c
+symLookup T 00000658 000000bc
+symNext T 0000008c 0000009c
+symOpen T 00000458 0000013c
+symSubClose T 00000434 00000024
+symSubOpen T 00000400 00000034
+valueFree U         
+valueString U         
+librtemscpu.a[uemf.o]:
+balloc U         
+basicGetAddress T 0000043c 0000000c
+basicGetProduct T 00000430 0000000c
+bfree U         
+bfreeSafe U         
+_ctype_ U         
+defaultErrorHandler U         
+defaultTraceHandler U         
+emfInst C 00000004 00000004
+emfInstGet T 00000368 0000000c
+emfInstSet T 0000035c 0000000c
+error T 00000000 00000100
+errorClose T 00000450 00000004
+errorOpen T 00000448 00000008
+errorSetHandler T 000002ec 00000014
+fmtAlloc U         
+fmtValloc U         
+stritoa T 000001b8 00000134
+strlower T 00000374 0000005c
+strupper T 000003d0 00000060
+trace T 00000100 000000b8
+traceRaw T 00000300 00000040
+traceSetHandler T 00000340 0000001c
+librtemscpu.a[um.o]:
+accessColumnNames D 00000080 00000010
+accessColumnTypes D 00000090 00000010
+accessTable D 000000a0 00000018
+bfree U         
+bstrdup U         
+_ctype_ U         
+dbAddRow U         
+dbClose U         
+dbDeleteRow U         
+dbLoad U         
+dbOpen U         
+dbReadInt U         
+dbReadStr U         
+dbRegisterDBSchema U         
+dbSave U         
+dbSearchStr U         
+dbWriteInt U         
+dbWriteStr U         
+dbZero U         
+groupColumnNames D 00000040 00000014
+groupColumnTypes D 00000054 00000014
+groupTable D 00000068 00000018
+strcmp U         
+strlen U         
+trace U         
+umAccessLimitExists T 00001cf0 00000048
+umAddAccessLimit T 000019a0 0000011c
+umAddGroup T 0000023c 00000140
+umAddUser T 00000000 000001f4
+umClose T 00000940 0000007c
+umCommit T 000009bc 00000090
+umDeleteAccessLimit T 00001abc 00000080
+umDeleteGroup T 00001264 0000013c
+umDeleteUser T 00000ae4 000000d8
+umGetAccessLimit T 000003c4 00000178
+umGetAccessLimitGroup T 00001f10 00000078
+umGetAccessLimitMethod T 00001d38 00000078
+umGetAccessLimitSecure T 00001e24 00000078
+umGetAccessMethodForURL T 00001ffc 00000154
+umGetFirstAccessLimit T 00001b3c 00000090
+umGetFirstGroup T 00001424 00000090
+umGetFirstUser T 00000bbc 00000090
+umGetGroupAccessMethod T 000015d8 0000007c
+umGetGroupEnabled T 000017b4 00000080
+umGetGroupInUse T 000013a0 00000084
+umGetGroupPrivilege T 000016c8 00000078
+umGetGroupProtected T 000018b4 00000078
+umGetNextAccessLimit T 00001bcc 00000124
+umGetNextGroup T 000014b4 00000124
+umGetNextUser T 00000c4c 00000124
+umGetUserEnabled T 00001078 00000080
+umGetUserGroup T 00000f8c 00000078
+umGetUserPassword T 00000d70 000000f4
+umGetUserProtected T 00001178 00000078
+umGroupExists T 0000037c 00000048
+umOpen T 00000874 000000cc
+umRestore T 00000a4c 00000098
+umSetAccessLimitGroup T 00001f88 00000074
+umSetAccessLimitMethod T 00001db0 00000074
+umSetAccessLimitSecure T 00001e9c 00000074
+umSetGroupAccessMethod T 00001654 00000074
+umSetGroupEnabled T 00001834 00000080
+umSetGroupPrivilege T 00001740 00000074
+umSetGroupProtected T 0000192c 00000074
+umSetUserEnabled T 000010f8 00000080
+umSetUserGroup T 00001004 00000074
+umSetUserPassword T 00000e64 00000128
+umSetUserProtected T 000011f0 00000074
+umUserCanAccessURL T 0000053c 000002e8
+umUserExists T 000001f4 00000048
+userColumnNames D 00000000 00000014
+userColumnTypes D 00000014 00000014
+userTable D 00000028 00000018
+librtemscpu.a[url.o]:
+balloc U         
+bfree U         
+htmExt G 00000000 00000005
+memcmp U         
+strchr U         
+strcpy U         
+stritoa U         
+strlen U         
+strlower U         
+strncpy U         
+strrchr U         
+symLookup U         
+websGetPort U         
+websMime U         
+websUrlParse T 000000d8 0000033c
+websUrlType T 00000000 000000d8
+librtemscpu.a[value.o]:
+bfree U         
+bstrdup U         
+memset U         
+valueFree T 000000ec 00000070
+valueInteger T 00000000 00000064
+valueString T 00000064 00000088
+librtemscpu.a[wbase64.o]:
+error U         
+websDecode64 T 00000000 00000180
+websEncode64 T 00000180 00000114
+librtemscpu.a[webmain.o]:
+ascToUni U         
+balloc U         
+bclose U         
+bfree U         
+bopen U         
+bstrdup U         
+defaultErrorHandler T 000001bc 00000040
+defaultTraceHandler T 000001fc 00000048
+ejArgs U         
+emfCreateTimer T 00000000 0000010c
+emfDeleteTimer T 00000180 0000003c
+emfSchedProcess U         
+error U         
+free U         
+gethostbyname U         
+gethostname U         
+inet_ntoa U         
+memcmp U         
+memcpy U         
+memset U         
+rtems_initialize_webserver T 0000010c 00000074
+rtems_panic U         
+rtems_task_create U         
+rtems_task_delete U         
+rtems_task_start U         
+socketClose U         
+socketOpen U         
+socketProcess U         
+socketReady U         
+socketSelect U         
+sprintf U         
+strlen U         
+symSubClose U         
+tempnam U         
+timer_create U         
+timer_delete U         
+timer_settime U         
+tp C 00000004 00000004
+websAspDefine U         
+websCloseServer U         
+websDefaultClose U         
+websDefaultHandler U         
+websDone U         
+websError U         
+websFooter U         
+websFormDefine U         
+websFormHandler U         
+websGetCgiCommName T 00000244 0000004c
+websGetVar U         
+websHeader U         
+websOpenServer U         
+websRedirect U         
+websSecurityHandler U         
+websSetDefaultDir U         
+websSetDefaultPage U         
+websSetHost U         
+websSetIpaddr U         
+websSetPassword U         
+websUrlHandlerDefine U         
+websWrite U         
+write U         
+librtemscpu.a[webpage.o]:
+close U         
+lseek U         
+open U         
+read U         
+stat U         
+websPageClose T 00000044 00000044
+websPageIsDirectory T 000000ec 0000003c
+websPageOpen T 00000000 00000044
+websPageReadData T 00000128 00000024
+websPageSeek T 0000014c 00000028
+websPageStat T 00000088 00000064
+librtemscpu.a[webrom.o]:
+websRomPageIndex D 00000000 00000010
+librtemscpu.a[webs.o]:
+ascToUni U         
+atoi U         
+ballocAscToUni U         
+ballocUniToAsc U         
+bfree U         
+bfreeSafe U         
+brealloc U         
+bstrdup U         
+close U         
+ctime U         
+_ctype_ U         
+error U         
+fmtAlloc U         
+fmtValloc U         
+hAllocEntry U         
+hFree U         
+memcmp U         
+open U         
+ringqClose U         
+ringqFlush U         
+ringqLen U         
+ringqOpen U         
+ringqPutStr U         
+socketCloseConnection U         
+socketCreateHandler U         
+socketDeleteHandler U         
+socketEof U         
+socketFlush U         
+socketGetPort U         
+socketGets U         
+socketOpenConnection U         
+socketRead U         
+socketSetBlock U         
+socketWrite U         
+strchr U         
+strcmp U         
+strcmpci U         
+strcpy U         
+stritoa U         
+strlen U         
+strlower U         
+strncpy U         
+strstr U         
+strtok U         
+strupper U         
+symClose U         
+symEnter U         
+symLookup U         
+symOpen U         
+time U         
+trace U         
+valueString U         
+webs C 00000004 00000004
+websAccept T 00001bd8 00000198
+websAlloc T 0000201c 000000b8
+websCloseListen T 00001b74 00000064
+websCloseServer T 00001a70 00000104
+websCompareVar T 00001dbc 00000048
+websDecode64 U         
+websDecodeUrl T 000014f8 0000011c
+websDone T 00001614 00000124
+websError T 00001228 00000104
+websErrors D 00000000 00000070
+websFormClose U         
+websFormOpen U         
+websFree T 00001738 00000198
+websGetCgiCommName U         
+websGetDateString T 000018d0 0000007c
+websGetHost T 000020d4 0000000c
+websGetHostUrl T 000020ec 0000000c
+websGetIpaddrUrl T 000020e0 0000000c
+websGetPort T 000020f8 0000000c
+websGetRealm T 00001980 0000000c
+websGetRequestBytes T 00002104 00000008
+websGetRequestDir T 0000210c 0000001c
+websGetRequestFlags T 00002128 00000008
+websGetRequestIpaddr T 00002130 00000008
+websGetRequestLpath T 00002138 00000008
+websGetRequestPassword T 0000215c 00000008
+websGetRequestPath T 00002140 0000001c
+websGetRequestType T 00002164 00000008
+websGetRequestUserName T 0000216c 00000008
+websGetRequestWritten T 00002174 00000008
+websGetVar T 00001008 00000054
+websHost C 00000040 00000040
+websHostUrl G 00000000 00000004
+websIpaddr C 00000040 00000040
+websIpaddrUrl G 00000004 00000004
+websMarkTime T 0000194c 00000034
+websMax C 00000004 00000004
+websMime C 00000004 00000004
+websMimeList U         
+websOpenListen T 00000000 0000017c
+websOpenServer T 0000198c 000000e4
+websPageClose U         
+websPort C 00000004 00000004
+websReadEvent T 0000017c 0000038c
+websRedirect T 00001e48 000000f8
+websReschedCallBack U         
+websResponse T 0000105c 000001cc
+websSchedCallBack U         
+websSetEnv T 00000cf8 00000290
+websSetHost T 0000217c 00000030
+websSetHostUrl T 000021ac 00000040
+websSetIpaddr T 000021ec 00000030
+websSetRealm T 000023ac 00000030
+websSetRequestBytes T 0000221c 00000008
+websSetRequestFlags T 00002224 00000008
+websSetRequestLpath T 0000222c 00000060
+websSetRequestPath T 0000228c 00000094
+websSetRequestSocketHandler T 00002320 00000038
+websSetRequestWritten T 00002358 00000008
+websSetVar T 00000f88 00000080
+websStats C 00000030 00000030
+websTestVar T 00001d70 0000004c
+websTimeout T 00001f80 0000009c
+websTimeoutCancel T 00001e04 00000044
+websUnschedCallBack U         
+websUrlHandlerClose U         
+websUrlHandlerOpen U         
+websUrlHandlerRequest U         
+websUrlParse U         
+websUrlType U         
+websValid T 00002360 0000004c
+websWrite T 0000136c 000000ec
+websWriteBlock T 00001458 000000a0
+websWriteDataNonBlock T 00001f40 00000040
+write U         
+librtemscpu.a[websuemf.o]:
+bfree U         
+_ctype_ U         
+ejEval U         
+emfSchedProcess T 00000080 000000d4
+hAllocEntry U         
+hFree U         
+scriptEval T 00000154 00000044
+strcmpci T 00000000 00000080
+time U         
+TimerProc T 00000198 00000040
+websReschedCallBack T 00000278 00000094
+websSchedCallBack T 000001d8 000000a0
+websUnschedCallBack T 0000030c 00000088
