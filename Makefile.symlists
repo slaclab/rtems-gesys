@@ -1,0 +1,11 @@
+RTEMS = /afs/slac/package/rtems/prod/
+VPATH = $(RTEMS)/rtems/powerpc-rtems/svgm/lib:$(RTEMS)/rtems/powerpc-rtems/lib:$(RTEMS)/tools/i386_linux2x/powerpc-rtems/lib:$(RTEMS)/tools/i386_linux2x/lib/gcc-lib/powerpc-rtems/2.95.3/
+LIBS = libgcc.a libstdc++.a libc.a libm.a libblock.a libbsp.a libbspExt.a libcsupport.a libfs.a libmisc.a libnetchip.a libnetworking.a librtems++.a librtemscpu.a libserialio.a librpc.a libxdr.a libtecla_r.a
+NM = powerpc-rtems-nm
+
+SCRIPTS = $(patsubst %.a, %.scr, $(notdir $(LIBS)))
+
+all: $(SCRIPTS)
+
+%.scr: %.a
+	$(NM) --defined-only -g $^ | awk '/^[^ \t:]*[:]/{ print "/* "$$1" */"} { if ( NF == 3 ) print "EXTERN("$$3")" }' > $@
