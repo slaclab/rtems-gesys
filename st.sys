@@ -9,10 +9,13 @@ rtems_rpc_start_portmapper(50)
 #ld("watchdog.obj") # && wdStart()
 chdir("../../bin/")
 # set telnet password to 'rtems'
-setenv("TELNETD_PASSWD","tdH/UvyAt6kUM")
+setenv("TELNETD_PASSWD","tduDcyLX12owo")
 ld("telnetd.obj") && startTelnetd(0,0,0,0,0)
+# RTEMS monitor (type rtemsMonitor() to enter its own shell)
 ld("monitor.obj")
+# misc utilities, e.g., md(), mm() memory inspection/modification
 ld("miscUtils.obj")
+# NTP clock this is NOT the system clock. Read using ntp_gettime()
 ld("ntpclock.obj") && rtemsNtpInitialize(0,0)
 # set timezone
 setenv("TZ","PST8PDT",1)
