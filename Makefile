@@ -32,12 +32,20 @@ OPT_LIBRARIES = -lm -lrtems++
 # and edit it to only contain stuff you DONT want.
 # Then mention it here
 # 
-EXCLUDE_LISTS+=config/libblock.excl  config/libmisc.excl
-EXCLUDE_LISTS+=config/libnetchip.excl  config/librtcio.excl
-EXCLUDE_LISTS+=config/libdosfs.excl  config/libserialio.excl
+EXCLUDE_LISTS+=$(wildcard config/*.excl)
 
 # This was permantently excluded from librtemsbsp.a by a patch
 #EXCLUDE_LISTS+=config/libnetapps.excl  
+
+#
+# Particular objects to INCLUDE with the link (note that
+# dependencies are also added).
+#
+# Note: INCLUDE_LISTS override EXCLUDE_LISTS; if you need more
+#       fine grained control, you can pass include/exclude list
+#       files explicitely  to 'ldep' and they are processed
+#       in the order they appear on the command line.
+INCLUDE_LISTS+=$(wildcard config/*.incl)
 
 # C source names, if any, go here -- minus the .c
 # make a system for storing in flash. The compressed binary
@@ -264,7 +272,7 @@ LIBNMS=$(patsubst %.a,$(ARCH)/%.nm,$(sort $(patsubst -l%,lib%.a,$(filter -l%,$(T
 
 $(SYMLIST_LDS): $(ARCH)/app.nm $(LIBNMS) $(ARCH)/startfiles.nm $(EXCLUDE_LISTS)
 	echo $^
-	$(LDEP) -F $(addprefix -x,$(EXCLUDE_LISTS)) -e $@ $(filter %.nm,$^) > $(ARCH)/ldep.log
+	$(LDEP) -F -l -u $(addprefix -o,$(LIBNMS)) $(addprefix -x,$(EXCLUDE_LISTS)) $(addprefix -o,$(INCLUDE_LISTS)) -e $@ $(filter %.nm,$^) > $(ARCH)/ldep.log
 
 vpath %.a $(patsubst -L%,%,$(filter -L%,$(THELIBS)))
 
