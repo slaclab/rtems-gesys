@@ -159,6 +159,7 @@ versioncheck:
        echo '            $(CONFVERSION)'; \
        echo '         YOU MAY HAVE TO GENERATE A NEW CONFIGURATION (linker errors?) FOR'; \
        echo '            $(GCCVERSION)'; \
+       echo '         (at least for libgcc.a, libstdc++, libsupc++; see README.config)'; \
        exit 1; \
     fi
 
