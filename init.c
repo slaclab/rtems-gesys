@@ -430,6 +430,12 @@ goto shell_entry;
   if ( pathspec )
   	goto firstTimeEntry;
 
+  /* no pathspec but a builtin symtab -> 
+   * skip reading symtab / system script
+   */
+  if ( BUILTIN_SYMTAB )
+	goto bare_entry;
+
 
   do {
 	chdir("/");
@@ -572,6 +578,8 @@ continue;
 		freeps(&scrspec);
 	}
 #endif
+
+bare_entry:
 
 	printf("Trying symfile '%s', system script '%s'\n",
 		BUILTIN_SYMTAB ? "BUILTIN" : symf,
