@@ -85,6 +85,7 @@ USE_GC=NO
 #C_PIECES=flashInit rtems_netconfig config flash
 #
 
+
 # Normal (i.e. non-flash) system which can be net-booted
 USE_TECLA_YES_C_PIECES = term
 C_PIECES=init rtems_netconfig config $(USE_TECLA_$(USE_TECLA)_C_PIECES)
@@ -143,8 +144,10 @@ DEFINES  += -DUSE_POSIX
 DEFINES  += $(DEFINES_BSPEXT_$(USE_BSPEXT))
 
 # Trim BSP specific things
+ifneq "$(filter $(RTEMS_BSP_FAMILY),svgm mvme5500)xx" "xx"
 ifeq  "$(RTEMS_BSP_FAMILY)" "svgm" 
 DEFINES  += -DHAVE_BSP_EXCEPTION_EXTENSION
+endif
 DEFINES  += "-DEARLY_CMDLINE_GET(arg)=do { *(arg) = BSP_commandline_string; } while (0)"
 C_PIECES += nvram
 ifndef ELFEXT
@@ -205,7 +208,7 @@ endif
 bspfail:
 	$(error GeSys has not been ported/tested on this BSP ($(RTEMS_BSP)) yet)
 
-bspcheck: $(if $(filter $(RTEMS_BSP_FAMILY),pc386 motorola_powerpc svgm mvme167 psim),,bspfail)
+bspcheck: $(if $(filter $(RTEMS_BSP_FAMILY),pc386 motorola_powerpc svgm mvme5500 mvme167 psim),,bspfail)
 
 
 CPPFLAGS += -I.
