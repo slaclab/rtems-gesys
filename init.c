@@ -348,18 +348,6 @@ char	*argv[7]={
   }
 #endif
 
-	
-#ifndef CDROM_IMAGE
-  if ( !getenv("SKIP_NETINI") || !BUILTIN_SYMTAB )
-	gesys_network_start();
-  else {
-	fprintf(stderr,"Skipping network initialization - you can do it manually\n");
-	fprintf(stderr,"by invoking 'gesys_network_start()' (needs BOOTP/DHCP server)\n");
-	argc = 1;
-goto shell_entry;
-  }
-#endif
-
 #if defined(USE_TECLA)
   /*
    * Install our special line discipline which implements
@@ -371,6 +359,17 @@ goto shell_entry;
 
   cexpInit(cexpExcHandlerInstall);
 
+#ifndef CDROM_IMAGE
+  /* check if we have a real ifconfig (first is loopback) */
+  if ( (!getenv("SKIP_NETINI") || !BUILTIN_SYMTAB) && rtems_bsdnet_config.ifconfig && rtems_bsdnet_config.ifconfig->next )
+	gesys_network_start();
+  else {
+	fprintf(stderr,"Skipping network initialization - you can do it manually\n");
+	fprintf(stderr,"by invoking 'gesys_network_start()' (needs BOOTP/DHCP server)\n");
+	argc = 1;
+goto shell_entry;
+  }
+#endif
 
 #ifndef CDROM_IMAGE
   if ( BOOTPFN ) {
