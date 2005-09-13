@@ -116,6 +116,18 @@
 #include <rtems/rtems_bsdnet.h>
 #include <rtems/libio.h>
 #include <rtems/tftp.h>
+
+#define CHECK(M,MM,m,mm,r,rr)	\
+	(   (M) > (MM)		\
+	|| ((M)==(MM) && (m)>(mm)) \
+	|| ((M)==(MM) && (m)==(mm) && (r)>(rr)))
+
+#define RTEMS_NEWER_THAN(M,m,r) CHECK(__RTEMS_MAJOR__,M,__RTEMS_MINOR__,m,__RTEMS_REVISION__,r)
+
+#if RTEMS_NEWER_THAN(4,6,10)
+/* in a new place */
+#include <rtems/bsdnet/servers.h>
+#endif
 #include <bsp.h>
 
 
@@ -260,6 +272,14 @@ gesys_network_start()
   printf("    (ip address, mask, [gateway, dns, ntp])\n");
 #endif
 
+#ifdef BSP_NETWORK_SETUP
+  {
+  extern int BSP_NETWORK_SETUP(struct rtems_bsdnet_config *, struct rtems_bsdnet_ifconfig *);
+  BSP_NETWORK_SETUP(&rtems_bsdnet_config, 0);
+  }
+#endif
+	
+
   rtems_bsdnet_initialize_network(); 
 
   /* remote logging only works after a call to openlog()... */
@@ -360,10 +380,14 @@ char	*argv[7]={
   cexpInit(cexpExcHandlerInstall);
 
 #ifndef CDROM_IMAGE
+#ifndef SKIP_NETINI
+#define SKIP_NETINI	getenv("SKIP_NETINI")
+#endif
   /* check if we have a real ifconfig (first is loopback) */
-  if ( (!getenv("SKIP_NETINI") || !BUILTIN_SYMTAB) && rtems_bsdnet_config.ifconfig && rtems_bsdnet_config.ifconfig->next )
+  if ( (! (SKIP_NETINI) || !BUILTIN_SYMTAB) && rtems_bsdnet_config.ifconfig && rtems_bsdnet_config.ifconfig->next )
 	gesys_network_start();
-  else {
+  else
+  {
 	fprintf(stderr,"Skipping network initialization - you can do it manually\n");
 	fprintf(stderr,"by invoking 'gesys_network_start()' (needs BOOTP/DHCP server)\n");
 	argc = 1;
@@ -602,7 +626,7 @@ bare_entry:
 
 shell_entry:
 
-	result = cexp_main(argc, argv);
+	result = argc > 1 ? cexp_main(argc, argv) : 0;
 
 	if ( ISONTMP( symf ) )
 		unlink( symf );
