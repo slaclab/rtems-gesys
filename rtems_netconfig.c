@@ -25,19 +25,39 @@ extern int rtems_dec21140_driver_attach (struct rtems_bsdnet_ifconfig *, int);
 extern int rtems_ne_driver_attach (struct rtems_bsdnet_ifconfig *, int);
 extern int rtems_wd_driver_attach (struct rtems_bsdnet_ifconfig *, int);
 
+static struct rtems_bsdnet_ifconfig isa_netdriver_config[] = {
+	{
+		"ep0", rtems_3c509_driver_attach, isa_netdriver_config + 1,
+	},
+	{
+		"ne1", rtems_ne_driver_attach, 0, irno: 9 /* qemu cannot configure irq-no :-(; has it hardwired to 9 */
+	},
+};
+
+static struct rtems_bsdnet_ifconfig pci_netdriver_config[]={
+	{
+	"fxp1", rtems_fxp_attach, pci_netdriver_config+1,
+	},
+	{
+	"dc1", rtems_dec21140_driver_attach, pci_netdriver_config+2,
+	},
+	{
+	"elnk1", rtems_elnk_driver_attach, isa_netdriver_config,
+	},
+};
+
+static int pci_check(struct rtems_bsdnet_ifconfig *cfg, int attaching)
+{
+	if ( attaching ) {
+		cfg->next = pcib_init() ? isa_netdriver_config : pci_netdriver_config;
+	}
+	return -1;
+}
+
 static struct rtems_bsdnet_ifconfig netdriver_config[]={
-		{
-		"fxp1", rtems_fxp_attach, netdriver_config+1,
-		},
-		{
-		"dc1", rtems_dec21140_driver_attach, netdriver_config+2,
-		},
-		{
-		"elnk1", rtems_elnk_driver_attach, netdriver_config+3,
-		},
-		{
-		"ep0", rtems_3c509_driver_attach, 0,
-		},
+	{
+		"dummy", pci_check, 0
+	}
 };
 
 #else
