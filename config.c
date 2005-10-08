@@ -19,6 +19,8 @@
 
 #ifdef MEMORY_SCARCE
 #define CONFIGURE_EXECUTIVE_RAM_SIZE        (1024*1024)
+#elif defined MEMORY_HUGE
+#define CONFIGURE_EXECUTIVE_RAM_SIZE        (15*1024*1024)
 #else
 #define CONFIGURE_EXECUTIVE_RAM_SIZE        (5*1024*1024)
 #endif

@@ -90,6 +90,11 @@ USE_GC=NO
 USE_TECLA_YES_C_PIECES = term
 C_PIECES=init rtems_netconfig config $(USE_TECLA_$(USE_TECLA)_C_PIECES)
 
+ifeq "$(RTEMS_BSP)" "mvme6100"
+C_PIECES+=discovery_pic
+DEFINES+=-DMEMORY_HUGE
+endif
+
 # SSRL 4.6.0pre2 compatibility workaround. Obsolete.
 #C_PIECES+=pre2-compat
 
@@ -144,12 +149,14 @@ DEFINES  += -DUSE_POSIX
 DEFINES  += $(DEFINES_BSPEXT_$(USE_BSPEXT))
 
 # Trim BSP specific things
-ifneq "$(filter $(RTEMS_BSP_FAMILY),svgm mvme5500)xx" "xx"
-ifeq  "$(RTEMS_BSP_FAMILY)" "svgm" 
+ifneq "$(filter $(RTEMS_BSP_FAMILY),svgm mvme5500 mot_ppc_new)xx" "xx"
 DEFINES  += -DHAVE_BSP_EXCEPTION_EXTENSION
-endif
-DEFINES  += "-DEARLY_CMDLINE_GET(arg)=do { *(arg) = BSP_commandline_string; } while (0)"
+DEFINES  += "-DEARLY_CMDLINE_GET(arg)=do { void BSP_fixup_bsdnet_config(); BSP_fixup_bsdnet_config(); *(arg) = BSP_commandline_string; } while (0)"
 C_PIECES += nvram
+C_PIECES += efence
+LDFLAGS  += -Wl,--wrap,malloc -Wl,--wrap,realloc -Wl,--wrap,calloc -Wl,--wrap,free
+LDFLAGS  += -Wl,--wrap,_malloc_r -Wl,--wrap,_realloc_r -Wl,--wrap,_calloc_r -Wl,--wrap,_free_r
+CPPFLAGS+=-I../../rtems/c/src/lib/libbsp/powerpc/shared/startup
 ifndef ELFEXT
 ELFEXT    = nxe
 endif 
@@ -171,6 +178,18 @@ DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_ATTACH=rtems_dec21140_driver_attach
 ifndef ELFEXT
 ELFEXT    = nxe
 endif
+endif
+
+ifeq "$(RTEMS_BSP)" "mvme6100"
+#DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_NAME=\"mve1\"
+#DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_ATTACH=rtems_mve_attach
+#DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_NAME=\"pcn1\"
+#DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_ATTACH=rtems_pcn_attach
+#DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_NAME=\"em1\"
+#DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_ATTACH=rtems_em_attach
+#DEFINES  += '-DEARLY_CMDLINE_GET(arg)=do { *arg="SKIP_NETINI=YES"; } while (0)'
+#LD_LIBS  += -lif_pcn
+LD_LIBS  += -lrtems-gdb-stub
 endif
 
 ifeq  "$(RTEMS_BSP_FAMILY)" "pc386"
@@ -208,7 +227,7 @@ endif
 bspfail:
 	$(error GeSys has not been ported/tested on this BSP ($(RTEMS_BSP)) yet)
 
-bspcheck: $(if $(filter $(RTEMS_BSP_FAMILY),pc386 motorola_powerpc svgm mvme5500 mvme167 psim),,bspfail)
+bspcheck: $(if $(filter $(RTEMS_BSP_FAMILY),pc386 motorola_powerpc svgm mvme5500 mot_ppc_new mvme167 psim),,bspfail)
 
 
 CPPFLAGS += -I.
@@ -250,7 +269,7 @@ LD_LIBS   += $(OPT_LIBRARIES)
 
 # Produce a linker map to help finding 'undefined symbol' references (README.config)
 LDFLAGS_GC_YES = -Wl,--wrap,free
-LDFLAGS   += -Wl,-Map,$(ARCH)/linkmap $(LDFLAGS_GC_$(USE_GC))
+LDFLAGS   += -Wl,-Map,$(ARCH)/linkmap $(LDFLAGS_GC_$(USE_GC)) -Wl,--trace-symbol,_fstat
 ##LDFLAGS += -Tlinkcmds
 
 # this special object contains 'undefined' references for
@@ -311,7 +330,7 @@ $(RTEMS_SITE_INSTALLDIR)/bin:
 INSTFILES += ${PGMS} ${PGMS:%.exe=%.$(ELFEXT)} ${PGMS:%.exe=%.bin} ${PGMS:%.exe=%.sym}
 
 # How to build a  tarball of this package
-REVISION=$(filter-out $$%,$SSRL_RTEMS_20041202$)
+REVISION=$(filter-out $$%,$$Name$$)
 tar:
 	@$(make-tar)
 

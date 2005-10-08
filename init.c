@@ -4,7 +4,7 @@
  *
  *  Author: Till Straumann <strauman@slac.stanford.edu>
  *
- *  init.c,v 1.24 2004/11/08 23:10:42 till Exp
+ *  $Id$
  */
 
 /*
@@ -357,8 +357,8 @@ char	*argv[7]={
 
 
   printf("Welcome to RTEMS GeSys\n");
-  printf("This system SSRL_RTEMS_20041202 was built on %s\n",system_build_date);
-  printf("init.c,v 1.24 2004/11/08 23:10:42 till Exp\n");
+  printf("This system $Name$ was built on %s\n",system_build_date);
+  printf("$Id$\n");
 
 #ifdef EARLY_CMDLINE_GET
   {

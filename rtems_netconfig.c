@@ -118,6 +118,9 @@ struct rtems_bsdnet_config rtems_bsdnet_config = {
 #ifdef MEMORY_SCARCE
     100*1024,                 /* MBUF space */
     200*1024,                 /* MBUF cluster space */
+#elif defined(MEMORY_HUGE)
+    2*1024*1024,                 /* MBUF space */
+    5*1024*1024,                 /* MBUF cluster space */
 #else
     180*1024,                 /* MBUF space */
     350*1024,                 /* MBUF cluster space */
