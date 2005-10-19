@@ -91,7 +91,6 @@ USE_TECLA_YES_C_PIECES = term
 C_PIECES=init rtems_netconfig config $(USE_TECLA_$(USE_TECLA)_C_PIECES)
 
 ifeq "$(RTEMS_BSP)" "mvme6100"
-C_PIECES+=discovery_pic
 DEFINES+=-DMEMORY_HUGE
 endif
 
