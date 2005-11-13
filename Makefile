@@ -90,7 +90,7 @@ USE_GC=NO
 USE_TECLA_YES_C_PIECES = term
 C_PIECES=init rtems_netconfig config $(USE_TECLA_$(USE_TECLA)_C_PIECES)
 
-ifeq "$(RTEMS_BSP)" "mvme6100"
+ifeq "$(RTEMS_BSP)" "beatnik"
 DEFINES+=-DMEMORY_HUGE
 endif
 
@@ -148,13 +148,13 @@ DEFINES  += -DUSE_POSIX
 DEFINES  += $(DEFINES_BSPEXT_$(USE_BSPEXT))
 
 # Trim BSP specific things
-ifneq "$(filter $(RTEMS_BSP_FAMILY),svgm mvme5500 mot_ppc_new)xx" "xx"
+ifneq "$(filter $(RTEMS_BSP_FAMILY),svgm beatnik)xx" "xx"
 DEFINES  += -DHAVE_BSP_EXCEPTION_EXTENSION
 DEFINES  += "-DEARLY_CMDLINE_GET(arg)=do { void BSP_fixup_bsdnet_config(); BSP_fixup_bsdnet_config(); *(arg) = BSP_commandline_string; } while (0)"
 C_PIECES += nvram
-C_PIECES += efence
-LDFLAGS  += -Wl,--wrap,malloc -Wl,--wrap,realloc -Wl,--wrap,calloc -Wl,--wrap,free
-LDFLAGS  += -Wl,--wrap,_malloc_r -Wl,--wrap,_realloc_r -Wl,--wrap,_calloc_r -Wl,--wrap,_free_r
+#C_PIECES += efence
+#LDFLAGS  += -Wl,--wrap,malloc -Wl,--wrap,realloc -Wl,--wrap,calloc -Wl,--wrap,free
+#LDFLAGS  += -Wl,--wrap,_malloc_r -Wl,--wrap,_realloc_r -Wl,--wrap,_calloc_r -Wl,--wrap,_free_r
 CPPFLAGS+=-I../../rtems/c/src/lib/libbsp/powerpc/shared/startup
 ifndef ELFEXT
 ELFEXT    = nxe
@@ -179,7 +179,7 @@ ELFEXT    = nxe
 endif
 endif
 
-ifeq "$(RTEMS_BSP)" "mvme6100"
+ifeq "$(RTEMS_BSP)" "beatnik"
 #DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_NAME=\"mve1\"
 #DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_ATTACH=rtems_mve_attach
 #DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_NAME=\"pcn1\"
@@ -226,7 +226,7 @@ endif
 bspfail:
 	$(error GeSys has not been ported/tested on this BSP ($(RTEMS_BSP)) yet)
 
-bspcheck: $(if $(filter $(RTEMS_BSP_FAMILY),pc386 motorola_powerpc svgm mvme5500 mot_ppc_new mvme167 psim),,bspfail)
+bspcheck: $(if $(filter $(RTEMS_BSP_FAMILY),pc386 motorola_powerpc svgm mvme5500 beatnik mvme167 psim),,bspfail)
 
 
 CPPFLAGS += -I.
@@ -420,7 +420,11 @@ foo:
 	echo $(filter %.nm,$(LIBNMS))
 
 thelibs:
-	echo $(THELIBS)
+	@echo THELIBS:
+	@echo $(THELIBS)
+	@echo
+	@echo Library vpath:
+	@echo $(patsubst -L%,%,$(filter -L%,$(THELIBS)))
 
 #initialization script
 $(ARCH)/st.sys: st.sys $(wildcard st.sys-ssrl) $(wildcard st.sys-$(RTEMS_BSP)) $(wildcard st.sys-$(RTEMS_BSP)-ssrl)
