@@ -67,8 +67,19 @@ rtems_task Init (rtems_task_argument argument);
 
 #define CONFIGURE_HAS_OWN_DEVICE_DRIVER_TABLE
 
+#define ISMINVERSION(ma,mi,re) \
+	(    __RTEMS_MAJOR__  > (ma)	\
+	 || (__RTEMS_MAJOR__ == (ma) && __RTEMS_MINOR__  > (mi))	\
+	 || (__RTEMS_MAJOR__ == (ma) && __RTEMS_MINOR__ == (mi) && __RTEMS_REVISION__ >= (re)) \
+    )
+
+#if ISMINVERSION(4,6,99)
+#include <rtems/console.h>
+#include <rtems/clockdrv.h>
+#else
 #include <console.h>
 #include <clockdrv.h>
+#enddif
 
 rtems_driver_address_table Device_drivers[]={
     CONSOLE_DRIVER_TABLE_ENTRY,
@@ -77,4 +88,9 @@ rtems_driver_address_table Device_drivers[]={
 };
 
 #define CONFIGURE_INIT
+#if ISMINVERSION(4,6,99)
+#include <rtems/confdefs.h>
+#else
 #include <confdefs.h>
+#endif
+
