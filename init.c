@@ -279,7 +279,6 @@ gesys_network_start()
   }
 #endif
 	
-
   rtems_bsdnet_initialize_network(); 
 
   /* remote logging only works after a call to openlog()... */
@@ -319,13 +318,14 @@ rtems_task Init(
 {
 GetLine	*gl=0;
 char	*symf=0, *sysscr=0, *user_script=0, *bufp;
-int		argc;
-int		result=0;
+int	argc;
+int	result=0;
+int	no_net=0;
 char	*dfltSrv  = 0;
 char	*pathspec = 0;
 #ifdef NFS_SUPPORT
 MntDescRec	bootmnt = { "/boot", 0, 0 };
-MntDescRec  homemnt = { "/home", 0, 0 };
+MntDescRec      homemnt = { "/home", 0, 0 };
 #endif
 char	*argv[7]={
 	"Cexp",	/* program name */
@@ -390,8 +390,8 @@ char	*argv[7]={
   {
 	fprintf(stderr,"Skipping network initialization - you can do it manually\n");
 	fprintf(stderr,"by invoking 'gesys_network_start()' (needs BOOTP/DHCP server)\n");
-	argc = 1;
-goto shell_entry;
+	argc   = 1;
+	no_net = 1;
   }
 #endif
 
@@ -445,9 +445,14 @@ goto shell_entry;
   if ( !pathspec ) {
 	loadTarImg(1, 0);
 	pathspec = strdup("/bin/"SYSSCRIPT);
+  } else {
+	fprintf(stderr,"PSIM: root tarfs not loaded (pathspec was '%s')\n",pathspec);
   }
   }
 #endif
+
+  if ( no_net && ( !pathspec || LOCAL_PATH != pathType(pathspec) ) )
+	goto shell_entry;
 
   /* omit prompting for the symbol file */
   if ( pathspec )
