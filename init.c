@@ -316,11 +316,11 @@ rtems_task Init(
   rtems_task_argument ignored
 )
 {
-GetLine	*gl=0;
-char	*symf=0, *sysscr=0, *user_script=0, *bufp;
-int	argc;
-int	result=0;
-int	no_net=0;
+GetLine	*gl       = 0;
+char	*symf     = 0, *sysscr=0, *user_script=0, *bufp;
+int	argc      = 0;
+int	result    = 0;
+int	no_net    = 0;
 char	*dfltSrv  = 0;
 char	*pathspec = 0;
 #ifdef NFS_SUPPORT
