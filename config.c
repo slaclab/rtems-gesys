@@ -79,7 +79,7 @@ rtems_task Init (rtems_task_argument argument);
 #else
 #include <console.h>
 #include <clockdrv.h>
-#enddif
+#endif
 
 rtems_driver_address_table Device_drivers[]={
     CONSOLE_DRIVER_TABLE_ENTRY,
