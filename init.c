@@ -151,6 +151,10 @@ static	char *my_getline(char *rval, char *prompt, int len);
 #include <pcibios.h>
 #endif
 
+#ifdef HAVE_LIBNETBOOT
+#include <libnetboot.h>
+#endif
+
 #define LINE_LENGTH 200
 
 #define SYMEXT      ".sym"
@@ -359,6 +363,14 @@ char	*argv[7]={
   printf("Welcome to RTEMS GeSys\n");
   printf("This system $Name$ was built on %s\n",system_build_date);
   printf("$Id$\n");
+
+#ifdef HAVE_LIBNETBOOT
+  /* Let libnetboot process the command line string; all 
+   * special name=value pairs recognized by libnetboot will
+   * be removed...
+   */
+   nvramFixupBsdnetConfig(1);
+#endif
 
 #ifdef EARLY_CMDLINE_GET
   {

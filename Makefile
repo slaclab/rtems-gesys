@@ -150,12 +150,12 @@ DEFINES  += $(DEFINES_BSPEXT_$(USE_BSPEXT))
 # Trim BSP specific things
 ifneq "$(filter $(RTEMS_BSP_FAMILY),svgm beatnik)xx" "xx"
 DEFINES  += -DHAVE_BSP_EXCEPTION_EXTENSION
-DEFINES  += "-DEARLY_CMDLINE_GET(arg)=do { void BSP_fixup_bsdnet_config(); BSP_fixup_bsdnet_config(); *(arg) = BSP_commandline_string; } while (0)"
-C_PIECES += nvram
+DEFINES  += "-DEARLY_CMDLINE_GET(arg)=do { *(arg) = BSP_commandline_string; } while (0)"
+DEFINES  += -DHAVE_LIBNETBOOT
+LD_LIBS  += -lnetboot
 #C_PIECES += efence
 #LDFLAGS  += -Wl,--wrap,malloc -Wl,--wrap,realloc -Wl,--wrap,calloc -Wl,--wrap,free
 #LDFLAGS  += -Wl,--wrap,_malloc_r -Wl,--wrap,_realloc_r -Wl,--wrap,_calloc_r -Wl,--wrap,_free_r
-CPPFLAGS+=-I../../rtems/c/src/lib/libbsp/powerpc/shared/startup
 ifndef ELFEXT
 ELFEXT    = nxe
 endif 
@@ -283,7 +283,7 @@ OBJS      += ${ARCH}/allsyms.o
 #  'make clobber' already includes 'make clean'
 #
 
-CLEAN_ADDITIONS   += builddate.c nvram.c
+CLEAN_ADDITIONS   += builddate.c pathcheck.c
 CLOBBER_ADDITIONS +=
 
 all: bspcheck gc-check libnms ${ARCH} $(SRCS) $(PGMS)
@@ -294,9 +294,6 @@ $(ARCH)/init.o: builddate.c pathcheck.c
 builddate.c: $(filter-out $(ARCH)/init.o $(ARCH)/allsyms.o,$(OBJS)) Makefile
 	echo 'static char *system_build_date="'`date +%Y%m%d%Z%T`'";' > $@
 	echo '#define DEFAULT_CPU_ARCH_FOR_CEXP "'`$(XSYMS) -a $<`'"' >>$@
-
-nvram.c: nvram/nvram.c
-	ln -s $^ $@
 
 pathcheck.c: nvram/pathcheck.c
 	ln -s $^ $@
@@ -456,3 +453,6 @@ else
 		exit 1;\
 	fi
 endif
+
+blah:
+	echo $(LINK_FILES)
