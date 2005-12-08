@@ -75,7 +75,7 @@
  *   - chdir into the directory where the boot (and symbol)
  *     files reside.
  *
- *   - invoke 'cexp("-s <symfile> st.sys")', i.e. start
+ *   - invoke 'cexpsh("-s <symfile> st.sys")', i.e. start
  *     CEXP and try to load the symbol table and subsequently
  *     execute a 'st.sys' file AKA 'system script'.
  *

@@ -30,6 +30,7 @@
 #define CONFIGURE_MAXIMUM_MESSAGE_QUEUES    rtems_resource_unlimited(5)
 #define CONFIGURE_MAXIMUM_PERIODS		    rtems_resource_unlimited(8)
 #define CONFIGURE_MAXIMUM_DRIVERS			15
+#define CONFIGURE_MAXIMUM_USER_EXTENSIONS	2
 
 #ifdef USE_POSIX
 #define CONFIGURE_MAXIMUM_POSIX_THREADS			20
