@@ -116,6 +116,7 @@
 #include <rtems/rtems_bsdnet.h>
 #include <rtems/libio.h>
 #include <rtems/tftp.h>
+#include <rtems/imfs.h>
 
 #define CHECK(M,MM,m,mm,r,rr)	\
 	(   (M) > (MM)		\
@@ -227,6 +228,11 @@ ansiTiocGwinszInstall(int slot);
 static int rshCopy(char **pDfltSrv, char *pathspec, char **pFnam);
 #endif
 
+int
+getchar_timeout(int fd, int timeout);
+
+static void
+dummy_clock_init();
 
 static void freeps(char **ps)
 {
@@ -282,7 +288,7 @@ gesys_network_start()
   BSP_NETWORK_SETUP(&rtems_bsdnet_config, 0);
   }
 #endif
-	
+
   rtems_bsdnet_initialize_network(); 
 
   /* remote logging only works after a call to openlog()... */
@@ -389,14 +395,29 @@ char	*argv[7]={
 		 ansiTiocGwinszInstall(7) ? "failed" : "ok");
 #endif
 
+  /*
+   * Make sure the time-of-day clock is at least initialized.
+   * The dummy routine just sets the date to 1/1/2000
+   */
+  dummy_clock_init();
+
   cexpInit(cexpExcHandlerInstall);
+
+  printf("To skip initialization, press a key now...");
+  fflush(stdout);
+  if ( getchar_timeout(fileno(stdin),10) > 0 ) {
+	printf("OK; skipping to shell");
+	no_net = 1;
+	argc   = 1;
+  }
+  printf("\n");
 
 #ifndef CDROM_IMAGE
 #ifndef SKIP_NETINI
 #define SKIP_NETINI	getenv("SKIP_NETINI")
 #endif
   /* check if we have a real ifconfig (first is loopback) */
-  if ( (! (SKIP_NETINI) || !BUILTIN_SYMTAB) && rtems_bsdnet_config.ifconfig && rtems_bsdnet_config.ifconfig->next )
+  if ( !no_net && (! (SKIP_NETINI) || !BUILTIN_SYMTAB) && rtems_bsdnet_config.ifconfig && rtems_bsdnet_config.ifconfig->next )
 	gesys_network_start();
   else
   {
@@ -431,6 +452,15 @@ char	*argv[7]={
 		}
 	}
   }
+  {
+  char *tarvar;
+  void *addr;
+  int   len;
+  	if ( (tarvar=getenv("TARFS")) && 2 == sscanf(tarvar,"%p:%i",&addr,&len) && len > 0 ) {
+		mkdir("/tar",0777);
+		rtems_tarfs_load("/tar",addr,len);
+  	}
+  }
 #else
   {
 	extern void *gesys_tarfs_image_start;
@@ -462,6 +492,7 @@ char	*argv[7]={
   }
   }
 #endif
+
 
   if ( no_net && ( !pathspec || LOCAL_PATH != pathType(pathspec) ) )
 	goto shell_entry;
@@ -520,6 +551,7 @@ char	*argv[7]={
 		*bufp-- = 0;
 
 firstTimeEntry:
+
 
   {
 	int fd = -1, ed = -1;
@@ -989,3 +1021,62 @@ cleanup:
 	return rval;	
 }
 #endif
+
+
+/* timeout is in 10ths of a second;
+ * RETURNS: -1 on error
+ *           0 on timeout
+ *          char > 0 otherwise
+ */
+int
+getchar_timeout(int fd, int timeout)
+{
+struct termios ot,nt;
+unsigned char	val;
+int		st;
+
+	/* establish timeout using termios */
+	if (tcgetattr(fd,&ot)) {
+		perror("TCGETATTR");
+		return -1;
+	} else {
+		nt=ot;
+		nt.c_lflag &= ~ICANON;
+		nt.c_cc[VMIN]=0;
+		/* 1s tics */
+		nt.c_cc[VTIME]=timeout;
+		if (tcsetattr(fd,TCSANOW,&nt)) {
+			perror("TCSETATTR");
+			return -1;
+		} else {
+			st = read(fd, &val, 1);
+			if ( st > 0 )
+				st = val;
+		}
+	}
+	if (tcsetattr(fd,TCSANOW,&ot)) {
+		perror("TCSETATTR (restoring old settings)");
+		return -1;
+	}
+	return st;
+}
+
+/* EPICS doesn't start up if the TOD is not initialized.
+ * Normally, this should be set from NTP but we use this
+ * as a fallback if NTP fails.
+ *
+ * FIXME: should read the RTC instead!.
+ */
+static void
+dummy_clock_init()
+{
+rtems_time_of_day rt;
+        rt.year   = 2000;
+        rt.month  = 1;
+        rt.day    = 1;
+        rt.hour   = 0;
+        rt.minute = 0;
+        rt.second = 0;
+        rt.ticks  = 0;
+	rtems_clock_set(&rt);
+}
