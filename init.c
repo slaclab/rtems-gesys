@@ -216,9 +216,6 @@ cexpExcHandlerInstall(void (*handler)(int))
 #define BOOTPSA  rtems_bsdnet_bootp_server_address
 #define SYSSCRIPT	"st.sys"
 
-static void
-cmdline2env(const char *);
-
 #ifdef USE_TECLA
 int
 ansiTiocGwinszInstall(int slot);
@@ -271,6 +268,7 @@ struct stat stbuf;
 int
 gesys_network_start()
 {
+char *buf;
 
 #ifdef MULTI_NETDRIVER
   printf("Going to probe for Ethernet chips when initializing networking:\n");
@@ -313,7 +311,10 @@ gesys_network_start()
   }
 
   /* stuff command line 'name=value' pairs into the environment */
-  cmdline2env(rtems_bsdnet_bootp_cmdline);
+  if ( (buf = strdup(rtems_bsdnet_bootp_cmdline)) ) {
+	cmdlinePairExtract(buf, putenv, 1);
+	free(buf);
+  }
 
   return 0;
 }
@@ -370,19 +371,20 @@ char	*argv[7]={
   printf("This system $Name$ was built on %s\n",system_build_date);
   printf("$Id$\n");
 
+#ifdef EARLY_CMDLINE_GET
+  {
+	char *cmdlinetmp;
+	EARLY_CMDLINE_GET(&cmdlinetmp);
+
 #ifdef HAVE_LIBNETBOOT
   /* Let libnetboot process the command line string; all 
    * special name=value pairs recognized by libnetboot will
    * be removed...
    */
-   nvramFixupBsdnetConfig(1);
+   nvramFixupBsdnetConfig(1, cmdlinetmp);
 #endif
 
-#ifdef EARLY_CMDLINE_GET
-  {
-	char *cmdlinetmp;
-	EARLY_CMDLINE_GET(&cmdlinetmp);
-	cmdline2env(cmdlinetmp);
+	cmdlinePairExtract(cmdlinetmp, putenv, 1);
   }
 #endif
 
@@ -799,81 +801,6 @@ shell_entry:
   fprintf(stderr,"Unable to execute CEXP - suspending initialization...\n");
   rtems_task_suspend(RTEMS_SELF);
   exit( 1 );
-}
-
-static void
-cmdline2env(const char *cmdline)
-{
-char *buf = 0;
-
-char *beg,*end;
-
-	if ( !cmdline )
-		return;
-
-	/* make a copy we may modify */
-	buf = strdup(cmdline);
-
-	/* find 'name=' tags */
-
-	/* this algorithm is copied from the svgm BSP (startup/bspstart.c) */
-	for (beg=buf; beg; beg=end) {
-		/* skip whitespace */
-		while (' '==*beg) {
-			if (!*++beg) {
-			/* end of string reached; bail out */
-				goto done;
-			}
-		}
-		/* simple algorithm to find the end of quoted 'name=quoted'
-		 * substrings. As a side effect, quotes are removed from
-		 * the value.
-		 */
-		if ( (end = strchr(beg,'=')) ) {
-			char *dst;
-
-			/* eliminate whitespace between variable name and '=' */
-			for (dst=end; dst>beg; ) {
-					dst--;
-					if (!isspace(*dst)) {
-						dst++;
-						break;
-					}
-			}
-
-			beg = memmove(beg + (end-dst), beg, dst-beg);
-
-			/* now unquote the value */
-			if ('\'' == *++end) {
-				/* end points to the 1st char after '=' which is a '\'' */
-
-				dst = end++;
-
-				/* end points to 1st char after '\'' */
-
-				while ('\'' != *end || '\'' == *++end) {
-					if ( 0 == (*dst++=*end++) ) {
-						/* NO TERMINATING QUOTE FOUND
-						 * (for a properly quoted string we
-						 * should never get here)
-						 */
-						end = 0;
-						dst--;
-						break;
-					}
-				}
-				*dst = 0;
-			} else {
-				/* first space terminates non-quoted strings */
-				if ( (end = strchr(end,' ')) )
-					*(end++)=0;
-			}
-			putenv(beg);
-		}
-
-	}
-done:
-	free(buf);
 }
 
 #ifndef USE_TECLA
