@@ -1,4 +1,6 @@
 /#address-cells 2
+# 604 CPU
+/openprom/init/register/pvr 0xfffe0000
 /openprom/options/oea-memory-size 0x2000000
 #not using stdio results in polling read from stdin!!
 #/openprom/options/use-stdio? false
