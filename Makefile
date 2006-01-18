@@ -214,7 +214,7 @@ USE_BSPEXT = NO
 
 endif
 
-ifeq "$(RTEMS_BSP_FAMILY)" "mvme167"
+ifneq "$(filter $(RTEMS_BSP_FAMILY),mvme167 uC5282)xx" "xx"
 USE_BSPEXT = NO
 DEFINES+=-DMEMORY_SCARCE
 ifndef ELFEXT
@@ -222,11 +222,15 @@ ELFEXT=elf
 endif
 endif
 
+ifneq "$(filter $(RTEMS_BSP_FAMILY),uC5282)xx" "xx"
+C_PIECES+=bev
+DEFINES+=-DBSP_NETWORK_SETUP=bev_network_setup
+endif
 
 bspfail:
 	$(error GeSys has not been ported/tested on this BSP ($(RTEMS_BSP)) yet)
 
-bspcheck: $(if $(filter $(RTEMS_BSP_FAMILY),pc386 motorola_powerpc svgm mvme5500 beatnik mvme167 psim),,bspfail)
+bspcheck: $(if $(filter $(RTEMS_BSP_FAMILY),pc386 motorola_powerpc svgm mvme5500 beatnik mvme167 uC5282 psim),,bspfail)
 
 
 CPPFLAGS += -I.
