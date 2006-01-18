@@ -16,3 +16,6 @@ ld("ntpclock.obj") && rtemsNtpInitialize(0,0)
 # set timezone
 setenv("TZ","PST8PDT",1)
 tzset()
+# set default PATH
+(buf=malloc(1000)) && getcwd(buf,1000) && strcat(buf,":") && setenv("PATH",buf,1)
+free(buf)
