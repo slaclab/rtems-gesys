@@ -113,19 +113,17 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 
+#include <rtems.h>
+
 #include <rtems/rtems_bsdnet.h>
 #include <rtems/libio.h>
 #include <rtems/tftp.h>
 #include <rtems/imfs.h>
 
-#define CHECK(M,MM,m,mm,r,rr)	\
-	(   (M) > (MM)		\
-	|| ((M)==(MM) && (m)>(mm)) \
-	|| ((M)==(MM) && (m)==(mm) && (r)>(rr)))
+#include "verscheck.h"
 
-#define RTEMS_NEWER_THAN(M,m,r) CHECK(__RTEMS_MAJOR__,M,__RTEMS_MINOR__,m,__RTEMS_REVISION__,r)
 
-#if RTEMS_NEWER_THAN(4,6,10)
+#if RTEMS_VERSION_LATER_THAN(4,6,10)
 /* in a new place */
 #include <rtems/bsdnet/servers.h>
 #endif
@@ -349,7 +347,11 @@ char	*argv[7]={
   rtems_libio_set_private_env();
 
 #ifdef HAVE_PCIBIOS
+#if RTEMS_VERSION_ATLEAST(4,6,99)
+  pci_initialize();
+#else
   pcib_init();
+#endif
 #endif
 	
 #ifdef STACK_CHECKER_ON

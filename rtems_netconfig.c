@@ -12,9 +12,15 @@
 #include <bsp.h>
 #include <rtems/rtems_bsdnet.h>
 
+#include "verscheck.h"
+
 #define NETWORK_TASK_PRIORITY           90
 
 #ifdef MULTI_NETDRIVER
+
+#if RTEMS_VERSION_ATLEAST(4,6,99)
+#define pcib_init pci_initialize
+#endif
 
 extern int rtems_3c509_driver_attach (struct rtems_bsdnet_ifconfig *, int);
 extern int rtems_fxp_attach (struct rtems_bsdnet_ifconfig *, int);
