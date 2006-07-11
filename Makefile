@@ -211,6 +211,7 @@ USE_BSPEXT = NO
 #		exit 1;\
 #	fi
 #endef
+C_PIECES+=pairxtract
 
 endif
 
@@ -218,12 +219,12 @@ ifneq "$(filter $(RTEMS_BSP_FAMILY),mvme167 uC5282)xx" "xx"
 USE_BSPEXT = NO
 DEFINES+=-DMEMORY_SCARCE
 ifndef ELFEXT
-ELFEXT=elf
+ELFEXT=nxe
 endif
 endif
 
 ifneq "$(filter $(RTEMS_BSP_FAMILY),uC5282)xx" "xx"
-C_PIECES+=bev
+C_PIECES+=bev pairxtract
 DEFINES+=-DBSP_NETWORK_SETUP=bev_network_setup
 endif
 

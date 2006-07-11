@@ -296,7 +296,8 @@ char *buf;
 #endif
 
 #ifdef NFS_SUPPORT
-  rpcUdpInit() || nfsInit(0,0);
+  if ( rpcUdpInit() || nfsInit(0,0) )
+	/* nothing else to do */;
 #endif
 
   if ( rtems_bsdnet_ntpserver_count > 0 ) {
