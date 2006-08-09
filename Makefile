@@ -166,7 +166,7 @@ USE_BSPEXT = NO
 USE_TFTPFS = NO
 USE_NFS    = NO
 USE_RSH    = NO
-C_PIECES  += bug_disk
+C_PIECES  += bug_disk pairxtract
 DEFINES   += -DPSIM
 INSTFILES += psim_tree.gesys
 endif
@@ -288,7 +288,7 @@ OBJS      += ${ARCH}/allsyms.o
 #  'make clobber' already includes 'make clean'
 #
 
-CLEAN_ADDITIONS   += builddate.c pathcheck.c
+CLEAN_ADDITIONS   += builddate.c pathcheck.c pairxtract.c
 CLOBBER_ADDITIONS +=
 
 all: bspcheck gc-check libnms ${ARCH} $(SRCS) $(PGMS)
@@ -301,7 +301,12 @@ builddate.c: $(filter-out $(ARCH)/init.o $(ARCH)/allsyms.o,$(OBJS)) Makefile
 	echo '#define DEFAULT_CPU_ARCH_FOR_CEXP "'`$(XSYMS) -a $<`'"' >>$@
 
 pathcheck.c: nvram/pathcheck.c
-	ln -s $^ $@
+	$(LN) -s $^ $@
+
+# a hack for now
+pairxtract.c:	nvram/pairxtract.c
+	$(LN) -s $^ $@
+
 
 #LINK_OBJS+= -Wl,-b,binary o-optimize/rtems.sym.tar -Wl,-b,elf32-i386
 
