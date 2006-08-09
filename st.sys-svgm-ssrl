@@ -1,6 +1,7 @@
 
 # Hardwire media setup (disabling autoconfig) to 100Tx-Fullduplex
 SIOCSIFMEDIA=0xc0206937
+SIOCGIFMEDIA=0xc0286938
 # Media word:
 #  (phy_inst<<28) | (options) | (type<<4) | (subtype)
 # type: 2: ETHER, 4: TOKEN, 6: FDDI
