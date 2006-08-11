@@ -115,10 +115,16 @@
 
 #include <rtems.h>
 
+#include "verscheck.h"
+
 #include <rtems/rtems_bsdnet.h>
 #include <rtems/libio.h>
 #include <rtems/tftp.h>
+#if RTEMS_VERSION_ATLEAST(4,6,99)
 #include <rtems/imfs.h>
+#else
+#include <imfs.h>
+#endif
 
 #include "verscheck.h"
 
