@@ -1007,12 +1007,14 @@ static void
 dummy_clock_init()
 {
 rtems_time_of_day rt;
-        rt.year   = 2000;
-        rt.month  = 1;
-        rt.day    = 1;
-        rt.hour   = 0;
-        rt.minute = 0;
-        rt.second = 0;
-        rt.ticks  = 0;
-	rtems_clock_set(&rt);
+	if ( RTEMS_SUCCESSFUL != rtems_clock_get( RTEMS_CLOCK_GET_TOD, &rt) ) {
+		rt.year   = 2000;
+		rt.month  = 1;
+		rt.day    = 1;
+		rt.hour   = 0;
+		rt.minute = 0;
+		rt.second = 0;
+		rt.ticks  = 0;
+		rtems_clock_set(&rt);
+	}
 }
