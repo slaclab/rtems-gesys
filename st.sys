@@ -18,4 +18,22 @@ setenv("TZ","PST8PDT",1)
 tzset()
 # set default PATH
 (buf=malloc(1000)) && getcwd(buf,1000) && strcat(buf,":") && setenv("PATH",buf,1)
-free(buf)
+free(buf), buf=0
+
+# Ethernet Interface Media Ioctl Commands (for convenience)
+SIOCSIFMEDIA=0xc0206937
+SIOCGIFMEDIA=0xc0286938
+# Media word:
+#  (phy_inst<<28) | (options) | (type<<4) | (subtype)
+# type: 2: ETHER, 4: TOKEN, 6: FDDI
+# ether_subtype: 3: 10BaseT
+#                4: 10Base2
+#                5: 10Base5
+#                6: 100BaseTX
+#                7: 100BaseFX
+#                8: 100BaseT4
+#               10: 100BaseT2
+# options:   1<<20: Force Full Duplex
+#            1<<21: Force Half Duplex
+#            1<<27: HW Loopback
+

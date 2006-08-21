@@ -1,0 +1,8 @@
+buf    = malloc(2000)
+(opath = getenv("PATH")) || (opath = "")
+strcpy(buf,opath)
+strcat(buf,":/boot/g/spear/3.14.8.2epics/app/spear/bin/RTEMS-@RTEMS_BSP@/")
+strcat(buf,":/boot/epics/app/spear/bin/RTEMS-@RTEMS_BSP@/:")
+setenv("PATH",buf,1)
+free(buf)
+buf    = 0

@@ -435,7 +435,7 @@ thelibs:
 
 #initialization script
 $(ARCH)/st.sys: st.sys $(wildcard st.sys-ssrl) $(wildcard st.sys-$(RTEMS_BSP)) $(wildcard st.sys-$(RTEMS_BSP)-ssrl)
-	cat $^ > $@
+	cat $^ | sed -e 's/@RTEMS_CPU@/$(RTEMS_CPU)/g' -e 's/@RTEMS_BSP@/$(RTEMS_BSP)/g' > $@
 
 
 
