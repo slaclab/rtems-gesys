@@ -379,8 +379,9 @@ $(ARCH)/empty.o:
 	$(CC) -c -O -o $@ $(@:%.o=%.c)
 
 # try to find out what startfiles will be linked in
-$(ARCH)/gcc-startfiles.o: $(ARCH)/empty.o
-	$(LINK.cc) -Wl,-r -nodefaultlibs -o $@ $^
+# and what symbols are defined by the linker script
+$(ARCH)/gcc-startfiles.o:
+	$(LINK.cc) -Wl,-r -nodefaultlibs -o $@ `$(CC) -print-file-name=linkcmds`
 
 # and generate a name file for them (the endfiles will
 # actually be there also)
