@@ -14,7 +14,10 @@
 
 #include "verscheck.h"
 
-#define NETWORK_TASK_PRIORITY           90
+#define NETWORK_TASK_PRIORITY   150	/* within EPICS' range */
+
+/* make publicily available for startup scripts... */
+int gesysNetworkTaskPriority = NETWORK_TASK_PRIORITY;
 
 #ifdef MULTI_NETDRIVER
 
