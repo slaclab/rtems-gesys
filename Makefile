@@ -88,7 +88,7 @@ USE_GC=NO
 
 # Normal (i.e. non-flash) system which can be net-booted
 USE_TECLA_YES_C_PIECES = term
-C_PIECES=init rtems_netconfig config $(USE_TECLA_$(USE_TECLA)_C_PIECES)
+C_PIECES=init rtems_netconfig config addpath $(USE_TECLA_$(USE_TECLA)_C_PIECES)
 
 ifeq "$(RTEMS_BSP)" "beatnik"
 DEFINES+=-DMEMORY_HUGE
@@ -148,17 +148,21 @@ DEFINES  += -DUSE_POSIX
 DEFINES  += $(DEFINES_BSPEXT_$(USE_BSPEXT))
 
 # Trim BSP specific things
+#
+# bsps w/o netboot use local 'pairxtract'
+ifneq "$(filter $(RTEMS_BSP_FAMILY),svgm beatnik)xx" "xx"
+DEFINES  += -DHAVE_LIBNETBOOT
+LD_LIBS  += -lnetboot
+else
+C_PIECES  += pairxtract
+endif
+
 ifneq "$(filter $(RTEMS_BSP_FAMILY),svgm beatnik)xx" "xx"
 DEFINES  += -DHAVE_BSP_EXCEPTION_EXTENSION
 DEFINES  += "-DEARLY_CMDLINE_GET(arg)=do { *(arg) = BSP_commandline_string; } while (0)"
-DEFINES  += -DHAVE_LIBNETBOOT
-LD_LIBS  += -lnetboot
 #C_PIECES += efence
 #LDFLAGS  += -Wl,--wrap,malloc -Wl,--wrap,realloc -Wl,--wrap,calloc -Wl,--wrap,free
 #LDFLAGS  += -Wl,--wrap,_malloc_r -Wl,--wrap,_realloc_r -Wl,--wrap,_calloc_r -Wl,--wrap,_free_r
-ifndef ELFEXT
-ELFEXT    = nxe
-endif 
 endif 
 
 ifeq "$(RTEMS_BSP_FAMILY)" "psim"
@@ -166,7 +170,7 @@ USE_BSPEXT = NO
 USE_TFTPFS = NO
 USE_NFS    = NO
 USE_RSH    = NO
-C_PIECES  += bug_disk pairxtract
+C_PIECES  += bug_disk
 DEFINES   += -DPSIM
 INSTFILES += psim_tree.gesys
 endif
@@ -174,9 +178,6 @@ endif
 ifeq "$(RTEMS_BSP_FAMILY)" "motorola_powerpc"
 DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_NAME=\"dc1\"
 DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_ATTACH=rtems_dec21140_driver_attach
-ifndef ELFEXT
-ELFEXT    = nxe
-endif
 endif
 
 ifeq "$(RTEMS_BSP)" "beatnik"
@@ -211,21 +212,20 @@ USE_BSPEXT = NO
 #		exit 1;\
 #	fi
 #endef
-C_PIECES+=pairxtract
-
 endif
 
 ifneq "$(filter $(RTEMS_BSP_FAMILY),mvme167 uC5282)xx" "xx"
 USE_BSPEXT = NO
 DEFINES+=-DMEMORY_SCARCE
-ifndef ELFEXT
-ELFEXT=nxe
-endif
 endif
 
 ifneq "$(filter $(RTEMS_BSP_FAMILY),uC5282)xx" "xx"
-C_PIECES+=bev pairxtract
+C_PIECES+=bev
 DEFINES+=-DBSP_NETWORK_SETUP=bev_network_setup
+endif
+
+ifndef ELFEXT
+ELFEXT=nxe
 endif
 
 bspfail:
@@ -273,7 +273,7 @@ LD_LIBS   += $(OPT_LIBRARIES)
 
 # Produce a linker map to help finding 'undefined symbol' references (README.config)
 LDFLAGS_GC_YES = -Wl,--wrap,free
-LDFLAGS   += -Wl,-Map,$(ARCH)/linkmap $(LDFLAGS_GC_$(USE_GC)) -Wl,--trace-symbol,_fstat
+LDFLAGS   += -Wl,-Map,$(ARCH)/linkmap $(LDFLAGS_GC_$(USE_GC)) -Wl,--trace-symbol,__end
 ##LDFLAGS += -Tlinkcmds
 
 # this special object contains 'undefined' references for
@@ -380,12 +380,12 @@ $(ARCH)/empty.o:
 
 # try to find out what startfiles will be linked in
 # and what symbols are defined by the linker script
-$(ARCH)/gcc-startfiles.o:
-	$(LINK.cc) -Wl,-r -nodefaultlibs -o $@ `$(CC) -print-file-name=linkcmds`
+$(ARCH)/gcc-startfiles.$(ELFEXT):
+	$(LINK.cc) -nodefaultlibs -o $@ -Wl,--unresolved-symbols=ignore-all -T`$(CC) -print-file-name=linkcmds`
 
 # and generate a name file for them (the endfiles will
 # actually be there also)
-$(ARCH)/startfiles.nm: $(ARCH)/gcc-startfiles.o
+$(ARCH)/startfiles.nm: $(ARCH)/gcc-startfiles.$(ELFEXT)
 	$(NM) -g -fposix $^ > $@
 
 # generate a name file for the application's objects
@@ -464,6 +464,15 @@ else
 		exit 1;\
 	fi
 endif
+
+prlinkcmds:
+	$(CC) -print-file-name=linkcmds
+
+tst.exe:OBJS=
+tst.exe:LD_LIBS=
+
+tst.exe:
+	$(LINK.cc) -nodefaultlibs -o $@ -Wl,--unresolved-symbols=ignore-all -print-file-name=linkcmds
 
 blah:
 	echo $(LINK_FILES)

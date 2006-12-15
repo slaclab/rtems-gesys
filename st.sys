@@ -3,7 +3,7 @@ ld    = cexpModuleLoad
 unld  = cexpModuleUnload
 lsmod = cexpModuleInfo
 # start the portmapper with a priority argument
-rtems_rpc_start_portmapper(50)
+rtems_rpc_start_portmapper(gesysNetworkTaskPriority)
 # set telnet password to 'rtems'
 setenv("TELNETD_PASSWD","tduDcyLX12owo")
 ld("telnetd.obj")
@@ -17,8 +17,7 @@ ld("ntpclock.obj") && rtemsNtpInitialize(0,0)
 setenv("TZ","PST8PDT",1)
 tzset()
 # set default PATH
-(buf=malloc(1000)) && getcwd(buf,1000) && strcat(buf,":") && setenv("PATH",buf,1)
-free(buf), buf=0
+addpathcwd(":",0)
 
 # Ethernet Interface Media Ioctl Commands (for convenience)
 SIOCSIFMEDIA=0xc0206937
