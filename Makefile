@@ -12,18 +12,20 @@
 #         have this, libtecla should work fine (2003/9/26)
 # On a PC, you may have to use a different network driver
 # also; YMMV. The value must be 'YES' or 'NO' (no quotes) 
-USE_TECLA  = YES
+USE_TECLA      = YES
 # Whether to use the libbspExt library. This is always
 # (automagically) disabled on pcx86 BSPs.
-USE_BSPEXT = YES
+USE_BSPEXT     = YES
+# Whether to use the 'netboot' library (on BSPs where this applies)
+USE_LIBNETBOOT = YES
 
 # Include NFS support; system symbol table and initialization
 # scripts can be loaded using NFS
-USE_NFS    = YES
+USE_NFS        = YES
 
 # Include TFTP filesystem support; system symbol table and
 # initialization scripts can be loaded using TFTP
-USE_TFTPFS = YES
+USE_TFTPFS     = YES
 
 # Include RSH support for downloading the system symbol
 # table and a system initialization script (user level
@@ -31,7 +33,7 @@ USE_TFTPFS = YES
 # NOTE: RSH support is NOT a filesystem but just downloads
 #       the essential files (symfile and script) to the IMFS,
 #       i.e., NO path is available to the script.
-USE_RSH    = YES
+USE_RSH        = YES
 
 # Whether the Cexp symbol table should be built into the executable ('YES')
 # If 'NO', cexp has to read the symbol table from a separate (.sym) file.
@@ -150,7 +152,11 @@ DEFINES  += $(DEFINES_BSPEXT_$(USE_BSPEXT))
 # Trim BSP specific things
 #
 # bsps w/o netboot use local 'pairxtract'
-ifneq "$(filter $(RTEMS_BSP_FAMILY),svgm beatnik)xx" "xx"
+ifeq "$(filter $(RTEMS_BSP_FAMILY),svgm beatnik)xx" "xx"
+USE_LIBNETBOOT=NO
+endif
+
+ifeq "$(USE_LIBNETBOOT)" "YES"
 DEFINES  += -DHAVE_LIBNETBOOT
 LD_LIBS  += -lnetboot
 else
@@ -189,7 +195,7 @@ ifeq "$(RTEMS_BSP)" "beatnik"
 #DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_ATTACH=rtems_em_attach
 #DEFINES  += '-DEARLY_CMDLINE_GET(arg)=do { *arg="SKIP_NETINI=YES"; } while (0)'
 #LD_LIBS  += -lif_pcn
-LD_LIBS  += -lrtems-gdb-stub
+#LD_LIBS  += -lrtems-gdb-stub
 endif
 
 ifeq  "$(RTEMS_BSP_FAMILY)" "pc386"
