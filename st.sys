@@ -13,8 +13,8 @@ ld("monitor.obj")
 ld("miscUtils.obj")
 # NTP clock this is NOT the system clock. Read using ntp_gettime()
 ld("ntpclock.obj") && rtemsNtpInitialize(0,0)
-# set timezone
-setenv("TZ","PST8PDT",1)
+# set timezone (2007++ rule)
+setenv("TZ","PST8PDT,M3.2.0,M11.1.0",1)
 tzset()
 # set default PATH
 addpathcwd(":",0)
