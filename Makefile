@@ -91,6 +91,7 @@ USE_GC=NO
 # Normal (i.e. non-flash) system which can be net-booted
 USE_TECLA_YES_C_PIECES = term
 C_PIECES=init rtems_netconfig config addpath $(USE_TECLA_$(USE_TECLA)_C_PIECES)
+C_PIECES+=memsz
 
 ifeq "$(RTEMS_BSP)" "beatnik"
 DEFINES+=-DMEMORY_HUGE
@@ -166,9 +167,9 @@ endif
 ifneq "$(filter $(RTEMS_BSP_FAMILY),svgm beatnik)xx" "xx"
 DEFINES  += -DHAVE_BSP_EXCEPTION_EXTENSION
 DEFINES  += "-DEARLY_CMDLINE_GET(arg)=do { *(arg) = BSP_commandline_string; } while (0)"
-#C_PIECES += efence
-#LDFLAGS  += -Wl,--wrap,malloc -Wl,--wrap,realloc -Wl,--wrap,calloc -Wl,--wrap,free
-#LDFLAGS  += -Wl,--wrap,_malloc_r -Wl,--wrap,_realloc_r -Wl,--wrap,_calloc_r -Wl,--wrap,_free_r
+LD_LIBS  += -lefence
+LDFLAGS  += -Wl,--wrap,malloc -Wl,--wrap,realloc -Wl,--wrap,calloc -Wl,--wrap,free
+LDFLAGS  += -Wl,--wrap,_malloc_r -Wl,--wrap,_realloc_r -Wl,--wrap,_calloc_r -Wl,--wrap,_free_r
 endif 
 
 ifeq "$(RTEMS_BSP_FAMILY)" "psim"
