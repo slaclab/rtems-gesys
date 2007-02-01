@@ -138,10 +138,10 @@ ifndef XSYMS
 XSYMS = $(RTEMS_CPU)-rtems-xsyms
 endif
 
-C_PIECES+=mdbg
-LDFLAGS  += -Wl,--wrap,malloc -Wl,--wrap,free \
+#C_PIECES+=mdbg
+#LDFLAGS  += -Wl,--wrap,malloc -Wl,--wrap,free \
 -Wl,--wrap,realloc -Wl,--wrap,calloc
-LDFLAGS  += -Wl,--wrap,_malloc_r -Wl,--wrap,_free_r \
+#LDFLAGS  += -Wl,--wrap,_malloc_r -Wl,--wrap,_free_r \
 -Wl,--wrap,_realloc_r -Wl,--wrap,_calloc_r
 
 
