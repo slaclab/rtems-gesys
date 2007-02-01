@@ -91,7 +91,6 @@ USE_GC=NO
 # Normal (i.e. non-flash) system which can be net-booted
 USE_TECLA_YES_C_PIECES = term
 C_PIECES=init rtems_netconfig config addpath $(USE_TECLA_$(USE_TECLA)_C_PIECES)
-C_PIECES+=memsz
 
 ifeq "$(RTEMS_BSP)" "beatnik"
 DEFINES+=-DMEMORY_HUGE
@@ -138,6 +137,13 @@ include $(RTEMS_ROOT)/make/leaf.cfg
 ifndef XSYMS
 XSYMS = $(RTEMS_CPU)-rtems-xsyms
 endif
+
+C_PIECES+=mdbg
+LDFLAGS  += -Wl,--wrap,malloc -Wl,--wrap,free \
+-Wl,--wrap,realloc -Wl,--wrap,calloc
+LDFLAGS  += -Wl,--wrap,_malloc_r -Wl,--wrap,_free_r \
+-Wl,--wrap,_realloc_r -Wl,--wrap,_calloc_r
+
 
 #
 # (OPTIONAL) Add local stuff here using +=
