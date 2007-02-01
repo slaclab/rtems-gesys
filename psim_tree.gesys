@@ -23,7 +23,7 @@
         i0,0,1c,6 1 \
         i0,0,20,0 8
 # NOTE: disk image files MUST exist
-#/phb/ide@1/disk@0/file "tarfsImg"
+/phb/ide@1/disk@0/file "tarfsImg"
 #/phb/ide@1/disk@1/file "tarfsImg1"
-#/chosen/disk0 */phb/ide@1/disk@0
+/chosen/disk0 */phb/ide@1/disk@0
 #/chosen/disk1 */phb/ide@1/disk@1
