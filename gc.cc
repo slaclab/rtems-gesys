@@ -79,7 +79,7 @@ extern "C" void printk(const char *,...);
 void rtemsGCHack::body(rtems_task_argument unused)
 {
 void             *ptr;
-rtems_unsigned32 s = sizeof(ptr);
+uint32_t s = sizeof(ptr);
 
 #ifdef DEBUG
 	printk("GC thread started...\n");
