@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdarg.h>
 
 extern const char *rtems_bsdnet_domain_name;
 
@@ -174,6 +175,36 @@ stringSubstitute(const char *p, const char * const *s, int ns)
 			}
 		}
 	}
+	return rval;
+}
+
+/* A vararg wrapper */
+
+char *
+stringSubstituteVa(const char *p, ...)
+{
+va_list    ap;
+int        ns;
+const char **sp = 0;
+const char *cp;
+char       *rval;
+
+	/* count number of substitutions */
+	va_start(ap,p);
+	for (ns = 0; va_arg(ap, const char *); ns++)
+		;
+	va_end(ap);
+	if ( ns && ! (sp = malloc(sizeof(*sp) * ns)) )
+		return 0;
+	va_start(ap,p);
+	for (ns = 0; (cp = va_arg(ap, const char *)); ns++)
+		sp[ns] = cp;
+	va_end(ap);
+
+	rval = stringSubstitute(p, sp, ns);
+
+	free(sp);
+
 	return rval;
 }
 
