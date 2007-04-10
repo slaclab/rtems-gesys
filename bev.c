@@ -48,6 +48,11 @@ GevHeader h;
 	return 0;
 }
 
+#ifndef HAVE_LIBNETBOOT
+/* Use bsdnet fixup routine to retrieve flash variables and setup
+ * the bsdnet_config.
+ */
+/* provide routine to setup the bsdnet_config from the flash variables */
 int
 bev_network_setup(struct rtems_bsdnet_config *cfg, struct rtems_bsdnet_ifconfig *ifcfg)
 {
@@ -136,3 +141,4 @@ char *bootp = (char*)getbenv("DO_BOOTP");
 
 	return 0;
 }
+#endif

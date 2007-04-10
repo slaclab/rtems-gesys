@@ -159,7 +159,7 @@ DEFINES  += $(DEFINES_BSPEXT_$(USE_BSPEXT))
 # Trim BSP specific things
 #
 # bsps w/o netboot use local 'pairxtract'
-ifeq "$(filter $(RTEMS_BSP_FAMILY),svgm beatnik)xx" "xx"
+ifeq "$(filter $(RTEMS_BSP_FAMILY),svgm beatnik uC5282)xx" "xx"
 USE_LIBNETBOOT=NO
 endif
 
@@ -234,7 +234,9 @@ endif
 
 ifneq "$(filter $(RTEMS_BSP_FAMILY),uC5282)xx" "xx"
 C_PIECES+=bev
+ifneq "$(USE_LIBNETBOOT)" "YES" 
 DEFINES+=-DBSP_NETWORK_SETUP=bev_network_setup
+endif
 endif
 
 ifndef ELFEXT
