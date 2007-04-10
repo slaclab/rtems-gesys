@@ -234,7 +234,9 @@ endif
 
 ifneq "$(filter $(RTEMS_BSP_FAMILY),uC5282)xx" "xx"
 C_PIECES+=bev
-ifneq "$(USE_LIBNETBOOT)" "YES" 
+ifeq "$(USE_LIBNETBOOT)" "YES" 
+DEFINES+= "-DEARLY_CMDLINE_GET(arg)=do { *(arg) = 0; /* use internal buffer */ } while (0)"
+else
 DEFINES+=-DBSP_NETWORK_SETUP=bev_network_setup
 endif
 endif
