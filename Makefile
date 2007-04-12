@@ -90,7 +90,7 @@ USE_GC=NO
 
 # Normal (i.e. non-flash) system which can be net-booted
 USE_TECLA_YES_C_PIECES = term
-C_PIECES=init rtems_netconfig config addpath $(USE_TECLA_$(USE_TECLA)_C_PIECES)
+C_PIECES=init rtems_netconfig config addpath ctrlx $(USE_TECLA_$(USE_TECLA)_C_PIECES)
 
 ifeq "$(RTEMS_BSP)" "beatnik"
 DEFINES+=-DMEMORY_HUGE
@@ -233,7 +233,7 @@ DEFINES+=-DMEMORY_SCARCE
 endif
 
 ifneq "$(filter $(RTEMS_BSP_FAMILY),uC5282)xx" "xx"
-C_PIECES+=bev
+C_PIECES+=bev reboot5282
 ifeq "$(USE_LIBNETBOOT)" "YES" 
 DEFINES+= "-DEARLY_CMDLINE_GET(arg)=do { *(arg) = 0; /* use internal buffer */ } while (0)"
 else
@@ -251,7 +251,7 @@ bspfail:
 bspcheck: $(if $(filter $(RTEMS_BSP_FAMILY),pc386 motorola_powerpc svgm mvme5500 beatnik mvme167 uC5282 psim),,bspfail)
 
 
-CPPFLAGS += -I.
+CPPFLAGS += -I. -Invram
 ifeq "$(USE_BUILTIN_SYMTAB)xx" "YESxx"
 CPPFLAGS += -I../cexp
 endif
@@ -305,19 +305,22 @@ OBJS      += ${ARCH}/allsyms.o
 #  'make clobber' already includes 'make clean'
 #
 
-CLEAN_ADDITIONS   += builddate.c pathcheck.c pairxtract.c
+CLEAN_ADDITIONS   += builddate.c pathcheck.c pairxtract.c ctrlx.c
 CLOBBER_ADDITIONS +=
 
 all: bspcheck gc-check libnms ${ARCH} $(SRCS) $(PGMS)
 
 # We want to have the build date compiled in...
-$(ARCH)/init.o: builddate.c pathcheck.c
+$(ARCH)/init.o: builddate.c pathcheck.c ctrlx.c
 
 builddate.c: $(filter-out $(ARCH)/init.o $(ARCH)/allsyms.o,$(OBJS)) Makefile
 	echo 'static char *system_build_date="'`date +%Y%m%d%Z%T`'";' > $@
 	echo '#define DEFAULT_CPU_ARCH_FOR_CEXP "'`$(XSYMS) -a $<`'"' >>$@
 
 pathcheck.c: nvram/pathcheck.c
+	$(LN) -s $^ $@
+
+ctrlx.c: nvram/ctrlx.c
 	$(LN) -s $^ $@
 
 # a hack for now
