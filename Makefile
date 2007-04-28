@@ -232,11 +232,11 @@ USE_BSPEXT = NO
 endif
 
 ifneq "$(filter $(RTEMS_BSP_FAMILY),mvme167)xx" "xx"
-DEFINES+=-DMEMORY_SCARCE=(1024*1024)
+DEFINES+='-DMEMORY_SCARCE=(1024*1024)'
 endif
 
 ifneq "$(filter $(RTEMS_BSP_FAMILY),uC5282)xx" "xx"
-DEFINES+=-DMEMORY_SCARCE=(2*1024*1024)
+DEFINES+='-DMEMORY_SCARCE=(2*1024*1024)'
 endif
 
 ifneq "$(filter $(RTEMS_BSP_FAMILY),uC5282)xx" "xx"
