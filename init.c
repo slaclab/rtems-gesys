@@ -428,7 +428,7 @@ char	*argv[7]={
 #define SKIP_NETINI	getenv("SKIP_NETINI")
 #endif
   /* check if we have a real ifconfig (first is loopback) */
-  if ( !no_net && (! (SKIP_NETINI) || !BUILTIN_SYMTAB) && rtems_bsdnet_config.ifconfig && rtems_bsdnet_config.ifconfig->next )
+  if ( !no_net && (! (SKIP_NETINI) || !BUILTIN_SYMTAB) && rtems_bsdnet_config.ifconfig )
 	gesys_network_start();
   else
   {
