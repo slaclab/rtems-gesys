@@ -7,6 +7,32 @@
  *
  * This file can be copied to an application source dirctory
  * and modified to override the values shown below.
+ *
+ * The following CPP symbols may be passed from the Makefile:
+ *
+ *   symbol                   default       description
+ *
+ *   NETWORK_TASK_PRIORITY    150           can be read by app from public var 'gesysNetworkTaskPriority'
+ *   FIXED_IP_ADDR            <undefined>   hardcoded IP address (e.g., "192.168.0.10"); disables BOOTP;
+ *                                          must also define FIXED_NETMASK
+ *   FIXED_NETMASK            <undefined>   IP netmask string (e.g. "255.255.255.0")
+ *   LO_IF_ONLY               <undefined>   If defined, do NOT configure any ethernet driver but only the
+ *                                          loopback interface.
+ *   MULTI_NETDRIVER          <undefined>   ugly hack; if defined try to probe a variety of PCI and ISA drivers
+ *                                          (i386 ONLY) use is discouraged!
+ *   NIC_NAME                 <undefined>   Ethernet driver name (e.g. "pcn1"); must also define NIC_ATTACH
+ *   NIC_ATTACH               <undefined>   Ethernet driver attach function (e.g., rtems_pcn_attach).
+ *                                          If these are undefined then
+ *                                            a) MULTI_NETDRIVER is used (if defined)
+ *                                            b) RTEMS_BSP_NETWORK_DRIVER_NAME/RTEMS_BSP_NETWORK_DRIVER_ATTACH
+ *                                               are tried
+ *   MEMORY_CUSTOM            <undefined>   Allocate the defined amount of memory for mbufs and mbuf clusters,
+ *                                          respectively. Define to a comma ',' separated pair of two numerical
+ *                                          values, e.g: 100*1024,200*1024
+ *   MEMORY_SCARCE            <undefined>   Allocate few memory for mbufs (hint for how much memory the board has)
+ *   MEMORY_HUGE              <undefined>   Allocate a lot of memory for mbufs (hint for how much memory the board has)
+ *                                          If none of MEMORY_CUSTOM/MEMORY_SCARCE/MEMORY_HUGE are defined then a
+ *                                          medium amount of memory is allocated for mbufs.
  */
 #include <stdio.h>
 #include <bsp.h>
@@ -14,10 +40,25 @@
 
 #include "verscheck.h"
 
+#ifndef NETWORK_TASK_PRIORITY
 #define NETWORK_TASK_PRIORITY   150	/* within EPICS' range */
+#endif
 
 /* make publicily available for startup scripts... */
-int gesysNetworkTaskPriority = NETWORK_TASK_PRIORITY;
+const int gesysNetworkTaskPriority = NETWORK_TASK_PRIORITY;
+
+#ifdef  FIXED_IP_ADDR
+#define RTEMS_DO_BOOTP 0
+#else
+#define RTEMS_DO_BOOTP rtems_bsdnet_do_bootp
+#define FIXED_IP_ADDR  0
+#undef  FIXED_NETMASK
+#define FIXED_NETMASK  0
+#endif
+
+#ifdef LO_IF_ONLY
+#undef NIC_NAME
+#elif !defined(NIC_NAME)
 
 #ifdef MULTI_NETDRIVER
 
@@ -29,6 +70,8 @@ extern int rtems_3c509_driver_attach (struct rtems_bsdnet_ifconfig *, int);
 extern int rtems_fxp_attach (struct rtems_bsdnet_ifconfig *, int);
 extern int rtems_elnk_driver_attach (struct rtems_bsdnet_ifconfig *, int);
 extern int rtems_dec21140_driver_attach (struct rtems_bsdnet_ifconfig *, int);
+
+extern int rtems_pcn_attach(struct rtems_bsdnet_ifconfig *, int);
 
 /* these don't probe and will be used even if there's no device :-( */
 extern int rtems_ne_driver_attach (struct rtems_bsdnet_ifconfig *, int);
@@ -51,26 +94,46 @@ static struct rtems_bsdnet_ifconfig pci_netdriver_config[]={
 	"dc1", rtems_dec21140_driver_attach, pci_netdriver_config+2,
 	},
 	{
+	"pcn1", rtems_pcn_attach, pci_netdriver_config+3,
+	},
+	{
 	"elnk1", rtems_elnk_driver_attach, isa_netdriver_config,
 	},
 };
 
-static int pci_check(struct rtems_bsdnet_ifconfig *cfg, int attaching)
+static int pci_check(struct rtems_bsdnet_ifconfig *ocfg, int attaching)
 {
+struct rtems_bsdnet_ifconfig *cfg;
+int if_index_pre;
+extern int if_index;
 	if ( attaching ) {
-		cfg->next = pcib_init() ? isa_netdriver_config : pci_netdriver_config;
+		cfg = pcib_init() ? isa_netdriver_config : pci_netdriver_config;
+	}
+	while ( cfg ) {
+		printf("Probing '%s'", cfg->name); fflush(stdout);
+		/* unfortunately, the return value is unreliable - some drivers report
+		 * success even if they fail.
+		 * Check if they chained an interface (ifnet) structure instead
+		 */
+		if_index_pre = if_index;
+		cfg->attach(cfg, attaching);
+		if ( if_index > if_index_pre) {
+			/* assume success */
+			printf(" .. seemed to work\n");
+			ocfg->name   = cfg->name;
+			ocfg->attach = cfg->attach;
+			return 0;
+		}
+		printf(" .. failed\n");
+		cfg = cfg->next;
 	}
 	return -1;
 }
 
-static struct rtems_bsdnet_ifconfig netdriver_config[]={
-	{
-		"dummy", pci_check, 0
-	}
-};
+#define NIC_NAME   "dummy"
+#define NIC_ATTACH pci_check
 
 #else
-
 
 /*
  * The following conditionals select the network interface card.
@@ -93,22 +156,28 @@ static struct rtems_bsdnet_ifconfig netdriver_config[]={
 #elif defined(RTEMS_BSP_NETWORK_DRIVER_NAME)  /* Use NIC provided by BSP */
 # define NIC_NAME   RTEMS_BSP_NETWORK_DRIVER_NAME
 # define NIC_ATTACH RTEMS_BSP_NETWORK_DRIVER_ATTACH
-/* T. Straumann, 12/18/2001, added declaration, just in case */
-extern int
-RTEMS_BSP_NETWORK_DRIVER_ATTACH();
+/* provide declaration, just in case */
+int
+RTEMS_BSP_NETWORK_DRIVER_ATTACH(struct rtems_bsdnet_ifconfig *ifconfig, int attaching);
 #endif
+
+#endif /* ifdef MULTI_NETDRIVER */
+
+#endif /* ifdef LO_IF_ONLY */
 
 #ifdef NIC_NAME
 static struct rtems_bsdnet_ifconfig netdriver_config[1] = {{
     NIC_NAME,	/* name */
     NIC_ATTACH,	/* attach function */
     0,			/* link to next interface */
+	FIXED_IP_ADDR,
+	FIXED_NETMASK
 }};
 #else
+#ifndef LO_IF_ONLY
 #warning "NO KNOWN NETWORK DRIVER FOR THIS BSP -- YOU MAY HAVE TO EDIT rtems_netconfig.c"
-#define netdriver_config 0
 #endif
-
+#define netdriver_config 0
 #endif
 
 extern void rtems_bsdnet_loopattach();
@@ -122,14 +191,16 @@ static struct rtems_bsdnet_ifconfig loopback_config = {
 
 struct rtems_bsdnet_config rtems_bsdnet_config = {
     &loopback_config,         /* Network interface */
-    netdriver_config ? rtems_bsdnet_do_bootp : 0,    /* Use BOOTP to get network configuration */
+    netdriver_config ? RTEMS_DO_BOOTP : 0,    /* Use BOOTP to get network configuration */
     NETWORK_TASK_PRIORITY,    /* Network task priority */
-#ifdef MEMORY_SCARCE
+#if   defined(MEMORY_CUSTOM)
+	MEMORY_CUSTOM,
+#elif defined(MEMORY_SCARCE)
     100*1024,                 /* MBUF space */
     200*1024,                 /* MBUF cluster space */
 #elif defined(MEMORY_HUGE)
-    2*1024*1024,                 /* MBUF space */
-    5*1024*1024,                 /* MBUF cluster space */
+    2*1024*1024,              /* MBUF space */
+    5*1024*1024,              /* MBUF cluster space */
 #else
     180*1024,                 /* MBUF space */
     350*1024,                 /* MBUF cluster space */
