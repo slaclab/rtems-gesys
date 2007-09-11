@@ -41,6 +41,12 @@ USE_RSH        = YES
 # the parent directory (for searching -I../cexp for cexpsyms.h)
 USE_BUILTIN_SYMTAB = YES
 
+# These are local and experimental debugging tools - do not
+# enable unless you know what you are doing.
+# Both cannot used at the same time
+# USE_MDBG   = YES
+# USE_EFENCE = YES
+
 # Optional libraries to add, i.e. functionality you
 # want to be present but which is not directly used
 # by GeSys itself.
@@ -92,10 +98,6 @@ USE_GC=NO
 USE_TECLA_YES_C_PIECES = term
 C_PIECES=init rtems_netconfig config addpath ctrlx $(USE_TECLA_$(USE_TECLA)_C_PIECES)
 
-ifeq "$(RTEMS_BSP)" "beatnik"
-DEFINES+=-DMEMORY_HUGE
-endif
-
 # SSRL 4.6.0pre2 compatibility workaround. Obsolete.
 #C_PIECES+=pre2-compat
 
@@ -138,12 +140,6 @@ ifndef XSYMS
 XSYMS = $(RTEMS_CPU)-rtems-xsyms
 endif
 
-#C_PIECES+=mdbg
-#LDFLAGS  += -Wl,--wrap,malloc -Wl,--wrap,free \
--Wl,--wrap,realloc -Wl,--wrap,calloc
-#LDFLAGS  += -Wl,--wrap,_malloc_r -Wl,--wrap,_free_r \
--Wl,--wrap,_realloc_r -Wl,--wrap,_calloc_r
-
 
 #
 # (OPTIONAL) Add local stuff here using +=
@@ -170,12 +166,34 @@ else
 C_PIECES  += pairxtract
 endif
 
+# pieces for the 'mdbg' memory leak debugger
+C_PIECES_MDBG_YES = mdbg
+LDFLAGS_MDBG_YES  = -Wl,--wrap,malloc -Wl,--wrap,free -Wl,--wrap,realloc -Wl,--wrap,calloc
+LDFLAGS_MDBG_YES += -Wl,--wrap,_malloc_r -Wl,--wrap,_free_r -Wl,--wrap,_realloc_r -Wl,--wrap,_calloc_r
+
+C_PIECES += $(C_PIECES_MDBG_$(USE_MDBG))
+LDFLAGS  += $(LDFLAGS_MDBG_$(USE_MDBG))
+
+# pieces for the 'efence' heap corruption debugger
+# (accesses outside of malloced areas are trapped;
+# need PPC 604 paging hardware for this!!)
+#
+ifneq "$(filter $(RTEMS_BSP_FAMILY),svgm beatnik mvme5500)xx" "xx"
+USE_EFENCE=NO
+endif
+
+LD_LIBS_EFENCE_YES  += -lefence
+LDFLAGS_EFENCE_YES   = -Wl,--wrap,malloc -Wl,--wrap,realloc -Wl,--wrap,calloc -Wl,--wrap,free
+LDFLAGS_EFENCE_YES  += -Wl,--wrap,_malloc_r -Wl,--wrap,_realloc_r -Wl,--wrap,_calloc_r -Wl,--wrap,_free_r
+
+LD_LIBS += $(LD_LIBS_EFENCE_$(USE_EFENCE))
+LDFLAGS += $(LDFLAGS_EFENCE_$(USE_EFENCE))
+
+# BSP specifica...
+
 ifneq "$(filter $(RTEMS_BSP_FAMILY),svgm beatnik)xx" "xx"
 DEFINES  += -DHAVE_BSP_EXCEPTION_EXTENSION
 DEFINES  += "-DEARLY_CMDLINE_GET(arg)=do { *(arg) = BSP_commandline_string; } while (0)"
-LD_LIBS  += -lefence
-LDFLAGS  += -Wl,--wrap,malloc -Wl,--wrap,realloc -Wl,--wrap,calloc -Wl,--wrap,free
-LDFLAGS  += -Wl,--wrap,_malloc_r -Wl,--wrap,_realloc_r -Wl,--wrap,_calloc_r -Wl,--wrap,_free_r
 endif 
 
 ifeq "$(RTEMS_BSP_FAMILY)" "psim"
@@ -194,25 +212,21 @@ DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_ATTACH=rtems_dec21140_driver_attach
 endif
 
 ifeq "$(RTEMS_BSP)" "beatnik"
-#DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_NAME=\"mve1\"
-#DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_ATTACH=rtems_mve_attach
-#DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_NAME=\"pcn1\"
-#DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_ATTACH=rtems_pcn_attach
-#DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_NAME=\"em1\"
-#DEFINES  += -DRTEMS_BSP_NETWORK_DRIVER_ATTACH=rtems_em_attach
-#DEFINES  += '-DEARLY_CMDLINE_GET(arg)=do { *arg="SKIP_NETINI=YES"; } while (0)'
-#LD_LIBS  += -lif_pcn
-#LD_LIBS  += -lrtems-gdb-stub
+DEFINES+=-DMEMORY_HUGE
 endif
 
 ifeq  "$(RTEMS_BSP_FAMILY)" "pc386"
-DEFINES  += -DMULTI_NETDRIVER
+#DEFINES  += -DMULTI_NETDRIVER
+LD_LIBS  += -lif_pcn
+LD_LIBS  += -lif_em
+LD_LIBS  += -lif_le
+LD_LIBS  += -lbsdport
 DEFINES  += -DHAVE_PCIBIOS
-DEFINES  += "-DEARLY_CMDLINE_GET(arg)=do { if ( (*(arg) = strchr((const char*)0x2000, ' ')) ) (*(arg))++; } while (0)"
+DEFINES  += -DMEMORY_HUGE
+DEFINES  += "-DEARLY_CMDLINE_GET(arg)=do { *(arg) = BSP_commandline_string; } while (0)"
 ifndef ELFEXT
 ELFEXT    = obj
 endif
-USE_BSPEXT = NO
 ####### OBSOLETE AS OF PR#624 #######
 #define bsp-size-check
 #	@if [ `$(SIZE_FOR_TARGET) $(@:%.exe=%.$(ELFEXT)) | awk '/2/{print $$4}'` -ge 2097148 ]; then \
@@ -237,9 +251,6 @@ endif
 
 ifneq "$(filter $(RTEMS_BSP_FAMILY),uC5282)xx" "xx"
 DEFINES+='-DMEMORY_SCARCE=(2*1024*1024)'
-endif
-
-ifneq "$(filter $(RTEMS_BSP_FAMILY),uC5282)xx" "xx"
 C_PIECES+=bev reboot5282
 ifeq "$(USE_LIBNETBOOT)" "YES" 
 DEFINES+= "-DEARLY_CMDLINE_GET(arg)=do { *(arg) = 0; /* use internal buffer */ } while (0)"
@@ -258,7 +269,7 @@ bspfail:
 bspcheck: $(if $(filter $(RTEMS_BSP_FAMILY),pc386 motorola_powerpc svgm mvme5500 beatnik mvme167 uC5282 psim),,bspfail)
 
 
-CPPFLAGS += -I. -Invram
+CPPFLAGS += -I. -Invram -DHAVE_CEXP
 ifeq "$(USE_BUILTIN_SYMTAB)xx" "YESxx"
 CPPFLAGS += -I../cexp
 endif
