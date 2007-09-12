@@ -156,9 +156,6 @@ extern int if_index;
 #elif defined(RTEMS_BSP_NETWORK_DRIVER_NAME)  /* Use NIC provided by BSP */
 # define NIC_NAME   RTEMS_BSP_NETWORK_DRIVER_NAME
 # define NIC_ATTACH RTEMS_BSP_NETWORK_DRIVER_ATTACH
-/* provide declaration, just in case */
-int
-RTEMS_BSP_NETWORK_DRIVER_ATTACH(struct rtems_bsdnet_ifconfig *ifconfig, int attaching);
 #endif
 
 #endif /* ifdef MULTI_NETDRIVER */
@@ -166,6 +163,11 @@ RTEMS_BSP_NETWORK_DRIVER_ATTACH(struct rtems_bsdnet_ifconfig *ifconfig, int atta
 #endif /* ifdef LO_IF_ONLY */
 
 #ifdef NIC_NAME
+
+/* provide declaration, just in case */
+int
+NIC_ATTACH(struct rtems_bsdnet_ifconfig *ifconfig, int attaching);
+
 static struct rtems_bsdnet_ifconfig netdriver_config[1] = {{
     NIC_NAME,	/* name */
     NIC_ATTACH,	/* attach function */
