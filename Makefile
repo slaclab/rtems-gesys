@@ -221,6 +221,7 @@ LD_LIBS  += -lif_pcn
 LD_LIBS  += -lif_em
 LD_LIBS  += -lif_le
 LD_LIBS  += -lbsdport
+DEFINES  += -DNIC_NAME='""' -DNIC_ATTACH=libbsdport_netdriver_attach
 DEFINES  += -DHAVE_PCIBIOS
 DEFINES  += -DMEMORY_HUGE
 DEFINES  += "-DEARLY_CMDLINE_GET(arg)=do { *(arg) = BSP_commandline_string; } while (0)"
