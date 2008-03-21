@@ -65,24 +65,31 @@
 #endif
 rtems_task Init (rtems_task_argument argument);
 
-#define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
-#define CONFIGURE_APPLICATION_NEEDS_CLOCK_DRIVER
-
 #define CONFIGURE_HAS_OWN_DEVICE_DRIVER_TABLE
 
 #if RTEMS_VERSION_ATLEAST(4,6,99)
 #include <rtems/console.h>
 #include <rtems/clockdrv.h>
+#ifdef USE_RTC_DRIVER
+#include <rtems/rtc.h>
+#endif
 #else
 #include <console.h>
 #include <clockdrv.h>
+#ifdef USE_RTC_DRIVER
+#include <rtc.h>
+#endif
 #endif
 
 rtems_driver_address_table Device_drivers[]={
     CONSOLE_DRIVER_TABLE_ENTRY,
     CLOCK_DRIVER_TABLE_ENTRY,
+#ifdef USE_RTC_DRIVER
+	RTC_DRIVER_TABLE_ENTRY,
+#endif
     {0}
 };
+
 
 #define CONFIGURE_INIT
 #if RTEMS_VERSION_ATLEAST(4,6,99)
@@ -90,4 +97,3 @@ rtems_driver_address_table Device_drivers[]={
 #else
 #include <confdefs.h>
 #endif
-

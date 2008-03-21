@@ -41,6 +41,10 @@ USE_RSH        = YES
 # the parent directory (for searching -I../cexp for cexpsyms.h)
 USE_BUILTIN_SYMTAB = YES
 
+# Whether to include the RTC driver (if available; BSPs w/o one
+# should automatically omit it)
+USE_RTC_DRIVER = YES
+
 # These are local and experimental debugging tools - do not
 # enable unless you know what you are doing.
 # Both cannot used at the same time
@@ -97,6 +101,8 @@ USE_GC=NO
 # Normal (i.e. non-flash) system which can be net-booted
 USE_TECLA_YES_C_PIECES = term
 C_PIECES=init rtems_netconfig config addpath ctrlx $(USE_TECLA_$(USE_TECLA)_C_PIECES)
+C_PIECES_USE_RTC_DRIVER_YES=missing
+C_PIECES+=$(C_PIECES_USE_RTC_DRIVER_$(USE_RTC_DRIVER))
 
 # SSRL 4.6.0pre2 compatibility workaround. Obsolete.
 #C_PIECES+=pre2-compat
@@ -152,10 +158,13 @@ DEFINES_BSPEXT_YES=-DHAVE_LIBBSPEXT
 DEFINES  += -DUSE_POSIX
 DEFINES  += $(DEFINES_BSPEXT_$(USE_BSPEXT))
 
+DEFINES_USE_RTC_DRIVER_YES=-DUSE_RTC_DRIVER
+DEFINES += $(DEFINES_USE_RTC_DRIVER_$(USE_RTC_DRIVER))
+
 # Trim BSP specific things
 #
 # bsps w/o netboot use local 'pairxtract'
-ifeq "$(filter $(RTEMS_BSP_FAMILY),svgm beatnik uC5282)xx" "xx"
+ifeq "$(filter $(RTEMS_BSP_FAMILY),svgm beatnik uC5282 mvme3100)xx" "xx"
 USE_LIBNETBOOT=NO
 endif
 
@@ -267,7 +276,7 @@ endif
 bspfail:
 	$(error GeSys has not been ported/tested on this BSP ($(RTEMS_BSP)) yet)
 
-bspcheck: $(if $(filter $(RTEMS_BSP_FAMILY),pc386 motorola_powerpc svgm mvme5500 beatnik mvme167 uC5282 psim),,bspfail)
+bspcheck: $(if $(filter $(RTEMS_BSP_FAMILY),pc386 motorola_powerpc svgm mvme5500 beatnik mvme3100 mvme167 uC5282 psim),,bspfail)
 
 
 CPPFLAGS += -I. -Invram -DHAVE_CEXP
