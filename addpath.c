@@ -229,6 +229,7 @@ int  i;
 char *s[MAX_SUBST];
 int     ns = 0;
 char *rval = 0;
+char * const *sp = s;
 
 	if ( strstr(tmpl,"%H") ) {
 		if ( ! (s[ns] = malloc(100)) )
@@ -252,7 +253,7 @@ char *rval = 0;
 		ns++;
 	}
 
-	rval = stringSubstitute(tmpl, (const char * const *)s, ns);
+	rval = stringSubstitute(tmpl, (const char * const *)sp, ns);
 
 bail:
 	for ( i = 0; i<ns; i++ ) {
