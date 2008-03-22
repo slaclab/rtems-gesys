@@ -179,21 +179,28 @@ static struct rtems_bsdnet_ifconfig netdriver_config[1] = {{
 #ifndef LO_IF_ONLY
 #warning "NO KNOWN NETWORK DRIVER FOR THIS BSP -- YOU MAY HAVE TO EDIT rtems_netconfig.c"
 #endif
-#define netdriver_config 0
 #endif
 
 extern void rtems_bsdnet_loopattach();
 static struct rtems_bsdnet_ifconfig loopback_config = {
     "lo0",                          /* name */
     (int (*)(struct rtems_bsdnet_ifconfig *, int))rtems_bsdnet_loopattach, /* attach function */
+#ifdef NIC_NAME
     netdriver_config,               /* link to next interface */
+#else
+    0,                              /* link to next interface */
+#endif
     "127.0.0.1",                    /* IP address */
     "255.0.0.0",                    /* IP net mask */
 };
 
 struct rtems_bsdnet_config rtems_bsdnet_config = {
     &loopback_config,         /* Network interface */
-    netdriver_config ? RTEMS_DO_BOOTP : 0,    /* Use BOOTP to get network configuration */
+#ifdef NIC_NAME
+    RTEMS_DO_BOOTP,           /* Use BOOTP to get network configuration */
+#else
+    0,                        /* Use BOOTP to get network configuration */
+#endif
     NETWORK_TASK_PRIORITY,    /* Network task priority */
 #if   defined(MEMORY_CUSTOM)
 	MEMORY_CUSTOM,
