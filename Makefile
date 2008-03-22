@@ -269,9 +269,20 @@ DEFINES+=-DBSP_NETWORK_SETUP=bev_network_setup
 endif
 endif
 
+# RTEMS 4.8.99 has 'unified' the ELF extension to be '.exe'
+# which is hardcoded ATM; they also define a 'DOWNEXT' variable
+# (extension of downloadable file). We test for presence of
+# 'DOWNEXT' to find out if we're using the new system...
+
+ifndef DOWNEXT
 ifndef ELFEXT
-ELFEXT=nxe
+ELFEXT=exe
 endif
+else
+ELFEXT=exe
+endif
+
+DOWNEXT=.bin
 
 bspfail:
 	$(error GeSys has not been ported/tested on this BSP ($(RTEMS_BSP)) yet)
@@ -336,6 +347,9 @@ OBJS      += ${ARCH}/allsyms.o
 CLEAN_ADDITIONS   += builddate.c pathcheck.c pairxtract.c ctrlx.c
 CLOBBER_ADDITIONS +=
 
+THELIBS:=$(shell $(LINK.cc) $(AM_CFLAGS) $(AM_LDFLAGS) $(LINK_LIBS) -specs=myspec)
+vpath %.a $(patsubst -L%,%,$(filter -L%,$(THELIBS)))
+
 all: bspcheck gc-check libnms ${ARCH} $(SRCS) $(PGMS)
 
 # We want to have the build date compiled in...
@@ -366,9 +380,9 @@ ifeq "$(USE_BUILTIN_SYMTAB)xx" "NOxx"
 ifdef ELFEXT
 ifdef XSYMS
 ifeq ($(USE_GC),YES)
-	$(OBJCOPY) --redefine-sym free=__real_free --redefine-sym __wrap_free=free $(@:%.exe=%.$(ELFEXT))
+	$(OBJCOPY) --redefine-sym free=__real_free --redefine-sym __wrap_free=free $(@:%$(DOWNEXT)=%.$(ELFEXT))
 endif
-	$(XSYMS) $(@:%.exe=%.$(ELFEXT)) $(@:%.exe=%.sym)
+	$(XSYMS) $(@:%$(DOWNEXT)=%.$(ELFEXT)) $(@:%$(DOWNEXT)=%.sym)
 endif
 endif
 endif
@@ -449,7 +463,6 @@ $(ARCH)/app.nm: $(filter-out $(ARCH)/allsyms.o,$(OBJS))
 #	echo "`pwd`/mylink" >>$@
 #
 
-THELIBS:=$(shell $(LINK.cc) $(AM_CFLAGS) $(AM_LDFLAGS) $(LINK_LIBS) -specs=myspec)
 
 LIBNMS=$(patsubst %.a,$(ARCH)/%.nm,$(sort $(patsubst -l%,lib%.a,$(filter -l%,$(THELIBS)))))
 OPTIONAL_ALL=$(addprefix -o,$(LIBNMS)) 
@@ -463,7 +476,6 @@ $(ARCH)/allsyms.c: $(ARCH)/app.nm $(LIBNMS) $(ARCH)/startfiles.nm $(EXCLUDE_LIST
 	echo $^
 	$(LDEP) -F -l -u $(OPTIONAL_ALL) $(addprefix -x,$(EXCLUDE_LISTS)) $(addprefix -o,$(INCLUDE_LISTS)) -C $@ $(filter %.nm,$^)  > $(ARCH)/ldep.log
 
-vpath %.a $(patsubst -L%,%,$(filter -L%,$(THELIBS)))
 
 libnms: $(ARCH) $(LIBNMS)
 	
@@ -516,11 +528,11 @@ endif
 prlinkcmds:
 	$(CC) -print-file-name=linkcmds
 
-tst.exe:OBJS=
-tst.exe:LD_LIBS=
+tst$(DOWNEXT):OBJS=
+tst$(DOWNEXT):LD_LIBS=
 
-tst.exe:
+tst$(DOWNEXT):
 	$(LINK.cc) -nodefaultlibs -o $@ -Wl,--unresolved-symbols=ignore-all -print-file-name=linkcmds
 
-blah:
+blah: 
 	echo $(LINK_FILES)
