@@ -229,6 +229,9 @@ ansiTiocGwinszInstall(int slot);
 static int rshCopy(char **pDfltSrv, char *pathspec, char **pFnam);
 #endif
 
+void
+cmdlinePairExtract(char *buf, int (*putpair)(char *str), int removeFound);
+
 int
 getchar_timeout(int fd, int timeout);
 
@@ -429,7 +432,9 @@ char	*argv[7]={
 #endif
   /* check if we have a real ifconfig (first is loopback) */
   if ( !no_net && (! (SKIP_NETINI) || !BUILTIN_SYMTAB) && rtems_bsdnet_config.ifconfig )
-	gesys_network_start();
+  {
+    gesys_network_start();
+  }
   else
   {
 	fprintf(stderr,"Skipping network initialization - you can do it manually\n");
