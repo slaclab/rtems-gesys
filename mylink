@@ -4,6 +4,7 @@
 # -Lxxx and -lyyy arguments. It assembles a directory path list
 # and a list of libraries found.
 #
+#echo "$*" > feil
 while [ ! -z "$1" ]; do
 	strarg=`echo "$1" | sed -n -e '/^-../s/^[-].//p'`
 	if  echo "$1" | grep '^-L' > /dev/null ; then
@@ -14,7 +15,7 @@ while [ ! -z "$1" ]; do
 		if [ -z "$LIBPATH" ] ; then
 			LIBPATH="-L"$strarg
 		else
-			LIBPATH=$LIBPATH:$strarg
+			LIBPATH="$LIBPATH:$strarg"
 		fi
 	fi
 	if  echo "$1" | grep '^-l' > /dev/null ; then
