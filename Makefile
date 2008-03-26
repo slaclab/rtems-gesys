@@ -202,8 +202,11 @@ LDFLAGS += $(LDFLAGS_EFENCE_$(USE_EFENCE))
 
 ifneq "$(filter $(RTEMS_BSP_FAMILY),svgm beatnik)xx" "xx"
 DEFINES  += -DHAVE_BSP_EXCEPTION_EXTENSION
-DEFINES  += "-DEARLY_CMDLINE_GET(arg)=do { *(arg) = BSP_commandline_string; } while (0)"
 endif 
+
+ifneq "$(filter $(RTEMS_BSP_FAMILY),svgm beatnik mvme3100)xx" "xx"
+DEFINES  += "-DEARLY_CMDLINE_GET(arg)=do { *(arg) = BSP_commandline_string; } while (0)"
+endif
 
 ifeq "$(RTEMS_BSP_FAMILY)" "psim"
 USE_BSPEXT = NO
