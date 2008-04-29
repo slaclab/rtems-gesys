@@ -15,9 +15,9 @@
 USE_TECLA      = YES
 # Whether to use the libbspExt library. This is always
 # (automagically) disabled on pcx86 BSPs.
-USE_BSPEXT     = YES
+USE_BSPEXT     = $(shell if test -d ../libbspExt; then echo YES; else echo NO; fi)
 # Whether to use the 'netboot' library (on BSPs where this applies)
-USE_LIBNETBOOT = YES
+USE_LIBNETBOOT = $(shell if test -d ../netboot; then echo YES; else echo NO; fi)
 
 # Include NFS support; system symbol table and initialization
 # scripts can be loaded using NFS
