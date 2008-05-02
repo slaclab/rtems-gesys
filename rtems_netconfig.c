@@ -21,7 +21,7 @@
  *   MULTI_NETDRIVER          <undefined>   ugly hack; if defined try to probe a variety of PCI and ISA drivers
  *                                          (i386 ONLY) use is discouraged!
  *   NIC_NAME                 <undefined>   Ethernet driver name (e.g. "pcn1"); must also define NIC_ATTACH
- *   NIC_ATTACH               <undefined>   Ethernet driver attach function (e.g., rtems_pcn_attach).
+ *   NIC_ATTACH               <undefined>   Ethernet driver attach function (e.g., rtems_fxp_attach).
  *                                          If these are undefined then
  *                                            a) MULTI_NETDRIVER is used (if defined)
  *                                            b) RTEMS_BSP_NETWORK_DRIVER_NAME/RTEMS_BSP_NETWORK_DRIVER_ATTACH
@@ -71,8 +71,6 @@ extern int rtems_fxp_attach (struct rtems_bsdnet_ifconfig *, int);
 extern int rtems_elnk_driver_attach (struct rtems_bsdnet_ifconfig *, int);
 extern int rtems_dec21140_driver_attach (struct rtems_bsdnet_ifconfig *, int);
 
-extern int rtems_pcn_attach(struct rtems_bsdnet_ifconfig *, int);
-
 /* these don't probe and will be used even if there's no device :-( */
 extern int rtems_ne_driver_attach (struct rtems_bsdnet_ifconfig *, int);
 extern int rtems_wd_driver_attach (struct rtems_bsdnet_ifconfig *, int);
@@ -92,9 +90,6 @@ static struct rtems_bsdnet_ifconfig pci_netdriver_config[]={
 	},
 	{
 	"dc1", rtems_dec21140_driver_attach, pci_netdriver_config+2,
-	},
-	{
-	"pcn1", rtems_pcn_attach, pci_netdriver_config+3,
 	},
 	{
 	"elnk1", rtems_elnk_driver_attach, isa_netdriver_config,

@@ -19,6 +19,9 @@ USE_BSPEXT     = $(shell if test -d ../libbspExt; then echo YES; else echo NO; f
 # Whether to use the 'netboot' library (on BSPs where this applies)
 USE_LIBNETBOOT = $(shell if test -d ../netboot; then echo YES; else echo NO; fi)
 
+#
+USE_BSDNETDRVS = $(shell if test -d ../bsd_eth_drivers; then echo YES ; else echo NO; fi)
+
 # Include NFS support; system symbol table and initialization
 # scripts can be loaded using NFS
 USE_NFS        = YES
@@ -228,12 +231,15 @@ DEFINES+=-DMEMORY_HUGE
 endif
 
 ifeq  "$(RTEMS_BSP_FAMILY)" "pc386"
-#DEFINES  += -DMULTI_NETDRIVER
+ifeq  "$(USE_BSDNETDRVS)"   "YES"
 LD_LIBS  += -lif_pcn
 LD_LIBS  += -lif_em
 LD_LIBS  += -lif_le
 LD_LIBS  += -lbsdport
 DEFINES  += -DNIC_NAME='""' -DNIC_ATTACH=libbsdport_netdriver_attach
+else
+DEFINES  += -DMULTI_NETDRIVER
+endif
 DEFINES  += -DHAVE_PCIBIOS
 DEFINES  += -DMEMORY_HUGE
 DEFINES  += "-DEARLY_CMDLINE_GET(arg)=do { *(arg) = BSP_commandline_string; } while (0)"
