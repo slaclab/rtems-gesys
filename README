@@ -22,7 +22,14 @@ to load and start 'real' applications at run-time.
 
 RTEMS GeSys has been tested on the following BSPs:
 
-	powerpc-svgm, powerpc-mvme23xx, i386-pc?86, m68k-mvme167
+    i386-pc386,
+
+	powerpc-mvme23xx, powerpc-mvme2100 powerpc-svgm,
+	powerpc-mvme5500, powerpc-beatnik, powerpc-mvme3100,
+	powerpc-psim
+
+	m68k-mvme167, m68k-uC5282
+
 
 Till Straumann, 2003/7/22
 
