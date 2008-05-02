@@ -2,7 +2,7 @@ all: install
 
 CEXP=cexp-1.6.beta
 NFS=rtemsNfs-1.7
-GESYS=system
+GESYS=GeSys-2.4
 BSPEXT=libbspExt-1.4
 
 ifndef RTEMS_MAKEFILE_PATH
