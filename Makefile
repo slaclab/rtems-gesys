@@ -322,7 +322,7 @@ DEFINES+=$(USE_RSH_$(USE_RSH)_DEFINES)
 
 USE_TECLA_YES_LIB  = -ltecla_r
 USE_BSPEXT_YES_LIB = -lbspExt
-USE_NFS_YES_LIB    = -lrtemsNfs
+USE_NFS_YES_LIB    = -lnfs
 
 LD_LIBS   += -lcexp -lbfd -lspencer_regexp -lopcodes -liberty
 LD_LIBS   += $(USE_TECLA_$(USE_TECLA)_LIB)
