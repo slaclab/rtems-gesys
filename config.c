@@ -27,12 +27,17 @@
 #define CONFIGURE_EXECUTIVE_RAM_SIZE        (5*1024*1024)
 #endif
 #define CONFIGURE_MAXIMUM_TASKS             rtems_resource_unlimited(30)
-#define CONFIGURE_MAXIMUM_SEMAPHORES        rtems_resource_unlimited(500)
 #define CONFIGURE_MAXIMUM_TIMERS            rtems_resource_unlimited(20)
+#define CONFIGURE_MAXIMUM_SEMAPHORES        rtems_resource_unlimited(500)
 #define CONFIGURE_MAXIMUM_MESSAGE_QUEUES    rtems_resource_unlimited(5)
+#define CONFIGURE_MAXIMUM_PARTITIONS        8
+#define CONFIGURE_MAXIMUM_REGIONS           8
+#define CONFIGURE_MAXIMUM_PORTS             8
 #define CONFIGURE_MAXIMUM_PERIODS		    rtems_resource_unlimited(8)
+#define CONFIGURE_MAXIMUM_USER_EXTENSIONS	4
+
 #define CONFIGURE_MAXIMUM_DRIVERS			15
-#define CONFIGURE_MAXIMUM_USER_EXTENSIONS	2
+
 
 #ifdef USE_POSIX
 #define CONFIGURE_MAXIMUM_POSIX_THREADS			20
