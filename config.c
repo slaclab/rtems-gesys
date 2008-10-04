@@ -8,7 +8,11 @@
 
 #include <rtems.h>
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#else
 #include "verscheck.h"
+#endif
 
 /*
  ***********************************************************************
@@ -32,6 +36,7 @@
 #define CONFIGURE_MAXIMUM_MESSAGE_QUEUES    rtems_resource_unlimited(5)
 #define CONFIGURE_MAXIMUM_PERIODS		    rtems_resource_unlimited(8)
 #define CONFIGURE_MAXIMUM_DRIVERS			15
+#define CONFIGURE_MAXIMUM_REGIONS			3
 #define CONFIGURE_MAXIMUM_USER_EXTENSIONS	2
 
 #ifdef USE_POSIX

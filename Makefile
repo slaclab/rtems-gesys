@@ -73,7 +73,7 @@ OPT_LIBRARIES = -lm -lrtems++
 # 
 EXCLUDE_LISTS+=$(wildcard config/*.excl)
 
-# This was permantently excluded from librtemsbsp.a by a patch
+# This was permanently excluded from librtemsbsp.a by a patch
 #EXCLUDE_LISTS+=config/libnetapps.excl  
 
 #
@@ -309,7 +309,7 @@ CFLAGS   += -O2
 # the system configuration table...
 #CFLAGS   +=-DSTACK_CHECKER_ON
 
-USE_TECLA_YES_DEFINES  = -DWINS_LINE_DISC -DUSE_TECLA
+USE_TECLA_YES_DEFINES  = -DWINS_LINE_DISC -DHAVE_TECLA
 USE_NFS_YES_DEFINES    = -DNFS_SUPPORT
 USE_TFTPFS_YES_DEFINES = -DTFTP_SUPPORT
 USE_RSH_YES_DEFINES    = -DRSH_SUPPORT
@@ -328,9 +328,9 @@ DEFINES+=$(USE_RSH_$(USE_RSH)_DEFINES)
 
 USE_TECLA_YES_LIB  = -ltecla_r
 USE_BSPEXT_YES_LIB = -lbspExt
-USE_NFS_YES_LIB    = -lrtemsNfs
+USE_NFS_YES_LIB    = -lnfs
 
-LD_LIBS   += -lcexp -lbfd -lspencer_regexp -lopcodes -liberty
+LD_LIBS   += -lcexp -lpmbfd -lpmelf -lspencer_regexp 
 LD_LIBS   += $(USE_TECLA_$(USE_TECLA)_LIB)
 LD_LIBS   += $(USE_BSPEXT_$(USE_BSPEXT)_LIB)
 LD_LIBS   += $(USE_NFS_$(USE_NFS)_LIB)
@@ -504,7 +504,7 @@ thelibs:
 	@echo $(patsubst -L%,%,$(filter -L%,$(THELIBS)))
 
 #initialization script
-$(ARCH)/st.sys: st.sys $(wildcard st.sys-ssrl) $(wildcard st.sys-$(RTEMS_BSP)) $(wildcard st.sys-$(RTEMS_BSP)-ssrl)
+$(ARCH)/st.sys: st.sys.in $(wildcard st.sys-ssrl) $(wildcard st.sys-$(RTEMS_BSP)) $(wildcard st.sys-$(RTEMS_BSP)-ssrl)
 	cat $^ | sed -e 's/@RTEMS_CPU@/$(RTEMS_CPU)/g' -e 's/@RTEMS_BSP@/$(RTEMS_BSP)/g' > $@
 
 

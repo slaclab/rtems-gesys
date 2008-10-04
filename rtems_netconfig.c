@@ -38,7 +38,11 @@
 #include <bsp.h>
 #include <rtems/rtems_bsdnet.h>
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#else
 #include "verscheck.h"
+#endif
 
 #ifndef NETWORK_TASK_PRIORITY
 #define NETWORK_TASK_PRIORITY   150	/* within EPICS' range */

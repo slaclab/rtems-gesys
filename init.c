@@ -115,7 +115,11 @@
 
 #include <rtems.h>
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#else
 #include "verscheck.h"
+#endif
 
 #include <rtems/rtems_bsdnet.h>
 #include <rtems/libio.h>
@@ -142,7 +146,7 @@
 
 #include <cexp.h>
 
-#ifdef USE_TECLA
+#ifdef HAVE_TECLA
 #include <libtecla.h>
 #else
 #define del_GetLine(gl)					free(gl)
@@ -220,7 +224,7 @@ cexpExcHandlerInstall(void (*handler)(int))
 #define BOOTPSA  rtems_bsdnet_bootp_server_address
 #define SYSSCRIPT	"st.sys"
 
-#ifdef USE_TECLA
+#ifdef HAVE_TECLA
 int
 ansiTiocGwinszInstall(int slot);
 #endif
@@ -400,7 +404,7 @@ char	*argv[7]={
   }
 #endif
 
-#if defined(USE_TECLA)
+#if defined(HAVE_TECLA) && defined(WINS_LINE_DISC)
   /*
    * Install our special line discipline which implements
    * TIOCGWINSZ
@@ -552,7 +556,7 @@ char	*argv[7]={
 #ifdef RSH_SUPPORT
 		printf("   RSH: [<host>:]~<user>/<symfile_path>\n"); 
 #endif
-#ifdef USE_TECLA
+#ifdef HAVE_TECLA
 		bufp = gl_get_line(gl, "Enter Symbol File Name: ",
 			               pathspec,
                            ( pathspec && *pathspec ) ? strlen(pathspec) : 0 );
@@ -817,7 +821,7 @@ shell_entry:
   exit( 1 );
 }
 
-#ifndef USE_TECLA
+#ifndef HAVE_TECLA
 static char *my_getline(char *rval, char *prompt, int len)
 {
 int		ch;
