@@ -270,7 +270,7 @@ case "$RTEMS_BSP_FAMILY" in
 	;;
 esac
 
-CEXP_TEXT_REGION_END=0
+CEXP_TEXT_REGION_END=
 case "$RTEMS_BSP_FAMILY" in
 	beatnik | mvme3100)
 		CEXP_TEXT_REGION_END=0x2000000
@@ -336,7 +336,7 @@ fi
 
 AC_MSG_CHECKING([which BFD library to use])
 if SSRLAPPS_CHECK_COMPONENT(cexp) ; then
-	if test -d ../cexp/binutils/bfd ; then
+	if test -d ../cexp/binutils/bfd -a ! "${enable_bfd}" = "no" ; then
 		with_bfdlib=gnubfd
 	elif test -d ../cexp/pmbfd ; then
 		if test "$enable_loader" = "no" ; then
