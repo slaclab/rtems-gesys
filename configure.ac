@@ -271,13 +271,18 @@ case "$RTEMS_BSP_FAMILY" in
 esac
 
 CEXP_TEXT_REGION_END=
+RTEMS_CEXP_TEXT_REGION_SIZE=
 case "$RTEMS_BSP_FAMILY" in
-	beatnik | mvme3100)
-		CEXP_TEXT_REGION_END=0x2000000
+	beatnik | mvme3100 | virtex | rce405)
+		RTEMS_CEXP_TEXT_REGION_SIZE=0x01000000
 	;;
 	*)
 	;;
 esac
+
+if test ! "${RTEMS_CEXP_TEXT_REGION_SIZE}"xx = "xx" ; then
+	AC_DEFINE_UNQUOTED([RTEMS_CEXP_TEXT_REGION_SIZE],[$RTEMS_CEXP_TEXT_REGION_SIZE],[The amount of memory in the first 32MB area to set aside for loadable module's text (PPC only)])
+fi
 
 # BSP_commandline_string is not a function but
 # the macro just checks if it can link the symbol
@@ -327,16 +332,16 @@ if test ! "${with_nic_name}xx" = "xx" ; then
 	AC_DEFINE_UNQUOTED([NIC_NAME],[$with_nic_name],[NIC device name we should use])
 fi
 
-if test -d ../cexp/binutils/opcodes ; then
+if test -d ../cexp/binutils ; then
 	if ! test "${enable_opcodes+set}" = "set" ; then
-		AC_MSG_NOTICE(['opcodes' directory found relative to 'system'; using opcodes library (configure with --disable-opcodes to disable)])
+		AC_MSG_NOTICE(['binutils' directory found relative to 'system'; using opcodes library (configure with --disable-opcodes to disable)])
 		enable_opcodes=yes
 	fi
 fi
 
 AC_MSG_CHECKING([which BFD library to use])
 if SSRLAPPS_CHECK_COMPONENT(cexp) ; then
-	if test -d ../cexp/binutils/bfd -a ! "${enable_bfd}" = "no" ; then
+	if test -d ../cexp/binutils -a ! "${enable_bfd}" = "no" ; then
 		with_bfdlib=gnubfd
 	elif test -d ../cexp/pmbfd ; then
 		if test "$enable_loader" = "no" ; then
@@ -391,6 +396,9 @@ AM_CONDITIONAL([GNUBFD], [test "$with_bfdlib"     = "gnubfd"])
 AM_CONDITIONAL([PMBFD],  [test "$with_bfdlib"     = "pmbfd"])
 AM_CONDITIONAL([PMELF],  [test "$with_bfdlib"     = "pmelf"])
 
-AM_CONDITIONAL([RESERVE_CEXP_TEXT_REGION], [test ! "$CEXP_TEXT_REGION_END"xx = "xx" ])
+# two ways for handling this - the RESERVE_CEXP_TEXT_REGION way is
+# an ugly hack; we really should have proper linker scripts...
+AM_CONDITIONAL([RESERVE_CEXP_TEXT_REGION],  [test ! "$CEXP_TEXT_REGION_END"xx = "xx" ])
+AM_CONDITIONAL([INTERNAL_CEXP_TEXT_REGION], [test ! "$RTEMS_CEXP_TEXT_REGION_SIZE"xx = "xx" ])
 
 AC_OUTPUT

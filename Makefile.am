@@ -30,6 +30,10 @@ endif
 # the C++ linker (and C++ system libraries)
 rtems_SOURCES  += cppdummy.cc
 
+if INTERNAL_CEXP_TEXT_REGION
+rtems_SOURCES  += cexp-txtregion.c
+endif
+
 EXTRA_rtems_SOURCES=
 
 # PSIM bsp
