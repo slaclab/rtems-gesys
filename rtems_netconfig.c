@@ -134,25 +134,7 @@ extern int if_index;
 
 #else
 
-/*
- * The following conditionals select the network interface card.
- *
- * By default the network interface specified by the board-support
- * package is used.
- * To use a different NIC for a particular application, copy this file to the
- * application directory and add the appropriate -Dxxxx to the compiler flag.
- * To specify a different NIC on a site-wide basis, add the appropriate
- * flags to the site configuration file for the target.  For example, to
- * specify a 3COM 3C509 for all RTEMS-pc386 targets at your site, add
- *      TARGET_CFLAGS += -DEPICS_RTEMS_NIC_3C509
- * to configure/os/CONFIG_SITE.Common.RTEMS-pc386.
- */
-#if defined(EPICS_RTEMS_NIC_3C509)            /* 3COM 3C509 */
-  extern int rtems_3c509_driver_attach (struct rtems_bsdnet_ifconfig *, int);
-# define NIC_NAME   "ep0"
-# define NIC_ATTACH rtems_3c509_driver_attach
-
-#elif defined(RTEMS_BSP_NETWORK_DRIVER_NAME)  /* Use NIC provided by BSP */
+#if defined(RTEMS_BSP_NETWORK_DRIVER_NAME)  /* Use NIC provided by BSP */
 # define NIC_NAME   RTEMS_BSP_NETWORK_DRIVER_NAME
 # define NIC_ATTACH RTEMS_BSP_NETWORK_DRIVER_ATTACH
 #endif
@@ -162,6 +144,8 @@ extern int if_index;
 #endif /* ifdef LO_IF_ONLY */
 
 #ifdef NIC_NAME
+
+extern int NIC_ATTACH();
 
 
 static struct rtems_bsdnet_ifconfig netdriver_config[1] = {{
