@@ -13,6 +13,7 @@ DOWNEXT         = @DOWNEXT@
 # initialize vars
 GESYSLIBS       = @GESYSLIBS@
 rtems_LDADD     =
+APPOBJS         =
 
 bin_PROGRAMS    = rtems
 # must use SCRIPTS, automake doesn't allow DATA into bindir
@@ -36,8 +37,9 @@ endif
 
 EXTRA_rtems_SOURCES=
 
-# PSIM bsp
 EXTRA_rtems_SOURCES += bug_disk.c bev.c reboot5282.c
+
+# PSIM bsp
 psim_bsp_OBJS        = bug_disk.$(OBJEXT)
 psim_bsp_DEFINES     = -DPSIM
 
@@ -60,9 +62,9 @@ EARLY_CMDLINE_GET_INTERNAL='-DEARLY_CMDLINE_GET(arg)=do { *(arg) = 0; /* use int
 EARLY_CMDLINE_GET_BSP_STR='-DEARLY_CMDLINE_GET(arg)=do { *(arg) = BSP_commandline_string; } while (0)'
 
 # Add BSP-specific defines + objects
-rtems_LDADD         += $(@RTEMS_BSP@_bsp_OBJS)
+APPOBJS             += $(@RTEMS_BSP@_bsp_OBJS)
 rtems_CPPFLAGS      += $(@RTEMS_BSP@_bsp_DEFINES)
-rtems_LDADD         += $(@RTEMS_BSP_FAMILY@_fam_OBJS)
+APPOBJS             += $(@RTEMS_BSP_FAMILY@_fam_OBJS)
 rtems_CPPFLAGS      += $(@RTEMS_BSP_FAMILY@_fam_DEFINES)
 
 rtems_CPPFLAGS      += @MEMORY_CONF@
@@ -107,7 +109,7 @@ if BSPEXT
 GESYSLIBS      += -lbspExt
 endif
 
-rtems_LDADD    += $(GESYSLIBS)
+rtems_LDADD    += $(APPOBJS) $(GESYSLIBS)
 rtems_DEPENDENCIES = $(rtems_LDADD)
 
 init.c: builddate.c
@@ -141,7 +143,7 @@ startfiles.nm: gcc-startfiles$(EXEEXT)
 	$(NM) -g -fposix $^ > $@
 
 # generate a name file for the application's objects
-app.nm: $(filter-out allsyms.$(OBJEXT) objattrs.$(OBJEXT),$(rtems_OBJECTS))
+app.nm: $(filter-out allsyms.$(OBJEXT) objattrs.$(OBJEXT),$(rtems_OBJECTS) $(APPOBJS))
 	$(NM) -g -fposix $^ > $@
 
 LIBNMS=$(patsubst %.a,%.nm,$(sort $(patsubst -l%,lib%.a,$(filter -l%,$(THELIBS)))))
