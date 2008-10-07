@@ -163,13 +163,10 @@ extern int if_index;
 
 #ifdef NIC_NAME
 
-/* provide declaration, just in case */
-int
-NIC_ATTACH(struct rtems_bsdnet_ifconfig *ifconfig, int attaching);
 
 static struct rtems_bsdnet_ifconfig netdriver_config[1] = {{
     NIC_NAME,	/* name */
-    NIC_ATTACH,	/* attach function */
+    (int (*)(struct rtems_bsdnet_ifconfig*,int))NIC_ATTACH,	/* attach function */
     0,			/* link to next interface */
 	FIXED_IP_ADDR,
 	FIXED_NETMASK
