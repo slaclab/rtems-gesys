@@ -288,6 +288,9 @@ fi
 # the macro just checks if it can link the symbol
 # which is good enough
 AC_CHECK_FUNCS([BSP_commandline_string])
+AC_CHECK_DECL([BSP_commandline_string],
+	[AC_DEFINE([DECL_BSP_COMMANDLINE_STRING],1,[Whether BSP_commandline_string is declared in <bsp.h>])],
+	,,[INCLUDES=bsp.h])
 
 if test "$ac_cv_func_BSP_commandline_string" = "yes" ; then
 	EARLY_CMDLINE_GET_TYPE=BSP_STR

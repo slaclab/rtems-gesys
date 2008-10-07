@@ -220,6 +220,10 @@ cexpExcHandlerInstall(void (*handler)(int))
 #define cexpExcHandlerInstall 0
 #endif
 
+#if defined(HAVE_BSP_COMMANDLINE_STRING) && ! defined(DECL_BSP_COMMANDLINE_STRING)
+extern char *BSP_commandline_string;
+#endif
+
 #define BOOTPFN  rtems_bsdnet_bootp_boot_file_name
 #define BOOTPSA  rtems_bsdnet_bootp_server_address
 #define SYSSCRIPT	"st.sys"
