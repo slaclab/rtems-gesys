@@ -314,6 +314,14 @@ case "$RTEMS_BSP_FAMILY" in
 	AC_MSG_NOTICE([with_nic_name now $with_nic_name])
 	AC_MSG_NOTICE([with_nic_attach now $with_nic_attach])
 	;;
+	motorola_powerpc)
+		if test "${with_nic_name}xx" = "xx" -a "${with_nic_attach}xx" = "xx"  ; then
+			with_nic_name='"dc0"'
+			with_nic_attach=rtems_dec21140_driver_attach
+		fi
+	AC_MSG_NOTICE([with_nic_name now $with_nic_name])
+	AC_MSG_NOTICE([with_nic_attach now $with_nic_attach])
+	;;
 	*)
 	AC_MSG_NOTICE([with_nic_name now $with_nic_name (NOT CHANGED)])
 	;;
