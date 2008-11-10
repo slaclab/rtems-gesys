@@ -365,7 +365,7 @@ all: bspcheck gc-check libnms ${ARCH} $(SRCS) $(PGMS)
 $(ARCH)/init.o: builddate.c pathcheck.c ctrlx.c
 
 builddate.c: $(filter-out $(ARCH)/init.o $(ARCH)/allsyms.o,$(OBJS)) Makefile
-	echo 'static char *system_build_date="'`date +%Y%m%d%Z%T`'";' > $@
+	echo 'const char *GeSys_Build_Date="'`date +%Y%m%d%Z%T`'";' > $@
 	echo '#define DEFAULT_CPU_ARCH_FOR_CEXP "'`$(XSYMS) -a $<`'"' >>$@
 
 pathcheck.c: nvram/pathcheck.c

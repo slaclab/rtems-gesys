@@ -17,7 +17,10 @@ APPOBJS         =
 
 bin_PROGRAMS    = rtems
 # must use SCRIPTS, automake doesn't allow DATA into bindir
-bin_SCRIPTS     = rtems$(DOWNEXT)
+bin_SCRIPTS     =
+if HAVE_BSP_POSTLINK_CMDS
+bin_SCRIPTS    += rtems$(DOWNEXT)
+endif
 bin_SCRIPTS    += st.sys
 
 rtems_CPPFLAGS  = $(AM_CPPFLAGS)
@@ -201,7 +204,7 @@ AM_LDFLAGS+=$(REGLDFLAGS)
 endif
 
 builddate.c: $(filter-out rtems-init.$(OBJEXT) rtems-allsyms.$(OBJEXT),$(rtems_OBJECTS)) Makefile
-	echo 'static char *system_build_date="'`date +%Y%m%d%Z%T`'";' > $@
+	echo 'const char *GeSys_Build_Date="'`date +%Y%m%d%Z%T`'";' > $@
 	echo '#define DEFAULT_CPU_ARCH_FOR_CEXP "'`$(extract-arch)`'"' >>$@
 
 objattrs.c: rtems-init.$(OBJEXT)
@@ -217,8 +220,10 @@ dbg-thelibs:
 	@echo Library vpath:
 	@echo $(patsubst -L%,%,$(filter -L%,$(THELIBS)))
 
+if HAVE_BSP_POSTLINK_CMDS
 %$(DOWNEXT):%$(EXEEXT)
-	$(OBJCOPY) -O binary $^ $@
+	$(RTEMS_BSP_POSTLINK_CMDS)
+endif
 
 st.sys: st.sys.in $(wildcard $(srcdir)/st.sys-ssrl) $(wildcard $(srcdir)/st.sys-$(RTEMS_BSP)) $(wildcard $(srcdir)/st.sys-$(RTEMS_BSP)-ssrl)
 	cat $^ | sed -e 's/[@]RTEMS_CPU[@]/$(host_cpu)/g' -e 's/[@]RTEMS_BSP[@]/$(RTEMS_BSP)/g' > $@
