@@ -23,10 +23,16 @@ bin_SCRIPTS    += rtems$(DOWNEXT)
 endif
 bin_SCRIPTS    += st.sys
 
+EXTRA_DIST      = mylink makefile.top.am makefile.top.in
+EXTRA_DIST     += $(wildcard $(srcdir)/st.sys*)
+
 rtems_CPPFLAGS  = $(AM_CPPFLAGS)
 
 rtems_SOURCES   = init.c rtems_netconfig.c config.c
-rtems_SOURCES  += addpath.c nvram/ctrlx.c nvram/pairxtract.c
+rtems_SOURCES  += addpath.c nvram/ctrlx.c nvram/ctrlx.h nvram/pairxtract.c
+
+rtems_SOURCES  += nvram/minversion.h verscheck.h
+
 if TECLA
 rtems_SOURCES  += term.c
 endif
@@ -40,7 +46,7 @@ endif
 
 EXTRA_rtems_SOURCES=
 
-EXTRA_rtems_SOURCES += bug_disk.c bev.c reboot5282.c
+EXTRA_rtems_SOURCES += bug_disk.c bev.c reboot5282.c nvram/pathcheck.c
 
 # PSIM bsp
 psim_bsp_OBJS        = bug_disk.$(OBJEXT)
@@ -154,7 +160,7 @@ OPTIONAL_ALL=$(addprefix -o,$(LIBNMS))
 
 # Use 'ldep' to analyze library interdependencies and to 
 # generate a symbol table.
-allsyms.c: app.nm $(LIBNMS) startfiles.nm $(EXCLUDE_LISTS) $(LDEP)
+allsyms.c: app.nm $(LIBNMS) startfiles.nm $(EXCLUDE_LISTS)
 	echo $^
 	$(LDEP) -F -l -u $(OPTIONAL_ALL) $(addprefix -x,$(EXCLUDE_LISTS)) $(addprefix -o,$(INCLUDE_LISTS)) -C $@ $(filter %.nm,$^)  > ldep.log
 

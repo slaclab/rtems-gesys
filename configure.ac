@@ -1,12 +1,12 @@
 m4_define([GESYS_VERSION],TILLAC_CVSTAG([$Name$]))
 
-AC_INIT(GeSys, GESYS_VERSION, <strauman@slac.stanford.edu>)
+AC_INIT(GeSys, TILLAC_CVSTAG([$Name$]), <strauman@slac.stanford.edu>)
 
 AC_CANONICAL_BUILD
 AC_CANONICAL_HOST
 AC_CANONICAL_TARGET
 
-AM_INIT_AUTOMAKE(GeSYs, GESYS_VERSION)
+AM_INIT_AUTOMAKE([foreign 1.10])
 AM_MAINTAINER_MODE
 
 TILLAC_RTEMS_CHECK_TOOLS
@@ -25,11 +25,15 @@ RTEMS_CHECK_PROG([LDEP],ldep,ldep)
 # package then we cannot check for the presence of
 # individual libraries since they do not exist yet
 # at configure time.
-# the list for a particular package.
+if test -f ../ssrlApps.components ; then
+	tillac_rtems_inside_package=yes
+. ../ssrlApps.components
+else
+	tillac_rtems_inside_package=no
+fi
 AC_DEFUN([SSRLAPPS_CHECK_COMPONENT],
 	[AC_MSG_CHECKING([if $1 was built as part of ssrlApps])
-	 if test -d ../$1 ; then
-		tillac_rtems_inside_package=yes
+	 if echo "$ssrlapps_components" | grep -q '\<$1\>' ; then
 		AC_MSG_RESULT([Yes])
 		true
 	 else
@@ -118,8 +122,6 @@ AM_CONFIG_HEADER(config.h)
 
 TILLAC_RTEMS_SETUP
 
-tillac_rtems_inside_package=no
-
 AH_TEMPLATE([HAVE_LIBNETBOOT])
 AH_TEMPLATE([HAVE_TECLA])
 AH_TEMPLATE([WINS_LINE_DISC])
@@ -177,22 +179,20 @@ else
 		TILLAC_RTEMS_CHECK_LIB_ARGS)
 fi
 
+AC_MSG_CHECKING([if 'libtecla' can be used in this configuration])
 if  test ! "${enable_tecla}" = "no" ; then
-	enable_tecla=no
-	AC_CHECK_LIB([tecla_r],[gl_getline],
-		[AC_MSG_NOTICE([Using existing/installed TECLA library])],
+	enable_tecla=yes
+	AC_CHECK_LIB([tecla_r],[gl_get_line],
+		[AC_MSG_RESULT([YES - using existing/installed TECLA library])],
 		[if SSRLAPPS_CHECK_COMPONENT(cexp) ; then
-			AC_MSG_CHECKING([if 'libtecla' is in a known place relative to 'system'])
-			if test -d "../cexp/libtecla" ; then
-				AC_MSG_RESULT([Yes])
-				enable_tecla=yes
-			else
-				AC_MSG_RESULT([No])
-			fi
+			AC_MSG_RESULT([YES - using TECLA from ssrlApps/cexp])
 		 else
-		 	AC_MSG_NOTICE([use of TECLA disabled])
+		    enable_tecla=no
+		 	AC_MSG_RESULT([NO - no TECLA found!])
 		 fi],
 		TILLAC_RTEMS_CHECK_LIB_ARGS)
+else
+	AC_MSG_RESULT([NO - use of TECLA disabled via --disable-tecla])
 fi
 
 if test "${enable_tecla}" = "yes" ; then
@@ -289,8 +289,9 @@ fi
 # which is good enough
 AC_CHECK_FUNCS([BSP_commandline_string])
 AC_CHECK_DECL([BSP_commandline_string],
-	[AC_DEFINE([DECL_BSP_COMMANDLINE_STRING],1,[Whether BSP_commandline_string is declared in <bsp.h>])],
-	,,[INCLUDES=bsp.h])
+	[AC_DEFINE([DECL_BSP_COMMANDLINE_STRING],1,[Whether BSP_commandline_string is declared in <bsp.h>])],,
+	[#include <rtems.h>
+	#include <bsp.h>])
 
 if test "$ac_cv_func_BSP_commandline_string" = "yes" ; then
 	EARLY_CMDLINE_GET_TYPE=BSP_STR
@@ -354,19 +355,23 @@ AC_MSG_CHECKING([which BFD library to use])
 if SSRLAPPS_CHECK_COMPONENT(cexp) ; then
 	if test -d ../cexp/binutils -a ! "${enable_bfd}" = "no" ; then
 		with_bfdlib=gnubfd
-	elif test -d ../cexp/pmbfd ; then
-		if test "$enable_loader" = "no" ; then
-			with_bfdlib=pmelf
+	elif test "$enable_loader" = "no" ; then
+		if test "$enable_elfsyms" = "no" ; then
+			with_bfdlib=none
 		else
-	    	with_bfdlib=pmbfd
+	    	with_bfdlib=pmelf
 		fi
 	else
-	    with_bfdlib=none
+	    with_bfdlib=pmbfd
 	fi
 else
 	if ! test "${with_bfdlib+set}" = "set" ; then
 		if test "$enable_loader" = "no" ; then
-			with_bfdlib=pmelf
+			if test "$enable_elfsyms" = "no" ; then
+				with_bfdlib=none
+			else
+				with_bfdlib=pmelf
+			fi
 		else
 			AC_MSG_WARN([It seems that you build GeSys apart from CEXP; I must guess which BFD library (pmbfd, no opcodes) to use -- provide --with-bfdlib to help me])
 			with_bfdlib=pmbfd
