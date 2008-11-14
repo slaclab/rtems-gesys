@@ -1,6 +1,8 @@
 #  $Id$
 AUTOMAKE_OPTIONS=foreign
 
+#ACLOCAL_AMFLAGS =-Iautognu
+
 EXEEXT          = $(APPEXEEXT)
 
 AM_CPPFLAGS     = -Wall -I$(srcdir)/nvram @package_incpath@
