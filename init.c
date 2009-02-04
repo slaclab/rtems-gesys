@@ -285,6 +285,8 @@ gesys_network_start()
 {
 char *buf;
 
+printk("TSILL HELLO\n");
+
 #ifdef MULTI_NETDRIVER
   printf("Going to probe for Ethernet chips when initializing networking:\n");
   printf("(supported are 3c509 (ISA), 3c90x (PCI) and eepro100 (PCI) variants).\n");
@@ -327,7 +329,7 @@ char *buf;
   }
 
   /* stuff command line 'name=value' pairs into the environment */
-  if ( (buf = strdup(rtems_bsdnet_bootp_cmdline)) ) {
+  if ( rtems_bsdnet_bootp_cmdline && (buf = strdup(rtems_bsdnet_bootp_cmdline)) ) {
 	cmdlinePairExtract(buf, putenv, 1);
 	free(buf);
   }
