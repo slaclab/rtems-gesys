@@ -285,8 +285,6 @@ gesys_network_start()
 {
 char *buf;
 
-printk("TSILL HELLO\n");
-
 #ifdef MULTI_NETDRIVER
   printf("Going to probe for Ethernet chips when initializing networking:\n");
   printf("(supported are 3c509 (ISA), 3c90x (PCI) and eepro100 (PCI) variants).\n");
