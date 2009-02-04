@@ -172,8 +172,8 @@ static	char *my_getline(char *rval, char *prompt, int len);
 
 #define TFTP_OPEN_FLAGS (O_RDONLY)
 
-#define ISONTMP(str) ( ! strncmp((str),"/tmp/",5) )
-#define ISONTFTP(str) ( ! strncmp((str),"/TFTP/",6))
+#define ISONTMP(str) ( (str) && ! strncmp((str),"/tmp/",5) )
+#define ISONTFTP(str) ( (str) && ! strncmp((str),"/TFTP/",6))
 
 #ifdef NFS_SUPPORT
 static int nfsInited     = 1; /* initialization done by application itself */
@@ -708,7 +708,7 @@ shell_entry:
 
 	if ( ISONTMP( symf ) )
 		unlink( symf );
-	if ( sysscr && ISONTMP( sysscr ) )
+	if ( ISONTMP( sysscr ) )
 		unlink( sysscr );
 
 	freeps(&symf);
