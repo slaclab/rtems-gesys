@@ -1,5 +1,3 @@
-m4_define([GESYS_VERSION],TILLAC_CVSTAG([$Name$]))
-
 AC_INIT(GeSys, TILLAC_CVSTAG([$Name$]), <strauman@slac.stanford.edu>)
 
 AC_CANONICAL_BUILD
@@ -10,6 +8,13 @@ AM_INIT_AUTOMAKE([foreign 1.10])
 AM_MAINTAINER_MODE
 
 TILLAC_RTEMS_CHECK_TOOLS
+
+# Must add this BEFORE TILLAC_RTEMS_SETUP
+# so that the dummy-top 'config.status' also
+# knows how to make a config.h
+AM_CONFIG_HEADER(config.h)
+
+TILLAC_RTEMS_SETUP
 
 # Check for additional programs we need for building
 RTEMS_CHECK_TOOL([NM],nm)
@@ -114,13 +119,6 @@ AC_ARG_WITH(extra-gesys-libs,
 		 you want to use --with-extra-libdirs, too.])
 )
 
-
-# Must add this BEFORE TILLAC_RTEMS_SETUP
-# so that the dummy-top 'config.status' also
-# knows how to make a config.h
-AM_CONFIG_HEADER(config.h)
-
-TILLAC_RTEMS_SETUP
 
 AH_TEMPLATE([HAVE_LIBNETBOOT])
 AH_TEMPLATE([HAVE_TECLA])
