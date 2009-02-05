@@ -1,3 +1,5 @@
+m4_include([m4/cvstag.m4])
+
 AC_INIT(GeSys, TILLAC_CVSTAG([$Name$]), <strauman@slac.stanford.edu>)
 
 AC_CANONICAL_BUILD

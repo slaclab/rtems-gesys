@@ -1,7 +1,7 @@
 #  $Id$
 AUTOMAKE_OPTIONS=foreign
 
-#ACLOCAL_AMFLAGS =-Iautognu
+ACLOCAL_AMFLAGS = -I./m4
 
 EXEEXT          = $(APPEXEEXT)
 

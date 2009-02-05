@@ -11,8 +11,8 @@
  (It is always a good idea to try a --dry-run first)
 
  Then you must re-build and re-install RTEMS (sorry).
- Later versions (not sure about 4.8 but the CVS head
- has it fixed) do not need to be patched.
+ Later versions (not sure about 4.8 but the CVS head,
+ i.e., 4.9 has it fixed) do not need to be patched.
 
  a) create a <top> directory and unpack the GeSys-2.4
     sources there.
