@@ -305,6 +305,18 @@ else
 	esac
 fi
 
+# Check if we can set the Cexp prompt to the hostname
+if SSRLAPPS_CHECK_COMPONENT(cexp) ; then
+	# assume it's a current version
+	AC_MSG_NOTICE([Assuming we may use cexpSetPrompt() because cexp is part of this package...])
+	AC_DEFINE([HAVE_CEXP_SET_PROMPT],1,[Whether cexpSetPrompt is available from <cexp.h>])
+else
+	AC_CHECK_DECL([cexpSetPrompt],
+		[AC_DEFINE([HAVE_CEXP_SET_PROMPT],1,[Whether cexpSetPrompt is available from <cexp.h>])],,
+		[#include <rtems.h>
+#include <cexp.h>])
+fi
+
 case "$RTEMS_BSP_FAMILY" in
 	pc386)
 		if test "${with_nic_name}xx" = "xx" -a "${with_nic_attach}xx" = "xx"  ; then

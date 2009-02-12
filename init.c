@@ -704,6 +704,23 @@ bare_entry:
 
 shell_entry:
 
+#ifdef HAVE_CEXP_SET_PROMPT
+	/* set cexp prompt to the hostname if possible */
+	{
+	char *tmpstr;
+	if ( (tmpstr=malloc(100)) ) {
+		strcpy(tmpstr,"Cexp@");
+		if ( 0 == gethostname(tmpstr+5, 90) && *(tmpstr+5) ) {
+			strcat(tmpstr,">");
+			cexpSetPrompt(CEXP_PROMPT_GBL, tmpstr);
+		}
+		free( tmpstr );
+		tmpstr = 0;
+	}
+	}
+#endif
+
+
 	result = argc > 1 ? cexp_main(argc, argv) : 0;
 
 	if ( ISONTMP( symf ) )
