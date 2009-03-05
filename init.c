@@ -464,6 +464,16 @@ char	*argv[7]={
 	strcpy(pathspec, BOOTPFN);
 	slash    = strrchr(pathspec,'/');
 
+	/*
+     * may be a NFS spec with no '/' after second colon, such as
+     * 'srvr:/export:file'
+     */
+	if ( (dot = strchr(pathspec,':')) )
+		dot = strchr(dot+1,':');
+
+	if ( dot && slash && slash < dot )
+		slash = dot;
+
 	if ( BUILTIN_SYMTAB ) {
  		if ( slash )
 			strcpy(slash+1,SYSSCRIPT);
