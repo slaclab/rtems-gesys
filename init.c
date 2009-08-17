@@ -302,6 +302,15 @@ char *buf;
   }
 #endif
 
+  {
+  extern int gesys_set_netdriver(const char *, int (*)(struct rtems_bsdnet_ifconfig *, int));
+
+  const char *nic_name;
+  	if ( (nic_name = getenv("NIC_NAME")) ) {
+		gesys_set_netdriver(nic_name, 0);
+  	}
+  }
+
   rtems_bsdnet_initialize_network(); 
 
   /* remote logging only works after a call to openlog()... */
@@ -390,7 +399,7 @@ char	*argv[7]={
   mkTmpDir();
 
 
-  printf("Welcome to RTEMS GeSys\n");
+  printf("Welcome to RTEMS %s GeSys\n", RTEMS_VERSION);
   printf("This system %s was built on %s\n",
   	GeSys_Release_Name,
 	GeSys_Build_Date);

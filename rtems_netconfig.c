@@ -195,3 +195,18 @@ struct rtems_bsdnet_config rtems_bsdnet_config = {
     350*1024,                 /* MBUF cluster space */
 #endif
 };
+
+int
+gesys_set_netdriver(char *name, int (*attach_fn)(struct rtems_bsdnet_ifconfig *, int))
+{
+	if ( rtems_bsdnet_config.ifconfig->next ) {
+		if ( name ) {
+			rtems_bsdnet_config.ifconfig->next->name   = name;
+		}
+		if ( attach_fn ) {
+			rtems_bsdnet_config.ifconfig->next->attach = attach_fn;
+		}
+		return 0;
+	}
+	return -1;
+}
