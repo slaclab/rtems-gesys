@@ -324,7 +324,7 @@ fi
 case "$RTEMS_BSP_FAMILY" in
 	pc386)
 		if test "${with_nic_name}xx" = "xx" -a "${with_nic_attach}xx" = "xx"  ; then
-			NIC_LIBS="-lif_pcn -lif_em -lif_le -lbsdport"
+			NIC_LIBS="-lif_pcn -lif_em -lif_le -lif_fxp -lif_re -lbsdport"
 			with_nic_name='""'
 			with_nic_attach=libbsdport_netdriver_attach
 		fi
