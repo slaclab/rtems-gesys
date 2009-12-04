@@ -418,7 +418,7 @@ char	*argv[7]={
    nvramFixupBsdnetConfig(1, cmdlinetmp);
 #endif
 
-	cmdlinePairExtract(cmdlinetmp, putenv, 1);
+	cmdlinePairExtract((char*)cmdlinetmp, putenv, 1);
   }
 #endif
 
