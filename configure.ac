@@ -293,8 +293,12 @@ AC_CHECK_DECL([BSP_commandline_string],
 	[#include <rtems.h>
 	#include <bsp.h>])
 
+AC_CHECK_FUNCS([bsp_cmdline])
+
 if test "$ac_cv_func_BSP_commandline_string" = "yes" ; then
 	EARLY_CMDLINE_GET_TYPE=BSP_STR
+elif test "$ac_cv_func_bsp_cmdline" = "yes" ; then
+	EARLY_CMDLINE_GET_TYPE=BSP_CLN
 else
 	case "$RTEMS_BSP_FAMILY" in
 	uC5282)

@@ -49,6 +49,7 @@ endif
 EXTRA_rtems_SOURCES=
 
 EXTRA_rtems_SOURCES += bug_disk.c bev.c reboot5282.c nvram/pathcheck.c
+EXTRA_rtems_SOURCES += pcx86_console_select.c
 
 # PSIM bsp
 psim_bsp_OBJS        = bug_disk.$(OBJEXT)
@@ -56,6 +57,7 @@ psim_bsp_DEFINES     = -DPSIM
 
 # pc386 bsp
 pc386_fam_DEFINES    = -DHAVE_PCIBIOS
+pc386_fam_OBJS       = pcx86_console_select.$(OBJEXT)
 
 # uC5282 bsp
 uC5282_bsp_OBJS      = bev.$(OBJEXT) reboot5282.$(OBJEXT)
@@ -71,6 +73,7 @@ EARLY_CMDLINE_GET_INTERNAL_NB='-DEARLY_CMDLINE_GET(arg)=do { *(arg) = 0; /* use 
 endif
 EARLY_CMDLINE_GET_INTERNAL='-DEARLY_CMDLINE_GET(arg)=do { *(arg) = 0; /* use internal buffer */ } while (0)'
 EARLY_CMDLINE_GET_BSP_STR='-DEARLY_CMDLINE_GET(arg)=do { *(arg) = BSP_commandline_string; } while (0)'
+EARLY_CMDLINE_GET_BSP_CLN='-DEARLY_CMDLINE_GET(arg)=do { *(arg) = bsp_cmdline(); } while (0)'
 
 # Add BSP-specific defines + objects
 APPOBJS             += $(@RTEMS_BSP@_bsp_OBJS)
