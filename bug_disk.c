@@ -70,7 +70,7 @@ loadTarImg(int verb, int lun)
 {
 char          		buf[512];
 int           		blkno, chks, i;
-unsigned long		mode,size;
+unsigned			mode,size;
 unsigned char		type;
 DiskioDescriptorRec d = {0};
 
