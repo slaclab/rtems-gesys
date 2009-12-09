@@ -31,7 +31,7 @@ EXTRA_DIST     += $(wildcard $(srcdir)/st.sys*)
 rtems_CPPFLAGS  = $(AM_CPPFLAGS)
 
 rtems_SOURCES   = init.c rtems_netconfig.c config.c
-rtems_SOURCES  += addpath.c nvram/ctrlx.c nvram/ctrlx.h nvram/pairxtract.c
+rtems_SOURCES  += addpath.c nvram/pairxtract.c
 
 rtems_SOURCES  += nvram/minversion.h verscheck.h
 
