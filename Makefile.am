@@ -31,7 +31,11 @@ EXTRA_DIST     += $(wildcard $(srcdir)/st.sys*)
 rtems_CPPFLAGS  = $(AM_CPPFLAGS)
 
 rtems_SOURCES   = init.c rtems_netconfig.c config.c
-rtems_SOURCES  += addpath.c nvram/pairxtract.c
+rtems_SOURCES  += addpath.c
+if NETBOOT
+else
+rtems_SOURCES  += nvram/pairxtract.c
+endif
 
 rtems_SOURCES  += nvram/minversion.h verscheck.h
 
@@ -55,10 +59,6 @@ EXTRA_rtems_SOURCES += pcx86_console_select.c
 psim_bsp_OBJS        = bug_disk.$(OBJEXT)
 psim_bsp_DEFINES     = -DPSIM
 
-# pc386 bsp
-pc386_fam_DEFINES    = -DHAVE_PCIBIOS
-pc386_fam_OBJS       = pcx86_console_select.$(OBJEXT)
-
 # uC5282 bsp
 uC5282_bsp_OBJS      = bev.$(OBJEXT) reboot5282.$(OBJEXT)
 if NETBOOT
@@ -67,6 +67,10 @@ uC5282_bsp_DEFINES   =-DBSP_NETWORK_SETUP=bev_network_setup
 endif
 
 rtems_CPPFLAGS      += -DUSE_POSIX
+
+if CONSOLE_SEL
+APPOBJS             += pcx86_console_select.$(OBJEXT)
+endif
 
 if NETBOOT
 EARLY_CMDLINE_GET_INTERNAL_NB='-DEARLY_CMDLINE_GET(arg)=do { *(arg) = 0; /* use internal buffer */ } while (0)'
@@ -78,8 +82,6 @@ EARLY_CMDLINE_GET_BSP_CLN='-DEARLY_CMDLINE_GET(arg)=do { *(arg) = bsp_cmdline();
 # Add BSP-specific defines + objects
 APPOBJS             += $(@RTEMS_BSP@_bsp_OBJS)
 rtems_CPPFLAGS      += $(@RTEMS_BSP@_bsp_DEFINES)
-APPOBJS             += $(@RTEMS_BSP_FAMILY@_fam_OBJS)
-rtems_CPPFLAGS      += $(@RTEMS_BSP_FAMILY@_fam_DEFINES)
 
 rtems_CPPFLAGS      += @MEMORY_CONF@
 rtems_CPPFLAGS      += $(EARLY_CMDLINE_GET_@EARLY_CMDLINE_GET_TYPE@)

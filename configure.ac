@@ -128,6 +128,7 @@ AH_TEMPLATE([WINS_LINE_DISC])
 AH_TEMPLATE([NFS_SUPPORT])
 AH_TEMPLATE([TFTP_SUPPORT])
 AH_TEMPLATE([RSH_SUPPORT])
+AH_TEMPLATE([HAVE_PCIBIOS])
 
 NFSLIB=
 if test ! "$enable_nfs" = "no"; then
@@ -255,9 +256,22 @@ if test "$have_libbspext" = "yes" ; then
 	AC_DEFINE([HAVE_LIBBSPEXT],1,[if we should use the bsp extension library])
 fi
 
+# check for <pcibios.h>
+AC_CHECK_HEADER(
+	[pcibios.h],
+	AC_DEFINE([HAVE_PCIBIOS],[1],[whether we have <pcibios.h> and need to initialize]),
+	AC_MSG_NOTICE([<pcibios.h> not found])
+)
+
+AC_CHECK_DECL([BSP_runtime_console_select],
+	[pcx86_console_sel=yes],
+	,
+	[#include <rtems.h>
+	#include <bsp.h>])
+
 # Several BSP-specific settings
-case "$RTEMS_BSP_FAMILY" in
-	beatnik | mvme3100 | pc386)
+case "$rtems_bsp" in
+	beatnik | mvme3100 | pc?86*)
 		MEMORY_CONF="'-DMEMORY_HUGE'"
 	;;
 	mvme167)
@@ -272,7 +286,7 @@ esac
 
 CEXP_TEXT_REGION_END=
 RTEMS_CEXP_TEXT_REGION_SIZE=
-case "$RTEMS_BSP_FAMILY" in
+case "$rtems_bsp" in
 	beatnik | mvme3100 | virtex | rce405)
 		RTEMS_CEXP_TEXT_REGION_SIZE=0x01000000
 	;;
@@ -300,7 +314,7 @@ if test "$ac_cv_func_BSP_commandline_string" = "yes" ; then
 elif test "$ac_cv_func_bsp_cmdline" = "yes" ; then
 	EARLY_CMDLINE_GET_TYPE=BSP_CLN
 else
-	case "$RTEMS_BSP_FAMILY" in
+	case "$rtems_bsp" in
 	uC5282)
 		EARLY_CMDLINE_GET_TYPE=INTERNAL_NB
 	;;
@@ -321,8 +335,8 @@ else
 #include <cexp.h>])
 fi
 
-case "$RTEMS_BSP_FAMILY" in
-	pc386)
+case "$rtems_bsp" in
+	pc?86*)
 		if test "${with_nic_name}xx" = "xx" -a "${with_nic_attach}xx" = "xx"  ; then
 			NIC_LIBS="-lif_pcn -lif_em -lif_le -lif_fxp -lif_re -lbsdport"
 			with_nic_name='""'
@@ -331,7 +345,7 @@ case "$RTEMS_BSP_FAMILY" in
 	AC_MSG_NOTICE([with_nic_name now $with_nic_name])
 	AC_MSG_NOTICE([with_nic_attach now $with_nic_attach])
 	;;
-	motorola_powerpc)
+	mvme2307|mvme2100)
 		if test "${with_nic_name}xx" = "xx" -a "${with_nic_attach}xx" = "xx"  ; then
 			with_nic_name='"dc0"'
 			with_nic_attach=rtems_dec21140_driver_attach
@@ -432,6 +446,8 @@ AM_CONDITIONAL([PMELF],  [test "$with_bfdlib"     = "pmelf"])
 # an ugly hack; we really should have proper linker scripts...
 AM_CONDITIONAL([RESERVE_CEXP_TEXT_REGION],  [test ! "$CEXP_TEXT_REGION_END"xx = "xx" ])
 AM_CONDITIONAL([INTERNAL_CEXP_TEXT_REGION], [test ! "$RTEMS_CEXP_TEXT_REGION_SIZE"xx = "xx" ])
+
+AM_CONDITIONAL([CONSOLE_SEL], [test "$pcx86_console_sel" = "yes"])
 
 TILLAC_RTEMS_BSP_POSTLINK_CMDS
 
