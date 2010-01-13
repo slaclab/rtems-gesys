@@ -237,8 +237,10 @@ ansiTiocGwinszInstall(int slot);
 static int rshCopy(char **pDfltSrv, char *pathspec, char **pFnam);
 #endif
 
+#ifndef HAVE_LIBNETBOOT
 void
 cmdlinePairExtract(char *buf, int (*putpair)(char *str), int removeFound);
+#endif
 
 int
 getchar_timeout(int fd, int timeout);
@@ -408,17 +410,21 @@ char	*argv[7]={
 #ifdef EARLY_CMDLINE_GET
   {
 	char *cmdlinetmp;
-	EARLY_CMDLINE_GET(&cmdlinetmp);
+	const char *cmdline_orig = 0;
+	EARLY_CMDLINE_GET(&cmdline_orig);
+	if ( cmdline_orig && (cmdlinetmp = strdup(cmdline_orig)) ) {
 
 #ifdef HAVE_LIBNETBOOT
-  /* Let libnetboot process the command line string; all 
-   * special name=value pairs recognized by libnetboot will
-   * be removed...
-   */
-   nvramFixupBsdnetConfig(1, cmdlinetmp);
+		/* Let libnetboot process the command line string; all 
+		 * special name=value pairs recognized by libnetboot will
+		 * be removed...
+		 */
+		nvramFixupBsdnetConfig(1, cmdlinetmp);
 #endif
 
-	cmdlinePairExtract((char*)cmdlinetmp, putenv, 1);
+		cmdlinePairExtract(cmdlinetmp, putenv, 1);
+		free(cmdlinetmp);
+	}
   }
 #endif
 
@@ -749,7 +755,6 @@ shell_entry:
 
 	freeps(&symf);
 	freeps(&sysscr);
-	
 
 	if (!result || CEXP_MAIN_NO_SCRIPT==result) {
 		int  rc;
