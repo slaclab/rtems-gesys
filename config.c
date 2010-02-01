@@ -24,8 +24,8 @@
  * pre 4.10:
 #define STACK_CHECKER_ON 1
  * 4.10+:
-*/
 #define CONFIGURE_STACK_CHECKER_ENABLED
+*/
 
 #define CONFIGURE_RTEMS_INIT_TASKS_TABLE
 
