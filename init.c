@@ -409,22 +409,18 @@ char	*argv[7]={
 
 #ifdef EARLY_CMDLINE_GET
   {
-	char *cmdlinetmp;
-	const char *cmdline_orig = 0;
-	EARLY_CMDLINE_GET(&cmdline_orig);
-	if ( cmdline_orig && (cmdlinetmp = strdup(cmdline_orig)) ) {
+	const char *cmdlinetmp;
+	EARLY_CMDLINE_GET(&cmdlinetmp);
 
 #ifdef HAVE_LIBNETBOOT
-		/* Let libnetboot process the command line string; all 
-		 * special name=value pairs recognized by libnetboot will
-		 * be removed...
-		 */
-		nvramFixupBsdnetConfig(1, cmdlinetmp);
+  /* Let libnetboot process the command line string; all 
+   * special name=value pairs recognized by libnetboot will
+   * be removed...
+   */
+   nvramFixupBsdnetConfig(1, cmdlinetmp);
 #endif
 
-		cmdlinePairExtract(cmdlinetmp, putenv, 1);
-		free(cmdlinetmp);
-	}
+	cmdlinePairExtract((char*)cmdlinetmp, putenv, 1);
   }
 #endif
 
