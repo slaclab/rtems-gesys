@@ -230,7 +230,7 @@ if  test ! "${enable_netboot}" = "no" ; then
 				else
 					enable_netboot=no
 				fi],
-				TILLAC_RTEMS_CHECK_LIB_ARGS)
+				[TILLAC_RTEMS_CHECK_LIB_ARGS -ltecla])
 		fi
 	fi
 fi
