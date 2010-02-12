@@ -191,8 +191,7 @@ define extract-objattrs
 	echo 'static const unsigned char thebytes[] = {' ;\
 	$(READELF) -x .gnu.attributes $< 2>/dev/null | sed \
 	-e '/^[ \t]*0x[0-9a-fA-F]\{4,8\} /!d' \
-	-e '/^[ \t]*0x[0-9a-fA-F]\{4,8\} /s/^\([ \t]*0x[0-9a-fA-F]\{4,8\} \)\(.\
-{36\}\)\(.*\)$$/\2/g' \
+	-e '/^[ \t]*0x[0-9a-fA-F]\{4,8\} /s/^\([ \t]*0x[0-9a-fA-F]\{4,8\} \)\(.\{36\}\)\(.*\)$$/\2/g' \
 	-e 's/[0-9a-fA-F]\{2\}/0x&,/g' \
 	-e 's/ //g' ;\
 	echo '};' ;\
