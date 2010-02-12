@@ -40,7 +40,7 @@ else
 fi
 AC_DEFUN([SSRLAPPS_CHECK_COMPONENT],
 	[AC_MSG_CHECKING([if $1 was built as part of ssrlApps])
-	 if echo "$ssrlapps_components" | grep -q '\<$1\>' ; then
+	 if echo "$ssrlapps_components" | grep '\<$1\>' > /dev/null ; then
 		AC_MSG_RESULT([Yes])
 		true
 	 else
