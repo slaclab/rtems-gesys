@@ -410,6 +410,24 @@ else
 fi
 AC_MSG_RESULT([$with_bfdlib])
 
+AC_MSG_CHECKING(["whether to reduce the system clock rate for this BSP"])
+case "$rtems_bsp" in
+	mvme167|uC5282|virtex|rce405)
+		us_per_clock_tick=10000;
+	;;
+	*)
+	;;
+esac
+
+if [ "$us_per_clock_tick"x == "x" ] ; then
+AC_DEFINE_UNQUOTED([CONFIGURE_MICROSECONDS_PER_TICK],[$us_per_clock_tick],[Override system clock rate defined in 'config.c'])
+us_per_clock_tick="YES: $us_per_clock_tick uS"
+else
+us_per_clock_tick="NO"
+fi
+
+AC_MSG_RESULT([$us_per_clock_tick])
+
 
 package_incpath=
 package_libpath=

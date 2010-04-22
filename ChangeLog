@@ -1,5 +1,10 @@
 	2010-04-22 (T.S.):
 
+	* configure.ac, Makefile.am: Override clock rate from config.h rather
+	than the Makefile.
+
+	2010-04-22 (T.S.):
+
 	* config.c, Makefile.am: Made clock rate 'overridable' from Makefile.am
 	and use slower rate (100Hz) for uC5282 BSP.
 

@@ -66,8 +66,6 @@ uC5282_bsp_DEFINES   =
 else
 uC5282_bsp_DEFINES   =-DBSP_NETWORK_SETUP=bev_network_setup
 endif
-# reduce clock rate to 100Hz for coldfire CPU
-uC5282_bsp_DEFINES  +=-DCONFIGURE_MICROSECONDS_PER_TICK=10000
 
 rtems_CPPFLAGS      += -DUSE_POSIX
 
