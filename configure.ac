@@ -410,7 +410,7 @@ else
 fi
 AC_MSG_RESULT([$with_bfdlib])
 
-AC_MSG_CHECKING(["whether to reduce the system clock rate for this BSP"])
+AC_MSG_CHECKING([whether to reduce the system clock rate for this BSP])
 case "$rtems_bsp" in
 	mvme167|uC5282|virtex|rce405)
 		us_per_clock_tick=10000;
