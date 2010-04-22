@@ -1,0 +1,6 @@
+	2010-04-22 (T.S.):
+
+	* ChangeLog: Added
+
+	* config.c: INCREASED SYSTEM CLOCK RATE TO 1kHz (and reduced timeslice
+	to 20ms).
