@@ -419,11 +419,11 @@ case "$rtems_bsp" in
 	;;
 esac
 
-if [ "$us_per_clock_tick"x == "x" ] ; then
-AC_DEFINE_UNQUOTED([CONFIGURE_MICROSECONDS_PER_TICK],[$us_per_clock_tick],[Override system clock rate defined in 'config.c'])
-us_per_clock_tick="YES: $us_per_clock_tick uS"
+if test "$us_per_clock_tick"x = "x" ; then
+	us_per_clock_tick="NO"
 else
-us_per_clock_tick="NO"
+	AC_DEFINE_UNQUOTED([CONFIGURE_MICROSECONDS_PER_TICK],[$us_per_clock_tick],[Override system clock rate defined in 'config.c'])
+	us_per_clock_tick="YES: $us_per_clock_tick uS"
 fi
 
 AC_MSG_RESULT([$us_per_clock_tick])
