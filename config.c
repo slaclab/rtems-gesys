@@ -60,7 +60,7 @@
 #define CONFIGURE_LIBIO_MAXIMUM_FILE_DESCRIPTORS 512
 #define CONFIGURE_USE_IMFS_AS_BASE_FILESYSTEM
 
-/****  Allow override from Makefile.am ****/
+/*****  Allow override from config.h ******/
 #ifndef CONFIGURE_MICROSECONDS_PER_TICK
 #define CONFIGURE_MICROSECONDS_PER_TICK 1000
 #endif
