@@ -337,13 +337,26 @@ fi
 
 case "$rtems_bsp" in
 	pc?86*)
-		if test "${with_nic_name}xx" = "xx" -a "${with_nic_attach}xx" = "xx"  ; then
-			NIC_LIBS="-lif_pcn -lif_em -lif_le -lif_fxp -lif_re -lbsdport"
-			with_nic_name='""'
-			with_nic_attach=libbsdport_netdriver_attach
+		if test "${with_nic_name}xx" = "xx" && test "${with_nic_attach}xx" = "xx"  ; then
+			AC_MSG_CHECKING([for 'libbsdport' and extra PCI ethernet drivers])
+			AC_CHECK_LIB([bsdport],[libbsdport_netdriver_attach],
+				[AC_MSG_RESULT([Yes])
+				 have_libbsdport=yes],
+				[if SSRLAPPS_CHECK_COMPONENT(bsd_eth_drivers) ; then
+				    AC_MSG_RESULT([Yes (part of ssrlApps build)])
+				    have_libbsdport=yes
+				 else
+				    AC_MSG_RESULT([No])
+				 fi],
+				TILLAC_RTEMS_CHECK_LIB_ARGS)
+			if test "${have_libbsdport}" = "yes" ; then
+			    NIC_LIBS="-lif_pcn -lif_em -lif_le -lif_fxp -lif_re -lbsdport"
+			    with_nic_name='""'
+			    with_nic_attach=libbsdport_netdriver_attach
+			fi
 		fi
-	AC_MSG_NOTICE([with_nic_name now $with_nic_name])
-	AC_MSG_NOTICE([with_nic_attach now $with_nic_attach])
+		AC_MSG_NOTICE([with_nic_name now $with_nic_name])
+		AC_MSG_NOTICE([with_nic_attach now $with_nic_attach])
 	;;
 	mvme2307|mvme2100)
 		if test "${with_nic_name}xx" = "xx" -a "${with_nic_attach}xx" = "xx"  ; then

@@ -1,3 +1,9 @@
+	2010-06-24 (T.S.):
+
+	* configure.ac: Added a check for libbsdport (pc?86). If this library is not
+	found then with_nic_name/with_nic_attach remain undefined and the BSP
+	default NIC will be used (allows to be built w/o libbsdport).
+
 	2010-04-22 (T.S.):
 
 	* configure.ac, Makefile.am: Override clock rate from config.h rather
