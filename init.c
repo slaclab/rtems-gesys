@@ -178,7 +178,7 @@ static	char *my_getline(char *rval, char *prompt, int len);
 #ifdef NFS_SUPPORT
 static int nfsInited     = 1; /* initialization done by application itself */
 #endif
-#ifdef TFTP_SUPPORT
+#if defined(TFTP_SUPPORT) && ! RTEMS_VERSION_ATLEAST(4,9,99)
 static int tftpInited    = 1; /* initialization done by application itself */
 #endif
 
@@ -318,7 +318,7 @@ char *buf;
   /* remote logging only works after a call to openlog()... */
   openlog(0, LOG_PID | LOG_CONS, 0); /* use RTEMS defaults */
 
-#ifdef TFTP_SUPPORT
+#if defined(TFTP_SUPPORT) && ! RTEMS_VERSION_ATLEAST(4,9,99)
   if (rtems_bsdnet_initialize_tftp_filesystem())
 	perror("TFTP FS initialization failed");
 #endif
@@ -409,7 +409,12 @@ char	*argv[7]={
 
 #ifdef EARLY_CMDLINE_GET
   {
-	const char *cmdlinetmp;
+	char *cmdlinetmp;
+	/* Ugly hack -- nvramFixupBsdnetConfig and cmdlinePairExtract
+	 * actually modify a string that might have been declared 'const'
+	 * by a BSP or the shared BSP framework...
+	 * We will get a compiler warning in such cases...
+	 */
 	EARLY_CMDLINE_GET(&cmdlinetmp);
 
 #ifdef HAVE_LIBNETBOOT
@@ -420,7 +425,7 @@ char	*argv[7]={
    nvramFixupBsdnetConfig(1, cmdlinetmp);
 #endif
 
-	cmdlinePairExtract((char*)cmdlinetmp, putenv, 1);
+	cmdlinePairExtract(cmdlinetmp, putenv, 1);
   }
 #endif
 
