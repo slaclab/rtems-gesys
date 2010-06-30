@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include <string.h>
+#include <unistd.h>
 
 
 typedef struct DiskioDescriptorRec_ {
