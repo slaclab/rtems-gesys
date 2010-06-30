@@ -1,3 +1,29 @@
+	2010-06-30 (T.S.):
+
+	* configure.ac: Check for nfsInit rather than nfsMount when looking for
+	bundled NFS support (nfsMount is gone from rtems-4.10).
+
+	* Makefile.am: Base BSP specific files and CPPFLAGS on RTEMS_BSP_CLASS
+	rather than the RTEMS_BSP.
+
+	* bug_disk.c: Silence compiler warning (rtems-4.10) by including
+	<unistd.h>
+
+	* config.c, init.c: definition CONFIGURE_FILESYSTEM_TFTPFS and
+	CONFIGURE_FILESYSTEM_NFSFS in config.c replaces explicit initialization
+	of TFTPFS and NFS from init.c under rtems-4.10.
+
+	* init.c: reverted declaration of cmdlinetmp as 'const char *' and
+	added a comment that we really violate the 'const' attribute here
+	for BSPs that declare a 'const' command-line since we do modify it.
+
+	* reboot5282.c: More API mess. From some 4.10 pre-release on
+	bsp_reset() is declared in <bsp/bootcard.h>. As of 4.9.99 it is
+	bsp_reset(void) [more consistent], before it was bsp_reset(int).
+
+	* psim_tree.gesys: Updated tree by adding OpenPIC and (optional)
+	ethernet device (requires patched psim).
+
 	2010-06-24 (T.S.):
 
 	* configure.ac: Added a check for libbsdport (pc?86). If this library is not
