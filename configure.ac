@@ -137,7 +137,7 @@ if test ! "$enable_nfs" = "no"; then
 # the application usually supplies rtems_bsdnet_config.
 # In order to link, we create a dummy symbol.
 enable_nfs=no
-AC_CHECK_LIB([nfs],[nfsMount],
+AC_CHECK_LIB([nfs],[nfsInit],
 	[AC_MSG_NOTICE([Using RTEMS bundled NFS])
 	 NFSLIB="$NFSLIB -lnfs"
 	 enable_nfs=bundled],
