@@ -52,19 +52,19 @@ endif
 
 EXTRA_rtems_SOURCES=
 
-EXTRA_rtems_SOURCES += bug_disk.c bev.c reboot5282.c nvram/pathcheck.c
-EXTRA_rtems_SOURCES += pcx86_console_select.c
+EXTRA_rtems_SOURCES    += bug_disk.c bev.c reboot5282.c nvram/pathcheck.c
+EXTRA_rtems_SOURCES    += pcx86_console_select.c
 
 # PSIM bsp
-psim_bsp_OBJS        = bug_disk.$(OBJEXT)
-psim_bsp_DEFINES     = -DPSIM
+psim_bspclass_OBJS      = bug_disk.$(OBJEXT)
+psim_bspclass_DEFINES   = -DPSIM
 
 # uC5282 bsp
-uC5282_bsp_OBJS      = bev.$(OBJEXT) reboot5282.$(OBJEXT)
+uC5282_bspclass_OBJS    = bev.$(OBJEXT) reboot5282.$(OBJEXT)
 if NETBOOT
-uC5282_bsp_DEFINES   =
+uC5282_bspclass_DEFINES =
 else
-uC5282_bsp_DEFINES   =-DBSP_NETWORK_SETUP=bev_network_setup
+uC5282_bspclass_DEFINES =-DBSP_NETWORK_SETUP=bev_network_setup
 endif
 
 rtems_CPPFLAGS      += -DUSE_POSIX
@@ -81,8 +81,8 @@ EARLY_CMDLINE_GET_BSP_STR='-DEARLY_CMDLINE_GET(arg)=do { *(arg) = BSP_commandlin
 EARLY_CMDLINE_GET_BSP_CLN='-DEARLY_CMDLINE_GET(arg)=do { *(arg) = bsp_cmdline(); } while (0)'
 
 # Add BSP-specific defines + objects
-APPOBJS             += $(@RTEMS_BSP@_bsp_OBJS)
-rtems_CPPFLAGS      += $(@RTEMS_BSP@_bsp_DEFINES)
+APPOBJS             += $(@RTEMS_BSP_CLASS@_bspclass_OBJS)
+rtems_CPPFLAGS      += $(@RTEMS_BSP_CLASS@_bspclass_DEFINES)
 
 rtems_CPPFLAGS      += @MEMORY_CONF@
 rtems_CPPFLAGS      += $(EARLY_CMDLINE_GET_@EARLY_CMDLINE_GET_TYPE@)
