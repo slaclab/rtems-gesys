@@ -1,29 +1,85 @@
 /#address-cells 2
 # 604 CPU
 /openprom/init/register/pvr 0xfffe0000
-/openprom/options/oea-memory-size 0x20000000
+/openprom/options/oea-memory-size 0x08000000
+
 #not using stdio results in polling read from stdin!!
 #/openprom/options/use-stdio? false
-/phb@0x80000000/#address-cells 3
-/phb@0x80000000/#size-cells 2
-/phb@0x80000000/ranges \
-    nm0,0,0,80000000 0x80000000 0x10000000 \
-    ni0,0,0,0 0xc0000000 0x10000
+/cpus@cpu@0
+/cpus@cpu@0/clock-frequency 400000000
+/cpus@cpu@0/bus-frequency   133333333
+
+/phb@0x0c000000/#address-cells 3
+/phb@0x0c000000/#size-cells 2
+/phb@0x0c000000/ranges \
+    nm0,0,0,0x0c000000 0x0c000000 0x01000000 \
+    ni0,0,0,0 0x0a000000 0x10000
+
 /phb/ide@1/assigned-addresses \
         ni0,0,10,1f0 8 \
         ni0,0,14,3f8 8 \
         ni0,0,18,170 8 \
         ni0,0,1c,378 8 \
         ni0,0,20,200 8
-/phb@0x80000000/ide@1/reg \
+/phb/ide@1/reg \
         1 0 \
         i0,0,10,0 8 \
         i0,0,18,0 8 \
         i0,0,14,6 1 \
         i0,0,1c,6 1 \
         i0,0,20,0 8
+
 # NOTE: disk image files MUST exist
 /phb/ide@1/disk@0/file "tarfsImg"
 #/phb/ide@1/disk@1/file "tarfsImg1"
 /chosen/disk0 */phb/ide@1/disk@0
 #/chosen/disk1 */phb/ide@1/disk@1
+
+##### OPENPIC @ 0x0c130000 - 0x0c170000 (512K)
+/phb/opic@0/reg 0 0 nm0,0,0,0x0c130000 0x40000
+/phb/opic@0/interrupt-ranges 0 0 0 16
+/phb/opic@0/device_type open-pic
+/phb/opic@0 > intr0 int /cpus/cpu@0
+
+##### ETHTAP  @ 0x0c100020 - 0x0c10003f
+#
+# NOTE 'ethtap' currently (201006) requires psim to
+#      be patched -- also, it is only supported on
+#      a linux host. The patch (since rtems-4.10) is
+#      available in
+#
+#         rtems-4.10/c/src/lib/libbsp/powerpc/psim/network/
+#
+#      the 'ethtap' device transfers data from/to the
+#      simulated network interface to/from a 'ethertap'
+#      interface on the linux host (consult tun/tap
+#      device documentation).
+#      A very useful tool is 'tunctl' which allows for
+#      configuring user-accessible, persistent 'tap'
+#      devices so that psim may be executed w/o special
+#      (root) privileges.
+#
+# In order to enable the 'ethtap' device do remove the
+# double comments '##' below.
+# The triple commented settings '###' correspond to default
+# values. You only need to uncomment the line(s) and change
+# the value(s) if you don't want to use the defaults as shown.
+# E.g., if you want to use 'tap1' instead of 'tap0' then
+# you need to say
+#
+#    /phb/ethtap@0/tap-ifname "tap1"
+#
+# PCI REGISTERS
+##/phb/ethtap@0/reg           0 0 nm0,0,0,0x0c100020 0x40
+# ROUTE INTERRUPT TO OPEN-PIC
+##/phb/ethtap@0               > 0 irq0 /phb/opic@0
+# 'tun' DEVICE ON HOST
+###/phb/ethtap@0/tun-device    "/dev/net/tun"
+# NAME OF 'tap' DEVICE TO USE
+###/phb/ethtap@0/tap-ifname    "tap0"
+# ETHERNET ADDRESS OF SIMULATED IF
+###/phb/ethtap@0/hw-address    "00:00:00:22:11:00"
+# GENERATE CRC and append to received packet before
+# handing over to the simulation. This is mostly for
+# debugging the rtems device driver. If unsure, leave 'false'.
+###/phb/ethtap@0/enable-crc    false
