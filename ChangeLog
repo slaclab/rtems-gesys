@@ -1,3 +1,7 @@
+	2010-10-05 (T.S.):
+
+	* README.addpath: added README.addpath describing addpath & friends.
+
 	2010-06-30 (T.S.):
 
 	* configure.ac: Check for nfsInit rather than nfsMount when looking for
