@@ -1,0 +1,354 @@
+I have implemented a few routines (available in the 4.7.1 installation)
+that are useful (mainly in cexpsh scripts) for manipulating strings
+and environment variables, in particular: PATH.
+
+Here's a summary -- please send me comments about what else
+would be useful etc.
+
+The source code can be found in ssrlApps/system/addpath.c
+
+A) Manipulation of environment variables
+
+**********************************************************
+ADDENV:
+**********************************************************
+
+Append or prepend a copy of string 'str' to environment
+variable 'env_var' (variable is created if not defined
+already).
+
+Returns: 0 on success, nonzero on error.
+
+int
+addenv(char *env_var, char *str, int prepend);
+
+Example: append ".suff" to environment variable "XXX":
+
+ addenv("XXX",".suff",0)
+
+NOTE: addenv manipulates the environment in a thread-safe
+     way.
+
+**********************************************************
+ADDPATPH:
+**********************************************************
+
+Append or prepend 'str' to "PATH" (utility wrapper around addenv()):
+
+int addpath(char *str, int prepend);
+
+Example: prepend "/home/bin:" to "PATH":
+
+ addpath("/home/bin:", 1)
+
+**********************************************************
+ADDPATHCWD:
+**********************************************************
+
+Append or prepend the current working directory (converted
+into an absolute path) with an optional suffix to PATH.
+'suffix' may be NULL if unused.
+
+Returns 0 on success, nonzero on error
+
+int
+addpathcwd(char *suffix, int prepend);
+
+Example: Assume the WD is currently "/opt" and you want
+to add "/opt/bin" plus a ':' separator to PATH
+
+ addpathcwd("/bin:",0)
+
+The PATH will now (after the last two examples) look
+like this:
+
+"/home/bin:/opt/bin:"
+
+NOTE: make sure that the old PATH already contains a
+separator at the end if you are appending to it.
+
+B) String Substitution
+
+The idea was providing a simple substitution mechanism
+where sequences of '%<tagchar>' in a template string
+are substituted by substitution strings of the format
+'<tagchar><value>'. The tag characters are arbitrary
+and just serve the purpose of tagging different
+substitutions.
+
+E.g., consider the template string
+
+"He said: %h %y\n"
+
+where you want to substitute the %h and %y sequences
+by other strings.
+If you chose the substitutions
+
+"hHello", "yYou"
+
+Then the expansion of the template would render
+
+"He said: Hello You\n"
+
+The substitutions "hHi", "yThere" would yield
+
+"He said: Hi There\n"
+
+There are two interfaces for string substitution. In all
+cases, the expanded string you get was 'malloc'ed and it
+is your responsibility to 'free' it.
+
+Note: A '%' (percent character) is escaped by the sequence
+     "%%"
+
+**********************************************************
+STRINGSUBSTITUTE:
+**********************************************************
+Use a list of 'num_substitutions' strings to expand 'template'.
+Return malloced, expanded string or NULL on error.
+
+char*
+stringSubstitute(
+     const char *         template,
+     const char * const * substitutions,
+     int                  num_substitutions);
+
+**********************************************************
+STRINGSUBSTITUTEVA:
+**********************************************************
+Same as 'stringSubstitute' but the substitution strings
+are passed as a NULL terminated vararg-list (which is
+useful in cexpsh scripts)
+
+char*
+stringSubstituteVa(const char *template, ... );
+
+Example using values from above:
+
+ exp_str = stringSubstituteVa(
+              "He said: %h %y\n",
+              "hHi",
+              "yThere",
+              0)
+
+ printf(exp_str)
+
+ free(exp_str)
+
+**********************************************************
+PATHSUBSTITUTE:
+**********************************************************
+Perform a few 'standard' substitutions on a template.
+This is work in progress and subject to your input (what
+other substitutions make sense?)
+
+So far, only %H (gethostname) and %D (getdomainname) have
+been implemented.
+
+Returns: newly allocated string (must be 'free'ed by user)
+        or NULL (on error).
+
+char *
+pathSubstitute(const char *template);
+
+Example: on a box named 'iocbpm1'
+
+  pathSubstitute("/opt/epics/iocBoot/%H/")
+
+would return
+
+  "/opt/epics/iocBoot/iocbpm1/"
+
+**********************************************************
+CHDIRTO:
+**********************************************************
+Perform standard substitutions (see pathSubstitute), chdir
+to expanded string and free the latter.
+Returns: 0 on success, nonzero on failure.
+
+int
+chdirTo(const char *template);
+
+
+-- Till
+
+I have implemented a few routines (available in the 4.7.1 installation)
+that are useful (mainly in cexpsh scripts) for manipulating strings
+and environment variables, in particular: PATH.
+
+(Sidenote: remember that it is also possible to pass environment
+variables from the boot environment, i.e., the BOOTP/DHCP server
+or NVRAM. However, space is limited here (in the protocol) and
+using the startup script is preferable. Using a var from the
+boot environment makes sense to discriminate between different
+scripts, though (and the 'INIT' variable is just that).
+
+Here's a summary -- please send me comments about what else
+would be useful etc.
+
+The source code can be found in ssrlApps/system/addpath.c
+
+A) Manipulation of environment variables
+
+**********************************************************
+ADDENV:
+**********************************************************
+
+Append or prepend a copy of string 'str' to environment
+variable 'env_var' (variable is created if not defined
+already).
+
+Returns: 0 on success, nonzero on error.
+
+int
+addenv(char *env_var, char *str, int prepend);
+
+Example: append ".suff" to environment variable "XXX":
+
+ addenv("XXX",".suff",0)
+
+NOTE: addenv manipulates the environment in a thread-safe
+     way.
+
+**********************************************************
+ADDPATPH:
+**********************************************************
+
+Append or prepend 'str' to "PATH" (utility wrapper around addenv()):
+
+int addpath(char *str, int prepend);
+
+Example: prepend "/home/bin:" to "PATH":
+
+ addpath("/home/bin:", 1)
+
+**********************************************************
+ADDPATHCWD:
+**********************************************************
+
+Append or prepend the current working directory (converted
+into an absolute path) with an optional suffix to PATH.
+'suffix' may be NULL if unused.
+
+Returns 0 on success, nonzero on error
+
+int
+addpathcwd(char *suffix, int prepend);
+
+Example: Assume the WD is currently "/opt" and you want
+to add "/opt/bin" plus a ':' separator to PATH
+
+ addpathcwd("/bin:",0)
+
+The PATH will now (after the last two examples) look
+like this:
+
+"/home/bin:/opt/bin:"
+
+NOTE: make sure that the old PATH already contains a
+separator at the end if you are appending to it.
+
+B) String Substitution
+
+The idea was providing a simple substitution mechanism
+where sequences of '%<tagchar>' in a template string
+are substituted by substitution strings of the format
+'<tagchar><value>'. The tag characters are arbitrary
+and just serve the purpose of tagging different
+substitutions.
+
+E.g., consider the template string
+
+"He said: %h %y\n"
+
+where you want to substitute the %h and %y sequences
+by other strings.
+If you chose the substitutions
+
+"hHello", "yYou"
+
+Then the expansion of the template would render
+
+"He said: Hello You\n"
+
+The substitutions "hHi", "yThere" would yield
+
+"He said: Hi There\n"
+
+There are two interfaces for string substitution. In all
+cases, the expanded string you get was 'malloc'ed and it
+is your responsibility to 'free' it.
+
+Note: A '%' (percent character) is escaped by the sequence
+     "%%"
+
+**********************************************************
+STRINGSUBSTITUTE:
+**********************************************************
+Use a list of 'num_substitutions' strings to expand 'template'.
+Return malloced, expanded string or NULL on error.
+
+char*
+stringSubstitute(
+     const char *         template,
+     const char * const * substitutions,
+     int                  num_substitutions);
+
+**********************************************************
+STRINGSUBSTITUTEVA:
+**********************************************************
+Same as 'stringSubstitute' but the substitution strings
+are passed as a NULL terminated vararg-list (which is
+useful in cexpsh scripts)
+
+char*
+stringSubstituteVa(const char *template, ... );
+
+Example using values from above:
+
+ exp_str = stringSubstituteVa(
+              "He said: %h %y\n",
+              "hHi",
+              "yThere",
+              0)
+
+ printf(exp_str)
+
+ free(exp_str)
+
+**********************************************************
+PATHSUBSTITUTE:
+**********************************************************
+Perform a few 'standard' substitutions on a template.
+This is work in progress and subject to your input (what
+other substitutions make sense?)
+
+So far, only %H (gethostname) and %D (getdomainname) have
+been implemented.
+
+Returns: newly allocated string (must be 'free'ed by user)
+        or NULL (on error).
+
+char *
+pathSubstitute(const char *template);
+
+Example: on a box named 'iocbpm1'
+
+  pathSubstitute("/opt/epics/iocBoot/%H/")
+
+would return
+
+  "/opt/epics/iocBoot/iocbpm1/"
+
+**********************************************************
+CHDIRTO:
+**********************************************************
+Perform standard substitutions (see pathSubstitute), chdir
+to expanded string and free the latter.
+Returns: 0 on success, nonzero on failure.
+
+int
+chdirTo(const char *template);
+
+
+-- Till
