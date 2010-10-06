@@ -1,5 +1,10 @@
 	2010-10-05 (T.S.):
 
+	* README.addpath, addpath.c: added comments describing new
+	%P substitution.
+
+	2010-10-05 (T.S.):
+
 	* addpath.c: Added %P (cwd) substitution to 'pathSubstitute()'
 	(suggestion by K. Luchini).
 

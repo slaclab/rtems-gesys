@@ -248,6 +248,7 @@ char       *rval;
  *
  *        %H -> hostname ('gethostname')
  *        %D -> domainname ('getdomainname')
+ *        %P -> cwd ('getcwd')
  *        %I -> IP address (dot notation) [NOT SUPPORTED YET -- it's not trivial to find our IP address].
  *
  * RETURNS: newly allocated string (user must free())

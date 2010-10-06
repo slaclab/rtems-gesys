@@ -142,8 +142,8 @@ Perform a few 'standard' substitutions on a template.
 This is work in progress and subject to your input (what
 other substitutions make sense?)
 
-So far, only %H (gethostname) and %D (getdomainname) have
-been implemented.
+So far, only %H (gethostname), %D (getdomainname) and
+%P (getcwd) have been implemented.
 
 Returns: newly allocated string (must be 'free'ed by user)
         or NULL (on error).
