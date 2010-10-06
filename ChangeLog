@@ -1,5 +1,15 @@
 	2010-10-05 (T.S.):
 
+	* addpath.c: Added %P (cwd) substitution to 'pathSubstitute()'
+	(suggestion by K. Luchini).
+
+	BUGFIX: 'stringSubstitute()' failed to add terminal 'NUL' to 
+	generated string.
+
+	Dynamically allocate storage for getcwd() buffer.
+
+	2010-10-05 (T.S.):
+
 	* README.addpath: added README.addpath describing addpath & friends.
 
 	2010-06-30 (T.S.):

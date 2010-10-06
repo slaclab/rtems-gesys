@@ -1,15 +1,24 @@
 /* $Id$ */
 
-#include <reent.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include <stdarg.h>
+#include <errno.h>
+#include <assert.h>
 
 extern const char *rtems_bsdnet_domain_name;
 
+#ifndef DEBUG_MAIN
+#include <reent.h>
 extern void __env_lock(struct _reent *);
 extern void __env_unlock(struct _reent *);
+#else
+#define __env_lock(x)   do { } while (0)
+#define __env_unlock(x) do { } while (0)
+static char dombuf[100];
+const char *rtems_bsdnet_domain_name = dombuf;
+#endif
 
 /* append/prepend to environment var */
 int
@@ -60,6 +69,33 @@ addpath(char *val, int prepend)
 	return addenv("PATH",val,prepend);
 }
 
+static char * cwdbuf(unsigned pre, unsigned post)
+{
+int   sz, xtra;
+char *rval = 0;
+
+	xtra = pre + post;
+
+	for ( sz = 16; sz < xtra + 16; sz *= 2 )
+		;
+
+	do {
+		if ( ! (rval = realloc(rval, sz)) ) {
+			return 0;
+		}
+
+		if ( getcwd(rval + pre, sz - xtra) )
+			return rval;
+
+		sz *= 2;
+
+	} while ( ERANGE == errno && sz <= 64 /*8192*/ );
+
+	free(rval);
+
+	return 0;
+}
+
 /* Add CWD with suffix to PATH */
 int
 addpathcwd(char *suffix, int prepend)
@@ -68,11 +104,7 @@ int     l = suffix ? (strlen(suffix) + 1) : 0;
 char *buf = 0; 
 int  rval = -1;
 	
-	l += MAXPATHLEN;
-	if ( ! (buf = malloc(l)) )
-		goto cleanup;
-
-	if ( ! getcwd(buf, MAXPATHLEN) )
+	if ( ! (buf = cwdbuf(0, l)) )
 		goto cleanup;
 
 	if ( suffix )
@@ -175,6 +207,8 @@ stringSubstitute(const char *p, const char * const *s, int ns)
 			}
 		}
 	}
+	*dd++ = 0;
+	assert( dd == rval + l + 1);
 	return rval;
 }
 
@@ -222,6 +256,8 @@ char       *rval;
 
 #define MAX_SUBST 4
 
+#define MAX_NAM 100
+
 char *
 pathSubstitute(const char *tmpl)
 {
@@ -231,32 +267,42 @@ int     ns = 0;
 char *rval = 0;
 char * const *sp = s;
 
+	for ( i=0; i<MAX_SUBST; i++ )
+		s[i] = 0;
+
 	if ( strstr(tmpl,"%H") ) {
-		if ( ! (s[ns] = malloc(100)) )
+		if ( ! (s[ns] = malloc(MAX_NAM)) )
 			goto bail;
 		s[ns][0]='H';	/* tag char */
-		if ( gethostname(s[ns]+1,99) ) {
+		if ( gethostname(s[ns]+1,MAX_NAM - 1) ) {
 			/* gethostname failure */
 			goto bail;
 		}
 		ns++;
 	}
 	if ( strstr(tmpl,"%D") ) {
-		if ( ! (s[ns] = malloc(100)) )
+		if ( ! (s[ns] = malloc(MAX_NAM)) )
 			goto bail;
 		s[ns][0]='D';	/* tag char */
 		if ( rtems_bsdnet_domain_name ) {
-			strcpy(s[ns]+1,rtems_bsdnet_domain_name);
+			strncpy(s[ns]+1,rtems_bsdnet_domain_name, MAX_NAM - 1);
+			s[ns][MAX_NAM - 1] = 0;
 		} else {
 			s[ns][1]=0;
 		}
+		ns++;
+	}
+	if ( strstr(tmpl,"%P") ) {
+		if ( ! (s[ns] = cwdbuf(1,0)) )
+			goto bail;
+		s[ns][0] = 'P';
 		ns++;
 	}
 
 	rval = stringSubstitute(tmpl, (const char * const *)sp, ns);
 
 bail:
-	for ( i = 0; i<ns; i++ ) {
+	for ( i = 0; i<MAX_SUBST; i++ ) {
 		free(s[i]);
 	}
 	return rval;
@@ -276,10 +322,13 @@ int  rval = -1;
 
 
 #ifdef DEBUG_MAIN
+
+#include <stdio.h>
+
 static void
 usage(char *nm)
 {
-	fprintf(stderr,"Usage: %s [-s <subst>] [-s <subst>] <path>\n",nm);
+	fprintf(stderr,"Usage: %s [a] [-s <subst>] [-s <subst>] <path>\n",nm);
 	fprintf(stderr,"       <subst> : 'subst_char' 'subst_string', e.g., Hhhh\n");
 }
 
@@ -290,8 +339,14 @@ int   ns = 0;
 char *p;
 int   ch;
 
-	while ( (ch = getopt(argc, argv, "s:")) > 0 ) {
+	getdomainname(dombuf, sizeof(dombuf));
+
+	while ( (ch = getopt(argc, argv, "as:")) > 0 ) {
 		switch ( ch ) {
+			case 'a':
+				addpathcwd(":",1);
+				printf("PATH=%s\n",getenv("PATH"));
+			break;
 			case 's':
 				if ( ns < sizeof(s)/sizeof(s[0]) ) {
 					s[ns]=optarg;
@@ -312,9 +367,17 @@ int   ch;
 		usage(argv[0]);
 		return(1);
 	}
-	if ( !(p = stringSubstitute(argv[optind],s,ns)) ) {
-		fprintf(stderr,"stringSubstitute failed\n");
-		return(1);
+
+	if ( ns > 0 ) {
+		if ( !(p = stringSubstitute(argv[optind],s,ns)) ) {
+			fprintf(stderr,"stringSubstitute failed\n");
+			return(1);
+		}
+	} else {
+		if ( !(p = pathSubstitute(argv[optind])) ) {
+			fprintf(stderr,"pathSubstitute failed\n");
+			return(1);
+		}
 	}
 	printf("%s\n",p);
 	free(p);
