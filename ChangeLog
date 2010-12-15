@@ -1,3 +1,7 @@
+	2010-12-14 (T.S.):
+
+	* configure.ac: default NIC name for mvme2xxx must be 'dc1', not 'dc0'.
+
 	2010-10-05 (T.S.):
 
 	* README.addpath, addpath.c: added comments describing new
