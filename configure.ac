@@ -271,7 +271,7 @@ AC_CHECK_DECL([BSP_runtime_console_select],
 
 # Several BSP-specific settings
 case "$rtems_bsp" in
-	beatnik | mvme3100 | pc?86*)
+	beatnik | mvme3100 | pc?86* | qemu)
 		MEMORY_CONF="'-DMEMORY_HUGE'"
 	;;
 	mvme167)
@@ -287,7 +287,7 @@ esac
 CEXP_TEXT_REGION_END=
 RTEMS_CEXP_TEXT_REGION_SIZE=
 case "$rtems_bsp" in
-	beatnik | mvme3100 | virtex | rce405)
+	beatnik | mvme3100 | virtex | rce405 | psim)
 		RTEMS_CEXP_TEXT_REGION_SIZE=0x01000000
 	;;
 	*)
@@ -338,38 +338,44 @@ fi
 case "$rtems_bsp" in
 	pc?86*)
 		if test "${with_nic_name}xx" = "xx" && test "${with_nic_attach}xx" = "xx"  ; then
-			AC_MSG_CHECKING([for 'libbsdport' and extra PCI ethernet drivers])
-			AC_CHECK_LIB([bsdport],[libbsdport_netdriver_attach],
-				[AC_MSG_RESULT([Yes])
-				 have_libbsdport=yes],
-				[if SSRLAPPS_CHECK_COMPONENT(bsd_eth_drivers) ; then
-				    AC_MSG_RESULT([Yes (part of ssrlApps build)])
-				    have_libbsdport=yes
-				 else
-				    AC_MSG_RESULT([No])
-				 fi],
-				TILLAC_RTEMS_CHECK_LIB_ARGS)
-			if test "${have_libbsdport}" = "yes" ; then
-			    NIC_LIBS="-lif_pcn -lif_em -lif_le -lif_fxp -lif_re -lbsdport"
-			    with_nic_name='""'
-			    with_nic_attach=libbsdport_netdriver_attach
-			fi
+			with_nic_attach=libbsdport_netdriver_attach
 		fi
-		AC_MSG_NOTICE([with_nic_name now $with_nic_name])
-		AC_MSG_NOTICE([with_nic_attach now $with_nic_attach])
 	;;
 	mvme2307|mvme2100)
 		if test "${with_nic_name}xx" = "xx" -a "${with_nic_attach}xx" = "xx"  ; then
 			with_nic_name='"dc1"'
 			with_nic_attach=rtems_dec21140_driver_attach
 		fi
-	AC_MSG_NOTICE([with_nic_name now $with_nic_name])
-	AC_MSG_NOTICE([with_nic_attach now $with_nic_attach])
-	;;
-	*)
-	AC_MSG_NOTICE([with_nic_name now $with_nic_name (NOT CHANGED)])
 	;;
 esac
+
+if test xx"${with_nic_attach}" = xxlibbsdport_netdriver_attach ; then
+	AC_MSG_CHECKING([for 'libbsdport' and extra PCI ethernet drivers])
+	AC_CHECK_LIB([bsdport],[libbsdport_netdriver_attach],
+		[AC_MSG_RESULT([Yes])
+		 have_libbsdport=yes],
+		[if SSRLAPPS_CHECK_COMPONENT(bsd_eth_drivers) ; then
+		    AC_MSG_RESULT([Yes (part of ssrlApps build)])
+		    have_libbsdport=yes
+		 else
+		    AC_MSG_RESULT([No])
+		 fi],
+		TILLAC_RTEMS_CHECK_LIB_ARGS)
+	if test "${have_libbsdport}" = "yes" ; then
+		if test "${with_nic_name+set}" = "set" ; then
+			NIC_LIBS="-lif_`echo ${with_nic_name} | sed -e 's/[[\"0-9]]*//g'` -lbsdport"
+		else
+		    NIC_LIBS="-lif_pcn -lif_em -lif_le -lif_fxp -lif_re -lbsdport"
+		    with_nic_name='""'
+		fi
+	else
+		with_nic_attach=
+		with_nic_name=
+	fi
+fi
+
+AC_MSG_NOTICE([with_nic_name now $with_nic_name])
+AC_MSG_NOTICE([with_nic_attach now $with_nic_attach])
 
 if test ! "${with_nic_attach}xx" = "xx" ; then
 	case "${with_nic_attach}" in
