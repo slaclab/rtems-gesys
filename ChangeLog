@@ -1,3 +1,21 @@
+	2011-02-03 (T.S.):
+
+	* config.c: added idle task body for qemu selecting sleep mode so
+	that host OS doesn't spin (IIRC requires qemu patch since MSR_POW
+	is not handled correctly by qemu).
+
+	It's CONFIGURE_FILESYSTEM_NFS (not NFSFS) after all.
+
+	* configure.ac:
+	 o select use MEMORY_HUGE for qemu also
+	 o set RTEMS_CEXP_TEXT_REGION_SIZE for psim also.
+	 o moved libbsdport check away from pcx86 specific section into
+	   generic flow of the script.
+
+	* m4/rtems-bsp-postlink.m4: Use PReP bootloader for qemu also.
+
+	* nvram/pairxtract.c: Skip options (stuff starting with '-').
+
 	2010-12-14 (T.S.):
 
 	* configure.ac: default NIC name for mvme2xxx must be 'dc1', not 'dc0'.
