@@ -14,6 +14,28 @@
 #include "verscheck.h"
 #endif
 
+#include <bspopts.h>
+
+#ifdef qemu
+#include <rtems/powerpc/registers.h>
+void *ppc_idle(uintptr_t ignored)
+{
+uint32_t msr;
+	_CPU_MSR_GET(msr);
+	msr |= MSR_POW;
+	asm volatile(
+	"1: sync       \n"
+	"	mtmsr %0   \n"
+	"   isync      \n"
+	"   b 1b       \n"
+	::"r"(msr)
+	);
+	return 0;
+}
+#define BSP_IDLE_TASK_BODY ppc_idle
+#endif
+
+
 /*
  ***********************************************************************
  *                         RTEMS CONFIGURATION                         *
@@ -65,7 +87,7 @@
 #define CONFIGURE_FILESYSTEM_TFTPFS
 #endif
 #ifdef NFS_SUPPORT
-#define CONFIGURE_FILESYSTEM_NFSFS
+#define CONFIGURE_FILESYSTEM_NFS
 #endif
 #endif
 
