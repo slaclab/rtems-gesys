@@ -7,6 +7,7 @@
  */
 
 #include <rtems.h>
+#include <bsp.h>
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
