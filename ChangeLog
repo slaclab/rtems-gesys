@@ -1,3 +1,7 @@
+	2011-03-17 (T.S.):
+
+	* Makefile.am: add ldep/ to EXTRA_DIST
+
 	2011-02-23 (T.S.):
 
 	* config.c: include <bsp.h> so that BSP-specific idle task (e.g. uC5282)

@@ -27,6 +27,7 @@ bin_SCRIPTS    += st.sys
 
 EXTRA_DIST      = mylink makefile.top.am makefile.top.in
 EXTRA_DIST     += $(wildcard $(srcdir)/st.sys*)
+EXTRA_DIST     += ldep
 
 rtems_CPPFLAGS  = $(AM_CPPFLAGS)
 
