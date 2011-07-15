@@ -375,6 +375,7 @@ char	*argv[7]={
 	0,
 	0
 };
+int st;
 
   rtems_libio_set_private_env();
 
@@ -512,8 +513,13 @@ char	*argv[7]={
   void *addr;
   int   len;
   	if ( (tarvar=getenv("TARFS")) && 2 == sscanf(tarvar,"%p:%i",&addr,&len) && len > 0 ) {
+printf("Making '/tar' directory\n");
 		mkdir("/tar",0777);
-		rtems_tarfs_load("/tar",addr,len);
+printf("Loading tar image @%p[%u]\n", addr, len);
+		if ( (st = rtems_tarfs_load("/tar",addr,len)) )
+			printf("Loading tar image failed: %i\n", st);
+		else
+			printf("Success\n");
   	}
   }
 #else
