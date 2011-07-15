@@ -161,7 +161,6 @@ static struct rtems_bsdnet_ifconfig netdriver_config[1] = {{
 #endif
 #endif
 
-#ifdef LOOPATTACH
 extern void rtems_bsdnet_loopattach();
 static struct rtems_bsdnet_ifconfig loopback_config = {
     "lo0",                          /* name */
@@ -174,14 +173,9 @@ static struct rtems_bsdnet_ifconfig loopback_config = {
     "127.0.0.1",                    /* IP address */
     "255.0.0.0",                    /* IP net mask */
 };
-#endif
 
 struct rtems_bsdnet_config rtems_bsdnet_config = {
-#ifdef LOOPATTACH
     &loopback_config,         /* Network interface */
-#else
-	netdriver_config,
-#endif
 #ifdef NIC_NAME
     RTEMS_DO_BOOTP,           /* Use BOOTP to get network configuration */
 #else
