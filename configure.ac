@@ -84,6 +84,11 @@ AC_ARG_ENABLE(opcodes,
 		[disable the use of the opcodes library (if present)])
 )
 
+AC_ARG_ENABLE(unified-workarea,
+	AC_HELP_STRING([--enable-unified-workarea],
+	[enable unified malloc-heap/rtems workspace])
+)
+
 AC_ARG_WITH(bfdlib,
 	AC_HELP_STRING([--with-bfdlib=gnubfd | pmbfd | pmelf | none],
 		[which BFD libraries to use if gesys is built outside of 
@@ -446,6 +451,10 @@ else
 fi
 
 AC_MSG_RESULT([$us_per_clock_tick])
+
+if test x"$enable_unified_workarea" = x"yes" ; then
+	AC_DEFINE([USE_UNIFIED_WORKAREA], 1, [Whether to use unified area for malloc heap and RTEMS workspace])
+fi
 
 
 package_incpath=

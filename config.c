@@ -17,26 +17,6 @@
 
 #include <bspopts.h>
 
-#ifdef qemu
-#include <rtems/powerpc/registers.h>
-void *ppc_idle(uintptr_t ignored)
-{
-uint32_t msr;
-	_CPU_MSR_GET(msr);
-	msr |= MSR_POW;
-	asm volatile(
-	"1: sync       \n"
-	"	mtmsr %0   \n"
-	"   isync      \n"
-	"   b 1b       \n"
-	::"r"(msr)
-	);
-	return 0;
-}
-#define BSP_IDLE_TASK_BODY ppc_idle
-#endif
-
-
 /*
  ***********************************************************************
  *                         RTEMS CONFIGURATION                         *
@@ -79,6 +59,9 @@ uint32_t msr;
 #define CONFIGURE_MAXIMUM_POSIX_SEMAPHORES		20
 #endif
 
+#ifdef USE_UNIFIED_WORKAREA
+#define CONFIGURE_UNIFIED_WORK_AREAS
+#endif
 
 #define CONFIGURE_LIBIO_MAXIMUM_FILE_DESCRIPTORS 512
 #define CONFIGURE_USE_IMFS_AS_BASE_FILESYSTEM
