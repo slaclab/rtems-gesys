@@ -4,7 +4,7 @@
 
 #include <stdint.h>
 
-uint32_t BSP_sbrk_policy = -1;
+uintptr_t BSP_sbrk_policy = -1; /*-1;*/
 
 #ifdef RTEMS_CEXP_TEXT_REGION_SIZE
 /* hopefully goes into .bss */

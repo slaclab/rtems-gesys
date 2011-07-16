@@ -1,4 +1,8 @@
 	2011-07-15 (T.S.):
+
+	* cexp-txtregion.c: declare BSP_sbrk_policy as uintptr_t.
+
+	2011-07-15 (T.S.):
 	
 	* configure.ac: added 'qemuprep' BSP.
 
