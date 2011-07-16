@@ -1,3 +1,7 @@
+	2011-07-15 (T.S.):
+	
+	* configure.ac: added 'qemuprep' BSP.
+
 	2011-03-17 (T.S.):
 
 	* Makefile.am: add ldep/ to EXTRA_DIST
