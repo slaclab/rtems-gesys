@@ -1,3 +1,9 @@
+	2011-08-04 (T.S.):
+
+	* configure.ac, rtems_netconfig.c: rtems-4.11 has no rtems_bsdnet_loopattach
+	anymore. Added 'configure' test and conditional compilation so that we
+	can handle 4.11 as well as pre-4.11 versions.
+
 	2011-07-15 (T.S.):
 
 	* configure.ac, config.c: added configure option to enable unified

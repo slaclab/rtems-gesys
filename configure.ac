@@ -312,6 +312,8 @@ AC_CHECK_DECL([BSP_commandline_string],
 	[#include <rtems.h>
 	#include <bsp.h>])
 
+AC_CHECK_FUNCS([rtems_bsdnet_loopattach])
+
 AC_CHECK_FUNCS([bsp_cmdline])
 
 if test "$ac_cv_func_BSP_commandline_string" = "yes" ; then
