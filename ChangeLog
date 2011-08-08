@@ -1,3 +1,8 @@
+	2011-08-08 (T.S.):
+
+	* configure.ac: modified 'qemuprep' pattern (-> 'qemuprep*')
+	so that variants of the BSP are accepted.
+
 	2011-08-04 (T.S.):
 
 	* configure.ac, rtems_netconfig.c: rtems-4.11 has no rtems_bsdnet_loopattach

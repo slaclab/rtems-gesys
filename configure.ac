@@ -276,7 +276,7 @@ AC_CHECK_DECL([BSP_runtime_console_select],
 
 # Several BSP-specific settings
 case "$rtems_bsp" in
-	beatnik | mvme3100 | pc?86* | qemuprep)
+	beatnik | mvme3100 | pc?86* | qemuprep*)
 		MEMORY_CONF="'-DMEMORY_HUGE'"
 	;;
 	mvme167)
@@ -292,7 +292,7 @@ esac
 CEXP_TEXT_REGION_END=
 RTEMS_CEXP_TEXT_REGION_SIZE=
 case "$rtems_bsp" in
-	beatnik | mvme3100 | virtex | rce405 | psim | qemuprep )
+	beatnik | mvme3100 | virtex | rce405 | psim | qemuprep* )
 		RTEMS_CEXP_TEXT_REGION_SIZE=0x01000000
 	;;
 	*)
