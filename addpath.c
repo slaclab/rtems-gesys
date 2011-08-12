@@ -89,7 +89,7 @@ char *rval = 0;
 
 		sz *= 2;
 
-	} while ( ERANGE == errno && sz <= 64 /*8192*/ );
+	} while ( ERANGE == errno && sz <= MAXPATHLEN );
 
 	free(rval);
 
