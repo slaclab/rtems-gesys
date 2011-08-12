@@ -1,3 +1,8 @@
+	2011-08-12 (T.S.):
+
+	* addpath.c: replaced 64-byte path length limit (introduced probably for
+	testing) by MAXPATHLEN).
+
 	2011-08-08 (T.S.):
 
 	* configure.ac: modified 'qemuprep' pattern (-> 'qemuprep*')
