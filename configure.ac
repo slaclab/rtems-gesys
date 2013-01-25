@@ -347,7 +347,7 @@ case "$rtems_bsp" in
 	;;
 	mvme2307|mvme2100)
 		if test "${with_nic_name}xx" = "xx" -a "${with_nic_attach}xx" = "xx"  ; then
-			with_nic_name='"dc0"'
+			with_nic_name='"dc1"'
 			with_nic_attach=rtems_dec21140_driver_attach
 		fi
 	AC_MSG_NOTICE([with_nic_name now $with_nic_name])
