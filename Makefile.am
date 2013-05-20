@@ -247,7 +247,7 @@ if HAVE_BSP_POSTLINK_CMDS
 	$(RTEMS_BSP_POSTLINK_CMDS)
 endif
 
-st.sys: st.sys.in $(wildcard $(srcdir)/st.sys-ssrl) $(wildcard $(srcdir)/st.sys-$(RTEMS_BSP)) $(wildcard $(srcdir)/st.sys-$(RTEMS_BSP)-ssrl)
+st.sys: st.sys.in $(wildcard $(srcdir)/st.sys-$(RTEMS_BSP))
 	cat $^ | sed -e 's/[@]RTEMS_CPU[@]/$(host_cpu)/g' -e 's/[@]RTEMS_BSP[@]/$(RTEMS_BSP)/g' > $@
 
 #include $(top_srcdir)/rtems.am
