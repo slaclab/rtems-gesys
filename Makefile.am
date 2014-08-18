@@ -25,9 +25,14 @@ bin_SCRIPTS    += rtems$(DOWNEXT)
 endif
 bin_SCRIPTS    += st.sys
 
-EXTRA_DIST      = mylink makefile.top.am makefile.top.in
+EXTRA_DIST      = mylink makefile.top.am makefile.top.in myspec bootstrap
+EXTRA_DIST     += dummycxx
+EXTRA_DIST     += psim_tree.gesys
+EXTRA_DIST     += README.addpath README.config
+EXTRA_DIST     += LICENSE
 EXTRA_DIST     += $(wildcard $(srcdir)/st.sys*)
 EXTRA_DIST     += ldep
+EXTRA_DIST     += config
 
 rtems_CPPFLAGS  = $(AM_CPPFLAGS)
 
