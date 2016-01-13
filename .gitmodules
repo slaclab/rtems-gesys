@@ -1,0 +1,10 @@
+[submodule "nvram"]
+	path = nvram
+	url = ../rtems-netboot.git
+	branch = former_cvs_module_nvram
+[submodule "ldep"]
+	path = ldep
+	url = ../ldep.git
+[submodule "m4"]
+	path = m4
+	url = ../rtems-ac-macros.git
