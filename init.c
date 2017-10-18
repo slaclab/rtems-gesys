@@ -4,7 +4,6 @@
  *
  *  Author: Till Straumann <strauman@slac.stanford.edu>
  *
- *  $Id$
  */
 
 /*

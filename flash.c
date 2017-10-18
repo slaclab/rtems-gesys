@@ -1,5 +1,3 @@
-/* $Id$ */
-
 /* Copy data from the SVGM board flash area to a scratch file
  *
  * This file is of limited usefulness on boards other than

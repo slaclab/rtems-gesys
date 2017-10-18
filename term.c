@@ -1,5 +1,3 @@
-/* $Id$ */
-
 /* (non thread safe) helper to determine the terminal size */
 
 /* Author: Till Straumann <strauman@slac.stanford.edu>, 2003/3 */
