@@ -131,12 +131,23 @@ AH_TEMPLATE([HAVE_LIBNETBOOT])
 AH_TEMPLATE([HAVE_TECLA])
 AH_TEMPLATE([WINS_LINE_DISC])
 AH_TEMPLATE([NFS_SUPPORT])
+AH_TEMPLATE([HAVE_LIBBSD])
 AH_TEMPLATE([TFTP_SUPPORT])
 AH_TEMPLATE([RSH_SUPPORT])
 AH_TEMPLATE([HAVE_PCIBIOS])
 
+BSDLIB=
+AC_CHECK_LIB([bsd],[rtems_bsd_initialize],
+	[AC_MSG_NOTICE([Using libbsd -- note: disabling RSH (for now)])
+     AC_DEFINE([HAVE_LIBBSD],1,[Whether to use libbsd])
+     enable_rsh_symtab=no
+     enable_nfs=bundled
+     BSDLIB="$BSDLIB -lbsd"],
+    [AC_MSG_NOTICE([libbsd not found; not using])],
+    [-Wl,--defsym,ticks=_Watchdog_Ticks_since_boot])
+
 NFSLIB=
-if test ! "$enable_nfs" = "no"; then
+if test ! "$enable_nfs" = "no" -a -z "$BSDLIB"; then
 # looking for bundled NFS;
 # Note the 4th argument; linking would fail because
 # the application usually supplies rtems_bsdnet_config.
@@ -157,11 +168,21 @@ AC_CHECK_LIB([nfs],[nfsInit],
 fi
 
 if test ! "$enable_nfs" = "no"; then
-AC_DEFINE([NFS_SUPPORT],1,[Whether to use NFS])
+	if test "$enable_nfs" = "bundled"; then
+		nfs_enableval=2
+	else
+		nfs_enableval=1
+	fi
+AC_DEFINE_UNQUOTED([NFS_SUPPORT],[$nfs_enableval],[Whether to use NFS])
 fi
 
+
 if test ! "$enable_tftpfs" = "no" ; then
-AC_DEFINE([TFTP_SUPPORT],1,[Whether to build-in support for the TFTP file system])
+AC_CHECK_HEADER(
+	[rtems/tftp.h],
+	AC_DEFINE([TFTP_SUPPORT],1,[Whether to build-in support for the TFTP file system]),
+	AC_MSG_NOTICE([<rtems/tftp.h> not found])
+)
 fi
 
 if test ! "$enable_rsh_symtab" = "no" ; then
@@ -294,6 +315,13 @@ RTEMS_CEXP_TEXT_REGION_SIZE=
 case "$rtems_bsp" in
 	beatnik | mvme3100 | virtex | rce405 | psim | qemuprep* )
 		RTEMS_CEXP_TEXT_REGION_SIZE=0x01000000
+	;;
+	*)
+	;;
+esac
+case "$target_cpu" in
+	arm )
+		RTEMS_CEXP_TEXT_REGION_SIZE=0x00800000
 	;;
 	*)
 	;;
@@ -472,7 +500,8 @@ AC_SUBST([package_libpath])
 AC_SUBST([MEMORY_CONF])
 
 AC_SUBST([NFSLIB])
-AC_SUBST([GESYSLIBS],[$GESYSLIBS $with_extra_gesys_libs])
+AC_SUBST([BSDLIB])
+AC_SUBST([GESYSLIBS],["$GESYSLIBS $with_extra_gesys_libs"])
 AC_SUBST([RTEMS_BSP],[$rtems_bsp])
 AC_SUBST([EARLY_CMDLINE_GET_TYPE])
 AC_SUBST([NIC_LIBS])
@@ -489,6 +518,7 @@ AM_CONDITIONAL([OPCODES],[test "$enable_opcodes"  = "yes"])
 AM_CONDITIONAL([GNUBFD], [test "$with_bfdlib"     = "gnubfd"])
 AM_CONDITIONAL([PMBFD],  [test "$with_bfdlib"     = "pmbfd"])
 AM_CONDITIONAL([PMELF],  [test "$with_bfdlib"     = "pmelf"])
+AM_CONDITIONAL([HAVE_LIBBSD], [test -n "$BSDLIB"])
 
 # two ways for handling this - the RESERVE_CEXP_TEXT_REGION way is
 # an ugly hack; we really should have proper linker scripts...

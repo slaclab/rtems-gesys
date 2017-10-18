@@ -17,6 +17,18 @@
 
 #include <bspopts.h>
 
+#ifdef HAVE_LIBBSD
+#include <machine/rtems-bsd-sysinit.h>
+SYSINIT_NEED_NET_PF_UNIX;
+SYSINIT_NEED_NET_IF_LAGG;
+SYSINIT_NEED_NET_IF_VLAN;
+#include <bsp/nexus-devices.h>
+#endif
+
+#if NFS_SUPPORT > 1 /* bundled */
+#include <librtemsNfs.h>
+#endif
+
 /*
  ***********************************************************************
  *                         RTEMS CONFIGURATION                         *
@@ -49,14 +61,14 @@
 #define CONFIGURE_MAXIMUM_USER_EXTENSIONS	4
 
 #ifdef USE_POSIX
-#define CONFIGURE_MAXIMUM_POSIX_THREADS			20
-#define CONFIGURE_MAXIMUM_POSIX_MUTEXES			20
-#define CONFIGURE_MAXIMUM_POSIX_CONDITION_VARIABLES	20
-#define CONFIGURE_MAXIMUM_POSIX_KEYS			20
-#define CONFIGURE_MAXIMUM_POSIX_TIMERS			20
-#define CONFIGURE_MAXIMUM_POSIX_QUEUED_SIGNALS	20
-#define CONFIGURE_MAXIMUM_POSIX_MESSAGE_QUEUES	20
-#define CONFIGURE_MAXIMUM_POSIX_SEMAPHORES		20
+#define CONFIGURE_MAXIMUM_POSIX_THREADS			rtems_resource_unlimited(30)
+#define CONFIGURE_MAXIMUM_POSIX_MUTEXES			rtems_resource_unlimited(500)
+#define CONFIGURE_MAXIMUM_POSIX_CONDITION_VARIABLES	rtems_resource_unlimited(300)
+#define CONFIGURE_MAXIMUM_POSIX_KEYS			rtems_resource_unlimited(100)
+#define CONFIGURE_MAXIMUM_POSIX_TIMERS			rtems_resource_unlimited(100)
+#define CONFIGURE_MAXIMUM_POSIX_QUEUED_SIGNALS	20 //rtems_resource_unlimited(100)
+#define CONFIGURE_MAXIMUM_POSIX_MESSAGE_QUEUES	rtems_resource_unlimited(100)
+#define CONFIGURE_MAXIMUM_POSIX_SEMAPHORES		rtems_resource_unlimited(200)
 #endif
 
 #ifdef USE_UNIFIED_WORKAREA
@@ -66,13 +78,13 @@
 #define CONFIGURE_LIBIO_MAXIMUM_FILE_DESCRIPTORS 512
 #define CONFIGURE_USE_IMFS_AS_BASE_FILESYSTEM
 
-#if RTEMS_VERSION_ATLEAST(4,9,99)
-#ifdef TFTP_SUPPORT
+#if RTEMS_VERSION_ATLEAST(4,9,99) && defined(TFTP_SUPPORT)
 #define CONFIGURE_FILESYSTEM_TFTPFS
 #endif
-#ifdef NFS_SUPPORT
+
+#if NFS_SUPPORT > 1 /* bundled */
 #define CONFIGURE_FILESYSTEM_NFS
-#endif
+#define CONFIGURE_FILESYSTEM_ENTRY_NFS { RTEMS_FILESYSTEM_TYPE_NFS, rtems_nfs_initialize }
 #endif
 
 /*****  Allow override from config.h ******/
@@ -97,8 +109,6 @@
 #endif
 rtems_task Init (rtems_task_argument argument);
 
-#define CONFIGURE_HAS_OWN_DEVICE_DRIVER_TABLE
-
 #if RTEMS_VERSION_ATLEAST(4,6,99)
 #include <rtems/console.h>
 #include <rtems/clockdrv.h>
@@ -113,15 +123,11 @@ rtems_task Init (rtems_task_argument argument);
 #endif
 #endif
 
-rtems_driver_address_table Device_drivers[]={
-    CONSOLE_DRIVER_TABLE_ENTRY,
-    CLOCK_DRIVER_TABLE_ENTRY,
+#define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
+#define CONFIGURE_APPLICATION_NEEDS_CLOCK_DRIVER
 #ifdef USE_RTC_DRIVER
-	RTC_DRIVER_TABLE_ENTRY,
+#define CONFIGURE_APPLICATION_NEEDS_RTC_DRIVER
 #endif
-    {0}
-};
-
 
 #define CONFIGURE_INIT
 #if RTEMS_VERSION_ATLEAST(4,6,99)

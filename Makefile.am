@@ -36,7 +36,13 @@ EXTRA_DIST     += config
 
 rtems_CPPFLAGS  = $(AM_CPPFLAGS)
 
-rtems_SOURCES   = init.c rtems_netconfig.c config.c
+rtems_SOURCES   = init.c config.c
+if HAVE_LIBBSD
+AM_LDFLAGS     += -Wl,--defsym,ticks=_Watchdog_Ticks_since_boot
+rtems_SOURCES  += rtems_libbsdconfig.c
+else
+rtems_SOURCES  += rtems_netconfig.c
+endif
 rtems_SOURCES  += addpath.c
 if NETBOOT
 else
@@ -162,8 +168,10 @@ gcc-startfiles$(EXEEXT):
 
 # and generate a name file for them (the endfiles will
 # actually be there also)
+# Map '?' to abs symbol in startfile (hack for some linker script
+# addresses)
 startfiles.nm: gcc-startfiles$(EXEEXT)
-	$(NM) -g -fposix $^ > $@
+	$(NM) -g -fposix $^ | sed -e 's/\([^ ]*\) [?]/\1 A/' > $@
 
 # generate a name file for the application's objects
 app.nm: $(filter-out allsyms.$(OBJEXT) objattrs.$(OBJEXT),$(rtems_OBJECTS) $(APPOBJS))
