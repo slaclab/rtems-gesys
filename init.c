@@ -121,9 +121,13 @@
 #include "verscheck.h"
 #endif
 
+#ifndef HAVE_LIBBSD
 #include <rtems/rtems_bsdnet.h>
+#endif
 #include <rtems/libio.h>
+#ifdef TFTP_SUPPORT
 #include <rtems/tftp.h>
+#endif
 #if RTEMS_VERSION_ATLEAST(4,6,99)
 #include <rtems/imfs.h>
 #else
@@ -135,7 +139,9 @@
 
 #if RTEMS_VERSION_LATER_THAN(4,6,10)
 /* in a new place */
+#ifndef HAVE_LIBBSD
 #include <rtems/bsdnet/servers.h>
+#endif
 #endif
 #include <bsp.h>
 
@@ -224,8 +230,11 @@ cexpExcHandlerInstall(void (*handler)(int))
 extern char *BSP_commandline_string;
 #endif
 
+#ifndef HAVE_LIBBSD
 #define BOOTPFN  rtems_bsdnet_bootp_boot_file_name
 #define BOOTPSA  rtems_bsdnet_bootp_server_address
+#endif
+
 #define SYSSCRIPT	"st.sys"
 
 #ifdef HAVE_TECLA
@@ -259,6 +268,11 @@ static char *theSrv = 0;
 
 static void getDfltSrv(char **pdfltSrv)
 {
+#ifdef BOOTPSA
+	if ( ! BOOTPSA ) {
+		*pdfltSrv = 0;
+		return;
+	}
 
 	*pdfltSrv = realloc(*pdfltSrv, theSrv ? strlen(theSrv)+1 : DFLT_SRV_LEN);
 
@@ -269,6 +283,9 @@ static void getDfltSrv(char **pdfltSrv)
 			freeps(pdfltSrv);
   		}
 	}
+#else
+	*pdfltSrv = 0;
+#endif
 }
 
 
@@ -282,6 +299,9 @@ struct stat stbuf;
     }
 }
 
+#ifdef HAVE_LIBBSD
+extern int gesys_network_start();
+#else
 int
 gesys_network_start()
 {
@@ -297,7 +317,7 @@ char *buf;
   printf("    (ip address, mask, [gateway, dns, ntp])\n");
 #endif
 
-#ifdef BSP_NETWORK_SETUP
+#if defined(BSP_NETWORK_SETUP) && ! HAVE_LIBBSD
   {
   extern int BSP_NETWORK_SETUP(struct rtems_bsdnet_config *, struct rtems_bsdnet_ifconfig *);
   BSP_NETWORK_SETUP(&rtems_bsdnet_config, 0);
@@ -328,6 +348,7 @@ char *buf;
 	/* nothing else to do */;
 #endif
 
+#ifndef HAVE_LIBBSD
   if ( rtems_bsdnet_ntpserver_count > 0 ) {
   	printf("Trying to synchronize NTP...");
   	fflush(stdout);
@@ -336,6 +357,7 @@ char *buf;
   	else
 		printf("OK\n");
   }
+#endif
 
   /* stuff command line 'name=value' pairs into the environment */
   if ( rtems_bsdnet_bootp_cmdline && (buf = strdup(rtems_bsdnet_bootp_cmdline)) ) {
@@ -345,6 +367,7 @@ char *buf;
 
   return 0;
 }
+#endif
 
 extern void *cexpSystemSymbols;
 
@@ -461,7 +484,11 @@ int st;
 #define SKIP_NETINI	getenv("SKIP_NETINI")
 #endif
   /* check if we have a real ifconfig (first is loopback) */
-  if ( !no_net && (! (SKIP_NETINI) || !BUILTIN_SYMTAB) && rtems_bsdnet_config.ifconfig )
+  if ( !no_net && (! (SKIP_NETINI) || !BUILTIN_SYMTAB)
+#if ! HAVE_LIBBSD
+&& rtems_bsdnet_config.ifconfig
+#endif
+	)
   {
     gesys_network_start();
   }
@@ -475,6 +502,7 @@ int st;
 #endif
 
 #ifndef CDROM_IMAGE
+#ifdef BOOTPFN
   if ( BOOTPFN ) {
 	char *slash,*dot;
 	pathspec = malloc(strlen(BOOTPFN) + (BUILTIN_SYMTAB ? strlen(SYSSCRIPT) : strlen(SYMEXT)) + 1);
@@ -508,6 +536,7 @@ int st;
 		}
 	}
   }
+#endif
   {
   char *tarvar;
   void *addr;
@@ -554,7 +583,6 @@ printf("Loading tar image @%p[%u]\n", addr, len);
   }
 #endif
 
-
   if ( no_net && ( !pathspec || LOCAL_PATH != pathType(pathspec) ) )
 	goto shell_entry;
 
@@ -567,7 +595,6 @@ printf("Loading tar image @%p[%u]\n", addr, len);
    */
   if ( BUILTIN_SYMTAB )
 	goto bare_entry;
-
 
   do {
 	chdir("/");
