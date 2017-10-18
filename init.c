@@ -1073,7 +1073,7 @@ static void
 dummy_clock_init()
 {
 rtems_time_of_day rt;
-	if ( RTEMS_SUCCESSFUL != rtems_clock_get( RTEMS_CLOCK_GET_TOD, &rt) ) {
+	if ( RTEMS_SUCCESSFUL != rtems_clock_get_tod(&rt) ) {
 		rt.year   = 2000;
 		rt.month  = 1;
 		rt.day    = 1;
