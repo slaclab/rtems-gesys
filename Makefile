@@ -473,7 +473,7 @@ $(ARCH)/app.nm: $(filter-out $(ARCH)/allsyms.o,$(OBJS))
 #
 
 
-LIBNMS=$(patsubst %.a,$(ARCH)/%.nm,$(sort $(patsubst -l%,lib%.a,$(filter -l%,$(THELIBS)))))
+LIBNMS=$(patsubst %.a,$(ARCH)/%.nm,$(patsubst -l%,lib%.a,$(filter -l%,$(THELIBS))))
 OPTIONAL_ALL=$(addprefix -o,$(LIBNMS)) 
 #OPTIONAL_ALL=-o$(ARCH)/app.nm
 
