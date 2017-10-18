@@ -1,4 +1,6 @@
-/* $Id$ */
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 #include <stdlib.h>
 #include <string.h>
@@ -7,12 +9,17 @@
 #include <errno.h>
 #include <assert.h>
 
+#include <limits.h>
+
 extern const char *rtems_bsdnet_domain_name;
 
 #ifndef DEBUG_MAIN
 #include <reent.h>
 extern void __env_lock(struct _reent *);
 extern void __env_unlock(struct _reent *);
+#ifdef HAVE_LIBBSD /* don't know how to get that info easily */
+#define rtems_bsdnet_domain_name ""
+#endif
 #else
 #define __env_lock(x)   do { } while (0)
 #define __env_unlock(x) do { } while (0)
@@ -89,7 +96,7 @@ char *rval = 0;
 
 		sz *= 2;
 
-	} while ( ERANGE == errno && sz <= MAXPATHLEN );
+	} while ( ERANGE == errno && sz <= _POSIX_PATH_MAX );
 
 	free(rval);
 
