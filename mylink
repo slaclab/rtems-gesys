@@ -31,6 +31,6 @@ while [ ! -z "$1" ]; do
 	fi
 	shift
 done
-#echo $LIBPATH > feil
+#echo $LIBPATH >> feil
 #echo $LIBRS >> feil
 echo $LIBPATH $LIBRS
