@@ -1,4 +1,3 @@
-#  $Id$
 AUTOMAKE_OPTIONS=foreign
 
 ACLOCAL_AMFLAGS = -I./m4
@@ -39,6 +38,12 @@ rtems_CPPFLAGS  = $(AM_CPPFLAGS)
 rtems_SOURCES   = init.c config.c
 if HAVE_LIBBSD
 AM_LDFLAGS     += -Wl,--defsym,ticks=_Watchdog_Ticks_since_boot
+if NEED_LIBBSD_LD_HACKS
+AM_LDFLAGS     += -Wl,--defsym,_bind=bind
+AM_LDFLAGS     += -Wl,--defsym,_getsockopt=getsockopt
+AM_LDFLAGS     += -Wl,--defsym,_pthread_mutex_lock=pthread_mutex_lock
+AM_LDFLAGS     += -Wl,--defsym,pthread_main_np=0
+endif
 rtems_SOURCES  += rtems_libbsdconfig.c
 else
 rtems_SOURCES  += rtems_netconfig.c
@@ -47,6 +52,10 @@ rtems_SOURCES  += addpath.c
 if NETBOOT
 else
 rtems_SOURCES  += nvram/pairxtract.c
+endif
+if WRAP_EXIDX
+rtems_SOURCES  += gnuUnwindExidxWrapper.c
+AM_LDFLAGS     += -Wl,--wrap,__gnu_Unwind_Find_exidx
 endif
 
 rtems_SOURCES  += nvram/minversion.h verscheck.h
@@ -138,6 +147,8 @@ if BSPEXT
 GESYSLIBS      += -lbspExt
 endif
 
+GESYSLIBS      += @BSDLIB@
+
 rtems_LDADD    += $(APPOBJS) $(GESYSLIBS)
 rtems_DEPENDENCIES = $(rtems_LDADD)
 
@@ -179,6 +190,7 @@ app.nm: $(filter-out allsyms.$(OBJEXT) objattrs.$(OBJEXT),$(rtems_OBJECTS) $(APP
 
 LIBNMS=$(patsubst %.a,%.nm,$(sort $(patsubst -l%,lib%.a,$(filter -l%,$(THELIBS)))))
 OPTIONAL_ALL=$(addprefix -o,$(LIBNMS)) 
+
 
 # Use 'ldep' to analyze library interdependencies and to 
 # generate a symbol table.

@@ -31,6 +31,8 @@
 
 #include <sys/stat.h>
 #include <sys/socket.h>
+#include <sys/types.h>
+#include <sys/sysctl.h>
 
 #include <net/if.h>
 
@@ -163,13 +165,6 @@ default_network_dhcpcd(void)
 static void
 default_network_on_exit(int exit_code, void *arg)
 {
-	rtems_printer printer;
-
-	(void)arg;
-
-	rtems_print_printer_printf(&printer);
-	rtems_stack_checker_report_usage_with_plugin(&printer);
-
 	puts("*** Network Exit ***\n");
 }
 
@@ -184,6 +179,17 @@ gesys_network_start()
 
 	/* Let other tasks run to complete background work */
 	default_network_set_self_prio(RTEMS_MAXIMUM_PRIORITY - 1U);
+
+/* Unfortunately this crashes when we attempt to set before
+   initializing bsd and afterwards it is pointless (since only
+   honoured during ipfw initialization)
+
+   => must compile libbsd with default firewall rule ACCEPT
+	{
+	int yes = 1;
+	sysctlbyname("net.inet.ip.fw.default_to_accept", 0, 0, &yes, sizeof(yes));
+	}
+*/
 
 	rtems_bsd_initialize();
 

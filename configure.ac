@@ -146,6 +146,29 @@ AC_CHECK_LIB([bsd],[rtems_bsd_initialize],
     [AC_MSG_NOTICE([libbsd not found; not using])],
     [-Wl,--defsym,ticks=_Watchdog_Ticks_since_boot])
 
+need_libbsd_ld_hacks=no
+if test -n "$BSDLIB" ; then
+	AC_MSG_NOTICE([Using libbsd -- check if special hacks are required for linking])
+	AC_CHECK_LIB([bsd],[bindresvport],
+		[AC_MSG_NOTICE([libbsd links bindresvport - no hacks required])],
+		need_libbsd_ld_hacks=maybe
+		[AC_MSG_NOTICE([libbsd linking bindresvport failed - hacks may be needed])])
+	if test "x$need_libbsd_ld_hacks" = "xmaybe" ; then
+		AC_MSG_NOTICE([Checking if rebinding _bind and _getsockopt helps])
+		unset ac_cv_lib_bsd_bindresvport
+		AC_CHECK_LIB([bsd],[bindresvport],
+			[AC_MSG_NOTICE([Yes - using these hacks helps; will enable])]
+			need_libbsd_ld_hacks=yes,
+			[AC_MSG_ERROR([libbsd wouldn't link - even if we define _bind and _getsockopt])],
+			[-Wl,--defsym,_bind=0 -Wl,--defsym,_getsockopt=0])
+	fi
+else
+	AC_CHECK_FUNCS([rcmd],
+		,
+		enable_rsh_symtab=no
+		[AC_MSG_NOTICE([rcmd not declared -- disable rsh symtable support])])
+fi
+
 NFSLIB=
 if test ! "$enable_nfs" = "no" -a -z "$BSDLIB"; then
 # looking for bundled NFS;
@@ -173,7 +196,7 @@ if test ! "$enable_nfs" = "no"; then
 	else
 		nfs_enableval=1
 	fi
-AC_DEFINE_UNQUOTED([NFS_SUPPORT],[$nfs_enableval],[Whether to use NFS])
+AC_DEFINE_UNQUOTED([NFS_SUPPORT],[$nfs_enableval],[Whether to use NFS (2: bundled; 1 unbundled)])
 fi
 
 
@@ -486,6 +509,11 @@ if test x"$enable_unified_workarea" = x"yes" ; then
 	AC_DEFINE([USE_UNIFIED_WORKAREA], 1, [Whether to use unified area for malloc heap and RTEMS workspace])
 fi
 
+has_gnu_exidx=no
+if test "$target_cpu" = "arm" ; then
+	AC_CHECK_FUNCS([__gnu_Unwind_Find_exidx],[has_gnu_exidx=yes])
+fi
+
 
 package_incpath=
 package_libpath=
@@ -510,15 +538,17 @@ AC_SUBST([CEXP_TEXT_REGION_END])
 AC_CONFIG_FILES(Makefile)
 AC_CONFIG_FILES(myspec)
 
-AM_CONDITIONAL([NETBOOT],[test "$enable_netboot"  = "yes"])
-AM_CONDITIONAL([TECLA],  [test "$enable_tecla"    = "yes"])
-AM_CONDITIONAL([BSPEXT], [test "$have_libbspext"  = "yes"])
-AM_CONDITIONAL([OPCODES],[test "$enable_opcodes"  = "yes"])
+AM_CONDITIONAL([NETBOOT],     [test "$enable_netboot"  = "yes"])
+AM_CONDITIONAL([TECLA],       [test "$enable_tecla"    = "yes"])
+AM_CONDITIONAL([BSPEXT],      [test "$have_libbspext"  = "yes"])
+AM_CONDITIONAL([OPCODES],     [test "$enable_opcodes"  = "yes"])
+AM_CONDITIONAL([WRAP_EXIDX],  [test "$has_gnu_exidx"   = "yes"])
 
-AM_CONDITIONAL([GNUBFD], [test "$with_bfdlib"     = "gnubfd"])
-AM_CONDITIONAL([PMBFD],  [test "$with_bfdlib"     = "pmbfd"])
-AM_CONDITIONAL([PMELF],  [test "$with_bfdlib"     = "pmelf"])
+AM_CONDITIONAL([GNUBFD],      [test "$with_bfdlib"     = "gnubfd"])
+AM_CONDITIONAL([PMBFD],       [test "$with_bfdlib"     = "pmbfd"])
+AM_CONDITIONAL([PMELF],       [test "$with_bfdlib"     = "pmelf"])
 AM_CONDITIONAL([HAVE_LIBBSD], [test -n "$BSDLIB"])
+AM_CONDITIONAL([NEED_LIBBSD_LD_HACKS], [test "x$need_libbsd_ld_hacks" = "xyes"])
 
 # two ways for handling this - the RESERVE_CEXP_TEXT_REGION way is
 # an ugly hack; we really should have proper linker scripts...

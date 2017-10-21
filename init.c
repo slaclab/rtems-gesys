@@ -124,6 +124,11 @@
 #include <rtems/rtems_bsdnet.h>
 #endif
 #include <rtems/libio.h>
+
+#if NFS_SUPPORT == 1 /* bundled */
+static int nfsInited     = 1; /* initialization done by application itself */
+#endif
+
 #ifdef TFTP_SUPPORT
 #include <rtems/tftp.h>
 #endif
@@ -180,9 +185,6 @@ static	char *my_getline(char *rval, char *prompt, int len);
 #define ISONTMP(str) ( (str) && ! strncmp((str),"/tmp/",5) )
 #define ISONTFTP(str) ( (str) && ! strncmp((str),"/TFTP/",6))
 
-#ifdef NFS_SUPPORT
-static int nfsInited     = 1; /* initialization done by application itself */
-#endif
 #if defined(TFTP_SUPPORT) && ! RTEMS_VERSION_ATLEAST(4,9,99)
 static int tftpInited    = 1; /* initialization done by application itself */
 #endif
@@ -268,10 +270,6 @@ static char *theSrv = 0;
 static void getDfltSrv(char **pdfltSrv)
 {
 #ifdef BOOTPSA
-	if ( ! BOOTPSA ) {
-		*pdfltSrv = 0;
-		return;
-	}
 
 	*pdfltSrv = realloc(*pdfltSrv, theSrv ? strlen(theSrv)+1 : DFLT_SRV_LEN);
 
@@ -342,7 +340,7 @@ char *buf;
 	perror("TFTP FS initialization failed");
 #endif
 
-#ifdef NFS_SUPPORT
+#if NFS_SUPPORT == 1 /* unbundled */
   if ( rpcUdpInit() || nfsInit(0,0) )
 	/* nothing else to do */;
 #endif
@@ -375,6 +373,8 @@ extern void *cexpSystemSymbols;
 const char        *GeSys_Release_Name="$Name$";
 extern const char *GeSys_Build_Date;
 
+volatile int debug_ready = 0;
+
 rtems_task Init(
   rtems_task_argument ignored
 )
@@ -399,6 +399,11 @@ char	*argv[7]={
 };
 int st;
 
+#if 0
+  while ( ! debug_ready )
+	sleep(1);
+#endif
+
   rtems_libio_set_private_env();
 
 #ifdef HAVE_PCIBIOS
@@ -415,6 +420,12 @@ int st;
 	Stack_check_Initialize();
   }
 #endif
+
+  /*
+   * Make sure the time-of-day clock is at least initialized.
+   * The dummy routine just sets the date to 1/1/2000
+   */
+  dummy_clock_init();
 
 #ifdef HAVE_LIBBSPEXT
   bspExtInit();
@@ -460,12 +471,6 @@ int st;
   printf("Installing TIOCGWINSZ line discipline: %s.\n",
 		 ansiTiocGwinszInstall(7) ? "failed" : "ok");
 #endif
-
-  /*
-   * Make sure the time-of-day clock is at least initialized.
-   * The dummy routine just sets the date to 1/1/2000
-   */
-  dummy_clock_init();
 
   cexpInit(cexpExcHandlerInstall);
 
@@ -764,7 +769,7 @@ shell_entry:
 
 #ifdef HAVE_CEXP_SET_PROMPT
 	/* set cexp prompt to the hostname if possible */
-	{
+	if ( ! no_net ) {
 	char *tmpstr;
 	if ( (tmpstr=malloc(100)) ) {
 		strcpy(tmpstr,"Cexp@");
