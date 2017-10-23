@@ -1,2 +1,5 @@
 #!/bin/bash
 autoreconf -i
+if [ -d ldep ]; then
+  (cd ldep; ./bootstrap)
+fi
