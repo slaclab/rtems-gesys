@@ -54,7 +54,7 @@
 #define CONFIGURE_MAXIMUM_POSIX_CONDITION_VARIABLES	rtems_resource_unlimited(80)
 #define CONFIGURE_MAXIMUM_POSIX_KEYS			rtems_resource_unlimited(20)
 #define CONFIGURE_MAXIMUM_POSIX_TIMERS			rtems_resource_unlimited(20)
-#define CONFIGURE_MAXIMUM_POSIX_QUEUED_SIGNALS	rtems_resource_unlimited(20)
+#define CONFIGURE_MAXIMUM_POSIX_QUEUED_SIGNALS	20 /* cannot be unlimited */
 #define CONFIGURE_MAXIMUM_POSIX_MESSAGE_QUEUES	rtems_resource_unlimited(20)
 #define CONFIGURE_MAXIMUM_POSIX_SEMAPHORES		rtems_resource_unlimited(30)
 #endif
