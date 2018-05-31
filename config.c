@@ -61,14 +61,14 @@ SYSINIT_NEED_NET_IF_VLAN;
 #define CONFIGURE_MAXIMUM_USER_EXTENSIONS	4
 
 #ifdef USE_POSIX
-#define CONFIGURE_MAXIMUM_POSIX_THREADS			rtems_resource_unlimited(30)
-#define CONFIGURE_MAXIMUM_POSIX_MUTEXES			rtems_resource_unlimited(500)
-#define CONFIGURE_MAXIMUM_POSIX_CONDITION_VARIABLES	rtems_resource_unlimited(300)
-#define CONFIGURE_MAXIMUM_POSIX_KEYS			rtems_resource_unlimited(100)
-#define CONFIGURE_MAXIMUM_POSIX_TIMERS			rtems_resource_unlimited(100)
-#define CONFIGURE_MAXIMUM_POSIX_QUEUED_SIGNALS	20 //rtems_resource_unlimited(100)
-#define CONFIGURE_MAXIMUM_POSIX_MESSAGE_QUEUES	rtems_resource_unlimited(100)
-#define CONFIGURE_MAXIMUM_POSIX_SEMAPHORES		rtems_resource_unlimited(200)
+#define CONFIGURE_MAXIMUM_POSIX_THREADS			rtems_resource_unlimited(20)
+#define CONFIGURE_MAXIMUM_POSIX_MUTEXES			rtems_resource_unlimited(200)
+#define CONFIGURE_MAXIMUM_POSIX_CONDITION_VARIABLES	rtems_resource_unlimited(80)
+#define CONFIGURE_MAXIMUM_POSIX_KEYS			rtems_resource_unlimited(20)
+#define CONFIGURE_MAXIMUM_POSIX_TIMERS			rtems_resource_unlimited(20)
+#define CONFIGURE_MAXIMUM_POSIX_QUEUED_SIGNALS	20 /* queued signals cannot be unlimited */
+#define CONFIGURE_MAXIMUM_POSIX_MESSAGE_QUEUES	rtems_resource_unlimited(20)
+#define CONFIGURE_MAXIMUM_POSIX_SEMAPHORES		rtems_resource_unlimited(30)
 #endif
 
 #ifdef USE_UNIFIED_WORKAREA
