@@ -1,0 +1,9 @@
+[submodule "ldep"]
+	path = ldep
+	url = ../ldep
+[submodule "m4"]
+	path = m4
+	url = ../rtems-ac-macros
+[submodule "nvram"]
+	path = nvram
+	url = ../rtems-gesys-utils
