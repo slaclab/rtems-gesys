@@ -1,7 +1,3 @@
-[submodule "nvram"]
-	path = nvram
-	url = ../rtems-netboot.git
-	branch = former_cvs_module_nvram
 [submodule "ldep"]
 	path = ldep
 	url = ../ldep.git
