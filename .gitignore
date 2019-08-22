@@ -9,3 +9,8 @@ configure
 depcomp
 install-sh
 missing
+compile
+dummycxx
+makefile.top.am
+makefile.top.in
+
