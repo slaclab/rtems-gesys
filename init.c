@@ -350,7 +350,7 @@ extern void *cexpSystemSymbols;
 
 #define BUILTIN_SYMTAB (0!=cexpSystemSymbols)
 
-const char        *GeSys_Release_Name="$Name$";
+const char        *GeSys_Release_Name=PACKAGE_VERSION;
 extern const char *GeSys_Build_Date;
 
 rtems_task Init(
@@ -405,7 +405,6 @@ char	*argv[7]={
   printf("This system %s was built on %s\n",
   	GeSys_Release_Name,
 	GeSys_Build_Date);
-  printf("$Id$\n");
 
 #ifdef EARLY_CMDLINE_GET
   {
