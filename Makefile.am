@@ -41,7 +41,7 @@ endif
 rtems_SOURCES  += nvram/minversion.h verscheck.h
 
 if TECLA
-rtems_SOURCES  += term.c
+rtems_SOURCES  += nvram/term.c
 endif
 # Need one C++ source because we want automake to use
 # the C++ linker (and C++ system libraries)
