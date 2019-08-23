@@ -111,6 +111,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+#include <timex.h>
 
 #include <rtems.h>
 
@@ -131,6 +132,9 @@
 
 #include "verscheck.h"
 
+#ifdef HAVE_ICMPPING_H
+#include <icmpping.h>
+#endif
 
 #if RTEMS_VERSION_LATER_THAN(4,6,10)
 /* in a new place */
@@ -281,10 +285,30 @@ struct stat stbuf;
     }
 }
 
+static uint32_t dumb_hash(uint32_t n)
+{
+uint64_t r = (uint64_t)n;
+	/* ubiquitous multiplicative hash...
+	 * The lowermost bits are not 'well' distributed; e.g.,
+	 * hashing an even/odd number always yields an even/odd.
+	 * This is improved by right-shifting (=division) -- which we
+	 * can do since rpciod ony used 24-bits anyways (it manages
+	 * the 8 LSBs internally).
+	 */
+	r *= 2654435769ULL;
+	return (uint32_t)( r >> 8 );
+}
+
 int
 gesys_network_start()
 {
-char *buf;
+char             *buf;
+#ifdef NFS_SUPPORT
+uint32_t          seed    = 0;
+struct ntptimeval now;
+unsigned short    rpcPort = 0;
+unsigned          rpcPortAttempts = 3;
+#endif
 
 #ifdef MULTI_NETDRIVER
   printf("Going to probe for Ethernet chips when initializing networking:\n");
@@ -322,19 +346,60 @@ char *buf;
 	perror("TFTP FS initialization failed");
 #endif
 
-#ifdef NFS_SUPPORT
-  if ( rpcUdpInit() || nfsInit(0,0) )
-	/* nothing else to do */;
-#endif
-
   if ( rtems_bsdnet_ntpserver_count > 0 ) {
   	printf("Trying to synchronize NTP...");
   	fflush(stdout);
-  	if (rtems_bsdnet_synchronize_ntp(0,0)<0)
+  	if ( rtems_bsdnet_synchronize_ntp(0,0) < 0 ) {
 		printf("FAILED\n");
-  	else
+  	} else {
 		printf("OK\n");
+#ifdef NFS_SUPPORT
+		if (  0 == ntp_gettime( &now ) ) {
+			seed = dumb_hash( now.time.tv_sec );
+			printf( "RPC XID Seed from NTP: 0x%08" PRIx32 "\n", seed );
+		}
+#endif
+	}
   }
+
+  /* If there is a gateway then try to ping it (for obtaining a somewhat random delay) */
+#ifdef HAVE_ICMPPING_H
+  if ( rtems_bsdnet_config.gateway ) {
+    int pingval = rtems_ping( rtems_bsdnet_config.gateway, 0, 1 );
+	if ( pingval > 0 ) {
+		seed ^= dumb_hash( pingval );
+	}
+  }
+#endif
+
+#ifdef NFS_SUPPORT
+
+  if ( 0 == seed ) {
+    printf( "WARNING -- random seeding of RPC XID/port FAILED; neither NTP nor PING were available\n" );
+	rpcUdpInit();
+  }
+
+  /* It could at least be that there is some randomness in the nanoseconds of the 'up-time' */
+  if ( 0 == clock_gettime( CLOCK_MONOTONIC, &now.time ) ) {
+    seed ^= dumb_hash( now.time.tv_nsec );
+  }
+
+  rpcUdpSeedXidUpper( seed );
+
+  rpcPort = seed;
+
+  do {
+    rpcPort = 512 + ( ( dumb_hash( rpcPort ) >> 15 ) & 0x1ff );
+  } while ( rpcUdpInitOnPort( rpcPort ) && ( --rpcPortAttempts > 0 ) );
+
+  if ( rpcPortAttempts > 0 ) {
+    printf( "RPC Initialization successful; used port %hu, XID seed 0x08" PRIx32 "\n", rpcPort, seed );
+    if ( nfsInit( 0, 0 ) ) {
+      printf( "WARNING -- NFS initialization FAILED\n" );
+    }
+  }
+
+#endif
 
   /* stuff command line 'name=value' pairs into the environment */
   if ( rtems_bsdnet_bootp_cmdline && (buf = strdup(rtems_bsdnet_bootp_cmdline)) ) {

@@ -270,6 +270,12 @@ AC_CHECK_HEADER(
 	AC_MSG_NOTICE([<pcibios.h> not found])
 )
 
+AC_CHECK_HEADER(
+	[icmpping.h],
+	AC_DEFINE([HAVE_ICMPPING_H],[1],[whether we have <icmpping.h>]),
+	AC_MSG_NOTICE([<icmpping.h> not found])
+)
+
 AC_CHECK_DECL([BSP_runtime_console_select],
 	[pcx86_console_sel=yes],
 	,
