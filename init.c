@@ -112,7 +112,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
-#include <timex.h>
+#include <inttypes.h>
 
 #include <rtems.h>
 
@@ -306,7 +306,7 @@ gesys_network_start()
 char             *buf;
 #ifdef NFS_SUPPORT
 uint32_t          seed    = 0;
-struct ntptimeval now;
+struct timespec   now;
 unsigned short    rpcPort = 0;
 unsigned          rpcPortAttempts = 3;
 #endif
@@ -354,17 +354,19 @@ unsigned          rpcPortAttempts = 3;
 		printf("FAILED\n");
   	} else {
 		printf("OK\n");
-#ifdef NFS_SUPPORT
-		if (  0 == ntp_gettime( &now ) ) {
-			seed = dumb_hash( now.time.tv_sec );
-			printf( "RPC XID Seed from NTP: 0x%08" PRIx32 "\n", seed );
-		}
-#endif
 	}
   }
 
-  /* If there is a gateway then try to ping it (for obtaining a somewhat random delay) */
+#ifdef NFS_SUPPORT
+
+  if (  0 == clock_gettime( CLOCK_REALTIME, &now ) ) {
+    seed  = dumb_hash( now.tv_sec );
+    seed ^= dumb_hash( now.tv_nsec );
+    printf( "RPC XID Seed from NTP: 0x%08" PRIx32 "\n", seed );
+  }
+
 #ifdef HAVE_ICMPPING_H
+  /* If there is a gateway then try to ping it (for obtaining a somewhat random delay) */
   if ( rtems_bsdnet_config.gateway ) {
     int pingval = rtems_ping( rtems_bsdnet_config.gateway, 0, 1 );
 	if ( pingval > 0 ) {
@@ -373,16 +375,8 @@ unsigned          rpcPortAttempts = 3;
   }
 #endif
 
-#ifdef NFS_SUPPORT
-
   if ( 0 == seed ) {
     printf( "WARNING -- random seeding of RPC XID/port FAILED; neither NTP nor PING were available\n" );
-	rpcUdpInit();
-  }
-
-  /* It could at least be that there is some randomness in the nanoseconds of the 'up-time' */
-  if ( 0 == clock_gettime( CLOCK_MONOTONIC, &now.time ) ) {
-    seed ^= dumb_hash( now.time.tv_nsec );
   }
 
   rpcUdpSeedXidUpper( seed );
@@ -394,10 +388,12 @@ unsigned          rpcPortAttempts = 3;
   } while ( rpcUdpInitOnPort( rpcPort ) && ( --rpcPortAttempts > 0 ) );
 
   if ( rpcPortAttempts > 0 ) {
-    printf( "RPC Initialization successful; used port %hu, XID seed 0x08" PRIx32 "\n", rpcPort, seed );
+    printf( "RPCIO Initialization successful; used port %hu, XID seed 0x%08" PRIx32 "\n", rpcPort, seed );
     if ( nfsInit( 0, 0 ) ) {
       printf( "WARNING -- NFS initialization FAILED\n" );
     }
+  } else {
+    printf( "WARNING -- RPCIO Initialization FAILED -- NFS not available\n" );
   }
 
 #endif
