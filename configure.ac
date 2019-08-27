@@ -199,6 +199,11 @@ if test ! "$enable_nfs" = "no"; then
 		nfs_enableval=1
 	fi
 AC_DEFINE_UNQUOTED([NFS_SUPPORT],[$nfs_enableval],[Whether to use NFS (2: bundled; 1 unbundled)])
+AC_CHECK_DECL([rpcUdpSeedXidUpper],
+	[AC_DEFINE([RPCIO_HAS_SEED_XID_UPPER],1,[Whether RPCIOD supports initializing XID])],
+	,
+	[#include <rtems.h>
+	#include <librtemsNfs.h>])
 fi
 
 
@@ -313,6 +318,13 @@ AC_CHECK_HEADER(
 	AC_DEFINE([HAVE_PCIBIOS],[1],[whether we have <pcibios.h> and need to initialize]),
 	AC_MSG_NOTICE([<pcibios.h> not found])
 )
+
+# icmpping is part of miscUtils -- but not a library we actually link (yet)
+#AC_CHECK_HEADER(
+#	[icmpping.h],
+#	AC_DEFINE([HAVE_ICMPPING_H],[1],[whether we have <icmpping.h>]),
+#	AC_MSG_NOTICE([<icmpping.h> not found])
+#)
 
 AC_CHECK_DECL([BSP_runtime_console_select],
 	[pcx86_console_sel=yes],
