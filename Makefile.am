@@ -34,6 +34,7 @@ EXTRA_DIST     += LICENSE
 EXTRA_DIST     += $(wildcard $(srcdir)/st.sys*)
 EXTRA_DIST     += ldep
 EXTRA_DIST     += config
+EXTRA_DIST     += objattrs_test.c
 
 rtems_CPPFLAGS  = $(AM_CPPFLAGS)
 
@@ -256,7 +257,7 @@ builddate.c: $(filter-out rtems-init.$(OBJEXT) rtems-allsyms.$(OBJEXT),$(rtems_O
 	echo 'const char *GeSys_Build_Date="'`date +%Y%m%d%Z%T`'";' > $@
 	echo '#define DEFAULT_CPU_ARCH_FOR_CEXP "'`$(extract-arch)`'"' >>$@
 
-objattrs.c: rtems-init.$(OBJEXT)
+objattrs.c: objattrs_test.$(OBJEXT)
 	$(extract-objattrs) > $@
 
 dbg-libnms:
