@@ -286,6 +286,7 @@ struct stat stbuf;
     }
 }
 
+#ifdef RPCIO_HAS_SEED_XID_UPPER
 static uint32_t dumb_hash(uint32_t n)
 {
 uint64_t r = (uint64_t)n;
@@ -299,15 +300,18 @@ uint64_t r = (uint64_t)n;
 	r *= 2654435769ULL;
 	return (uint32_t)( r >> 8 );
 }
+#endif
 
 int
 gesys_network_start()
 {
 char             *buf;
 #ifdef NFS_SUPPORT
+#ifdef RPCIO_HAS_SEED_XID_UPPER
 uint32_t          seed    = 0;
 struct timespec   now;
 unsigned short    rpcPort = 0;
+#endif
 unsigned          rpcPortAttempts = 3;
 #endif
 
@@ -359,6 +363,7 @@ unsigned          rpcPortAttempts = 3;
 
 #ifdef NFS_SUPPORT
 
+#ifdef RPCIO_HAS_SEED_XID_UPPER
   if (  0 == clock_gettime( CLOCK_REALTIME, &now ) ) {
     seed  = dumb_hash( now.tv_sec );
     seed ^= dumb_hash( now.tv_nsec );
@@ -386,9 +391,16 @@ unsigned          rpcPortAttempts = 3;
   do {
     rpcPort = 512 + ( ( dumb_hash( rpcPort ) >> 15 ) & 0x1ff );
   } while ( rpcUdpInitOnPort( rpcPort ) && ( --rpcPortAttempts > 0 ) );
+#else
+  if ( rpcUdpInit() ) {
+    rpcPortAttempts = 0;
+  }
+#endif
 
   if ( rpcPortAttempts > 0 ) {
+#ifdef RPCIO_HAS_SEED_XID_UPPER
     printf( "RPCIO Initialization successful; used port %hu, XID seed 0x%08" PRIx32 "\n", rpcPort, seed );
+#endif
     if ( nfsInit( 0, 0 ) ) {
       printf( "WARNING -- NFS initialization FAILED\n" );
     }

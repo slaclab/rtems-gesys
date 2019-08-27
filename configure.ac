@@ -155,6 +155,11 @@ fi
 
 if test ! "$enable_nfs" = "no"; then
 AC_DEFINE([NFS_SUPPORT],1,[Whether to use NFS])
+AC_CHECK_DECL([rpcUdpSeedXidUpper],
+	[AC_DEFINE([RPCIO_HAS_SEED_XID_UPPER],1,[Whether RPCIOD supports initializing XID])],
+	,
+	[#include <rtems.h>
+	#include <librtemsNfs.h>])
 fi
 
 if test ! "$enable_tftpfs" = "no" ; then
