@@ -1,4 +1,3 @@
-/* $Id$ */
 
 /* (non thread safe) helper to determine the terminal size */
 

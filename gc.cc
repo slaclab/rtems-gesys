@@ -1,4 +1,3 @@
-/* $Id$ */
 #include <rtems++/rtemsTask.h>
 #include <rtems++/rtemsMessageQueue.h>
 
