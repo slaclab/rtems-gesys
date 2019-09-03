@@ -162,6 +162,14 @@ AC_CHECK_DECL([rpcUdpSeedXidUpper],
 	#include <librtemsNfs.h>])
 fi
 
+if test ! "$SUPERPACKAGE_VERSION" = "$PACKAGE_VERSION" ; then
+AC_DEFINE_UNQUOTED([SUPERPACKAGE_VERSION],"${SUPERPACKAGE_VERSION}",[Version of a superpackage that Gesys is part of])
+fi
+
+if test ! "$SUPERPACKAGE_NAME" = "$PACKAGE_NAME" ; then
+AC_DEFINE_UNQUOTED([SUPERPACKAGE_NAME],"${SUPERPACKAGE_NAME}",[Name of a superpackage that Gesys is part of])
+fi
+
 if test ! "$enable_tftpfs" = "no" ; then
 AC_DEFINE([TFTP_SUPPORT],1,[Whether to build-in support for the TFTP file system])
 fi

@@ -1,4 +1,3 @@
-/* $Id$ */
 
 #include <reent.h>
 #include <stdlib.h>
