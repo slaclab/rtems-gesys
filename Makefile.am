@@ -4,14 +4,12 @@ ACLOCAL_AMFLAGS = -I./m4
 
 EXEEXT          = $(APPEXEEXT)
 
-AM_CPPFLAGS     = -Wall -I$(srcdir)/nvram @package_incpath@ $(GITREV)
+AM_CPPFLAGS     = -Wall -I$(srcdir)/nvram @package_incpath@
 AM_CFLAGS       = -Wall
 AM_CXXFLAGS     = -Wall
 AM_CCASFLAGS    = 
 AM_LDFLAGS      = @package_libpath@
 DOWNEXT         = @DOWNEXT@
-
-GITREV:=-DGITREV="\"$(shell git describe --always)\""
 
 # initialize vars
 GESYSLIBS       = @GESYSLIBS@

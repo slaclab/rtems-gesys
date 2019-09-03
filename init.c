@@ -442,7 +442,7 @@ extern void *cexpSystemSymbols;
 
 #define BUILTIN_SYMTAB (0!=cexpSystemSymbols)
 
-const char        *GeSys_Release_Name=GITREV;
+const char        *GeSys_Release_Name=PACKAGE_VERSION;
 extern const char *GeSys_Build_Date;
 
 volatile int debug_ready = 0;
@@ -511,6 +511,13 @@ int st;
   printf("This system %s was built on %s\n",
   	GeSys_Release_Name,
 	GeSys_Build_Date);
+#ifdef SUPERPACKAGE_NAME
+  printf("GesSys is part of the '%s' package", SUPERPACKAGE_NAME);
+#ifdef SUPERPACKAGE_VERSION
+  printf("; revision %s", SUPERPACKAGE_VERSION);
+#endif
+  printf("\n");
+#endif
 
 #ifdef EARLY_CMDLINE_GET
   {
