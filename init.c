@@ -478,6 +478,13 @@ int st;
   printf("This system %s was built on %s\n",
   	GeSys_Release_Name,
 	GeSys_Build_Date);
+#ifdef SUPERPACKAGE_NAME
+  printf("GesSys is part of the '%s' package", SUPERPACKAGE_NAME);
+#ifdef SUPERPACKAGE_VERSION
+  printf("; revision %s", SUPERPACKAGE_VERSION);
+#endif
+  printf("\n");
+#endif
 
 #ifdef EARLY_CMDLINE_GET
   {
