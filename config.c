@@ -37,6 +37,7 @@
 #define CONFIGURE_EXECUTIVE_RAM_SIZE        (5*1024*1024)
 #endif
 #define CONFIGURE_MAXIMUM_TASKS             rtems_resource_unlimited(30)
+#define CONFIGURE_MAXIMUM_BARRIERS          rtems_resource_unlimited(30)
 #define CONFIGURE_MAXIMUM_SEMAPHORES        rtems_resource_unlimited(500)
 #define CONFIGURE_MAXIMUM_TIMERS            rtems_resource_unlimited(20)
 #define CONFIGURE_MAXIMUM_MESSAGE_QUEUES    rtems_resource_unlimited(5)
