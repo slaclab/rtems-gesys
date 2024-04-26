@@ -4,6 +4,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdarg.h>
+#include <assert.h>
 
 extern const char *rtems_bsdnet_domain_name;
 
@@ -174,6 +175,8 @@ stringSubstitute(const char *p, const char * const *s, int ns)
 			}
 		}
 	}
+	*dd++ = 0;
+	assert(dd == rval + l + 1);
 	return rval;
 }
 
