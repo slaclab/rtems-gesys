@@ -1,6 +1,6 @@
 [submodule "ldep"]
 	path = ldep
-	url = ../ldep
+	url = https://github.com/till-s/ldep.git
 [submodule "m4"]
 	path = m4
 	url = ../rtems-ac-macros
