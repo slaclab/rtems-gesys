@@ -11,6 +11,8 @@ rtems_rpc_start_portmapper(gesysNetworkTaskPriority)
 ld("monitor.obj")
 # misc utilities, e.g., md(), mm() memory inspection/modification
 ld("miscUtils.obj")
+# 9p support
+ld("t9p.obj")
 # NTP clock this is NOT the system clock. Read using ntp_gettime()
 ld("ntpclock.obj") && rtemsNtpInitialize(0,0)
 # set timezone (2007++ rule)
