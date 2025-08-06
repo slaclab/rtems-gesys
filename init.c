@@ -130,6 +130,8 @@
 #include <imfs.h>
 #endif
 
+#include "t9p_rtems.h"
+
 #include "verscheck.h"
 
 #ifdef HAVE_ICMPPING_H
@@ -473,6 +475,8 @@ int st;
   /* make /tmp directory */
   mkTmpDir();
 
+  /* Register 9p fs driver */
+  t9p_rtems_register();
 
   printf("Welcome to RTEMS %s GeSys\n", RTEMS_VERSION);
   printf("This system %s was built on %s\n",
@@ -675,6 +679,9 @@ printf("Loading tar image @%p[%u]\n", addr, len);
 #ifdef RSH_SUPPORT
 		printf("   RSH: [<host>:]~<user>/<symfile_path>\n"); 
 #endif
+#ifdef P9_SUPPORT
+		printf("   9P: 9p::[uid.gid@][host]:<export_path>:<symfile_path>\n");
+#endif
 #ifdef HAVE_TECLA
 		bufp = gl_get_line(gl, "Enter Symbol File Name: ",
 			               pathspec,
@@ -702,7 +709,8 @@ firstTimeEntry:
 	chdir("/TFTP/BOOTP_HOST/");
 #endif
 
-	switch ( pathType(pathspec) ) {
+	int pt = pathType(pathspec);
+	switch ( pt ) {
 		case LOCAL_PATH:
 			fd = open(pathspec,O_RDONLY);			
 			if ( fd >= 0 )
@@ -718,7 +726,8 @@ firstTimeEntry:
 
 #ifdef NFS_SUPPORT
 		case NFS_PATH:
-    		fd = isNfsPath( &dfltSrv, pathspec, &ed, &symf, &bootmnt );
+		case P9_PATH:
+    		fd = isRemotePath( &dfltSrv, pathspec, &ed, &symf, &bootmnt, pt );
 		break;
 #endif
 
@@ -860,15 +869,20 @@ shell_entry:
 
 			getDfltSrv(&dfltSrv);
 
-			switch ( pathType( pathspec ) ) {
-#ifdef NFS_SUPPORT
-				case NFS_PATH:	 
-					if ( 0 == (rc = isNfsPath( &dfltSrv, pathspec, 0, &user_script, &homemnt ) ) ) {
+			int pt = pathType( pathspec );
+			switch ( pt ) {
+#if defined(NFS_SUPPORT) || defined(P9_SUPPORT)
+				case NFS_PATH:
+				case P9_PATH:
+					if ( 0 == (rc = isRemotePath( &dfltSrv, pathspec, 0, &user_script, &homemnt, pt ) ) ) {
 						/* valid NFS path; try to mount; */
 						if ( !bootmnt.uidhost || strcmp( homemnt.uidhost, bootmnt.uidhost ) ||
 						     !bootmnt.rpath   || strcmp( homemnt.rpath  , bootmnt.rpath   ) )
-							rc = nfsMount(homemnt.uidhost, homemnt.rpath, homemnt.mntpt);
+							rc = pt == NFS_PATH ?
+									nfsMount(homemnt.uidhost, homemnt.rpath, homemnt.mntpt)
+									: p9Mount(homemnt.uidhost, homemnt.rpath, homemnt.mntpt, "");
 					}
+					fprintf(stderr, "We will try to execute '%s'\n", user_script);
 				break;
 #endif
 				case RSH_PATH:
