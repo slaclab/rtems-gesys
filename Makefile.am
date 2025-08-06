@@ -4,7 +4,7 @@ ACLOCAL_AMFLAGS = -I./m4
 
 EXEEXT          = $(APPEXEEXT)
 
-AM_CPPFLAGS     = -Wall -I$(srcdir)/nvram @package_incpath@
+AM_CPPFLAGS     = -Wall -I$(srcdir)/nvram @package_incpath@ -I$(srcdir)/../rtems9p
 AM_CFLAGS       = -Wall
 AM_CXXFLAGS     = -Wall
 AM_CCASFLAGS    = 
@@ -116,6 +116,8 @@ endif
 if TECLA
 GESYSLIBS      += -ltecla_r
 endif
+
+GESYSLIBS      += -lt9p
 
 GESYSLIBS      += @NFSLIB@
 
