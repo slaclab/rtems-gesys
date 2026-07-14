@@ -198,6 +198,10 @@ static int tftpInited    = 1; /* initialization done by application itself */
 #include <bsp/bspExt.h>
 #endif
 
+#ifdef P9_SUPPORT
+extern int p9MountAlias(const char* mountpt, const char* aliasedMount);
+#endif
+
 #if defined(HAVE_BSP_EXCEPTION_EXTENSION)
 #include <bsp/bspException.h>
 
@@ -878,9 +882,17 @@ shell_entry:
 						/* valid NFS path; try to mount; */
 						if ( !bootmnt.uidhost || strcmp( homemnt.uidhost, bootmnt.uidhost ) ||
 						     !bootmnt.rpath   || strcmp( homemnt.rpath  , bootmnt.rpath   ) )
+						{
 							rc = pt == NFS_PATH ?
 									nfsMount(homemnt.uidhost, homemnt.rpath, homemnt.mntpt)
 									: p9Mount(homemnt.uidhost, homemnt.rpath, homemnt.mntpt, "");
+						} else {
+							/* If /boot is our /home, provide an alias mount for compatibility */
+							mkdir(homemnt.mntpt, 0777);
+							if (p9MountAlias(homemnt.mntpt, bootmnt.mntpt) < 0) {
+								fprintf(stderr, "Failed to alias mount /home -> /boot: %s\n", strerror(errno));
+							}
+						}
 					}
 					fprintf(stderr, "We will try to execute '%s'\n", user_script);
 				break;
